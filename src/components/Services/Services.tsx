@@ -1,4 +1,5 @@
 import { Box, ChartColumnBig, Check, CircleCheckBig } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const SERVICES = [
@@ -78,7 +79,7 @@ export default function Services() {
         </div>
 
         <div className="mt-16 text-center">
-          <a
+          <Link
             href="#contact"
             className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-400 to-brand hover:from-blue-500 hover:to-[#0B8ED0] md:py-4 md:text-lg md:px-10"
           >
@@ -96,7 +97,7 @@ export default function Services() {
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               ></path>
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

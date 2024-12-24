@@ -4,7 +4,10 @@ import GlobalPresence from "@/components/GlobalPresence/GlobalPresence";
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
 import Products from "@/components/Products/Products";
+import Resources from "@/components/Resources/Resources";
+import SaasBanner from "@/components/SaaSBanner/SaasBanner";
 import Services from "@/components/Services/Services";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 import { Button } from "@/components/ui/button";
 
@@ -36,6 +39,9 @@ export default function Home() {
         <Products />
         <GlobalPresence />
         <Services />
+        <SaasBanner />
+        <Resources />
+        <Testimonials />
       </main>
       <Footer />
     </>
