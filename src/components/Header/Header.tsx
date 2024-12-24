@@ -7,7 +7,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-12">
             <a
-              href="#"
+              href="/"
               className="text-2xl font-bold group text-white transition-colors duration-300"
             >
               <span className="group-hover:text-brand">Trade</span>

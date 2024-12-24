@@ -1,11 +1,8 @@
-import About from "@/components/About/About";
+import { Features } from "@/components/Features/Features";
 import Footer from "@/components/Footer/Footer";
-import GlobalPresence from "@/components/GlobalPresence/GlobalPresence";
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
-import Products from "@/components/Products/Products";
-import Services from "@/components/Services/Services";
-
+import HowItWorks from "@/components/HowItWorks/HowItWorks";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -14,7 +11,7 @@ export default function Home() {
       <Header />
       <main className="bg-neutral-900">
         <Hero
-          title="Bridging Markets, Building Partnerships"
+          title="Transform Your Global Trade Operations"
           ctaButtons={
             <>
               <Button
@@ -32,10 +29,8 @@ export default function Home() {
             </>
           }
         />
-        <About />
-        <Products />
-        <GlobalPresence />
-        <Services />
+        <Features />
+        <HowItWorks />
       </main>
       <Footer />
     </>
