@@ -8,9 +8,10 @@ export default function Footer() {
           <div className="space-y-6">
             <a
               href="#"
-              className="text-2xl font-bold text-white hover:text-blue-500 transition-colors duration-300"
+              className="text-2xl font-bold group text-white transition-colors duration-300"
             >
-              TradeFlow
+              <span className="group-hover:text-brand">Trade</span>
+              <span className="text-brand group-hover:text-white">Flow</span>
             </a>
             <p className="text-neutral-400">
               Transforming global trade operations with innovative software
@@ -142,7 +143,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-medium rounded-lg hover:from-blue-500 hover:to-blue-300 transition-all duration-300"
+                className="w-full px-4 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
               >
                 Subscribe
               </button>

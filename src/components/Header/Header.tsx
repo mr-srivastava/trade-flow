@@ -11,44 +11,30 @@ export default function Header() {
               className="text-2xl font-bold group text-white transition-colors duration-300"
             >
               <span className="group-hover:text-brand">Trade</span>
-              <span className="text-brand group-hover:text-white">
-                Flow
-              </span>
+              <span className="text-brand group-hover:text-white">Flow</span>
             </a>
             <div className="hidden md:flex items-center space-x-8">
               <a
                 href="#"
-                className="text-sm font-medium text-white hover:text-blue-500 transition-colors duration-300"
+                className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
               >
                 Home
               </a>
               <a
                 href="#features"
-                className="text-sm font-medium text-white hover:text-blue-500 transition-colors duration-300"
+                className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
               >
                 Features
               </a>
               <a
-                href="#pricing"
-                className="text-sm font-medium text-white hover:text-blue-500 transition-colors duration-300"
+                href="#how-it-works"
+                className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
               >
-                Pricing
-              </a>
-              <a
-                href="#about"
-                className="text-sm font-medium text-white hover:text-blue-500 transition-colors duration-300"
-              >
-                About
-              </a>
-              <a
-                href="#contact"
-                className="text-sm font-medium text-white hover:text-blue-500 transition-colors duration-300"
-              >
-                Contact
+                How it works?
               </a>
             </div>
           </div>
-          <button className="hidden md:block px-6 py-2 bg-brand text-white font-medium rounded-lg  transition-all duration-300">
+          <button className="hidden md:block px-6 py-2 bg-brand text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform rounded-lg ">
             Schedule a Demo
           </button>
           <button className="md:hidden text-white">

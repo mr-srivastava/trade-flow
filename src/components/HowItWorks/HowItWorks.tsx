@@ -30,7 +30,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16  relative">
+    <section className="py-16  relative" id="how-it-works">
       <div className="max-w-6xl mx-auto px-8 py-20 flex flex-col items-center justify-center">
         <div className="text-center mb-20">
           <h2 className="text-4xl font-bold text-slate-50 mb-6">
@@ -43,7 +43,7 @@ export default function HowItWorks() {
         <Steps steps={steps} />
         <Button
           size={"lg"}
-          className="mt-10 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-medium rounded-lg hover:from-blue-500 hover:to-blue-300 transition-all duration-300"
+          className="mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
         >
           Book Demo
         </Button>

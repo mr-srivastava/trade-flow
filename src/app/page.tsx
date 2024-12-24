@@ -16,13 +16,13 @@ export default function Home() {
             <>
               <Button
                 size={"lg"}
-                className="px-6 py-2 font-bold rounded-lg bg-brand transition-all duration-300"
+                className="px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
               >
-                Book Demo
+                Book a Demo
               </Button>
               <Button
                 size={"lg"}
-                className="px-6 py-2 text-white bg-brand/40 border-2 border-brand hover:bg-brand/60 font-bold rounded-lg transition-all duration-300"
+                className="px-6 py-3 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-lg hover:shadow-xl bg-white text-[#0DA2EF] border-2 border-[#0DA2EF] hover:bg-blue-50 focus:ring-blue-200"
               >
                 Learn More
               </Button>
