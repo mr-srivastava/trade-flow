@@ -64,9 +64,11 @@ export interface Property {
     opinion: any[]
     valid_product: boolean
     faq: Property[]
-    faq_description: string
+    faq_description: string | null,
     available_as: string | null
-    slug_name: string
+    slug_name: string,
+    used_in_manufacturing: string[],
+    manufactured_form: string[],
   }
   
   export interface ProductsResponse {
