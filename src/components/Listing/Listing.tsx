@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { extendedProducts } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +21,7 @@ import {
 import { ProductFilters } from "../ProductFilters/ProductFilters";
 import ProductCard from "../ProductCard/ProductCard";
 
-export default function Listing() {
+function ListingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
@@ -87,14 +87,12 @@ export default function Listing() {
     params.set("q", searchValue);
     params.set("page", "1"); // Reset to first page on new search
     router.push(`${pathname}?${params.toString()}`);
-    // router.push(`/?${params.toString()}`);
   };
 
   // Handle sort change
   const handleSortChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", value);
-    // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -104,7 +102,6 @@ export default function Listing() {
 
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", page.toString());
-    // router.push(`?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -245,5 +242,13 @@ export default function Listing() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Listing() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ListingContent />
+    </Suspense>
   );
 }
