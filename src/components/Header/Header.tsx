@@ -1,8 +1,14 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
-export default function Header() {
+export default function Header({ isFixed = true }: { isFixed?: boolean }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-white/10">
+    <header
+      className={cn(
+        isFixed && "fixed",
+        "top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-white/10"
+      )}
+    >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-12">
@@ -31,6 +37,12 @@ export default function Header() {
                 className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
               >
                 How it works?
+              </a>
+              <a
+                href="products"
+                className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
+              >
+                Products
               </a>
             </div>
           </div>
