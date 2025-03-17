@@ -47,7 +47,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       <Header isFixed={false} />
       <main className="container px-4 py-8 mx-auto">
         <Link
-          href="/"
+          href="/products"
           className="inline-flex items-center text-sm font-medium mb-6 hover:underline"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
