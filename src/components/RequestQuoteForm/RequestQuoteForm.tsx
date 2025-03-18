@@ -64,6 +64,7 @@ export function RequestQuoteForm({ product }: RequestQuoteFormProps) {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onSubmit(values: FormValues) {
     setIsSubmitting(true);
 
@@ -85,7 +86,7 @@ export function RequestQuoteForm({ product }: RequestQuoteFormProps) {
       <Toaster position="bottom-left" richColors />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="outline" size="lg" className="w-full mt-2">
+          <Button variant="outline" size="lg" className="w-full rounded-md">
             Request Quote
           </Button>
         </SheetTrigger>
@@ -176,7 +177,11 @@ export function RequestQuoteForm({ product }: RequestQuoteFormProps) {
                   )}
                 />
                 <SheetFooter>
-                  <Button type="submit" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="rounded-md"
+                  >
                     {isSubmitting && (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     )}

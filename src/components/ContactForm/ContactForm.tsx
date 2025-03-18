@@ -65,6 +65,7 @@ export function ContactForm({ product }: ContactFormProps) {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function onSubmit(values: FormValues) {
     setIsSubmitting(true);
 
@@ -88,7 +89,7 @@ export function ContactForm({ product }: ContactFormProps) {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size="lg" className="w-full">
+          <Button size="lg" className="w-full rounded-md">
             Get in Touch
           </Button>
         </DialogTrigger>
@@ -177,7 +178,11 @@ export function ContactForm({ product }: ContactFormProps) {
                 )}
               />
               <DialogFooter>
-                <Button type="submit" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="rounded-md"
+                >
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
