@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, CardContent, CardFooter } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import { AlertTriangle, Beaker, Crown } from "lucide-react";
-import { Button } from "../ui/button";
 import { Product } from "@/lib/types";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
@@ -118,9 +117,9 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="px-5 py-4 border-t bg-muted/20">
+      {/* <CardFooter className="px-5 py-4 border-t bg-muted/20">
         <div className="w-full flex items-center justify-between">
-          {/* {product.certificates && product.certificates.length > 0 && (
+          {product.certificates && product.certificates.length > 0 && (
             <div className="flex gap-2">
               {product.certificates.map((cert, i) => (
                 <Link
@@ -135,14 +134,14 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                 </Link>
               ))}
             </div>
-          )} */}
+          )}
           <Button className="ml-auto" size="sm" variant="default" asChild>
             <Link href={`/products/${product.id}`} className="font-medium">
               View Details
             </Link>
           </Button>
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }
