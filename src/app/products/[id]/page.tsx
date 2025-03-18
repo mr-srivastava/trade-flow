@@ -9,7 +9,13 @@ import {
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { extendedProducts } from "@/lib/data";
-import { AlertTriangle, Beaker, ChevronLeft, ExternalLink, FileText } from "lucide-react";
+import {
+  AlertTriangle,
+  Beaker,
+  ChevronLeft,
+  ExternalLink,
+  FileText,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -49,7 +55,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       <Header isFixed={false} />
       <main className="container px-4 py-8 mx-auto">
         <Link
-          href="/"
+          href="/products"
           className="inline-flex items-center text-sm font-medium mb-8 hover:text-primary transition-colors"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
@@ -142,6 +148,9 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="md:col-span-2 space-y-8">
             <div className="space-y-6">
               <div className="flex items-start gap-3">
+                <h1 className="text-3xl font-bold leading-tight">
+                  {product.name}
+                </h1>
                 {hasHazards && (
                   <div className="mt-1.5 flex-shrink-0">
                     <Badge
@@ -153,16 +162,13 @@ export default function ProductPage({ params }: ProductPageProps) {
                     </Badge>
                   </div>
                 )}
-                <div>
-                  <h1 className="text-3xl font-bold leading-tight">
-                    {product.name}
-                  </h1>
-                  {product.iupac_name && (
-                    <p className="text-muted-foreground mt-1">
-                      {product.iupac_name}
-                    </p>
-                  )}
-                </div>
+              </div>
+              <div>
+                {product.iupac_name && (
+                  <p className="text-muted-foreground mt-1">
+                    {product.iupac_name}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-muted/20 p-5 rounded-lg">
