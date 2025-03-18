@@ -9,7 +9,14 @@ import {
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { extendedProducts } from "@/lib/data";
-import { AlertTriangle, Beaker, ChevronLeft, FileText } from "lucide-react";
+import {
+  AlertTriangle,
+  Beaker,
+  ChevronLeft,
+  Crown,
+  ExternalLink,
+  FileText,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,6 +25,8 @@ import { PropertyList } from "@/components/PropertyList/PropertyList";
 import { Separator } from "@/components/ui/separator";
 import { ProductRecommendations } from "@/components/ProductRecommendation/ProductRecommendation";
 import { CTABanner } from "@/components/CTABanner/CTABanner";
+import { RequestQuoteForm } from "@/components/RequestQuoteForm/RequestQuoteForm";
+import { ContactForm } from "@/components/ContactForm/ContactForm";
 
 interface ProductPageProps {
   params: {
@@ -48,175 +57,251 @@ export default function ProductPage({ params }: ProductPageProps) {
       <main className="container px-4 py-8 mx-auto">
         <Link
           href="/products"
-          className="inline-flex items-center text-sm font-medium mb-6 hover:underline"
+          className="inline-flex items-center text-sm font-medium mb-8 hover:text-primary transition-colors"
         >
           <ChevronLeft className="mr-1 h-4 w-4" />
           Back to products
         </Link>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-1">
-            <div className="sticky top-8">
-              <div className="relative aspect-square bg-muted rounded-lg overflow-hidden mb-4">
+            <div className="sticky top-8 space-y-6">
+              <div className="relative aspect-square bg-muted/50 rounded-xl overflow-hidden mb-4 shadow-sm">
                 {product.product_images && product.product_images.length > 0 ? (
                   <Image
                     src={product.product_images[0] || "/placeholder.svg"}
                     alt={product.name}
                     fill
-                    className="object-cover"
-                    priority
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Beaker className="h-24 w-24 text-muted-foreground" />
+                    <Beaker className="h-16 w-16 text-muted-foreground/50" />
                   </div>
                 )}
+
+                <div className="absolute top-3 right-3 flex flex-col gap-2">
+                  {product.is_exclusive && (
+                    <Badge
+                      variant={"outline"}
+                      className="bg-purple-50 text-purple-700 border-purple-200"
+                    >
+                      <Crown className="h-3 w-3 mr-1" />
+                      Exclusive
+                    </Badge>
+                  )}
+                </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="flex flex-wrap gap-2">
                   {product.industries.map((industry, i) => (
-                    <Badge key={i} variant="outline">
+                    <Badge
+                      key={i}
+                      variant="outline"
+                      className="rounded-md py-1 px-2"
+                    >
                       {industry}
                     </Badge>
                   ))}
                   {product.categories.map((category, i) => (
-                    <Badge key={i} variant="secondary">
+                    <Badge
+                      key={i}
+                      variant="secondary"
+                      className="rounded-md py-1 px-2"
+                    >
                       {category}
                     </Badge>
                   ))}
                   {product.is_exclusive && (
-                    <Badge className="bg-primary">Exclusive</Badge>
+                    <Badge className="bg-primary rounded-md py-1 px-2">
+                      Exclusive
+                    </Badge>
                   )}
-                </div>
-
-                {product.certificates && product.certificates.length > 0 && (
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-medium">Certificates</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {product.certificates.map((cert, i) => (
-                        <Button
-                          key={i}
-                          variant="outline"
-                          size="sm"
-                          className="h-8"
-                          asChild
-                        >
-                          <Link
-                            href={cert.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <FileText className="h-3.5 w-3.5 mr-1.5" />
-                            {cert.name}
-                          </Link>
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div className="mt-6">
-                  {/* <ContactForm product={product} /> */}
-                  {/* <RequestQuoteForm product={product} /> */}
                 </div>
               </div>
             </div>
           </div>
 
           <div className="md:col-span-2 space-y-8">
-            <div className="space-y-4">
-              <div className="flex items-start gap-2">
-                <div>
-                  <h1 className="text-3xl font-bold">{product.name}</h1>
-                  {product.iupac_name && (
-                    <p className="text-muted-foreground">
-                      {product.iupac_name}
-                    </p>
-                  )}
-                </div>
+            <div className="space-y-6">
+              <div className="flex items-start gap-3">
+                <h1 className="text-3xl font-bold leading-tight">
+                  {product.name}
+                </h1>
                 {hasHazards && (
-                  <AlertTriangle className="h-5 w-5 text-amber-500 mt-1 flex-shrink-0" />
+                  <div className="mt-1.5 flex-shrink-0">
+                    <Badge
+                      variant="outline"
+                      className="bg-amber-50 text-amber-700 border-amber-200 rounded-md py-1 px-2"
+                    >
+                      <AlertTriangle className="h-4 w-4 mr-1.5" />
+                      Hazardous Material
+                    </Badge>
+                  </div>
+                )}
+              </div>
+              <div>
+                {product.iupac_name && (
+                  <p className="text-muted-foreground mt-1">
+                    {product.iupac_name}
+                  </p>
                 )}
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="space-y-1">
-                  <p className="text-muted-foreground">CAS Number</p>
-                  <p className="font-medium">{product.cas_number}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-muted/20 p-5 rounded-lg border border-muted/40">
+                <div className="space-y-1.5">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                    CAS Number
+                  </p>
+                  <p className="font-mono text-sm bg-background/80 px-2 py-1 rounded border border-border/50 inline-block">
+                    {product.cas_number}
+                  </p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-muted-foreground">Molecular Formula</p>
-                  <p className="font-medium">{product.molecular_formula}</p>
+                <div className="space-y-1.5">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                    Molecular Formula
+                  </p>
+                  <p className="font-mono text-sm">
+                    {product.molecular_formula}
+                  </p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-muted-foreground">EINECS</p>
-                  <p className="font-medium">{product.einecs_number || "—"}</p>
+                <div className="space-y-1.5">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                    EINECS
+                  </p>
+                  <p className="font-mono text-sm">
+                    {product.einecs_number || "—"}
+                  </p>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-muted-foreground">HSN Code</p>
-                  <p className="font-medium">{product.hsn_no || "—"}</p>
+                <div className="space-y-1.5">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                    HSN Code
+                  </p>
+                  <p className="font-mono text-sm">{product.hsn_no || "—"}</p>
                 </div>
               </div>
 
-              <div>
-                <h2 className="font-medium mb-2">Description</h2>
-                <p className="text-muted-foreground whitespace-pre-line">
+              <div className="space-y-2">
+                <h2 className="text-xl font-semibold">Description</h2>
+                <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
                   {product.description}
                 </p>
               </div>
-
-              <Tabs defaultValue="properties" className="w-full">
-                <TabsList className="grid grid-cols-4 mb-4">
-                  <TabsTrigger value="properties">Properties</TabsTrigger>
-                  <TabsTrigger value="applications">Applications</TabsTrigger>
-                  <TabsTrigger value="safety">Safety & Hazards</TabsTrigger>
-                  <TabsTrigger value="storage">Storage</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="properties" className="space-y-4">
-                  <PropertyList properties={product.properties} />
-                </TabsContent>
-
-                <TabsContent value="applications" className="space-y-4">
-                  <PropertyList properties={product.applications} />
-                </TabsContent>
-
-                <TabsContent value="safety" className="space-y-4">
-                  <PropertyList properties={product.safety_and_hazard} />
-                </TabsContent>
-
-                <TabsContent value="storage" className="space-y-4">
-                  <PropertyList properties={product.storage} />
-                </TabsContent>
-              </Tabs>
-
-              {product.faq && product.faq.length > 0 && (
-                <div className="space-y-4">
-                  <h2 className="text-xl font-bold">
-                    Frequently Asked Questions
-                  </h2>
-                  <Accordion type="single" collapsible className="w-full">
-                    {product.faq.map((faq, index) => (
-                      <AccordionItem key={index} value={`faq-${index}`}>
-                        <AccordionTrigger>{faq.key}</AccordionTrigger>
-                        <AccordionContent>
-                          <p className="whitespace-pre-line">{faq.value}</p>
-                        </AccordionContent>
-                      </AccordionItem>
+              {product.certificates && product.certificates.length > 0 && (
+                <div className="space-y-3 bg-muted/30 p-4 rounded-lg border border-muted/40">
+                  <h3 className="text-sm font-medium">
+                    Certificates & Documentation
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {product.certificates.map((cert, i) => (
+                      <Button
+                        key={i}
+                        variant="outline"
+                        size="sm"
+                        className="h-8 rounded-md"
+                        asChild
+                      >
+                        <Link
+                          href={cert.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FileText className="h-3.5 w-3.5 mr-1.5" />
+                          {cert.name}
+                          <ExternalLink className="h-3 w-3 ml-1.5 opacity-70" />
+                        </Link>
+                      </Button>
                     ))}
-                  </Accordion>
+                  </div>
                 </div>
               )}
+              <div className="flex pt-2 space-x-2">
+                <ContactForm product={product} />
+                <RequestQuoteForm product={product} />
+              </div>
             </div>
           </div>
         </div>
+        <div className="py-2 space-y-2 bg-primary-foreground rounded-xl p-8 md:p-10 mt-16 border border-primary/10">
+          <Tabs defaultValue="properties" className="w-full">
+            <TabsList className="grid grid-cols-4 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
+              <TabsTrigger
+                value="properties"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Properties
+              </TabsTrigger>
+              <TabsTrigger
+                value="applications"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Applications
+              </TabsTrigger>
+              <TabsTrigger
+                value="safety"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Safety & Hazards
+              </TabsTrigger>
+              <TabsTrigger
+                value="storage"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Storage
+              </TabsTrigger>
+            </TabsList>
 
-        <CTABanner />
+            <TabsContent value="properties" className="space-y-4 mt-2">
+              <PropertyList properties={product.properties} />
+            </TabsContent>
 
+            <TabsContent value="applications" className="space-y-4 mt-2">
+              <PropertyList properties={product.applications} />
+            </TabsContent>
+
+            <TabsContent value="safety" className="space-y-4 mt-2">
+              <PropertyList properties={product.safety_and_hazard} />
+            </TabsContent>
+
+            <TabsContent value="storage" className="space-y-4 mt-2">
+              <PropertyList properties={product.storage} />
+            </TabsContent>
+          </Tabs>
+        </div>
         <Separator className="my-12" />
 
         <ProductRecommendations currentProductId={product.id} />
+
+        <Separator className="my-12" />
+
+        {product.faq && product.faq.length > 0 && (
+          <div className="space-y-4 pt-4 flex justify-between">
+            <div className="w-full flex items-center justify-center">
+              <h2 className="max-w-2xl text-4xl font-black">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <Accordion type="single" collapsible className="w-full px-10">
+              {product.faq.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`faq-${index}`}
+                  className="border-b border-muted/70 py-2"
+                >
+                  <AccordionTrigger className="text-base font-medium hover:text-primary transition-colors py-2">
+                    {faq.key}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pt-2 pb-4 leading-relaxed">
+                    <p className="whitespace-pre-line">{faq.value}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        )}
+        <CTABanner />
       </main>
     </>
   );

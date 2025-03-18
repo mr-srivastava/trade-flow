@@ -10,11 +10,16 @@ export function PropertyList({ properties }: PropertyListProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5 divide-y divide-border/40">
       {properties.map((property, index) => (
-        <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-2">
-          <div className="font-medium">{property.key}</div>
-          <div className="md:col-span-2 whitespace-pre-line">
+        <div
+          key={index}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-3 ${
+            index > 0 ? "pt-5" : ""
+          }`}
+        >
+          <div className="font-medium text-foreground/90">{property.key}</div>
+          <div className="md:col-span-2 text-muted-foreground whitespace-pre-line">
             {property.value}
           </div>
         </div>
