@@ -18,6 +18,8 @@ import { PropertyList } from "@/components/PropertyList/PropertyList";
 import { Separator } from "@/components/ui/separator";
 import { ProductRecommendations } from "@/components/ProductRecommendation/ProductRecommendation";
 import { CTABanner } from "@/components/CTABanner/CTABanner";
+import { RequestQuoteForm } from "@/components/RequestQuoteForm/RequestQuoteForm";
+import { ContactForm } from "@/components/ContactForm/ContactForm";
 
 interface ProductPageProps {
   params: {
@@ -117,8 +119,8 @@ export default function ProductPage({ params }: ProductPageProps) {
                 )}
 
                 <div className="mt-6">
-                  {/* <ContactForm product={product} /> */}
-                  {/* <RequestQuoteForm product={product} /> */}
+                  <ContactForm product={product} />
+                  <RequestQuoteForm product={product} />
                 </div>
               </div>
             </div>
