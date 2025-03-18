@@ -136,11 +136,6 @@ export default function ProductPage({ params }: ProductPageProps) {
                     </div>
                   </div>
                 )}
-
-                <div className="pt-2 space-y-2">
-                  <ContactForm product={product} />
-                  <RequestQuoteForm product={product} />
-                </div>
               </div>
             </div>
           </div>
@@ -210,78 +205,83 @@ export default function ProductPage({ params }: ProductPageProps) {
                   {product.description}
                 </p>
               </div>
-
-              <Tabs defaultValue="properties" className="w-full">
-                <TabsList className="grid grid-cols-4 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
-                  <TabsTrigger
-                    value="properties"
-                    className="py-2.5 rounded-md data-[state=active]:bg-background"
-                  >
-                    Properties
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="applications"
-                    className="py-2.5 rounded-md data-[state=active]:bg-background"
-                  >
-                    Applications
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="safety"
-                    className="py-2.5 rounded-md data-[state=active]:bg-background"
-                  >
-                    Safety & Hazards
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="storage"
-                    className="py-2.5 rounded-md data-[state=active]:bg-background"
-                  >
-                    Storage
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="properties" className="space-y-4 mt-2">
-                  <PropertyList properties={product.properties} />
-                </TabsContent>
-
-                <TabsContent value="applications" className="space-y-4 mt-2">
-                  <PropertyList properties={product.applications} />
-                </TabsContent>
-
-                <TabsContent value="safety" className="space-y-4 mt-2">
-                  <PropertyList properties={product.safety_and_hazard} />
-                </TabsContent>
-
-                <TabsContent value="storage" className="space-y-4 mt-2">
-                  <PropertyList properties={product.storage} />
-                </TabsContent>
-              </Tabs>
-
-              {product.faq && product.faq.length > 0 && (
-                <div className="space-y-4 pt-4">
-                  <h2 className="text-xl font-semibold">
-                    Frequently Asked Questions
-                  </h2>
-                  <Accordion type="single" collapsible className="w-full">
-                    {product.faq.map((faq, index) => (
-                      <AccordionItem
-                        key={index}
-                        value={`faq-${index}`}
-                        className="border-b border-muted/70 py-2"
-                      >
-                        <AccordionTrigger className="text-base font-medium hover:text-primary transition-colors py-2">
-                          {faq.key}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-muted-foreground pt-2 pb-4 leading-relaxed">
-                          <p className="whitespace-pre-line">{faq.value}</p>
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                </div>
-              )}
+              <div className="flex pt-2 space-x-2">
+                <ContactForm product={product} />
+                <RequestQuoteForm product={product} />
+              </div>
             </div>
           </div>
         </div>
+        <div className="py-2 space-y-2 bg-primary/5 rounded-xl p-8 md:p-10 mt-16 border border-primary/10">
+          <Tabs defaultValue="properties" className="w-full">
+            <TabsList className="grid grid-cols-4 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
+              <TabsTrigger
+                value="properties"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Properties
+              </TabsTrigger>
+              <TabsTrigger
+                value="applications"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Applications
+              </TabsTrigger>
+              <TabsTrigger
+                value="safety"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Safety & Hazards
+              </TabsTrigger>
+              <TabsTrigger
+                value="storage"
+                className="py-2.5 rounded-md data-[state=active]:bg-background"
+              >
+                Storage
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="properties" className="space-y-4 mt-2">
+              <PropertyList properties={product.properties} />
+            </TabsContent>
+
+            <TabsContent value="applications" className="space-y-4 mt-2">
+              <PropertyList properties={product.applications} />
+            </TabsContent>
+
+            <TabsContent value="safety" className="space-y-4 mt-2">
+              <PropertyList properties={product.safety_and_hazard} />
+            </TabsContent>
+
+            <TabsContent value="storage" className="space-y-4 mt-2">
+              <PropertyList properties={product.storage} />
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {product.faq && product.faq.length > 0 && (
+          <div className="space-y-4 pt-4">
+            <h2 className="text-xl font-semibold">
+              Frequently Asked Questions
+            </h2>
+            <Accordion type="single" collapsible className="w-full">
+              {product.faq.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`faq-${index}`}
+                  className="border-b border-muted/70 py-2"
+                >
+                  <AccordionTrigger className="text-base font-medium hover:text-primary transition-colors py-2">
+                    {faq.key}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pt-2 pb-4 leading-relaxed">
+                    <p className="whitespace-pre-line">{faq.value}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        )}
 
         <CTABanner />
 

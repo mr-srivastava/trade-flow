@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Link from "next/link";
 import Image from "next/image";
-import { AlertTriangle, Beaker, FileText } from "lucide-react";
+import { AlertTriangle, Beaker, Crown, FileText } from "lucide-react";
 import { Button } from "../ui/button";
 import { Product } from "@/lib/types";
 import { Badge } from "../ui/badge";
@@ -51,17 +51,12 @@ export default function ProductCard({ product, className }: ProductCardProps) {
 
           <div className="absolute top-3 right-3 flex flex-col gap-2">
             {product.is_exclusive && (
-              <Badge className="bg-primary text-primary-foreground font-medium shadow-sm">
-                Exclusive
-              </Badge>
-            )}
-            {hasHazards && (
               <Badge
-                variant="outline"
-                className="bg-amber-50 text-amber-700 border-amber-200"
+                variant={"outline"}
+                className="bg-purple-50 text-purple-700 border-purple-200"
               >
-                <AlertTriangle className="h-3 w-3 mr-1" />
-                Hazardous
+                <Crown className="h-3 w-3 mr-1" />
+                Exclusive
               </Badge>
             )}
           </div>
@@ -90,6 +85,15 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                   {industry}
                 </Badge>
               ))}
+              {hasHazards && (
+                <Badge
+                  variant="outline"
+                  className="bg-amber-50 text-amber-700 border-amber-200"
+                >
+                  <AlertTriangle className="h-3 w-3 mr-1" />
+                  Hazardous
+                </Badge>
+              )}
             </div>
           </div>
 
@@ -116,7 +120,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
 
       <CardFooter className="px-5 py-4 border-t bg-muted/20">
         <div className="w-full flex items-center justify-between">
-          {product.certificates && product.certificates.length > 0 && (
+          {/* {product.certificates && product.certificates.length > 0 && (
             <div className="flex gap-2">
               {product.certificates.map((cert, i) => (
                 <Link
@@ -131,7 +135,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                 </Link>
               ))}
             </div>
-          )}
+          )} */}
           <Button className="ml-auto" size="sm" variant="default" asChild>
             <Link href={`/products/${product.id}`} className="font-medium">
               View Details
