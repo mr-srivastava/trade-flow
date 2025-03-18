@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   Beaker,
   ChevronLeft,
+  Crown,
   ExternalLink,
   FileText,
 } from "lucide-react";
@@ -65,20 +66,31 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-1">
             <div className="sticky top-8 space-y-6">
-              <div className="relative aspect-square bg-muted/30 rounded-xl overflow-hidden mb-4 shadow-sm">
+              <div className="relative aspect-square bg-muted/50 rounded-xl overflow-hidden mb-4 shadow-sm">
                 {product.product_images && product.product_images.length > 0 ? (
                   <Image
                     src={product.product_images[0] || "/placeholder.svg"}
                     alt={product.name}
                     fill
-                    className="object-cover"
-                    priority
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Beaker className="h-24 w-24 text-muted-foreground/50" />
+                    <Beaker className="h-16 w-16 text-muted-foreground/50" />
                   </div>
                 )}
+
+                <div className="absolute top-3 right-3 flex flex-col gap-2">
+                  {product.is_exclusive && (
+                    <Badge
+                      variant={"outline"}
+                      className="bg-purple-50 text-purple-700 border-purple-200"
+                    >
+                      <Crown className="h-3 w-3 mr-1" />
+                      Exclusive
+                    </Badge>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-5">
@@ -107,35 +119,6 @@ export default function ProductPage({ params }: ProductPageProps) {
                     </Badge>
                   )}
                 </div>
-
-                {product.certificates && product.certificates.length > 0 && (
-                  <div className="space-y-3 bg-muted/30 p-4 rounded-lg">
-                    <h3 className="text-sm font-medium">
-                      Certificates & Documentation
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {product.certificates.map((cert, i) => (
-                        <Button
-                          key={i}
-                          variant="outline"
-                          size="sm"
-                          className="h-8 rounded-md"
-                          asChild
-                        >
-                          <Link
-                            href={cert.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <FileText className="h-3.5 w-3.5 mr-1.5" />
-                            {cert.name}
-                            <ExternalLink className="h-3 w-3 ml-1.5 opacity-70" />
-                          </Link>
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -166,7 +149,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-muted/20 p-5 rounded-lg">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-muted/20 p-5 rounded-lg border border-muted/40">
                 <div className="space-y-1.5">
                   <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium">
                     CAS Number
@@ -205,6 +188,34 @@ export default function ProductPage({ params }: ProductPageProps) {
                   {product.description}
                 </p>
               </div>
+              {product.certificates && product.certificates.length > 0 && (
+                <div className="space-y-3 bg-muted/30 p-4 rounded-lg border border-muted/40">
+                  <h3 className="text-sm font-medium">
+                    Certificates & Documentation
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {product.certificates.map((cert, i) => (
+                      <Button
+                        key={i}
+                        variant="outline"
+                        size="sm"
+                        className="h-8 rounded-md"
+                        asChild
+                      >
+                        <Link
+                          href={cert.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FileText className="h-3.5 w-3.5 mr-1.5" />
+                          {cert.name}
+                          <ExternalLink className="h-3 w-3 ml-1.5 opacity-70" />
+                        </Link>
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="flex pt-2 space-x-2">
                 <ContactForm product={product} />
                 <RequestQuoteForm product={product} />
@@ -212,7 +223,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             </div>
           </div>
         </div>
-        <div className="py-2 space-y-2 bg-primary/5 rounded-xl p-8 md:p-10 mt-16 border border-primary/10">
+        <div className="py-2 space-y-2 bg-primary-foreground rounded-xl p-8 md:p-10 mt-16 border border-primary/10">
           <Tabs defaultValue="properties" className="w-full">
             <TabsList className="grid grid-cols-4 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
               <TabsTrigger
@@ -258,13 +269,21 @@ export default function ProductPage({ params }: ProductPageProps) {
             </TabsContent>
           </Tabs>
         </div>
+        <Separator className="my-12" />
+
+        <ProductRecommendations currentProductId={product.id} />
+
+        <Separator className="my-12" />
 
         {product.faq && product.faq.length > 0 && (
-          <div className="space-y-4 pt-4">
-            <h2 className="text-xl font-semibold">
-              Frequently Asked Questions
-            </h2>
-            <Accordion type="single" collapsible className="w-full">
+          <div className="space-y-4 pt-4 flex justify-between">
+            <div className="w-full flex items-center justify-center">
+              <h2 className="max-w-2xl text-4xl font-black">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <Accordion type="single" collapsible className="w-full px-10">
               {product.faq.map((faq, index) => (
                 <AccordionItem
                   key={index}
@@ -282,12 +301,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             </Accordion>
           </div>
         )}
-
         <CTABanner />
-
-        <Separator className="my-12" />
-
-        <ProductRecommendations currentProductId={product.id} />
       </main>
     </>
   );

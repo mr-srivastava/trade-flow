@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Link from "next/link";
 import Image from "next/image";
-import { AlertTriangle, Beaker, Crown, FileText } from "lucide-react";
+import { AlertTriangle, Beaker, Crown } from "lucide-react";
 import { Button } from "../ui/button";
 import { Product } from "@/lib/types";
 import { Badge } from "../ui/badge";
