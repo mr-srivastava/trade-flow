@@ -18,8 +18,8 @@ export function PropertyList({ properties }: PropertyListProps) {
             index > 0 ? "pt-5" : ""
           }`}
         >
-          <div className="font-medium text-foreground/90">{property.key}</div>
-          <div className="md:col-span-2 text-muted-foreground whitespace-pre-line">
+          <div className="font-medium text-white">{property.key}</div>
+          <div className="md:col-span-2 text-neutral-300 whitespace-pre-line">
             {property.value}
           </div>
         </div>

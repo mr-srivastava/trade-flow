@@ -26,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import type { Product } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import { toast, Toaster } from "sonner";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -47,9 +48,13 @@ type FormValues = z.infer<typeof formSchema>;
 
 interface RequestQuoteFormProps {
   product: Product;
+  buttonClassName?: string;
 }
 
-export function RequestQuoteForm({ product }: RequestQuoteFormProps) {
+export function RequestQuoteForm({
+  product,
+  buttonClassName,
+}: RequestQuoteFormProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -86,7 +91,11 @@ export function RequestQuoteForm({ product }: RequestQuoteFormProps) {
       <Toaster position="bottom-left" richColors />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="outline" size="lg" className="w-full rounded-md">
+          <Button
+            variant="outline"
+            size="lg"
+            className={cn("w-full rounded-md", buttonClassName)}
+          >
             Request Quote
           </Button>
         </SheetTrigger>

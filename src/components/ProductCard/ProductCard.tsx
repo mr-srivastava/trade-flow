@@ -26,7 +26,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
   return (
     <Card
       className={cn(
-        "overflow-hidden flex flex-col h-full group transition-all duration-300 hover:shadow-md border-muted/60 hover:border-primary/20",
+        "overflow-hidden flex flex-col h-full group transition-all duration-300 hover:shadow-md",
         className
       )}
     >
@@ -34,7 +34,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         href={`/products/${product.id}`}
         className="relative overflow-hidden"
       >
-        <div className="relative aspect-square bg-muted/50">
+        <div className="relative aspect-video bg-muted/50">
           {product.product_images && product.product_images.length > 0 ? (
             <Image
               src={product.product_images[0] || "/placeholder.svg"}
@@ -52,7 +52,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
             {product.is_exclusive && (
               <Badge
                 variant={"outline"}
-                className="bg-purple-50 text-purple-700 border-purple-200"
+                className="bg-purple-100 text-purple-700 border-purple-200"
               >
                 <Crown className="h-3 w-3 mr-1" />
                 Exclusive
@@ -69,19 +69,19 @@ export default function ProductCard({ product, className }: ProductCardProps) {
               href={`/products/${product.id}`}
               className="hover:underline decoration-primary decoration-1 underline-offset-4"
             >
-              <h3 className="font-medium text-lg line-clamp-2 leading-tight">
+              <h3 className="font-semibold text-xl line-clamp-2 leading-tight">
                 {product.name}
               </h3>
             </Link>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {product.industries.map((industry, i) => (
+              {product.categories.map((category, i) => (
                 <Badge
                   key={i}
                   variant="secondary"
-                  className="text-xs font-normal bg-secondary/50"
+                  className="text-xs font-normal border-neutral-300"
                 >
-                  {industry}
+                  {category}
                 </Badge>
               ))}
               {hasHazards && (
@@ -89,8 +89,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                   variant="outline"
                   className="bg-amber-50 text-amber-700 border-amber-200"
                 >
-                  <AlertTriangle className="h-3 w-3 mr-1" />
-                  Hazardous
+                  <AlertTriangle className="h-3 w-3" />
                 </Badge>
               )}
             </div>

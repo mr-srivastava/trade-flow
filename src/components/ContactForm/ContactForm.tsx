@@ -29,6 +29,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { Product } from "@/lib/types";
 import { toast, Toaster } from "sonner";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -48,9 +49,10 @@ type FormValues = z.infer<typeof formSchema>;
 
 interface ContactFormProps {
   product: Product;
+  buttonClassName?: string;
 }
 
-export function ContactForm({ product }: ContactFormProps) {
+export function ContactForm({ product, buttonClassName }: ContactFormProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -89,7 +91,11 @@ export function ContactForm({ product }: ContactFormProps) {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size="lg" className="w-full rounded-md">
+          <Button
+            variant="outline"
+            size="lg"
+            className={cn("w-full rounded-md", buttonClassName)}
+          >
             Get in Touch
           </Button>
         </DialogTrigger>

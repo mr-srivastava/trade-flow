@@ -39,7 +39,7 @@ export default function Header({ isFixed = true }: { isFixed?: boolean }) {
                 How it works?
               </a>
               <a
-                href="products"
+                href="/products"
                 className="text-sm font-medium text-white hover:text-brand transition-colors duration-300"
               >
                 Products
