@@ -101,6 +101,28 @@ export interface HeroContent {
 
 export interface Benefit {
   title: string;
-  icon: React.ReactNode;
   description: string;
+  icon: React.ReactNode;
+}
+
+interface Value {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+export interface AboutContent {
+  header: {
+    title: string;
+    subtitle: string;
+  };
+  description: {
+    paragraphs: string[];
+    links: Array<{
+      href: string;
+      text: string;
+      className: string;
+    }>;
+  };
+  values: Array<Value>;
 }

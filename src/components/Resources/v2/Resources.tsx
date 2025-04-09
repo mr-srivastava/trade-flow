@@ -1,34 +1,41 @@
 import React from 'react';
 import { BookOpen, FileText, Video, Download } from 'lucide-react';
 
-const ResourcesSection: React.FC = () => {
-  const resources = [
-    {
-      icon: <BookOpen className='h-6 w-6' />,
-      title: 'Industry Reports',
-      description: 'In-depth analysis of chemical industry trends',
-      link: '#',
-    },
-    {
-      icon: <FileText className='h-6 w-6' />,
-      title: 'Whitepapers',
-      description: 'Expert insights on supply chain optimization',
-      link: '#',
-    },
-    {
-      icon: <Video className='h-6 w-6' />,
-      title: 'Webinars',
-      description: 'Interactive sessions with industry experts',
-      link: '#',
-    },
-    {
-      icon: <Download className='h-6 w-6' />,
-      title: 'Case Studies',
-      description: 'Real-world success stories from our clients',
-      link: '#',
-    },
-  ];
+interface Resource {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  link: string;
+}
 
+const resources: Resource[] = [
+  {
+    icon: <BookOpen className='h-6 w-6' />,
+    title: 'Industry Reports',
+    description: 'In-depth analysis of chemical industry trends',
+    link: '#',
+  },
+  {
+    icon: <FileText className='h-6 w-6' />,
+    title: 'Whitepapers',
+    description: 'Expert insights on supply chain optimization',
+    link: '#',
+  },
+  {
+    icon: <Video className='h-6 w-6' />,
+    title: 'Webinars',
+    description: 'Interactive sessions with industry experts',
+    link: '#',
+  },
+  {
+    icon: <Download className='h-6 w-6' />,
+    title: 'Case Studies',
+    description: 'Real-world success stories from our clients',
+    link: '#',
+  },
+];
+
+const ResourcesSection: React.FC = () => {
   return (
     <section id='resources' className='py-16 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
       <div className='section-container'>
