@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart2, Handshake, TrendingUp, ChevronRight, Zap, Activity } from 'lucide-react';
+import { Handshake, TrendingUp, ChevronRight, Zap, Activity } from 'lucide-react';
 
 const SynFlowFeatures: React.FC = () => {
   return (
