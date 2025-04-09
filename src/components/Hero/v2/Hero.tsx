@@ -1,62 +1,8 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { HeroContent } from '@/lib/types';
 
-interface Content {
-  heading: string;
-  description: string;
-  buttons: {
-    contact: {
-      text: string;
-      href: string;
-    };
-    explore: {
-      text: string;
-      href: string;
-    };
-  };
-  stats: {
-    title: string;
-    items: {
-      value: string;
-      description: string;
-    }[];
-  };
-}
-
-const content: Content = {
-  heading: 'Bridging Markets, Building Partnerships for Chemicals/Pharmaceuticals',
-  description:
-    'Connect to our global network and leverage cutting-edge technology for operational efficiency in chemical and pharmaceutical trading.',
-  buttons: {
-    contact: {
-      text: 'Contact Us',
-      href: '#contact',
-    },
-    explore: {
-      text: 'Explore Platform',
-      href: '#platform',
-    },
-  },
-  stats: {
-    title: 'From India to Global Markets',
-    items: [
-      {
-        value: '48%',
-        description: 'Cost Reduction in Supply Chain',
-      },
-      {
-        value: '65+',
-        description: 'Global Partner Network',
-      },
-      {
-        value: '99.8%',
-        description: 'Process Efficiency Improvement',
-      },
-    ],
-  },
-};
-
-const HeroSection: React.FC = () => {
+const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
   return (
     <section className='relative py-16 md:py-24'>
       <div className='section-container'>

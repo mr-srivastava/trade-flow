@@ -1,38 +1,5 @@
 import React from 'react';
-import { Beaker, ShieldCheck, Activity, GanttChart, Clock, Globe } from 'lucide-react';
-
-const benefits = [
-  {
-    title: 'Quality Assurance',
-    icon: <ShieldCheck className='h-8 w-8 text-blue-500' />,
-    description: 'All products verified for compliance with international quality standards',
-  },
-  {
-    title: 'Laboratory Testing',
-    icon: <Beaker className='h-8 w-8 text-blue-500' />,
-    description: 'Advanced laboratory analysis and purity verification',
-  },
-  {
-    title: 'Market Insights',
-    icon: <Activity className='h-8 w-8 text-blue-500' />,
-    description: 'Real-time pricing data and market trend analysis',
-  },
-  {
-    title: 'Supply Chain Tracking',
-    icon: <GanttChart className='h-8 w-8 text-blue-500' />,
-    description: 'End-to-end visibility of your chemicals throughout the supply chain',
-  },
-  {
-    title: 'Just-in-Time Delivery',
-    icon: <Clock className='h-8 w-8 text-blue-500' />,
-    description: 'Optimized logistics for reduced inventory costs',
-  },
-  {
-    title: 'Global Reach',
-    icon: <Globe className='h-8 w-8 text-blue-500' />,
-    description: 'Connect with partners and suppliers across 120+ countries',
-  },
-];
+import { Benefit } from '@/lib/types';
 
 const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({
   icon,
@@ -60,7 +27,7 @@ const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = ({
   );
 };
 
-const PlatformBenefits: React.FC = () => {
+const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) => {
   return (
     <section id='benefits' className='py-16 bg-syntara-dark'>
       <div className='section-container'>

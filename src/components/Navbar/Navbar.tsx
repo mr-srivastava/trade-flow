@@ -18,8 +18,15 @@ const menuItems: Array<MenuItem> = [
 
 const Logo: React.FC<{ text: string }> = ({ text }) => (
   <div className='flex-shrink-0'>
-    <Link href='/' className='flex items-center'>
-      <span className='text-2xl font-heading font-bold text-syntara-light'>{text}</span>
+    <Link href='#' className='flex items-center group'>
+      <span className='text-2xl font-bold  font-heading relative overflow-hidden'>
+        <span className='inline-block transition-transform duration-500 group-hover:-translate-y-full'>
+          {text}
+        </span>
+        <span className='absolute left-0 top-0 inline-block -translate-y-full text-syntara-primary transition-transform duration-500 group-hover:translate-y-0'>
+          {text}
+        </span>
+      </span>
     </Link>
   </div>
 );
@@ -32,7 +39,7 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems }) =>
           <Link
             key={item.name}
             href={item.href}
-            className='text-syntara-light hover:text-white px-2 py-1 text-sm font-medium transition duration-150'
+            className='text-syntara-light hover:text-white font-medium transition-colors link-hover py-1'
           >
             {item.name}
           </Link>
