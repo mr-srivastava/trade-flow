@@ -1,9 +1,10 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import ProductDetails from "@/components/ProductDetails/ProductDetails";
-import { extendedProducts } from "@/lib/data";
-import { notFound } from "next/navigation";
-import React from "react";
+// import Footer from '@/components/Footer/Footer';
+// import Header from '@/components/Header/Header';
+// import ProductDetails from '@/components/ProductDetails/ProductDetails';
+import ProductDetail from '@/components/ProductDetails/v2/ProductDetails';
+import { extendedProducts } from '@/lib/data';
+// import { notFound } from 'next/navigation';
+import React from 'react';
 
 interface ProductPageProps {
   params: {
@@ -15,14 +16,15 @@ export default function ProductPage({ params }: ProductPageProps) {
   const product = extendedProducts.find((p) => p.id === params.id);
 
   if (!product) {
-    notFound();
+    // notFound();
   }
 
   return (
     <>
-      <Header isFixed={false} />
+      {/* <Header isFixed={false} />
       <ProductDetails product={product} />
-      <Footer />
+      <Footer /> */}
+      <ProductDetail />
     </>
   );
 }
