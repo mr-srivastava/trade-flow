@@ -126,3 +126,53 @@ export interface AboutContent {
   };
   values: Array<Value>;
 }
+
+interface Category {
+  name: string;
+  count: string;
+}
+
+export interface ProductCategoriesData {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  categories: Category[];
+}
+
+interface Feature {
+  id: number;
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+export interface SynFlowData {
+  features: Feature[];
+  sectionId: string;
+  sectionTitle: string;
+  sectionDescription: string;
+  learnMoreText: string;
+  learnMoreLink: string;
+}
+
+interface Resource {
+  icon: JSX.Element;
+  title: string;
+  description: string;
+  link: string;
+}
+
+export interface ResourcesData {
+  title: string;
+  subtitle: string;
+  resources: Resource[];
+}
+
+export interface PageContent {
+  hero: HeroContent;
+  benefits: Array<Benefit>;
+  about: AboutContent;
+  productCategories: ProductCategoriesData;
+  synFlowFeatures: SynFlowData;
+  resourcesData: ResourcesData;
+}

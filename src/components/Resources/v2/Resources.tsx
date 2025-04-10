@@ -1,53 +1,17 @@
 import React from 'react';
-import { BookOpen, FileText, Video, Download } from 'lucide-react';
+import { ResourcesData } from '@/lib/types';
 
-interface Resource {
-  icon: JSX.Element;
-  title: string;
-  description: string;
-  link: string;
-}
-
-const resources: Resource[] = [
-  {
-    icon: <BookOpen className='h-6 w-6' />,
-    title: 'Industry Reports',
-    description: 'In-depth analysis of chemical industry trends',
-    link: '#',
-  },
-  {
-    icon: <FileText className='h-6 w-6' />,
-    title: 'Whitepapers',
-    description: 'Expert insights on supply chain optimization',
-    link: '#',
-  },
-  {
-    icon: <Video className='h-6 w-6' />,
-    title: 'Webinars',
-    description: 'Interactive sessions with industry experts',
-    link: '#',
-  },
-  {
-    icon: <Download className='h-6 w-6' />,
-    title: 'Case Studies',
-    description: 'Real-world success stories from our clients',
-    link: '#',
-  },
-];
-
-const ResourcesSection: React.FC = () => {
+const ResourcesSection: React.FC<{ data: ResourcesData }> = ({ data }) => {
   return (
     <section id='resources' className='py-16 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
       <div className='section-container'>
         <div className='text-center mb-12'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>Educational Resources</h2>
-          <p className='text-syntara-light/80 max-w-2xl mx-auto'>
-            Explore our knowledge base to stay updated with industry trends and best practices
-          </p>
+          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>{data.title}</h2>
+          <p className='text-syntara-light/80 max-w-2xl mx-auto'>{data.subtitle}</p>
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-          {resources.map((resource, index) => (
+          {data.resources.map((resource, index) => (
             <a
               href={resource.link}
               key={index}
