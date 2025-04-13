@@ -1,16 +1,30 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import Listing from "@/components/Listing/Listing";
-import React from "react";
+import React from 'react';
+import ProductCatelogue from '@/components/Listing/v2/Listing';
+import urlMap from '@/lib/endpoint';
 
-export default function Products() {
-  return (
-    <>
-      <Header isFixed={false} />
-      <main className="">
-        <Listing />
-      </main>
-      <Footer />
-    </>
-  );
+export default async function Products() {
+  const url = `${urlMap.getProducts()}`;
+  console.log('Fetching products from URL:', url);
+
+  try {
+    const response = await fetch(url, { cache: 'no-store' });
+
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch products. Status: ${response.status}, StatusText: ${response.statusText}`,
+      );
+      throw new Error('Failed to fetch products');
+    }
+
+    const { products } = await response.json();
+
+    return (
+      <>
+        <ProductCatelogue data={products} />
+      </>
+    );
+  } catch (error) {
+    console.error('An error occurred while fetching products:', error);
+    throw error;
+  }
 }

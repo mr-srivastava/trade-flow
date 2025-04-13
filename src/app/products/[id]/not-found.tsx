@@ -1,26 +1,43 @@
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import Header from "@/components/Header/Header";
+import { Button } from '@/components/ui/button';
+import NavBar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/v2/Footer';
+
+
+const noProductFoundText = {
+  backToProducts: 'Back to products',
+  title: 'Product Not Found',
+  description: "The product you're looking for doesn't exist or has been removed.",
+  browseAllProducts: 'Browse All Products',
+};
 
 export default function ProductNotFound() {
   return (
-    <>
-      <Header isFixed={false} />
-      <main className="container flex flex-col items-center justify-center min-h-[70vh] px-4 py-8 mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
-        <p className="text-muted-foreground mb-8 max-w-md">
-          The product you&apos;re looking for doesn&apos;t exist or has been
-          removed from our catalog.
-        </p>
-        <Button asChild>
-          <Link href="/products">
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Back to Products
-          </Link>
-        </Button>
+    <div>
+      <NavBar />
+      <main className='flex-grow'>
+        <div>
+          <div className='section-container pt-8 pb-16'>
+            <Link
+              href='/products'
+              className='flex items-center text-syntara-light hover:text-syntara-primary transition mb-6'
+            >
+              <ChevronLeft className='h-4 w-4 mr-1' />
+              {noProductFoundText.backToProducts}
+            </Link>
+            <div className='glass-card p-12 text-center'>
+              <h1 className='text-2xl font-bold mb-4'>{noProductFoundText.title}</h1>
+              <p className='text-syntara-light/70 mb-8'>{noProductFoundText.description}</p>
+              <Button asChild>
+                <Link href='/products'>{noProductFoundText.browseAllProducts}</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }
