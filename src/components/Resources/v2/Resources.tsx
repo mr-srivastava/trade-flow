@@ -1,5 +1,6 @@
 import React from 'react';
 import { ResourcesData } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
 
 const ResourcesSection: React.FC<{ data: ResourcesData }> = ({ data }) => {
   return (
@@ -18,7 +19,7 @@ const ResourcesSection: React.FC<{ data: ResourcesData }> = ({ data }) => {
               className='glass-card p-6 text-center hover:bg-syntara-primary/5 transition-all duration-300'
             >
               <div className='inline-flex items-center justify-center w-12 h-12 rounded-full bg-syntara-primary/10 text-syntara-primary mb-4'>
-                {resource.icon}
+                {renderIcon(resource.icon, 'h-6 w-6')}
               </div>
               <h3 className='text-lg font-medium mb-2 text-white'>{resource.title}</h3>
               <p className='text-sm text-syntara-light/80'>{resource.description}</p>

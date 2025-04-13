@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronRight, Zap } from 'lucide-react';
 import { SynFlowData } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
 
 const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
   return (
@@ -25,7 +26,7 @@ const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
               >
                 <div className='flex gap-4 items-start'>
                   <div className='bg-syntara-primary/10 p-3 rounded-full flex-shrink-0'>
-                    <feature.icon className='h-6 w-6 text-syntara-primary' />
+                    {renderIcon(feature.icon, 'h-6 w-6 text-syntara-primary')}
                   </div>
                   <div>
                     <div className='flex items-center gap-2'>

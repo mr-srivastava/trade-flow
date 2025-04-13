@@ -11,8 +11,8 @@ const menuItems: Array<MenuItem> = [
   { name: 'Home', href: '/' },
   { name: 'Products', href: '/products' },
   { name: 'Capabilities', href: '#capabilities' },
-  { name: 'Platform', href: '#platform' },
-  { name: 'Partners', href: '#partners' },
+  // { name: 'Platform', href: '#platform' },
+  // { name: 'Partners', href: '#partners' },
   { name: 'Resources', href: '#resources' },
 ];
 

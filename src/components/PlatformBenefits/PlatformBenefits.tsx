@@ -1,5 +1,6 @@
 import React from 'react';
 import { Benefit } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
 
 const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({
   icon,
@@ -39,7 +40,7 @@ const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) 
           {benefits.map((benefit, index) => (
             <BenefitCard
               key={index}
-              icon={benefit.icon}
+              icon={renderIcon(benefit.icon, 'h-8 w-8 text-syntara-primary')}
               title={benefit.title}
               description={benefit.description}
             />

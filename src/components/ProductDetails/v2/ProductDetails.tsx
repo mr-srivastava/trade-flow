@@ -5,7 +5,6 @@ import {
   ChevronLeft,
   ExternalLink,
   FileText,
-  Shield,
   Beaker,
   Package2,
   Info,
@@ -21,6 +20,7 @@ import Link from 'next/link';
 import Footer from '@/components/Footer/v2/Footer';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
+import ProductCard from '@/components/Listing/v2/ProductCard';
 
 interface ProductDetailProps {
   product: Product & { relatedProducts: Array<Product> };
@@ -93,7 +93,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                       variant='outline'
                       className='w-full justify-center py-1.5 border-syntara-primary/30 bg-syntara-primary/10 text-syntara-primary flex gap-2'
                     >
-                      <Shield className='h-3.5 w-3.5' /> Exclusive Product
+                      <Crown className='h-3.5 w-3.5' /> Exclusive Product
                     </Badge>
                   )}
                 </div>
@@ -117,11 +117,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>EINECS</span>
-                  <span className='text-white font-mono'>{product.einecs_number}</span>
+                  <span className='text-white font-mono'>{product.einecs_number ?? '-'}</span>
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>HSN CODE</span>
-                  <span className='text-white font-mono'>{product.hsn_no}</span>
+                  <span className='text-white font-mono'>{product.hsn_no ?? '-'}</span>
                 </div>
               </div>
 
@@ -139,9 +139,25 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 <h2 className='text-xl font-semibold text-white mb-3'>
                   Certificates & Documentation
                 </h2>
-                <Button variant='outline' className='gap-2 mr-3'>
-                  <FileText className='h-4 w-4' /> COA <ExternalLink className='h-3 w-3 ml-1' />
-                </Button>
+                {product.certificates.length > 0 ? (
+                  product.certificates.map((cert, i) => (
+                    <Button key={i} variant='outline' className='gap-2 mr-3'>
+                      <Link
+                        href={cert.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='flex items-center gap-2'
+                      >
+                        <FileText className='h-4 w-4' /> {cert.name}{' '}
+                        <ExternalLink className='h-3 w-3 ml-1' />
+                      </Link>
+                    </Button>
+                  ))
+                ) : (
+                  <p className='text-syntara-light/80'>
+                    No certificates available for this product.
+                  </p>
+                )}
               </div>
 
               <div className='flex flex-col sm:flex-row gap-4 mt-8'>
@@ -238,53 +254,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         {/* Related Products Section */}
         <div className='mt-16'>
           <h2 className='text-2xl font-bold text-white mb-8'>Related Products</h2>
-          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {product.relatedProducts.map((relatedProduct) => (
-              <Link href={`/products/${relatedProduct.id}`} key={relatedProduct.id}>
-                <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-all duration-300 group'>
-                  <div className='relative h-36 bg-syntara-darker/70 flex items-center justify-center p-4'>
-                    {relatedProduct.is_exclusive && (
-                      <Badge
-                        variant='secondary'
-                        className='absolute top-2 right-2 flex items-center gap-1 bg-syntara-primary/20 text-syntara-primary'
-                      >
-                        <Crown className='h-3 w-3' /> Exclusive
-                      </Badge>
-                    )}
-                    {relatedProduct.product_images && relatedProduct.product_images.length > 0 ? (
-                      <Image
-                        src={relatedProduct.product_images[0] || '/placeholder.svg'}
-                        alt={relatedProduct.name}
-                        width={150}
-                        height={150}
-                        className='max-h-full max-w-full object-contain'
-                      />
-                    ) : (
-                      <div className='text-syntara-light/30 font-medium'>No image available</div>
-                    )}
-                  </div>
-
-                  <CardContent className='p-4'>
-                    <h3 className='text-lg font-semibold text-white mb-2 group-hover:text-syntara-primary transition-colors line-clamp-1'>
-                      {relatedProduct.name}
-                    </h3>
-
-                    <div className='flex'>
-                      <span className='text-syntara-light/70 w-16 text-xs'>CAS:</span>
-                      <span className='text-syntara-light font-mono text-xs'>
-                        {relatedProduct.cas_number}
-                      </span>
-                    </div>
-
-                    <div className='flex'>
-                      <span className='text-syntara-light/70 w-16 text-xs'>Formula:</span>
-                      <span className='text-syntara-light font-mono text-xs'>
-                        {relatedProduct.molecular_formula}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
         </div>

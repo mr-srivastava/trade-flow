@@ -1,23 +1,5 @@
 import { PageContent } from '@/lib/types';
 
-import {
-  Beaker,
-  ShieldCheck,
-  Activity,
-  GanttChart,
-  Clock,
-  Globe,
-  Shield,
-  Award,
-  Users,
-  Handshake,
-  TrendingUp,
-  BookOpen,
-  FileText,
-  Video,
-  Download,
-} from 'lucide-react';
-
 export const pageContent: PageContent = {
   hero: {
     heading: 'Bridging Markets, Building Partnerships for Chemicals/Pharmaceuticals',
@@ -54,32 +36,32 @@ export const pageContent: PageContent = {
   benefits: [
     {
       title: 'Quality Assurance',
-      icon: <ShieldCheck className='h-8 w-8 text-blue-500' />,
+      icon: 'ShieldCheck',
       description: 'All products verified for compliance with international quality standards',
     },
     {
       title: 'Laboratory Testing',
-      icon: <Beaker className='h-8 w-8 text-blue-500' />,
+      icon: 'Beaker',
       description: 'Advanced laboratory analysis and purity verification',
     },
     {
       title: 'Market Insights',
-      icon: <Activity className='h-8 w-8 text-blue-500' />,
+      icon: 'Activity',
       description: 'Real-time pricing data and market trend analysis',
     },
     {
       title: 'Supply Chain Tracking',
-      icon: <GanttChart className='h-8 w-8 text-blue-500' />,
+      icon: 'GanttChart',
       description: 'End-to-end visibility of your chemicals throughout the supply chain',
     },
     {
       title: 'Just-in-Time Delivery',
-      icon: <Clock className='h-8 w-8 text-blue-500' />,
+      icon: 'Clock',
       description: 'Optimized logistics for reduced inventory costs',
     },
     {
       title: 'Global Reach',
-      icon: <Globe className='h-8 w-8 text-blue-500' />,
+      icon: 'Globe',
       description: 'Connect with partners and suppliers across 120+ countries',
     },
   ],
@@ -101,23 +83,23 @@ export const pageContent: PageContent = {
     },
     values: [
       {
-        icon: <Shield className='h-6 w-6 text-syntara-primary' />,
+        icon: 'Shield',
         title: 'Compliance',
         description: 'We adhere to stringent USP and international standards',
       },
       {
-        icon: <Globe className='h-6 w-6 text-syntara-primary' />,
+        icon: 'Globe',
         title: 'Global Reach',
         description: 'Operations spanning across major markets worldwide',
       },
       {
-        icon: <Award className='h-6 w-6 text-syntara-primary' />,
         title: 'Quality',
+        icon: 'Award',
         description: 'Unwavering commitment to quality in every transaction',
       },
       {
-        icon: <Users className='h-6 w-6 text-syntara-primary' />,
         title: 'Partnerships',
+        icon: 'Users',
         description: 'Building lasting relationships with industry leaders',
       },
     ],
@@ -126,33 +108,25 @@ export const pageContent: PageContent = {
     title: 'Product Categories',
     subtitle: 'Entry Point to Products',
     buttonText: 'View All Product Categories',
-    categories: [
-      { name: 'Pharmaceutical Intermediates', count: '342' },
-      { name: 'API & Bulk Drugs', count: '156' },
-      { name: 'Fine Chemicals', count: '278' },
-      { name: 'Specialty Chemicals', count: '193' },
-      { name: 'Agrochemicals', count: '114' },
-      { name: 'Lab Reagents', count: '327' },
-    ],
   },
   synFlowFeatures: {
     features: [
       {
         id: 1,
-        icon: Activity,
+        icon: 'Activity',
         title: 'Supply Chain Intelligence',
         description: 'Seamless procurement, Real-Time Tracking and Insights',
       },
       {
         id: 2,
-        icon: Handshake,
+        icon: 'Handshake',
         title: 'Smart Deal Flow',
         description:
           'Supplier Matching, AI Handles negotiations, paperworks and Automated payment Journeys',
       },
       {
         id: 3,
-        icon: TrendingUp,
+        icon: 'TrendingUp',
         title: 'Pricing Intelligence',
         description: 'Real-time price, Supply and demand AI Forecast to spots the best deals',
       },
@@ -169,25 +143,25 @@ export const pageContent: PageContent = {
     subtitle: 'Explore our knowledge base to stay updated with industry trends and best practices',
     resources: [
       {
-        icon: <BookOpen className='h-6 w-6' />,
+        icon: 'BookOpen',
         title: 'Industry Reports',
         description: 'In-depth analysis of chemical industry trends',
         link: '#',
       },
       {
-        icon: <FileText className='h-6 w-6' />,
+        icon: 'FileText',
         title: 'Whitepapers',
         description: 'Expert insights on supply chain optimization',
         link: '#',
       },
       {
-        icon: <Video className='h-6 w-6' />,
+        icon: 'Video',
         title: 'Webinars',
         description: 'Interactive sessions with industry experts',
         link: '#',
       },
       {
-        icon: <Download className='h-6 w-6' />,
+        icon: 'Download',
         title: 'Case Studies',
         description: 'Real-world success stories from our clients',
         link: '#',
