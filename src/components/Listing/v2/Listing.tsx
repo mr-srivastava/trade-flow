@@ -29,31 +29,33 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
   const currentCategory = searchParams.get('categories') || '';
   const currentSubcategory = searchParams.get('subcategories') || '';
 
-  const filteredProducts = data.filter((product) => {
-    try {
-      const matchesSearch = [
-        product.name,
-        product.description,
-        product.cas_number,
-        product.molecular_formula,
-      ].some((field) => field.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredProducts = data
+    .filter((product) => {
+      try {
+        const matchesSearch = [
+          product.name,
+          product.description,
+          product.cas_number,
+          product.molecular_formula,
+        ].some((field) => field.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesIndustry = currentIndustry
-        ? product.industries.map(parseIndustryToSlug).includes(currentIndustry)
-        : true;
-      const matchesCategory = currentCategory
-        ? product.categories.map(parseIndustryToSlug).includes(currentCategory)
-        : true;
-      const matchesSubcategory = currentSubcategory
-        ? product.sub_categories?.map(parseIndustryToSlug).includes(currentSubcategory)
-        : true;
+        const matchesIndustry = currentIndustry
+          ? product.industries.map(parseIndustryToSlug).includes(currentIndustry)
+          : true;
+        const matchesCategory = currentCategory
+          ? product.categories.map(parseIndustryToSlug).includes(currentCategory)
+          : true;
+        const matchesSubcategory = currentSubcategory
+          ? product.sub_categories?.map(parseIndustryToSlug).includes(currentSubcategory)
+          : true;
 
-      return matchesSearch && matchesIndustry && matchesCategory && matchesSubcategory;
-    } catch (error) {
-      console.error('Error filtering product:', product, error);
-      return false;
-    }
-  });
+        return matchesSearch && matchesIndustry && matchesCategory && matchesSubcategory;
+      } catch (error) {
+        console.error('Error filtering product:', product, error);
+        return false;
+      }
+    })
+    .slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
 
   const toggleFilters = () => setShowFilters((prev) => !prev);
 
