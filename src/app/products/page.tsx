@@ -17,15 +17,14 @@ export default async function Products() {
     }
 
     const { products } = await response.json();
-    return products;
+
+    return (
+      <>
+        <ProductCatelogue data={products} />
+      </>
+    );
   } catch (error) {
     console.error('An error occurred while fetching products:', error);
     throw error;
   }
-
-  return (
-    <>
-      <ProductCatelogue data={products} />
-    </>
-  );
 }
