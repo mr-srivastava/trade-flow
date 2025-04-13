@@ -1,6 +1,7 @@
 import ProductDetail from '@/components/ProductDetails/v2/ProductDetails';
 import { notFound } from 'next/navigation';
 import React from 'react';
+import urlMap from '@/lib/endpoint';
 
 interface ProductPageProps {
   params: {
@@ -9,7 +10,7 @@ interface ProductPageProps {
 }
 
 export async function generateMetadata({ params }: ProductPageProps) {
-  const response = await fetch(`http://localhost:3000/api/products/${params.id}`, {
+  const response = await fetch(urlMap.getProduct(params.id), {
     cache: 'no-store',
   });
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 export default async function ProductPage({ params }: ProductPageProps) {
   let response;
   try {
-    response = await fetch(`http://localhost:3000/api/products/${params.id}`, {
+    response = await fetch(urlMap.getProduct(params.id), {
       cache: 'no-store',
     });
 
