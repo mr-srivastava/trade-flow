@@ -1,4 +1,5 @@
-import React from 'react';
+export const dynamic = 'force-dynamic';
+
 import ProductCatelogue from '@/components/Listing/v2/Listing';
 import urlMap from '@/lib/endpoint';
 
@@ -7,7 +8,7 @@ export default async function Products() {
   console.log('Fetching products from URL:', url);
 
   try {
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url, { next: { revalidate: 60 * 60 } });
 
     if (!response.ok) {
       console.error(
