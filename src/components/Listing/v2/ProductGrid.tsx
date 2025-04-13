@@ -19,7 +19,7 @@ const ProductGrid: React.FC<{ products: Array<Product> }> = ({ products }) => {
               item.value.includes('Corrosive'),
           );
         return (
-          <Link href={`/products/${product.id}`} key={product.id}>
+          <Link href={`/product/${product.id}`} key={product.id}>
             <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-all duration-300 group'>
               <div className='relative h-40 bg-syntara-darker/70 flex items-center justify-center p-4'>
                 {product.is_exclusive && (

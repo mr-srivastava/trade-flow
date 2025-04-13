@@ -10,11 +10,14 @@ import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
 import { Product } from '@/lib/types';
 
-const Products: React.FC<{ data: Array<Product> }> = ({ data }) => {
+const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
+  data,
+  title = 'Products Catalog',
+}) => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const totalProducts: number = 50;
+  const totalProducts: number = data.length; // Total number of products
   const productsPerPage: number = 12;
 
   const industry: string = '';
@@ -60,7 +63,7 @@ const Products: React.FC<{ data: Array<Product> }> = ({ data }) => {
       <main className='flex-grow'>
         <div className='section-container pt-8 pb-16'>
           <div className='mb-8'>
-            <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>Products Catalog</h1>
+            <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>{title}</h1>
 
             <form
               onSubmit={handleSearch}

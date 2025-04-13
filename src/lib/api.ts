@@ -31,3 +31,7 @@ export const apiCall = async (url: string) => {
 
   return response.json();
 };
+
+export const parseIndustryToSlug = (industry: string) => {
+  return industry.replace(/\s+/g, '-').toLowerCase();
+};

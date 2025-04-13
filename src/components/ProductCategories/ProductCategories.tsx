@@ -2,10 +2,11 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
 import urlMap from '@/lib/endpoint';
-import { apiCall } from '@/lib/api';
+import { apiCall, parseIndustryToSlug } from '@/lib/api';
+import Link from 'next/link';
 
 const fetchIndustries = async () => {
-  const url = urlMap.getIndustries();
+  const url = urlMap.getIndustriesProductCount();
   return apiCall(url);
 };
 
@@ -26,7 +27,8 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
           {industries.map((industry: IndustryProductCountMap) => (
-            <div
+            <Link
+              href={`/products/industries/${parseIndustryToSlug(industry.name)}`}
               key={industry.name}
               className='glass-card p-6 hover:border-syntara-primary/50 transition-all duration-300 group'
             >
@@ -40,14 +42,14 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
                 <span className='text-sm text-syntara-light/70'>Explore products</span>
                 <ChevronRight className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className='mt-10 text-center'>
-          <a href='#' className='btn-primary'>
+          <Link href='/products' className='btn-primary'>
             {productCategories.buttonText}
-          </a>
+          </Link>
         </div>
       </div>
     </section>

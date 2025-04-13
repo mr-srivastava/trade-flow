@@ -10,7 +10,9 @@ const getBaseUrl = () => {
 const urlMap = {
   getProduct: (productId: string) => `${getBaseUrl()}/api/products/${productId}`,
   getProducts: () => `${getBaseUrl()}/api/products`,
-  getIndustries: () => `${getBaseUrl()}/api/products/industries`,
+  getProductsByIndustry: (industry: string) =>
+    `${getBaseUrl()}/api/products/industries/${industry}`,
+  getIndustriesProductCount: () => `${getBaseUrl()}/api/products/industries/count`,
 };
 
 export default urlMap;
