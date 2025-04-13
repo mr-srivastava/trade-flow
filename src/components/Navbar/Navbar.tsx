@@ -48,7 +48,7 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems }) =>
     </div>
     <div className='hidden md:flex items-center space-x-4'>
       <Link
-        href='#about'
+        href='/#about'
         className='px-4 py-2 text-syntara-light hover:text-white text-sm font-medium transition duration-150'
       >
         About Us
