@@ -9,7 +9,6 @@ import {
   Beaker,
   Package2,
   Info,
-  Crown,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -21,6 +20,7 @@ import Link from 'next/link';
 import Footer from '@/components/Footer/v2/Footer';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
+import ProductCard from '@/components/Listing/v2/ProductCard';
 
 interface ProductDetailProps {
   product: Product & { relatedProducts: Array<Product> };
@@ -238,53 +238,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         {/* Related Products Section */}
         <div className='mt-16'>
           <h2 className='text-2xl font-bold text-white mb-8'>Related Products</h2>
-          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {product.relatedProducts.map((relatedProduct) => (
-              <Link href={`/products/${relatedProduct.id}`} key={relatedProduct.id}>
-                <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-all duration-300 group'>
-                  <div className='relative h-36 bg-syntara-darker/70 flex items-center justify-center p-4'>
-                    {relatedProduct.is_exclusive && (
-                      <Badge
-                        variant='secondary'
-                        className='absolute top-2 right-2 flex items-center gap-1 bg-syntara-primary/20 text-syntara-primary'
-                      >
-                        <Crown className='h-3 w-3' /> Exclusive
-                      </Badge>
-                    )}
-                    {relatedProduct.product_images && relatedProduct.product_images.length > 0 ? (
-                      <Image
-                        src={relatedProduct.product_images[0] || '/placeholder.svg'}
-                        alt={relatedProduct.name}
-                        width={150}
-                        height={150}
-                        className='max-h-full max-w-full object-contain'
-                      />
-                    ) : (
-                      <div className='text-syntara-light/30 font-medium'>No image available</div>
-                    )}
-                  </div>
-
-                  <CardContent className='p-4'>
-                    <h3 className='text-lg font-semibold text-white mb-2 group-hover:text-syntara-primary transition-colors line-clamp-1'>
-                      {relatedProduct.name}
-                    </h3>
-
-                    <div className='flex'>
-                      <span className='text-syntara-light/70 w-16 text-xs'>CAS:</span>
-                      <span className='text-syntara-light font-mono text-xs'>
-                        {relatedProduct.cas_number}
-                      </span>
-                    </div>
-
-                    <div className='flex'>
-                      <span className='text-syntara-light/70 w-16 text-xs'>Formula:</span>
-                      <span className='text-syntara-light font-mono text-xs'>
-                        {relatedProduct.molecular_formula}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
             ))}
           </div>
         </div>

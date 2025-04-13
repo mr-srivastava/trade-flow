@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         (p.categories.some((cat) => product.categories.includes(cat)) ||
           p.industries.some((ind) => product.industries.includes(ind))),
     )
-    .slice(0, 4);
+    .slice(0, 3);
   return new Response(JSON.stringify({ ...product, relatedProducts }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },

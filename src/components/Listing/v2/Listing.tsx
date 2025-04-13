@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import ProductGrid from './ProductGrid';
+
 import NavBar from '@/components/Navbar/Navbar';
 import ProductFilters from './ProductFilters';
 import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
 import { Product } from '@/lib/types';
+import ProductCard from './ProductCard';
 
 const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
   data,
@@ -103,7 +104,11 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
             )}
 
             <div className='flex-grow'>
-              <ProductGrid products={filteredProducts} />
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
 
               <div className='mt-12'>
                 <ProductPagination
