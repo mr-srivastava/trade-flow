@@ -8,8 +8,9 @@ const getBaseUrl = () => {
 };
 
 const urlMap = {
-  getProducts: () => `${getBaseUrl()}/api/products`,
   getProduct: (productId: string) => `${getBaseUrl()}/api/products/${productId}`,
+  getProducts: () => `${getBaseUrl()}/api/products`,
+  getIndustries: () => `${getBaseUrl()}/api/products/industries`,
 };
 
 export default urlMap;

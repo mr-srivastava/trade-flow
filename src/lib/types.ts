@@ -102,11 +102,11 @@ export interface HeroContent {
 export interface Benefit {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: string; // Optional for v2
 }
 
 interface Value {
-  icon: React.ReactNode;
+  icon: string; // Optional for v2
   title: string;
   description: string;
 }
@@ -127,21 +127,15 @@ export interface AboutContent {
   values: Array<Value>;
 }
 
-interface Category {
-  name: string;
-  count: string;
-}
-
 export interface ProductCategoriesData {
   title: string;
   subtitle: string;
   buttonText: string;
-  categories: Category[];
 }
 
 interface Feature {
   id: number;
-  icon: React.ElementType;
+  icon: string;
   title: string;
   description: string;
 }
@@ -156,7 +150,7 @@ export interface SynFlowData {
 }
 
 interface Resource {
-  icon: JSX.Element;
+  icon: string; // Optional for v2
   title: string;
   description: string;
   link: string;
@@ -175,4 +169,9 @@ export interface PageContent {
   productCategories: ProductCategoriesData;
   synFlowFeatures: SynFlowData;
   resourcesData: ResourcesData;
+}
+
+export interface IndustryProductCountMap {
+  name: string;
+  count: number;
 }

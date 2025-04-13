@@ -1,5 +1,6 @@
 import React from 'react';
 import { AboutContent } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
 
 const AboutSection: React.FC<AboutContent> = ({ header, description, values }) => {
   return (
@@ -46,7 +47,9 @@ const CoreValues: React.FC<{ values: AboutContent['values'] }> = ({ values }) =>
     <ul className='space-y-6'>
       {values.map((value, index) => (
         <li key={index} className='flex items-start gap-4'>
-          <div className='flex-shrink-0 bg-secondary/50 p-3 rounded-full'>{value.icon}</div>
+          <div className='flex-shrink-0 bg-secondary/50 p-3 rounded-full'>
+            {renderIcon(value.icon, 'h-6 w-6 text-syntara-primary')}
+          </div>
           <div>
             <h4 className='font-semibold text-white'>{value.title}</h4>
             <p className='text-sm text-syntara-light/80 leading-relaxed'>{value.description}</p>

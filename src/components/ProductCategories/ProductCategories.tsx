@@ -1,10 +1,19 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
-import { ProductCategoriesData } from '@/lib/types';
+import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
+import urlMap from '@/lib/endpoint';
+import { apiCall } from '@/lib/api';
 
-const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> = ({
+const fetchIndustries = async () => {
+  const url = urlMap.getIndustries();
+  return apiCall(url);
+};
+
+const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> = async ({
   productCategories,
 }) => {
+  const industries = await fetchIndustries();
+
   return (
     <section id='products' className='py-16 bg-gradient-to-b from-syntara-dark to-syntara-darker'>
       <div className='section-container'>
@@ -16,15 +25,15 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {productCategories.categories.map((category, index) => (
+          {industries.map((industry: IndustryProductCountMap) => (
             <div
-              key={index}
+              key={industry.name}
               className='glass-card p-6 hover:border-syntara-primary/50 transition-all duration-300 group'
             >
               <div className='flex justify-between items-center'>
-                <h3 className='text-lg font-medium text-white'>{category.name}</h3>
+                <h3 className='text-lg font-medium text-white'>{industry.name}</h3>
                 <span className='text-sm text-syntara-light/70 bg-syntara-darker py-1 px-2 rounded-full'>
-                  {category.count}
+                  {industry.count}
                 </span>
               </div>
               <div className='mt-6 flex justify-between items-center'>
