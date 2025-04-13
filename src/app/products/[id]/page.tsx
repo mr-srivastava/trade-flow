@@ -1,6 +1,3 @@
-// import Footer from '@/components/Footer/Footer';
-// import Header from '@/components/Header/Header';
-// import ProductDetails from '@/components/ProductDetails/ProductDetails';
 import ProductDetail from '@/components/ProductDetails/v2/ProductDetails';
 import { extendedProducts } from '@/lib/data';
 import { notFound } from 'next/navigation';
