@@ -54,7 +54,7 @@ const formFields = [
 
 const ContactSection: React.FC = () => {
   return (
-    <section id='contact' className='py-16'>
+    <section id='contact' className='py-8'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>Contact Us</h2>

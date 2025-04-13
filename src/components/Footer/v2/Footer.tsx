@@ -1,5 +1,44 @@
 import React from 'react';
-import { Globe, Mail, Phone, Linkedin, Twitter, Facebook } from 'lucide-react';
+import Link from 'next/link';
+import { renderIcon } from '@/lib/icon-util';
+
+interface FooterData {
+  logo: string;
+  description: string;
+  quickLinks: Record<'name' | 'href', string>[];
+  products: Record<'name' | 'href', string>[];
+  socials: Record<'name' | 'href' | 'icon', string>[];
+  contact: (Record<'key' | 'icon' | 'content', string> & Partial<Record<'href', string>>)[];
+}
+
+const footerData: FooterData = {
+  logo: 'Syntara',
+  description:
+    'Bridging markets and building partnerships in the global chemical and pharmaceutical trade industry.',
+  quickLinks: [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '#about' },
+    { name: 'Products', href: '#products' },
+    { name: 'Capabilities', href: '#capabilities' },
+    { name: 'Contact', href: '/contact' },
+  ],
+  products: [
+    { name: 'Pharmaceutical Intermediates', href: '#' },
+    { name: 'API & Bulk Drugs', href: '#' },
+    { name: 'Fine Chemicals', href: '#' },
+    { name: 'Specialty Chemicals', href: '#' },
+  ],
+  socials: [
+    { name: 'Linkedin', href: '#', icon: 'Linkedin' },
+    { name: 'Twitter', href: '#', icon: 'Twitter' },
+    { name: 'Facebook', href: '#', icon: 'Facebook' },
+  ],
+  contact: [
+    { key: 'location', icon: 'Globe', content: 'Mumbai, India' },
+    { key: 'mail', icon: 'Mail', content: 'contact@syntara.com', href: '#' },
+    { key: 'phone', icon: 'Phone', content: '+91 (123) 456-7890', href: '#' },
+  ],
+};
 
 const Footer: React.FC = () => {
   return (
@@ -7,142 +46,71 @@ const Footer: React.FC = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
-            <h3 className='text-xl font-bold text-white mb-6'>Syntara</h3>
-            <p className='text-syntara-light/70 mb-6 text-sm'>
-              Bridging markets and building partnerships in the global chemical and pharmaceutical
-              trade industry.
-            </p>
+            <h3 className='text-xl font-bold text-white mb-6'>{footerData.logo}</h3>
+            <p className='text-syntara-light/70 mb-6 text-sm'>{footerData.description}</p>
             <div className='flex space-x-4'>
-              <a
-                href='#'
-                className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
-              >
-                <Linkedin className='h-5 w-5 text-syntara-light hover:text-syntara-primary' />
-              </a>
-              <a
-                href='#'
-                className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
-              >
-                <Twitter className='h-5 w-5 text-syntara-light hover:text-syntara-primary' />
-              </a>
-              <a
-                href='#'
-                className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
-              >
-                <Facebook className='h-5 w-5 text-syntara-light hover:text-syntara-primary' />
-              </a>
+              {footerData.socials.map((social) => (
+                <Link
+                  key={social.name}
+                  href='#'
+                  className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
+                >
+                  {renderIcon(social.icon, 'h-5 w-5 text-syntara-light hover:text-syntara-primary')}
+                </Link>
+              ))}
             </div>
           </div>
 
           <div>
             <h4 className='text-lg font-medium text-white mb-4'>Quick Links</h4>
             <ul className='space-y-3'>
-              <li>
-                <a
-                  href='#'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#about'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#products'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Products
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#capabilities'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Capabilities
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#contact'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Contact
-                </a>
-              </li>
+              {footerData.quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className='text-lg font-medium text-white mb-4'>Products</h4>
             <ul className='space-y-3'>
-              <li>
-                <a
-                  href='#'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Pharmaceutical Intermediates
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  API & Bulk Drugs
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Fine Chemicals
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  Specialty Chemicals
-                </a>
-              </li>
+              {footerData.products.map((product) => (
+                <li key={product.name}>
+                  <Link
+                    href={product.href}
+                    className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                  >
+                    {product.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className='text-lg font-medium text-white mb-4'>Contact</h4>
             <ul className='space-y-3'>
-              <li className='flex items-center gap-3'>
-                <Globe className='h-5 w-5 text-syntara-primary' />
-                <span className='text-syntara-light/70'>Mumbai, India</span>
-              </li>
-              <li className='flex items-center gap-3'>
-                <Mail className='h-5 w-5 text-syntara-primary' />
-                <a
-                  href='mailto:contact@syntara.com'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  contact@syntara.com
-                </a>
-              </li>
-              <li className='flex items-center gap-3'>
-                <Phone className='h-5 w-5 text-syntara-primary' />
-                <a
-                  href='tel:+911234567890'
-                  className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
-                >
-                  +91 (123) 456-7890
-                </a>
-              </li>
+              {footerData.contact.map(({ key, icon, content, href }) => (
+                <li key={key} className='flex items-center gap-3'>
+                  {renderIcon(icon, 'h-5 w-5 text-syntara-primary')}
+                  {href ? (
+                    <Link
+                      href={href}
+                      className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <span className='text-syntara-light/70'>{content}</span>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -153,24 +121,24 @@ const Footer: React.FC = () => {
               © {new Date().getFullYear()} Syntara. All rights reserved.
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
-              <a
+              <Link
                 href='#'
                 className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
               >
                 Privacy Policy
-              </a>
-              <a
+              </Link>
+              <Link
                 href='#'
                 className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
               >
                 Terms of Service
-              </a>
-              <a
+              </Link>
+              <Link
                 href='#'
                 className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
               >
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>

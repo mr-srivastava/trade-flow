@@ -53,7 +53,14 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems }) =>
       >
         About Us
       </Link>
-      <Link href='#contact' className='btn-primary text-sm'>
+      <Link
+        href={
+          typeof window !== 'undefined' && window.location.pathname === '/'
+            ? '#contact'
+            : '/contact'
+        }
+        className='btn-primary text-sm'
+      >
         Contact
       </Link>
     </div>
