@@ -1,30 +1,50 @@
 import React, { Suspense } from 'react';
-import ProductCatelogue from '@/components/Listing/v2/Listing';
+import ProductCatalogue from '@/components/Listing/v2/Listing';
 import urlMap from '@/lib/endpoint';
 
 export const dynamic = 'force-dynamic';
 
-async function Products() {
-  const url = `${urlMap.getProducts()}`;
+// Extract API call logic into a separate utility function
+const apiCall = async (url: string) => {
+  const response = await fetch(url, { next: { revalidate: 60 * 60 } });
 
-  try {
-    const response = await fetch(url, { next: { revalidate: 60 * 60 } });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
+  if (!response.ok) {
+    switch (response.status) {
+      case 401:
+        throw new Error('Unauthorized access. Please log in.');
+      case 403:
+        throw new Error('Forbidden access. You do not have permission.');
+      case 404:
+        throw new Error('Products not found.');
+      default:
+        if (response.status >= 500) {
+          throw new Error('Server error. Please try again later.');
+        }
+        throw new Error('Failed to fetch products');
     }
-    const { products } = await response.json();
-
-    return (
-      <>
-        <ProductCatelogue data={products} />
-      </>
-    );
-  } catch (error) {
-    throw error;
   }
-}
 
+  return response.json();
+};
+
+// Extract API call logic into a separate utility function
+const fetchProducts = async () => {
+  const url = urlMap.getProducts();
+  return apiCall(url);
+};
+
+// Separate the data-fetching logic from the component
+const Products = async () => {
+  try {
+    const { products } = await fetchProducts();
+    return <ProductCatalogue data={products} />;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return <div>Failed to load products. Please try again later.</div>;
+  }
+};
+
+// Use a named function for better debugging and readability
 export default function ProductsPage() {
   return (
     <Suspense fallback={<div>Loading products...</div>}>

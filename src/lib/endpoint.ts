@@ -1,15 +1,15 @@
-interface UrlMap {
-  getProducts: () => string;
-  getProduct: (productId: string) => string;
-}
+import { headers } from 'next/headers';
 
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const getBaseUrl = () => {
+  const host = headers().get('host');
+  const protocol = host?.startsWith('localhost') ? 'http' : 'https';
+  const baseUrl = `${protocol}://${host}`;
+  return baseUrl;
+};
 
-const urlMap: UrlMap = {
-  getProducts: () => `${baseUrl}/api/products`,
-  getProduct: (productId) => `${baseUrl}/api/products/${productId}`,
+const urlMap = {
+  getProducts: () => `${getBaseUrl()}/api/products`,
+  getProduct: (productId: string) => `${getBaseUrl()}/api/products/${productId}`,
 };
 
 export default urlMap;
