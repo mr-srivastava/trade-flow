@@ -5,7 +5,7 @@ import urlMap from '@/lib/endpoint';
 export const dynamic = 'force-dynamic';
 
 async function Products() {
-  const url = `${urlMap.getProducts()}`;
+  const url = urlMap.getProducts();
 
   try {
     const response = await fetch(url, { next: { revalidate: 60 * 60 } });
@@ -13,13 +13,10 @@ async function Products() {
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
+
     const { products } = await response.json();
 
-    return (
-      <>
-        <ProductCatelogue data={products} />
-      </>
-    );
+    return <ProductCatelogue data={products} />;
   } catch (error) {
     throw error;
   }
