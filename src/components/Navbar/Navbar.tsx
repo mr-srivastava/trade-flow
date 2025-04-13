@@ -18,7 +18,7 @@ const menuItems: Array<MenuItem> = [
 
 const Logo: React.FC<{ text: string }> = ({ text }) => (
   <div className='flex-shrink-0'>
-    <Link href='#' className='flex items-center group'>
+    <Link href='/' className='flex items-center group'>
       <span className='text-2xl font-bold  font-heading relative overflow-hidden'>
         <span className='inline-block transition-transform duration-500 group-hover:-translate-y-full'>
           {text}

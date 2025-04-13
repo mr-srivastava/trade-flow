@@ -49,6 +49,7 @@ const NoProductFound = () => (
     </div>
   </div>
 );
+
 const ProductDetail: React.FC<{ product: Product; recommendations: Array<Product> }> = ({
   product,
   recommendations,

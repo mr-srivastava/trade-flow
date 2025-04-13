@@ -9,18 +9,16 @@ import ProductFilters from './ProductFilters';
 import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
 import { extendedProducts } from '@/lib/data';
-import { useSearchParams } from 'next/navigation';
 
 const Products: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const searchParams = useSearchParams();
   const totalProducts: number = 50;
   const productsPerPage: number = 12;
 
-  const industry: string = searchParams.get('industry') || '';
-  const category: string = searchParams.get('category') || '';
+  const industry: string = '';
+  const category: string = '';
 
   // Filter products based on search, industry and category
   const filteredProducts = extendedProducts.filter((product) => {
