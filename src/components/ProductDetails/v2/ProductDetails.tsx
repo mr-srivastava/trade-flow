@@ -5,10 +5,10 @@ import {
   ChevronLeft,
   ExternalLink,
   FileText,
-  Shield,
   Beaker,
   Package2,
   Info,
+  Crown,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -93,7 +93,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                       variant='outline'
                       className='w-full justify-center py-1.5 border-syntara-primary/30 bg-syntara-primary/10 text-syntara-primary flex gap-2'
                     >
-                      <Shield className='h-3.5 w-3.5' /> Exclusive Product
+                      <Crown className='h-3.5 w-3.5' /> Exclusive Product
                     </Badge>
                   )}
                 </div>
@@ -117,11 +117,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>EINECS</span>
-                  <span className='text-white font-mono'>{product.einecs_number}</span>
+                  <span className='text-white font-mono'>{product.einecs_number ?? '-'}</span>
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>HSN CODE</span>
-                  <span className='text-white font-mono'>{product.hsn_no}</span>
+                  <span className='text-white font-mono'>{product.hsn_no ?? '-'}</span>
                 </div>
               </div>
 
