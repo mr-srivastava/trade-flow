@@ -8,13 +8,33 @@ import NavBar from '@/components/Navbar/Navbar';
 import ProductFilters from './ProductFilters';
 import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
+import { extendedProducts } from '@/lib/data';
+import { useSearchParams } from 'next/navigation';
 
 const Products: React.FC = () => {
-  const [showFilters, setShowFilters] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
-  const totalProducts = 50;
-  const productsPerPage = 12;
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const searchParams = useSearchParams();
+  const totalProducts: number = 50;
+  const productsPerPage: number = 12;
+
+  const industry: string = searchParams.get('industry') || '';
+  const category: string = searchParams.get('category') || '';
+
+  // Filter products based on search, industry and category
+  const filteredProducts = extendedProducts.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.cas_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.molecular_formula.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesIndustry = industry ? product.industries.includes(industry) : true;
+    const matchesCategory = category ? product.categories.includes(category) : true;
+
+    return matchesSearch && matchesIndustry && matchesCategory;
+  });
 
   const toggleFilters = () => {
     setShowFilters(!showFilters);
@@ -69,7 +89,7 @@ const Products: React.FC = () => {
             )}
 
             <div className='flex-grow'>
-              <ProductGrid />
+              <ProductGrid products={filteredProducts} />
 
               <div className='mt-12'>
                 <ProductPagination
