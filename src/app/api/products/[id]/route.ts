@@ -2,7 +2,6 @@ import { productsData } from '@/lib/data';
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  console.log('ID:', id);
   const product = productsData.products.find((product) => product.id === id);
 
   if (!product) {

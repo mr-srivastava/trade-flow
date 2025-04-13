@@ -10,7 +10,7 @@ import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
 import { Product } from '@/lib/types';
 
-const Products: React.FC<{ data: { products: Array<Product> } }> = ({ data }) => {
+const Products: React.FC<{ data: Array<Product> }> = ({ data }) => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -21,27 +21,37 @@ const Products: React.FC<{ data: { products: Array<Product> } }> = ({ data }) =>
   const category: string = '';
 
   // Filter products based on search, industry and category
-  const filteredProducts = data.products.filter((product) => {
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.cas_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.molecular_formula.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredProducts = data.filter((product) => {
+    try {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.cas_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.molecular_formula.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesIndustry = industry ? product.industries.includes(industry) : true;
-    const matchesCategory = category ? product.categories.includes(category) : true;
+      const matchesIndustry = industry ? product.industries.includes(industry) : true;
+      const matchesCategory = category ? product.categories.includes(category) : true;
 
-    return matchesSearch && matchesIndustry && matchesCategory;
+      return matchesSearch && matchesIndustry && matchesCategory;
+    } catch (error) {
+      console.error('Error filtering product:', product, error);
+      return false;
+    }
   });
 
   const toggleFilters = () => {
+    console.log('Toggling filters:', !showFilters);
     setShowFilters(!showFilters);
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Search logic would go here
     console.log('Searching for:', searchQuery);
+  };
+
+  const handlePageChange = (page: number) => {
+    console.log('Changing page to:', page);
+    setCurrentPage(page);
   };
 
   return (
@@ -65,7 +75,10 @@ const Products: React.FC<{ data: { products: Array<Product> } }> = ({ data }) =>
                   placeholder='Search by name, CAS, formula...'
                   className='w-full pl-10 py-2.5 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus:outline-none focus:ring-2 focus:ring-syntara-primary/50'
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    console.log('Search query updated:', e.target.value);
+                    setSearchQuery(e.target.value);
+                  }}
                 />
               </div>
               <Button
@@ -93,7 +106,7 @@ const Products: React.FC<{ data: { products: Array<Product> } }> = ({ data }) =>
                 <ProductPagination
                   currentPage={currentPage}
                   totalPages={Math.ceil(totalProducts / productsPerPage)}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                   totalProducts={totalProducts}
                   productsPerPage={productsPerPage}
                 />

@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["cdn.scimplify.com"], // Add the domain here
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.scimplify.com',
+      },
+    ],
   },
 };
 
