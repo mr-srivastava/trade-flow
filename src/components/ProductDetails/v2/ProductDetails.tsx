@@ -139,9 +139,25 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 <h2 className='text-xl font-semibold text-white mb-3'>
                   Certificates & Documentation
                 </h2>
-                <Button variant='outline' className='gap-2 mr-3'>
-                  <FileText className='h-4 w-4' /> COA <ExternalLink className='h-3 w-3 ml-1' />
-                </Button>
+                {product.certificates.length > 0 ? (
+                  product.certificates.map((cert, i) => (
+                    <Button key={i} variant='outline' className='gap-2 mr-3'>
+                      <Link
+                        href={cert.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        className='flex items-center gap-2'
+                      >
+                        <FileText className='h-4 w-4' /> {cert.name}{' '}
+                        <ExternalLink className='h-3 w-3 ml-1' />
+                      </Link>
+                    </Button>
+                  ))
+                ) : (
+                  <p className='text-syntara-light/80'>
+                    No certificates available for this product.
+                  </p>
+                )}
               </div>
 
               <div className='flex flex-col sm:flex-row gap-4 mt-8'>
