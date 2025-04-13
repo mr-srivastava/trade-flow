@@ -5,84 +5,84 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import NavBar from '@/components/Navbar/Navbar';
-import ProductFilters from './ProductFilters';
 import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
 import { Product } from '@/lib/types';
-import ProductCard from './ProductCard';
+import ProductFilters from '@/components/ProductFilters/v2/ProductFilters';
+import ProductCard from '@/components/ProductCard/v2/ProductCard';
+import { useSearchParams } from 'next/navigation';
+import { parseIndustryToSlug } from '@/lib/api';
 
 const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
   data,
   title = 'Products Catalog',
 }) => {
-  const [showFilters, setShowFilters] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const totalProducts: number = data.length; // Total number of products
-  const productsPerPage: number = 12;
+  const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchParams = useSearchParams();
 
-  const industry: string = '';
-  const category: string = '';
+  const productsPerPage = 12;
+  const totalProducts = data.length;
 
-  // Filter products based on search, industry and category
+  const currentIndustry = searchParams.get('industries') || '';
+  const currentCategory = searchParams.get('categories') || '';
+  const currentSubcategory = searchParams.get('subcategories') || '';
+
   const filteredProducts = data.filter((product) => {
     try {
-      const matchesSearch =
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.cas_number.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.molecular_formula.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = [
+        product.name,
+        product.description,
+        product.cas_number,
+        product.molecular_formula,
+      ].some((field) => field.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesIndustry = industry ? product.industries.includes(industry) : true;
-      const matchesCategory = category ? product.categories.includes(category) : true;
+      const matchesIndustry = currentIndustry
+        ? product.industries.map(parseIndustryToSlug).includes(currentIndustry)
+        : true;
+      const matchesCategory = currentCategory
+        ? product.categories.map(parseIndustryToSlug).includes(currentCategory)
+        : true;
+      const matchesSubcategory = currentSubcategory
+        ? product.sub_categories?.map(parseIndustryToSlug).includes(currentSubcategory)
+        : true;
 
-      return matchesSearch && matchesIndustry && matchesCategory;
+      return matchesSearch && matchesIndustry && matchesCategory && matchesSubcategory;
     } catch (error) {
       console.error('Error filtering product:', product, error);
       return false;
     }
   });
 
-  const toggleFilters = () => {
-    console.log('Toggling filters:', !showFilters);
-    setShowFilters(!showFilters);
-  };
+  const toggleFilters = () => setShowFilters((prev) => !prev);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Searching for:', searchQuery);
   };
 
-  const handlePageChange = (page: number) => {
-    console.log('Changing page to:', page);
-    setCurrentPage(page);
-  };
+  const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />
       <main className='flex-grow'>
         <div className='section-container pt-8 pb-16'>
-          <div className='mb-8'>
+          <header className='mb-8'>
             <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>{title}</h1>
-
             <form
               onSubmit={handleSearch}
               className='flex flex-col md:flex-row gap-4 items-stretch md:items-center'
             >
               <div className='relative flex-grow'>
-                <div className='absolute inset-y-0 left-3 flex items-center pointer-events-none'>
-                  <Search className='h-5 w-5 text-syntara-light/50' />
-                </div>
+                <Search className='absolute inset-y-0 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' />
                 <Input
                   type='text'
                   placeholder='Search by name, CAS, formula...'
                   className='w-full pl-10 py-2.5 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus:outline-none focus:ring-2 focus:ring-syntara-primary/50'
                   value={searchQuery}
-                  onChange={(e) => {
-                    console.log('Search query updated:', e.target.value);
-                    setSearchQuery(e.target.value);
-                  }}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
               <Button
@@ -94,16 +94,23 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
                 {showFilters ? 'Hide Filters' : 'Show Filters'}
               </Button>
             </form>
-          </div>
+          </header>
 
           <div className='flex flex-col md:flex-row gap-6'>
             {showFilters && (
-              <div className='w-full md:w-72 shrink-0'>
-                <ProductFilters />
-              </div>
+              <aside className='w-full md:w-72 shrink-0'>
+                <ProductFilters
+                  products={data}
+                  appliedFilters={{
+                    industries: currentIndustry,
+                    categories: currentCategory,
+                    subcategories: currentSubcategory,
+                  }}
+                />
+              </aside>
             )}
 
-            <div className='flex-grow'>
+            <section className='flex-grow'>
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
@@ -119,7 +126,7 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
                   productsPerPage={productsPerPage}
                 />
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </main>
