@@ -34,7 +34,7 @@ const fetchProducts = async () => {
 };
 
 // Separate the data-fetching logic from the component
-const Products = async () => {
+export default async function Products() {
   try {
     const { products } = await fetchProducts();
     return <ProductCatalogue data={products} />;
@@ -42,13 +42,4 @@ const Products = async () => {
     console.error('Error fetching products:', error);
     return <div>Failed to load products. Please try again later.</div>;
   }
-};
-
-// Use a named function for better debugging and readability
-export default function ProductsPage() {
-  return (
-    <Suspense fallback={<div>Loading products...</div>}>
-      <Products />
-    </Suspense>
-  );
 }
