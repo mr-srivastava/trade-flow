@@ -10,7 +10,8 @@ interface ProductPageProps {
 }
 
 export async function generateMetadata({ params }: ProductPageProps) {
-  const response = await fetch(urlMap.getProduct(params.id), {
+  const url = `${urlMap.getProduct(params.id)}`;
+  const response = await fetch(url, {
     cache: 'no-store',
   });
 
