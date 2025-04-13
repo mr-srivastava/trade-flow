@@ -1,6 +1,7 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { Button } from '../ui/button';
 
 export default function ReadMore({ content }: { content: string }) {
   const [expanded, setExpanded] = useState(false);
@@ -9,21 +10,15 @@ export default function ReadMore({ content }: { content: string }) {
 
   return (
     <div>
-      <p
-        className={cn(
-          "text-neutral-400 whitespace-pre-line leading-relaxed",
-          expanded ? "" : "line-clamp-3"
-        )}
-      >
-        {content}
-      </p>
+      <p className={cn('text-syntara-light/80', expanded ? '' : 'line-clamp-3')}>{content}</p>
 
-      <button
+      <Button
         onClick={toggleExpanded}
-        className="italic text-sm hover:underline"
+        className='text-syntara-primary hover:text-syntara-primary/80 p-0'
+        variant='link'
       >
-        {expanded ? "Read less" : "Read more"}
-      </button>
+        {expanded ? 'Read less' : 'Read more'}
+      </Button>
     </div>
   );
 }

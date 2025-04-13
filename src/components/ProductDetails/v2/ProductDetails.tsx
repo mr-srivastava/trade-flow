@@ -1,19 +1,8 @@
-'use client';
-import React, { useState } from 'react';
-import {
-  AlertTriangle,
-  ChevronLeft,
-  ExternalLink,
-  FileText,
-  Beaker,
-  Package2,
-  Info,
-  Crown,
-} from 'lucide-react';
+import React from 'react';
+import { AlertTriangle, ChevronLeft, ExternalLink, FileText, Crown } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import NavBar from '@/components/Navbar/Navbar';
 import Link from 'next/link';
@@ -21,14 +10,16 @@ import Footer from '@/components/Footer/v2/Footer';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
 import ProductCard from '@/components/ProductCard/v2/ProductCard';
+import ReadMore from '@/components/ReadMore/ReadMore';
+import PropertyList from '@/components/PropertyList/v2/PropertyList';
+import { ContactForm } from '@/components/ContactForm/ContactForm';
+import { RequestQuoteForm } from '@/components/RequestQuoteForm/RequestQuoteForm';
 
 interface ProductDetailProps {
   product: Product & { relatedProducts: Array<Product> };
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
-  const [, setActiveTab] = useState('properties');
-
   const hasHazards =
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
@@ -127,12 +118,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
               <div className='mb-6'>
                 <h2 className='text-xl font-semibold text-white mb-3'>Description</h2>
-                <p className='text-syntara-light/80'>
-                  {product.description}
-                  <button className='text-syntara-primary hover:text-syntara-primary/80 ml-2'>
-                    Read more
-                  </button>
-                </p>
+                <ReadMore content={product.description} />
               </div>
 
               <div className='mb-6'>
@@ -160,93 +146,25 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 )}
               </div>
 
-              <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+              {/* <div className='flex flex-col sm:flex-row gap-4 mt-8'>
                 <Button className='flex-1 bg-white text-syntara-darker hover:bg-white/90'>
                   Get in Touch
                 </Button>
                 <Button variant='outline' className='flex-1'>
                   Request Quote
                 </Button>
+              </div> */}
+              <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+                <ContactForm
+                  product={product}
+                  buttonClassName='bg-white text-syntara-darker hover:text-syntara-darker hover:bg-white/90'
+                />
+                <RequestQuoteForm product={product} buttonClassName='' />
               </div>
             </div>
 
             <div className='mt-10'>
-              <Tabs defaultValue='properties' className='w-full' onValueChange={setActiveTab}>
-                <TabsList className='w-full bg-syntara-darker border border-border/50 rounded-lg p-1 mb-6'>
-                  <TabsTrigger value='properties' className='flex items-center gap-2 flex-1'>
-                    <Info className='h-4 w-4' /> PROPERTIES
-                  </TabsTrigger>
-                  <TabsTrigger value='applications' className='flex items-center gap-2 flex-1'>
-                    <Beaker className='h-4 w-4' /> APPLICATIONS
-                  </TabsTrigger>
-                  <TabsTrigger value='safety' className='flex items-center gap-2 flex-1'>
-                    <AlertTriangle className='h-4 w-4' /> SAFETY AND HAZARD
-                  </TabsTrigger>
-                  <TabsTrigger value='storage' className='flex items-center gap-2 flex-1'>
-                    <Package2 className='h-4 w-4' /> STORAGE
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value='properties'>
-                  <Card className='border border-border/40 bg-syntara-darker/40'>
-                    <CardContent className='p-0'>
-                      <div className='divide-y divide-border/30'>
-                        {product.properties.map((prop, index) => (
-                          <div key={index} className='flex py-4 px-6'>
-                            <div className='w-1/2 text-syntara-light/80'>{prop.key}</div>
-                            <div className='w-1/2 text-white'>{prop.value}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value='applications'>
-                  <Card className='border border-border/40 bg-syntara-darker/40'>
-                    <CardContent className='p-6'>
-                      <div className='divide-y divide-border/30'>
-                        {product.applications.map((app, index) => (
-                          <div key={index} className='flex py-4 px-6'>
-                            <div className='w-1/2 text-syntara-light/80'>{app.key}</div>
-                            <div className='w-1/2 text-white'>{app.value}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value='safety'>
-                  <Card className='border border-border/40 bg-syntara-darker/40'>
-                    <CardContent className='p-6'>
-                      <div className='divide-y divide-border/30'>
-                        {product.safety_and_hazard.map((app, index) => (
-                          <div key={index} className='flex py-4 px-6'>
-                            <div className='w-1/2 text-syntara-light/80'>{app.key}</div>
-                            <div className='w-1/2 text-white'>{app.value}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-
-                <TabsContent value='storage'>
-                  <Card className='border border-border/40 bg-syntara-darker/40'>
-                    <CardContent className='p-6'>
-                      <div className='divide-y divide-border/30'>
-                        {product.storage.map((app, index) => (
-                          <div key={index} className='flex py-4 px-6'>
-                            <div className='w-1/2 text-syntara-light/80'>{app.key}</div>
-                            <div className='w-1/2 text-white'>{app.value}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
+              <PropertyList product={product} />
             </div>
           </div>
         </div>

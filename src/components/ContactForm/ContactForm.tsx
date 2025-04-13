@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Loader2 } from "lucide-react";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Loader2 } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -24,24 +24,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import type { Product } from "@/lib/types";
-import { toast, Toaster } from "sonner";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import type { Product } from '@/lib/types';
+import { toast, Toaster } from 'sonner';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: 'Name must be at least 2 characters.',
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: 'Please enter a valid email address.',
   }),
   company: z.string().optional(),
   phone: z.string().optional(),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
+    message: 'Message must be at least 10 characters.',
   }),
 });
 
@@ -59,10 +59,10 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
+      name: '',
+      email: '',
+      company: '',
+      phone: '',
       message: `I'm interested in ${product.name} (CAS: ${product.cas_number}) and would like more information.`,
     },
   });
@@ -76,9 +76,8 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
       setIsSubmitting(false);
       setOpen(false);
 
-      toast.success("Inquiry Submitted", {
-        description:
-          "We've received your inquiry and will get back to you soon.",
+      toast.success('Inquiry Submitted', {
+        description: "We've received your inquiry and will get back to you soon.",
       });
 
       form.reset();
@@ -87,36 +86,31 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
 
   return (
     <>
-      <Toaster position="bottom-left" richColors />
+      <Toaster position='bottom-left' richColors />
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button
-            variant="outline"
-            size="lg"
-            className={cn("w-full rounded-md", buttonClassName)}
-          >
+          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
             Get in Touch
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className='sm:max-w-[500px]'>
           <DialogHeader>
             <DialogTitle>Product Inquiry</DialogTitle>
             <DialogDescription>
-              Submit your inquiry about {product.name}. Our team will get back
-              to you shortly.
+              Submit your inquiry about {product.name}. Our team will get back to you shortly.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
               <FormField
                 control={form.control}
-                name="name"
+                name='name'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name*</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input placeholder='Your name' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -124,26 +118,26 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
               />
               <FormField
                 control={form.control}
-                name="email"
+                name='email'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email*</FormLabel>
                     <FormControl>
-                      <Input placeholder="your.email@company.com" {...field} />
+                      <Input placeholder='your.email@company.com' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <div className="grid grid-cols-2 gap-4">
+              <div className='grid grid-cols-2 gap-4'>
                 <FormField
                   control={form.control}
-                  name="company"
+                  name='company'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your company" {...field} />
+                        <Input placeholder='Your company' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -151,12 +145,12 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name="phone"
+                  name='phone'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your phone number" {...field} />
+                        <Input placeholder='Your phone number' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -165,14 +159,14 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
               </div>
               <FormField
                 control={form.control}
-                name="message"
+                name='message'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Message*</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Please provide details about your inquiry"
-                        className="min-h-[120px]"
+                        placeholder='Please provide details about your inquiry'
+                        className='min-h-[120px]'
                         {...field}
                       />
                     </FormControl>
@@ -184,14 +178,8 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                 )}
               />
               <DialogFooter>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="rounded-md"
-                >
-                  {isSubmitting && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
+                <Button type='submit' disabled={isSubmitting} className='rounded-md'>
+                  {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
                   Submit Inquiry
                 </Button>
               </DialogFooter>

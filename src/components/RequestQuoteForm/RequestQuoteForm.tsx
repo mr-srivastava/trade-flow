@@ -1,5 +1,5 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 import {
   Sheet,
   SheetContent,
@@ -8,11 +8,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "../ui/button";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/sheet';
+import { Button } from '../ui/button';
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -20,26 +20,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import type { Product } from "@/lib/types";
-import { Loader2 } from "lucide-react";
-import { toast, Toaster } from "sonner";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import type { Product } from '@/lib/types';
+import { Loader2 } from 'lucide-react';
+import { toast, Toaster } from 'sonner';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: 'Name must be at least 2 characters.',
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: 'Please enter a valid email address.',
   }),
   company: z.string().min(2, {
-    message: "Company name is required.",
+    message: 'Company name is required.',
   }),
   quantity: z.string().min(1, {
-    message: "Please specify the quantity.",
+    message: 'Please specify the quantity.',
   }),
   requirements: z.string().optional(),
 });
@@ -51,21 +51,18 @@ interface RequestQuoteFormProps {
   buttonClassName?: string;
 }
 
-export function RequestQuoteForm({
-  product,
-  buttonClassName,
-}: RequestQuoteFormProps) {
+export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormProps) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      quantity: "",
-      requirements: "",
+      name: '',
+      email: '',
+      company: '',
+      quantity: '',
+      requirements: '',
     },
   });
 
@@ -78,7 +75,7 @@ export function RequestQuoteForm({
       setIsSubmitting(false);
       setOpen(false);
 
-      toast.success("Quote Request Submitted", {
+      toast.success('Quote Request Submitted', {
         description: "We'll prepare a custom quote and contact you soon.",
       });
 
@@ -88,39 +85,31 @@ export function RequestQuoteForm({
 
   return (
     <>
-      <Toaster position="bottom-left" richColors />
+      <Toaster position='bottom-left' richColors />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="lg"
-            className={cn("w-full rounded-md", buttonClassName)}
-          >
+          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
             Request Quote
           </Button>
         </SheetTrigger>
-        <SheetContent className="sm:max-w-md">
+        <SheetContent className='sm:max-w-md'>
           <SheetHeader>
             <SheetTitle>Request a Quote</SheetTitle>
             <SheetDescription>
-              Get a custom quote for {product.name} based on your specific
-              requirements.
+              Get a custom quote for {product.name} based on your specific requirements.
             </SheetDescription>
           </SheetHeader>
-          <div className="py-4">
+          <div className='py-4'>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
                 <FormField
                   control={form.control}
-                  name="name"
+                  name='name'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Name*</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} />
+                        <Input placeholder='Your name' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -128,15 +117,12 @@ export function RequestQuoteForm({
                 />
                 <FormField
                   control={form.control}
-                  name="email"
+                  name='email'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email*</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="your.email@company.com"
-                          {...field}
-                        />
+                        <Input placeholder='your.email@company.com' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -144,12 +130,12 @@ export function RequestQuoteForm({
                 />
                 <FormField
                   control={form.control}
-                  name="company"
+                  name='company'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company*</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your company" {...field} />
+                        <Input placeholder='Your company' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -157,12 +143,12 @@ export function RequestQuoteForm({
                 />
                 <FormField
                   control={form.control}
-                  name="quantity"
+                  name='quantity'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Quantity Required*</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., 100 kg, 5 drums" {...field} />
+                        <Input placeholder='e.g., 100 kg, 5 drums' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -170,14 +156,14 @@ export function RequestQuoteForm({
                 />
                 <FormField
                   control={form.control}
-                  name="requirements"
+                  name='requirements'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Special Requirements</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Any specific purity, packaging, or delivery requirements"
-                          className="min-h-[100px]"
+                          placeholder='Any specific purity, packaging, or delivery requirements'
+                          className='min-h-[100px]'
                           {...field}
                         />
                       </FormControl>
@@ -186,14 +172,8 @@ export function RequestQuoteForm({
                   )}
                 />
                 <SheetFooter>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="rounded-md"
-                  >
-                    {isSubmitting && (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    )}
+                  <Button type='submit' disabled={isSubmitting} className='rounded-md'>
+                    {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
                     Submit Request
                   </Button>
                 </SheetFooter>
