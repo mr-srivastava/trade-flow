@@ -7497,30 +7497,30 @@ export const productsData: ProductsResponse = {
   ],
 };
 
-// Add more mock products for pagination demonstration
-const extendedProducts = productsData.products;
+// // Add more mock products for pagination demonstration
+// const extendedProducts = productsData.products;
 
-// Get all unique industries, categories, and subcategories for filters
-export const getAllIndustries = () => {
-  const industries = new Set<string>();
-  extendedProducts.forEach((product) => {
-    product.industries.forEach((industry) => industries.add(industry));
-  });
-  return Array.from(industries);
-};
+// // Get all unique industries, categories, and subcategories for filters
+// export const getAllIndustries = () => {
+//   const industries = new Set<string>();
+//   extendedProducts.forEach((product) => {
+//     product.industries.forEach((industry) => industries.add(industry));
+//   });
+//   return Array.from(industries);
+// };
 
-export const getAllCategories = () => {
-  const categories = new Set<string>();
-  extendedProducts.forEach((product) => {
-    product.categories.forEach((category) => categories.add(category));
-  });
-  return Array.from(categories);
-};
+// export const getAllCategories = () => {
+//   const categories = new Set<string>();
+//   extendedProducts.forEach((product) => {
+//     product.categories.forEach((category) => categories.add(category));
+//   });
+//   return Array.from(categories);
+// };
 
-export const getAllSubCategories = () => {
-  const subCategories = new Set<string>();
-  extendedProducts.forEach((product) => {
-    product.sub_categories.forEach((subCategory) => subCategories.add(subCategory));
-  });
-  return Array.from(subCategories);
-};
+// export const getAllSubCategories = () => {
+//   const subCategories = new Set<string>();
+//   extendedProducts.forEach((product) => {
+//     product.sub_categories.forEach((subCategory) => subCategories.add(subCategory));
+//   });
+//   return Array.from(subCategories);
+// };
