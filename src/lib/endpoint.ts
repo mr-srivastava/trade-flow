@@ -2,8 +2,9 @@ import { headers } from 'next/headers';
 
 const getBaseUrl = () => {
   const host = headers().get('host');
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  return `${protocol}://${host}`;
+  const protocol = host?.startsWith('localhost') ? 'http' : 'https';
+  const baseUrl = `${protocol}://${host}`;
+  return baseUrl;
 };
 
 const urlMap = {
