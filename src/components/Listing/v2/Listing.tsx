@@ -8,9 +8,9 @@ import NavBar from '@/components/Navbar/Navbar';
 import ProductFilters from './ProductFilters';
 import Footer from '@/components/Footer/v2/Footer';
 import ProductPagination from './ProductPagination';
-import { extendedProducts } from '@/lib/data';
+import { Product } from '@/lib/types';
 
-const Products: React.FC = () => {
+const Products: React.FC<{ data: { products: Array<Product> } }> = ({ data }) => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -21,7 +21,7 @@ const Products: React.FC = () => {
   const category: string = '';
 
   // Filter products based on search, industry and category
-  const filteredProducts = extendedProducts.filter((product) => {
+  const filteredProducts = data.products.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
