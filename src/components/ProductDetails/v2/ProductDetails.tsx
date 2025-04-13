@@ -20,7 +20,7 @@ import Link from 'next/link';
 import Footer from '@/components/Footer/v2/Footer';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
-import ProductCard from '@/components/Listing/v2/ProductCard';
+import ProductCard from '@/components/ProductCard/v2/ProductCard';
 
 interface ProductDetailProps {
   product: Product & { relatedProducts: Array<Product> };
