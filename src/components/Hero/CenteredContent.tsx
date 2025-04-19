@@ -1,5 +1,6 @@
 import { HeroContent } from '@/lib/types';
 import { ArrowRight } from 'lucide-react';
+import StatCard from './Stat';
 
 export default function CenteredContent({ content }: { content: HeroContent }) {
   return (
@@ -15,16 +16,16 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
             </p>
             <div className='flex flex-col sm:flex-row gap-4'>
               <a
-          href={content.buttons.contact.href}
-          className='btn-primary flex items-center justify-center gap-2'
+                href={content.buttons.contact.href}
+                className='btn-primary flex items-center justify-center gap-2'
               >
-          {content.buttons.contact.text} <ArrowRight className='h-4 w-4' />
+                {content.buttons.contact.text} <ArrowRight className='h-4 w-4' />
               </a>
               <a
-          href={content.buttons.explore.href}
-          className='btn-outline flex items-center justify-center gap-2'
+                href={content.buttons.explore.href}
+                className='btn-outline flex items-center justify-center gap-2'
               >
-          {content.buttons.explore.text}
+                {content.buttons.explore.text}
               </a>
             </div>
           </div>
@@ -34,11 +35,8 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
           <h2 className='text-xl md:text-2xl font-medium mb-4 text-white'>{content.stats.title}</h2>
           <div className='bg-syntara-darker rounded-lg p-4 border border-border/25'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-              {content.stats.items.map((stat, index) => (
-                <div key={index} className='flex flex-col items-center p-4'>
-                  <div className='text-syntara-primary font-bold text-4xl mb-2'>{stat.value}</div>
-                  <p className='text-center text-sm text-syntara-light/80'>{stat.description}</p>
-                </div>
+              {content.stats.items.map((stat) => (
+                <StatCard key={stat.description} stat={stat} />
               ))}
             </div>
           </div>

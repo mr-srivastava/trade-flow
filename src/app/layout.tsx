@@ -6,7 +6,7 @@ const montserrat = Montserrat({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: 'SYntara | Transform Your Global Trade Operations',
+  title: 'Syntara | Transform Your Global Trade Operations',
   description:
     'Connect to our global network and leverage cutting-edge technology for operational efficiency in chemical and pharmaceutical trading.',
 };

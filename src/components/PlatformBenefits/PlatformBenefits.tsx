@@ -30,7 +30,7 @@ const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = ({
 
 const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) => {
   return (
-    <section id='solutions' className='py-4 bg-syntara-dark'>
+    <section id='solutions' className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
       <div className='section-container'>
         <PlatformBenefitsHeader
           title='Platform Benefits'
