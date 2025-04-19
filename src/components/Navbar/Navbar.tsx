@@ -10,10 +10,10 @@ interface MenuItem {
 const menuItems: Array<MenuItem> = [
   { name: 'Home', href: '/' },
   { name: 'Products', href: '/products' },
-  { name: 'Capabilities', href: '#capabilities' },
+  { name: 'Our Solutions', href: '/#solutions' },
   // { name: 'Platform', href: '#platform' },
   // { name: 'Partners', href: '#partners' },
-  { name: 'Resources', href: '#resources' },
+  // { name: 'Resources', href: '/#resources' },
 ];
 
 const Logo: React.FC<{ text: string }> = ({ text }) => (

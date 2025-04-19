@@ -49,26 +49,11 @@ export const pageContent: PageContent = {
       icon: 'Activity',
       description: 'Real-time pricing data and market trend analysis',
     },
-    {
-      title: 'Supply Chain Tracking',
-      icon: 'GanttChart',
-      description: 'End-to-end visibility of your chemicals throughout the supply chain',
-    },
-    {
-      title: 'Just-in-Time Delivery',
-      icon: 'Clock',
-      description: 'Optimized logistics for reduced inventory costs',
-    },
-    {
-      title: 'Global Reach',
-      icon: 'Globe',
-      description: 'Connect with partners and suppliers across 120+ countries',
-    },
   ],
   about: {
     header: {
       title: 'About Us',
-      subtitle: '/Section for USP',
+      subtitle: '',
     },
     description: {
       paragraphs: [

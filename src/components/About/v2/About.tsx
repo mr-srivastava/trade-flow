@@ -4,7 +4,7 @@ import { renderIcon } from '@/lib/icon-util';
 
 const AboutSection: React.FC<AboutContent> = ({ header, description, values }) => {
   return (
-    <section id='about' className='py-16'>
+    <section id='about' className='py-4'>
       <div className='section-container'>
         <div className='glass-card p-8 md:p-12'>
           <Header header={header} />

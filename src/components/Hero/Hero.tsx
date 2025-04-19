@@ -1,17 +1,12 @@
-import React, { ReactNode } from "react";
-import MapBackground from "./MapBackground";
-import CenteredContent from "./CenteredContent";
+import MapBackground from './MapBackground';
+import CenteredContent from './CenteredContent';
+import { HeroContent } from '@/lib/types';
 
-interface HeroProps {
-  title: string;
-  ctaButtons: ReactNode;
-}
-
-export default function Hero({ title, ctaButtons }: HeroProps) {
+export default function Hero({ content }: { content: HeroContent }) {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className='relative h-screen w-full overflow-hidden'>
       <MapBackground />
-      <CenteredContent title={title} ctaButtons={ctaButtons} />
+      <CenteredContent content={content} />
     </section>
   );
 }
