@@ -7,7 +7,7 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
   return (
     <div className='absolute inset-0 flex flex-col items-center justify-center text-center z-10'>
       <div className='section-container'>
-        <div className='p-8 md:p-12 animate-fade-in bg-syntara-darker/10 backdrop-blur-sm shadow-md rounded-lg'>
+        <div className='p-8 md:p-12 animate-fade-in bg-gradient-to-b from-syntara-darker/10 to-syntara-dark/10 backdrop-blur-sm shadow-md rounded-lg'>
           <div className='max-w-4xl text-left'>
             <h1 className='max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white'>
               {content.heading}
@@ -16,7 +16,6 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
                   {' for '}
                   <ContainerTextFlip
                     className='text-left max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold text-white bg-transparent dark:bg-transparent'
-
                     words={content.industries}
                     interval={1500}
                   />
