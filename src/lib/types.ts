@@ -80,6 +80,7 @@ export interface ProductsResponse {
 export interface HeroContent {
   heading: string;
   description: string;
+  industries?: Array<string>;
   buttons: {
     contact: {
       text: string;

@@ -2,9 +2,10 @@ import { PageContent } from '@/lib/types';
 
 export const pageContent: PageContent = {
   hero: {
-    heading: 'Bridging Markets, Building Partnerships for Chemicals/Pharmaceuticals',
+    heading: 'Bridging Markets, Building Partnerships',
     description:
       'Connect to our global network and leverage cutting-edge technology for operational efficiency in chemical and pharmaceutical trading.',
+    industries: ['Chemicals', 'Pharmaceuticals'],
     buttons: {
       contact: {
         text: 'Contact Us',
