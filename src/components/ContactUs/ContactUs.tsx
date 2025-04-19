@@ -23,7 +23,7 @@ const contactDetails = [
 
 const ContactSection: React.FC = () => {
   return (
-    <section id='contact' className='py-8'>
+    <section id='contact' className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>Contact Us</h2>

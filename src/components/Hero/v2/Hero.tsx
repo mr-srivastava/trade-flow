@@ -4,7 +4,7 @@ import { HeroContent } from '@/lib/types';
 
 const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
   return (
-    <section className='relative py-16 md:py-24'>
+    <section className='relative py-4'>
       <div className='section-container'>
         <div className='glass-card p-8 md:p-12 animate-fade-in'>
           <div className='max-w-4xl'>

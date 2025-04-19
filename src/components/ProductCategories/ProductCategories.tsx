@@ -16,7 +16,7 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
   const industries = await fetchIndustries();
 
   return (
-    <section id='products' className='py-16 bg-gradient-to-b from-syntara-dark to-syntara-darker'>
+    <section id='products' className='py-4 bg-gradient-to-b from-syntara-dark to-syntara-darker'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>

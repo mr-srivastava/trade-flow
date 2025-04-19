@@ -1,9 +1,9 @@
-import React from "react";
-import WorldMap from "../ui/world-map";
+import React from 'react';
+import WorldMap from '../ui/world-map';
 
 export default function MapBackground() {
   return (
-    <div className=" py-10 bg-neutral-900 w-full">
+    <div className='w-full'>
       <WorldMap
         dots={[
           {
