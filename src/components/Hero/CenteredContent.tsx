@@ -1,6 +1,7 @@
 import { HeroContent } from '@/lib/types';
 import { ArrowRight } from 'lucide-react';
 import StatCard from './Stat';
+import { ContainerTextFlip } from '@/components/ui/container-text-flip';
 
 export default function CenteredContent({ content }: { content: HeroContent }) {
   return (
@@ -10,6 +11,17 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
           <div className='max-w-4xl text-left'>
             <h1 className='max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white'>
               {content.heading}
+              {(content.industries ?? []).length > 0 && (
+                <>
+                  {' for '}
+                  <ContainerTextFlip
+                    className='text-left max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold text-white bg-transparent dark:bg-transparent'
+
+                    words={content.industries}
+                    interval={1500}
+                  />
+                </>
+              )}
             </h1>
             <p className='text-lg md:text-xl text-syntara-light/90 mb-8 max-w-3xl'>
               {content.description}
