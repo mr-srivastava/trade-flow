@@ -29,9 +29,9 @@ const footerData: FooterData = {
     { name: 'Specialty Chemicals', href: '#' },
   ],
   socials: [
-    { name: 'Linkedin', href: '#', icon: 'Linkedin' },
-    { name: 'Twitter', href: '#', icon: 'Twitter' },
-    { name: 'Facebook', href: '#', icon: 'Facebook' },
+    { name: 'Linkedin', href: '#linkedin', icon: 'Linkedin' },
+    { name: 'Twitter', href: '#twitter', icon: 'Twitter' },
+    { name: 'Facebook', href: '#facebook', icon: 'Facebook' },
   ],
   contact: [
     { key: 'location', icon: 'Globe', content: 'Mumbai, India' },
@@ -52,7 +52,9 @@ const Footer: React.FC = () => {
               {footerData.socials.map((social) => (
                 <Link
                   key={social.name}
-                  href='#'
+                  href={social.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
                   className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
                 >
                   {renderIcon(social.icon, 'h-5 w-5 text-syntara-light hover:text-syntara-primary')}
