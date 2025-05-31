@@ -26,9 +26,8 @@ function ListingContent() {
   const currentPage = Number(searchParams.get("page") || 1);
   const searchQuery = searchParams.get("q") || "";
   const industry = searchParams.get("industry") || "";
-  const category = searchParams.get("category") || "";
 
-  // Filter products based on search, industry and category
+  // Filter products based on search and industry
   const filteredProducts = extendedProducts.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -41,11 +40,8 @@ function ListingContent() {
     const matchesIndustry = industry
       ? product.industries.includes(industry)
       : true;
-    const matchesCategory = category
-      ? product.categories.includes(category)
-      : true;
 
-    return matchesSearch && matchesIndustry && matchesCategory;
+    return matchesSearch && matchesIndustry;
   });
 
   // Pagination

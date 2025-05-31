@@ -26,8 +26,9 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
   const totalProducts = data.length;
 
   const currentIndustry = searchParams.get('industries') || '';
-  const currentCategory = searchParams.get('categories') || '';
-  const currentSubcategory = searchParams.get('subcategories') || '';
+  // Remove category and subcategory params since these fields don't exist in Product type
+  // const currentCategory = searchParams.get('categories') || '';
+  // const currentSubcategory = searchParams.get('subcategories') || '';
 
   const filteredProducts = data
     .filter((product) => {
@@ -42,14 +43,8 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
         const matchesIndustry = currentIndustry
           ? product.industries.map(parseIndustryToSlug).includes(currentIndustry)
           : true;
-        const matchesCategory = currentCategory
-          ? product.categories.map(parseIndustryToSlug).includes(currentCategory)
-          : true;
-        const matchesSubcategory = currentSubcategory
-          ? product.sub_categories?.map(parseIndustryToSlug).includes(currentSubcategory)
-          : true;
 
-        return matchesSearch && matchesIndustry && matchesCategory && matchesSubcategory;
+        return matchesSearch && matchesIndustry;
       } catch (error) {
         console.error('Error filtering product:', product, error);
         return false;
@@ -105,8 +100,6 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
                   products={data}
                   appliedFilters={{
                     industries: currentIndustry,
-                    categories: currentCategory,
-                    subcategories: currentSubcategory,
                   }}
                 />
               </aside>
