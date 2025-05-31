@@ -1,6 +1,6 @@
-import { FileDown, FileText } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import { FileDown, FileText } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 export default function Resources() {
   return (

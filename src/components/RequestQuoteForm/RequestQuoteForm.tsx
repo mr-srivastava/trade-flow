@@ -76,7 +76,7 @@ export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormP
       setOpen(false);
 
       toast.success('Quote Request Submitted', {
-        description: "We'll prepare a custom quote and contact you soon.",
+        description: 'We\'ll prepare a custom quote and contact you soon.',
       });
 
       form.reset();

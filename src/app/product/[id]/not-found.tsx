@@ -5,11 +5,10 @@ import { Button } from '@/components/ui/button';
 import NavBar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/v2/Footer';
 
-
 const noProductFoundText = {
   backToProducts: 'Back to products',
   title: 'Product Not Found',
-  description: "The product you're looking for doesn't exist or has been removed.",
+  description: 'The product you\'re looking for doesn\'t exist or has been removed.',
   browseAllProducts: 'Browse All Products',
 };
 

@@ -1,23 +1,23 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   AlertTriangle,
   Beaker,
   ChevronLeft,
   ExternalLink,
   FileText,
-} from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import { Separator } from "@/components/ui/separator";
-import { ProductRecommendations } from "@/components/ProductRecommendation/ProductRecommendation";
-import { CTABanner } from "@/components/CTABanner/CTABanner";
-import { RequestQuoteForm } from "@/components/RequestQuoteForm/RequestQuoteForm";
-import { ContactForm } from "@/components/ContactForm/ContactForm";
-import { Product } from "@/lib/types";
-import FAQ from "../FAQ/FAQ";
-import ProductProperties from "./ProductProperties";
-import ReadMore from "../ReadMore/ReadMore";
+} from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
+import { Separator } from '@/components/ui/separator';
+import { ProductRecommendations } from '@/components/ProductRecommendation/ProductRecommendation';
+import { CTABanner } from '@/components/CTABanner/CTABanner';
+import { RequestQuoteForm } from '@/components/RequestQuoteForm/RequestQuoteForm';
+import { ContactForm } from '@/components/ContactForm/ContactForm';
+import { Product } from '@/lib/types';
+import FAQ from '../FAQ/FAQ';
+import ProductProperties from './ProductProperties';
+import ReadMore from '../ReadMore/ReadMore';
 
 export default function ProductDetails({ product }: { product: Product }) {
   // Check if product has hazard warnings
@@ -25,9 +25,9 @@ export default function ProductDetails({ product }: { product: Product }) {
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
       (item) =>
-        item.value.includes("hazardous") ||
-        item.value.includes("Toxic") ||
-        item.value.includes("Corrosive")
+        item.value.includes('hazardous') ||
+        item.value.includes('Toxic') ||
+        item.value.includes('Corrosive')
     );
 
   return (
@@ -101,7 +101,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
                   HSN Code
                 </p>
-                <p className="font-mono text-sm">{product.hsn_no || "—"}</p>
+                <p className="font-mono text-sm">{product.hsn_no || '—'}</p>
               </div>
             </div>
             {/* 

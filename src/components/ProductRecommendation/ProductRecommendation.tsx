@@ -1,5 +1,5 @@
-import { extendedProducts } from "@/lib/data"
-import ProductCard from "../ProductCard/ProductCard"
+import { extendedProducts } from '@/lib/data';
+import ProductCard from '../ProductCard/ProductCard';
 
 interface ProductRecommendationsProps {
   currentProductId: string
@@ -7,9 +7,9 @@ interface ProductRecommendationsProps {
 
 export function ProductRecommendations({ currentProductId }: ProductRecommendationsProps) {
   // Get products from the same category as the current product
-  const currentProduct = extendedProducts.find((p) => p.id === currentProductId)
+  const currentProduct = extendedProducts.find((p) => p.id === currentProductId);
 
-  if (!currentProduct) return null
+  if (!currentProduct) return null;
 
   const relatedProducts = extendedProducts
     .filter(
@@ -20,7 +20,7 @@ export function ProductRecommendations({ currentProductId }: ProductRecommendati
     .slice(0, 3);
 
   if (relatedProducts.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -32,6 +32,6 @@ export function ProductRecommendations({ currentProductId }: ProductRecommendati
         ))}
       </div>
     </section>
-  )
+  );
 }
 

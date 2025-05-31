@@ -1,12 +1,12 @@
-import { Check, MapPin } from "lucide-react";
-import React from "react";
+import { Check, MapPin } from 'lucide-react';
+import React from 'react';
 
-const COUNTRIES = ["USA", "UAE", "UK", "Germany", "China", "Singapore"];
+const COUNTRIES = ['USA', 'UAE', 'UK', 'Germany', 'China', 'Singapore'];
 const BENEFITS = [
-  "Direct access to international markets",
-  "Local expertise in each region",
-  "Streamlined customs procedures",
-  "24/7 global support network",
+  'Direct access to international markets',
+  'Local expertise in each region',
+  'Streamlined customs procedures',
+  '24/7 global support network',
 ];
 
 export default function GlobalPresence() {

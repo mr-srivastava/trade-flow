@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/accordion';
+import { Button } from '@/components/ui/button';
 import {
   getAllIndustries,
   getAllCategories,
   getAllSubCategories,
-} from "@/lib/data";
+} from '@/lib/data';
 
 export function ProductFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const currentIndustry = searchParams.get("industry") || "";
-  const currentCategory = searchParams.get("category") || "";
+  const currentIndustry = searchParams.get('industry') || '';
+  const currentCategory = searchParams.get('category') || '';
 
   const industries = getAllIndustries();
   const categories = getAllCategories();
@@ -34,13 +34,13 @@ export function ProductFilters() {
     const params = new URLSearchParams(searchParams.toString());
 
     if (industryName === currentIndustry) {
-      params.delete("industry");
+      params.delete('industry');
     } else {
-      params.set("industry", industryName);
+      params.set('industry', industryName);
     }
 
     // Reset to page 1 when changing filters
-    params.set("page", "1");
+    params.set('page', '1');
 
     // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
@@ -50,13 +50,13 @@ export function ProductFilters() {
     const params = new URLSearchParams(searchParams.toString());
 
     if (categoryName === currentCategory) {
-      params.delete("category");
+      params.delete('category');
     } else {
-      params.set("category", categoryName);
+      params.set('category', categoryName);
     }
 
     // Reset to page 1 when changing filters
-    params.set("page", "1");
+    params.set('page', '1');
 
     // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
@@ -64,9 +64,9 @@ export function ProductFilters() {
 
   const clearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
-    params.delete("industry");
-    params.delete("category");
-    params.set("page", "1");
+    params.delete('industry');
+    params.delete('category');
+    params.set('page', '1');
 
     // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
@@ -88,7 +88,7 @@ export function ProductFilters() {
 
       <Separator />
 
-      <Accordion type="multiple" defaultValue={["industries", "categories"]}>
+      <Accordion type="multiple" defaultValue={['industries', 'categories']}>
         <AccordionItem value="industries">
           <AccordionTrigger>Industries</AccordionTrigger>
           <AccordionContent>

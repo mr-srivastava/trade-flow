@@ -1,30 +1,30 @@
-import { Check, Cog, Shirt, Tractor } from "lucide-react";
-import React from "react";
+import { Check, Cog, Shirt, Tractor } from 'lucide-react';
+import React from 'react';
 
 const PRODUCT_CATEGORIES = [
   {
     icon: <Tractor className="h-6 w-6 text-brand" />,
-    name: "Agricultural Produce",
+    name: 'Agricultural Produce',
     description:
-      "Rice, spices, tea, coffee, and other agricultural products sourced directly from premium farms.",
-    products: ["Premium Quality Rice", "Organic Spices", "Fine Tea & Coffee"],
+      'Rice, spices, tea, coffee, and other agricultural products sourced directly from premium farms.',
+    products: ['Premium Quality Rice', 'Organic Spices', 'Fine Tea & Coffee'],
   },
   {
     icon: <Shirt className="h-6 w-6 text-brand" />,
-    name: "Textiles & Apparel",
+    name: 'Textiles & Apparel',
     description:
-      "High-quality fabrics and ready-made garments from leading manufacturers.",
-    products: ["Cotton Textiles", "Ready-made Garments", "Fashion Accessories"],
+      'High-quality fabrics and ready-made garments from leading manufacturers.',
+    products: ['Cotton Textiles', 'Ready-made Garments', 'Fashion Accessories'],
   },
   {
     icon: <Cog className="h-6 w-6 text-brand" />,
-    name: "Industrial Machinery",
+    name: 'Industrial Machinery',
     description:
-      "State-of-the-art machinery and equipment for various industries.",
+      'State-of-the-art machinery and equipment for various industries.',
     products: [
-      "Manufacturing Equipment",
-      "Processing Units",
-      "Industrial Tools",
+      'Manufacturing Equipment',
+      'Processing Units',
+      'Industrial Tools',
     ],
   },
 ];

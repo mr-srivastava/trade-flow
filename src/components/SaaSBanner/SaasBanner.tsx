@@ -1,6 +1,6 @@
-import { ArrowRight, BarChart2, Clock, Zap } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { ArrowRight, BarChart2, Clock, Zap } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function SaasBanner() {
   return (

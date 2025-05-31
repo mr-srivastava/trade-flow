@@ -3,10 +3,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Product } from "@/lib/types";
+} from '@/components/ui/accordion';
+import { Product } from '@/lib/types';
 
-export default function FAQ({ faqs }: { faqs: Product["faq"] }) {
+export default function FAQ({ faqs }: { faqs: Product['faq'] }) {
   return (
     <Accordion type="single" collapsible className="w-full px-10">
       {faqs.map((faq) => (
@@ -16,7 +16,7 @@ export default function FAQ({ faqs }: { faqs: Product["faq"] }) {
   );
 }
 
-function FAQItem({ faq }: { faq: Product["faq"][number] }) {
+function FAQItem({ faq }: { faq: Product['faq'][number] }) {
   return (
     <AccordionItem
       value={`faq-${faq.key}`}

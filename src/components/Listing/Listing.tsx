@@ -1,20 +1,20 @@
-"use client";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import React, { Suspense, useState } from "react";
-import { extendedProducts } from "@/lib/data";
-import { Button } from "@/components/ui/button";
+'use client';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import React, { Suspense, useState } from 'react';
+import { extendedProducts } from '@/lib/data';
+import { Button } from '@/components/ui/button';
 import {
   ChevronLeft,
   ChevronRight,
   Search,
   SlidersHorizontal,
-} from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { ProductFilters } from "../ProductFilters/ProductFilters";
-import ProductCard from "../ProductCard/ProductCard";
-import { Product } from "@/lib/types";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { ProductFilters } from '../ProductFilters/ProductFilters';
+import ProductCard from '../ProductCard/ProductCard';
+import { Product } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 function ListingContent() {
   const router = useRouter();
@@ -23,9 +23,9 @@ function ListingContent() {
   const pathname = usePathname();
 
   // Get current page from URL or default to 1
-  const currentPage = Number(searchParams.get("page") || 1);
-  const searchQuery = searchParams.get("q") || "";
-  const industry = searchParams.get("industry") || "";
+  const currentPage = Number(searchParams.get('page') || 1);
+  const searchQuery = searchParams.get('q') || '';
+  const industry = searchParams.get('industry') || '';
 
   // Filter products based on search and industry
   const filteredProducts = extendedProducts.filter((product) => {
@@ -56,11 +56,11 @@ function ListingContent() {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const searchValue = formData.get("search") as string;
+    const searchValue = formData.get('search') as string;
 
     const params = new URLSearchParams(searchParams.toString());
-    params.set("q", searchValue);
-    params.set("page", "1"); // Reset to first page on new search
+    params.set('q', searchValue);
+    params.set('page', '1'); // Reset to first page on new search
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -69,7 +69,7 @@ function ListingContent() {
     if (page < 1 || page > totalPages) return;
 
     const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
+    params.set('page', page.toString());
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -93,7 +93,7 @@ function ListingContent() {
           goToPage={goToPage}
         />
         <div className="text-xs text-neutral-400 text-center">
-          Showing {paginatedProducts.length} of {filteredProducts.length}{" "}
+          Showing {paginatedProducts.length} of {filteredProducts.length}{' '}
           products
         </div>
       </div>
@@ -204,8 +204,8 @@ function ProductGrid({
 
       <div
         className={`grid gap-6 ${
-          isFiltersOpen ? "md:col-span-3" : "md:col-span-4"
-        } grid-cols-1 sm:grid-cols-2 lg:grid-cols-${isFiltersOpen ? "3" : "4"}`}
+          isFiltersOpen ? 'md:col-span-3' : 'md:col-span-4'
+        } grid-cols-1 sm:grid-cols-2 lg:grid-cols-${isFiltersOpen ? '3' : '4'}`}
       >
         {paginatedProducts.length > 0 ? (
           paginatedProducts.map((product: Product) => (
@@ -267,10 +267,10 @@ function Pagination({
               return (
                 <Button
                   key={pageToShow}
-                  variant={"outline"}
+                  variant={'outline'}
                   className={cn(
-                    "border border-white bg-transparent text-white",
-                    currentPage === pageToShow && "bg-white text-neutral-900"
+                    'border border-white bg-transparent text-white',
+                    currentPage === pageToShow && 'bg-white text-neutral-900'
                   )}
                   size="sm"
                   onClick={() => goToPage(pageToShow)}

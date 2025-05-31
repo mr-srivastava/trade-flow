@@ -1,10 +1,10 @@
-import React from "react";
-import { Card, CardContent } from "../ui/card";
-import Link from "next/link";
-import { AlertTriangle, Beaker } from "lucide-react";
-import { Product } from "@/lib/types";
-import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { Card, CardContent } from '../ui/card';
+import Link from 'next/link';
+import { AlertTriangle, Beaker } from 'lucide-react';
+import { Product } from '@/lib/types';
+import { Badge } from '../ui/badge';
+import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
@@ -17,15 +17,15 @@ export default function ProductCard({ product, className }: ProductCardProps) {
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
       (item) =>
-        item.value.includes("hazardous") ||
-        item.value.includes("Toxic") ||
-        item.value.includes("Corrosive")
+        item.value.includes('hazardous') ||
+        item.value.includes('Toxic') ||
+        item.value.includes('Corrosive')
     );
 
   return (
     <Card
       className={cn(
-        "overflow-hidden flex flex-col h-full group transition-all duration-300 hover:shadow-md",
+        'overflow-hidden flex flex-col h-full group transition-all duration-300 hover:shadow-md',
         className
       )}
     >

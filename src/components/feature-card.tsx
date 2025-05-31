@@ -1,5 +1,5 @@
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 interface FeatureCardProps {
   title: string;
@@ -17,7 +17,7 @@ export default function FeatureCard({
   return (
     <Card
       className={cn(
-        "group relative w-full max-w-sm overflow-hidden border-0 bg-gradient-to-br from-sky-50 to-sky-100 p-8 transition-all hover:shadow-2xl dark:from-sky-900 dark:to-sky-800",
+        'group relative w-full max-w-sm overflow-hidden border-0 bg-gradient-to-br from-sky-50 to-sky-100 p-8 transition-all hover:shadow-2xl dark:from-sky-900 dark:to-sky-800',
         className
       )}
     >
@@ -33,7 +33,7 @@ export default function FeatureCard({
         <div className="mb-8 flex justify-center">
           <div
             className={cn(
-              "relative h-20 w-20 transform-gpu transition-all duration-500"
+              'relative h-20 w-20 transform-gpu transition-all duration-500'
             )}
           >
             {/* Isometric Icon */}

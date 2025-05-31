@@ -1,12 +1,12 @@
-import { cn } from "@/lib/utils";
-import React from "react";
+import { cn } from '@/lib/utils';
+import React from 'react';
 
 export default function Header({ isFixed = true }: { isFixed?: boolean }) {
   return (
     <header
       className={cn(
-        isFixed && "fixed",
-        "top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-white/10"
+        isFixed && 'fixed',
+        'top-0 left-0 right-0 z-50 bg-neutral-900/90 backdrop-blur-lg border-b border-white/10'
       )}
     >
       <nav className="container mx-auto px-6 py-4">

@@ -321,7 +321,7 @@ export const productsData: ProductsResponse = {
         {
           key: 'General Use',
           value:
-            "Atenolol is a beta-blocker medication primarily prescribed for managing hypertension, angina pectoris, and arrhythmias by reducing the workload on the heart and improving blood flow through the body's vessels",
+            'Atenolol is a beta-blocker medication primarily prescribed for managing hypertension, angina pectoris, and arrhythmias by reducing the workload on the heart and improving blood flow through the body\'s vessels',
         },
       ],
       certificates: [
@@ -395,7 +395,7 @@ export const productsData: ProductsResponse = {
         {
           key: 'What is it used for',
           value:
-            "Atenolol is a beta-blocker medication primarily prescribed for managing hypertension, angina pectoris, and arrhythmias by reducing the workload on the heart and improving blood flow through the body's vessels",
+            'Atenolol is a beta-blocker medication primarily prescribed for managing hypertension, angina pectoris, and arrhythmias by reducing the workload on the heart and improving blood flow through the body\'s vessels',
         },
       ],
     },

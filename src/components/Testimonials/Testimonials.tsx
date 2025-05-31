@@ -1,29 +1,29 @@
-import { Quote, Star } from "lucide-react";
-import React from "react";
+import { Quote, Star } from 'lucide-react';
+import React from 'react';
 
 const TESTIMONIALS = [
   {
     content:
-      "ExportBridge has been instrumental in expanding our market reach. Their expertise in international trade and commitment to quality service is unmatched.",
+      'ExportBridge has been instrumental in expanding our market reach. Their expertise in international trade and commitment to quality service is unmatched.',
     author: {
-      name: "Sarah Johnson",
-      about: "Procurement Director, US Trade Co.",
+      name: 'Sarah Johnson',
+      about: 'Procurement Director, US Trade Co.',
     },
   },
   {
     content:
-      "Their deep understanding of international markets and regulatory requirements has made our export operations seamless and efficient.",
+      'Their deep understanding of international markets and regulatory requirements has made our export operations seamless and efficient.',
     author: {
-      name: "Raj Patel",
-      about: "CEO, Indian Exports Ltd.",
+      name: 'Raj Patel',
+      about: 'CEO, Indian Exports Ltd.',
     },
   },
   {
     content:
-      "Working with ExportBridge has opened new opportunities for our business. Their professional approach and global network are truly valuable.",
+      'Working with ExportBridge has opened new opportunities for our business. Their professional approach and global network are truly valuable.',
     author: {
-      name: "Hans Muller",
-      about: "Operations Manager, German Tech GmbH",
+      name: 'Hans Muller',
+      about: 'Operations Manager, German Tech GmbH',
     },
   },
 ];

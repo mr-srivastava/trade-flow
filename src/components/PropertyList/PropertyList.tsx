@@ -1,4 +1,4 @@
-import type { Property } from "@/lib/types";
+import type { Property } from '@/lib/types';
 
 interface PropertyListProps {
   properties: Property[];
@@ -15,7 +15,7 @@ export function PropertyList({ properties }: PropertyListProps) {
         <div
           key={index}
           className={`grid grid-cols-1 md:grid-cols-3 gap-3 ${
-            index > 0 ? "pt-5" : ""
+            index > 0 ? 'pt-5' : ''
           }`}
         >
           <div className="font-medium text-white">{property.key}</div>

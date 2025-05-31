@@ -77,7 +77,7 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
       setOpen(false);
 
       toast.success('Inquiry Submitted', {
-        description: "We've received your inquiry and will get back to you soon.",
+        description: 'We\'ve received your inquiry and will get back to you soon.',
       });
 
       form.reset();

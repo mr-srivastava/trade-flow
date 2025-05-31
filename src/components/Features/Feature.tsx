@@ -1,5 +1,5 @@
-"use client";
-import FeatureCard from "../feature-card";
+'use client';
+import FeatureCard from '../feature-card';
 
 interface FeatureProps {
   title: string;
@@ -8,8 +8,8 @@ interface FeatureProps {
 }
 
 export function Feature({
-  title = "Author Card",
-  description = "Card with Author: Firstname Lastname, complete name and time to read - most suitable for blogs.",
+  title = 'Author Card',
+  description = 'Card with Author: Firstname Lastname, complete name and time to read - most suitable for blogs.',
   icon,
 }: FeatureProps) {
   return (

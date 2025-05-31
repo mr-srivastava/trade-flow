@@ -1,19 +1,19 @@
-import { Facebook, Linkedin, Twitter } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 const PRODUCT_LINKS = [
-  { name: "Features", href: "#" },
-  { name: "Pricing", href: "#" },
-  { name: "Testimonials", href: "#" },
-  { name: "FAQ", href: "#" },
+  { name: 'Features', href: '#' },
+  { name: 'Pricing', href: '#' },
+  { name: 'Testimonials', href: '#' },
+  { name: 'FAQ', href: '#' },
 ];
 
 const COMPANY_LINKS = [
-  { name: "About", href: "#" },
-  { name: "Blog", href: "#" },
-  { name: "Careers", href: "#" },
-  { name: "Contact", href: "#" },
+  { name: 'About', href: '#' },
+  { name: 'Blog', href: '#' },
+  { name: 'Careers', href: '#' },
+  { name: 'Contact', href: '#' },
 ];
 
 export default function Footer() {

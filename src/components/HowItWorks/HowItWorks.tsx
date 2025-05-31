@@ -1,30 +1,30 @@
-import React from "react";
-import Steps from "../steps";
-import { Button } from "../ui/button";
+import React from 'react';
+import Steps from '../steps';
+import { Button } from '../ui/button';
 
 const steps = [
   {
     step: 1,
-    title: "Sign Up",
+    title: 'Sign Up',
     description:
-      "Create your account and complete the simple onboarding process to get started.",
+      'Create your account and complete the simple onboarding process to get started.',
   },
   {
     step: 2,
-    title: "Configure",
+    title: 'Configure',
     description:
-      "Set up your preferences and integrate with your existing systems.",
+      'Set up your preferences and integrate with your existing systems.',
   },
   {
     step: 3,
-    title: "Import Data",
+    title: 'Import Data',
     description:
-      "Import your existing trade data or start fresh with our intuitive interface.",
+      'Import your existing trade data or start fresh with our intuitive interface.',
   },
   {
     step: 4,
-    title: "Go Live",
-    description: "Start managing your global trade operations with confidence.",
+    title: 'Go Live',
+    description: 'Start managing your global trade operations with confidence.',
   },
 ];
 
@@ -42,7 +42,7 @@ export default function HowItWorks() {
         </div>
         <Steps steps={steps} />
         <Button
-          size={"lg"}
+          size={'lg'}
           className="mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
         >
           Book a Demo

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Product } from "@/lib/types";
-import { PropertyList } from "../PropertyList/PropertyList";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Product } from '@/lib/types';
+import { PropertyList } from '../PropertyList/PropertyList';
 
 export default function ProductProperties({ product }: { product: Product }) {
   const { properties, applications, safety_and_hazard } = product;
@@ -18,7 +18,7 @@ export default function ProductProperties({ product }: { product: Product }) {
               key={key}
               className="py-2.5 rounded-md data-[state=active]:bg-background text-neutral-50"
             >
-              {key.replace(/_/g, " ").toUpperCase()}
+              {key.replace(/_/g, ' ').toUpperCase()}
             </TabsTrigger>
           ))}
         </TabsList>

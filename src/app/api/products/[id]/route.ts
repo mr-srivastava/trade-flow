@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 import { 
   getProductById, 
   updateProduct, 
   deleteProduct, 
   isAuthorizedAdmin,
   getAllProducts
-} from '@/lib/db'
-import { z } from 'zod'
+} from '@/lib/db';
+import { z } from 'zod';
 
 // Validation schema for product updates
 const updateProductSchema = z.object({
@@ -39,7 +39,7 @@ const updateProductSchema = z.object({
     key: z.string(),
     value: z.string()
   })).optional()
-})
+});
 
 // GET /api/products/[id] - Get a specific product with related products
 export async function GET(
@@ -47,17 +47,17 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const product = await getProductById(params.id)
+    const product = await getProductById(params.id);
     
     if (!product) {
       return NextResponse.json(
         { error: 'Product not found' },
         { status: 404 }
-      )
+      );
     }
 
     // Get all products to find related ones
-    const { products } = await getAllProducts()
+    const { products } = await getAllProducts();
     
     // Find related products based on shared industries
     const relatedProducts = products
@@ -66,16 +66,16 @@ export async function GET(
           p.id !== params.id &&
           p.industries.some((ind) => product.industries.includes(ind))
       )
-      .slice(0, 3)
+      .slice(0, 3);
 
     // Return product with related products
-    return NextResponse.json({ ...product, relatedProducts })
+    return NextResponse.json({ ...product, relatedProducts });
   } catch (error) {
-    console.error('Error fetching product:', error)
+    console.error('Error fetching product:', error);
     return NextResponse.json(
       { error: 'Failed to fetch product' },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -86,31 +86,31 @@ export async function PUT(
 ) {
   try {
     // Check admin authorization
-    const authHeader = request.headers.get('authorization')
+    const authHeader = request.headers.get('authorization');
     if (!isAuthorizedAdmin(authHeader)) {
       return NextResponse.json(
         { error: 'Unauthorized - Admin access required' },
         { status: 401 }
-      )
+      );
     }
 
     // Parse and validate request body
-    const body = await request.json()
-    const validatedData = updateProductSchema.parse(body)
+    const body = await request.json();
+    const validatedData = updateProductSchema.parse(body);
 
     // Update the product
-    const updatedProduct = await updateProduct(params.id, validatedData)
+    const updatedProduct = await updateProduct(params.id, validatedData);
 
     if (!updatedProduct) {
       return NextResponse.json(
         { error: 'Product not found' },
         { status: 404 }
-      )
+      );
     }
 
-    return NextResponse.json(updatedProduct)
+    return NextResponse.json(updatedProduct);
   } catch (error) {
-    console.error('Error updating product:', error)
+    console.error('Error updating product:', error);
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -119,13 +119,13 @@ export async function PUT(
           details: error.errors 
         },
         { status: 400 }
-      )
+      );
     }
 
     return NextResponse.json(
       { error: 'Failed to update product' },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -136,33 +136,33 @@ export async function DELETE(
 ) {
   try {
     // Check admin authorization
-    const authHeader = request.headers.get('authorization')
+    const authHeader = request.headers.get('authorization');
     if (!isAuthorizedAdmin(authHeader)) {
       return NextResponse.json(
         { error: 'Unauthorized - Admin access required' },
         { status: 401 }
-      )
+      );
     }
 
     // Delete the product
-    const deleted = await deleteProduct(params.id)
+    const deleted = await deleteProduct(params.id);
 
     if (!deleted) {
       return NextResponse.json(
         { error: 'Product not found' },
         { status: 404 }
-      )
+      );
     }
 
     return NextResponse.json(
       { message: 'Product deleted successfully' },
       { status: 200 }
-    )
+    );
   } catch (error) {
-    console.error('Error deleting product:', error)
+    console.error('Error deleting product:', error);
     return NextResponse.json(
       { error: 'Failed to delete product' },
       { status: 500 }
-    )
+    );
   }
 }

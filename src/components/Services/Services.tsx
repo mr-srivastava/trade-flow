@@ -1,39 +1,39 @@
-import { Box, ChartColumnBig, Check, CircleCheckBig } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import { Box, ChartColumnBig, Check, CircleCheckBig } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
 
 const SERVICES = [
   {
     icon: (
       <ChartColumnBig className="w-8 h-8 text-brand group-hover:text-white" />
     ),
-    name: "Market Research",
+    name: 'Market Research',
     description:
-      "Comprehensive market analysis and intelligence to identify opportunities and minimize risks.",
-    details: ["Market Trend Analysis", "Competitor Research", "Price Analysis"],
+      'Comprehensive market analysis and intelligence to identify opportunities and minimize risks.',
+    details: ['Market Trend Analysis', 'Competitor Research', 'Price Analysis'],
   },
   {
     icon: <Box className="w-8 h-8 text-brand group-hover:text-white" />,
-    name: "Trade Facilitation",
+    name: 'Trade Facilitation',
     description:
-      "End-to-end support for seamless international trade operations.",
+      'End-to-end support for seamless international trade operations.',
     details: [
-      "Documentation Support",
-      "Customs Clearance",
-      "Logistics Coordination",
+      'Documentation Support',
+      'Customs Clearance',
+      'Logistics Coordination',
     ],
   },
   {
     icon: (
       <CircleCheckBig className="w-8 h-8 text-brand group-hover:text-white" />
     ),
-    name: "Quality Assurance",
+    name: 'Quality Assurance',
     description:
-      "Rigorous quality control measures to ensure product excellence.",
+      'Rigorous quality control measures to ensure product excellence.',
     details: [
-      "Product Inspection",
-      "Quality Certification",
-      "Compliance Verification",
+      'Product Inspection',
+      'Quality Certification',
+      'Compliance Verification',
     ],
   },
 ];

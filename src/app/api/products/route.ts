@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 import { 
   getAllProducts, 
   addProduct, 
   isAuthorizedAdmin 
-} from '@/lib/db'
-import { z } from 'zod'
+} from '@/lib/db';
+import { z } from 'zod';
 
 // Validation schema for product creation
 const createProductSchema = z.object({
@@ -37,19 +37,19 @@ const createProductSchema = z.object({
     key: z.string(),
     value: z.string()
   }))
-})
+});
 
 // GET /api/products - Get all products
 export async function GET() {
   try {
-    const productsResponse = await getAllProducts()
-    return NextResponse.json(productsResponse)
+    const productsResponse = await getAllProducts();
+    return NextResponse.json(productsResponse);
   } catch (error) {
-    console.error('Error fetching products:', error)
+    console.error('Error fetching products:', error);
     return NextResponse.json(
       { error: 'Failed to fetch products' },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -57,24 +57,24 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     // Check admin authorization
-    const authHeader = request.headers.get('authorization')
+    const authHeader = request.headers.get('authorization');
     if (!isAuthorizedAdmin(authHeader)) {
       return NextResponse.json(
         { error: 'Unauthorized - Admin access required' },
         { status: 401 }
-      )
+      );
     }
 
     // Parse and validate request body
-    const body = await request.json()
-    const validatedData = createProductSchema.parse(body)
+    const body = await request.json();
+    const validatedData = createProductSchema.parse(body);
 
     // Create the product
-    const newProduct = await addProduct(validatedData)
+    const newProduct = await addProduct(validatedData);
 
-    return NextResponse.json(newProduct, { status: 201 })
+    return NextResponse.json(newProduct, { status: 201 });
   } catch (error) {
-    console.error('Error creating product:', error)
+    console.error('Error creating product:', error);
     
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -83,12 +83,12 @@ export async function POST(request: NextRequest) {
           details: error.errors 
         },
         { status: 400 }
-      )
+      );
     }
 
     return NextResponse.json(
       { error: 'Failed to create product' },
       { status: 500 }
-    )
+    );
   }
 }
