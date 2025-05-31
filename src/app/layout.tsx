@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { Inter, Montserrat } from 'next/font/google';
 import './globals.css';
+
+// Optimize font loading with proper settings
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap', // Important for performance
+  preload: true,
+});
 
 const montserrat = Montserrat({
   subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap', // Important for performance
+  preload: true,
 });
+
 export const metadata: Metadata = {
   title: 'Syntara | Transform Your Global Trade Operations',
   description:
@@ -18,7 +30,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${montserrat.className} antialiased`}>{children}</body>
+      <head>
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        
+        {/* DNS prefetch for better loading */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
+      <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
