@@ -1,12 +1,67 @@
-import * as LucideIcons from 'lucide-react';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ShieldCheck,
+  Beaker,
+  Activity,
+  Shield,
+  Globe,
+  Award,
+  Users,
+  BookOpen,
+  FileText,
+  Video,
+  Download,
+  HelpCircle,
+  Linkedin,
+  Twitter,
+  Facebook,
+  ChevronRight,
+  Menu,
+  X,
+  Send,
+  Handshake,
+  TrendingUp
+} from 'lucide-react';
 import React from 'react'; // Ensure React is imported for JSX
 
+// Icon mapping for better performance and type safety
+const iconMap = {
+  Mail,
+  Phone,
+  MapPin,
+  ShieldCheck,
+  Beaker,
+  Activity,
+  Shield,
+  Globe,
+  Award,
+  Users,
+  BookOpen,
+  FileText,
+  Video,
+  Download,
+  HelpCircle,
+  Linkedin,
+  Twitter,
+  Facebook,
+  ChevronRight,
+  Menu,
+  X,
+  Send,
+  Handshake,
+  TrendingUp
+} as const;
+
+type IconName = keyof typeof iconMap;
+
 function getLucideIcon(name: string): React.ElementType {
-  const Icon = LucideIcons[name as keyof typeof LucideIcons];
-  return (Icon as React.ElementType) || (LucideIcons.HelpCircle as React.ElementType); // fallback icon
+  const Icon = iconMap[name as IconName];
+  return Icon || HelpCircle; // fallback icon
 }
 
 export function renderIcon(iconName: string, className?: string): JSX.Element {
-  const Icon = getLucideIcon(iconName) ?? LucideIcons.HelpCircle;
+  const Icon = getLucideIcon(iconName);
   return <Icon className={className} />;
 }

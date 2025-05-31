@@ -39,7 +39,7 @@ const ContactSection: React.FC = () => {
 
               <div className='space-y-4'>
                 {contactDetails.map((detail, index) => (
-                  <div key={index} className='flex items-start gap-4'>
+                  <div key={`${detail.title}-${index}`} className='flex items-start gap-4'>
                     <div className='bg-syntara-primary/10 p-2 rounded-full'>
                       {renderIcon(detail.icon, 'h-5 w-5 text-syntara-primary')}
                     </div>
@@ -63,4 +63,4 @@ const ContactSection: React.FC = () => {
   );
 };
 
-export default ContactSection;
+export default React.memo(ContactSection);
