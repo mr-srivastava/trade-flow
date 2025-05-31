@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
 import { apiCall, parseIndustryToSlug } from '@/lib/api';
+import urlMap from '@/lib/endpoint';
 import Link from 'next/link';
 
 const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> = ({
@@ -17,12 +18,7 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
     const fetchIndustries = async () => {
       try {
         setLoading(true);
-        // Client-side URL generation
-        const baseUrl = typeof window !== 'undefined' 
-          ? `${window.location.protocol}//${window.location.host}`
-          : '';
-        const url = `${baseUrl}/api/products/industries/count`;
-        const data = await apiCall(url);
+        const data = await apiCall(urlMap.getIndustriesProductCount());
         setIndustries(data);
       } catch (err) {
         setError('Failed to load industries');

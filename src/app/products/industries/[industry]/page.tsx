@@ -1,8 +1,8 @@
 import React from 'react';
 import ProductCatalogue from '@/components/Listing/v2/Listing';
-import urlMap from '@/lib/endpoint';
-import { apiCall } from '@/lib/api';
+import { GET as getProductsByIndustryHandler } from '@/app/api/products/industries/[industry]/route';
 import { Product } from '@/lib/types';
+import { NextRequest } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,10 +12,15 @@ const parseToUserFriendlyName = (name: string): string =>
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
-// Fetch products by industry
+// Direct API handler call for server-side rendering
 const fetchProductsByIndustry = async (industry: string): Promise<Product[]> => {
-  const url = urlMap.getProductsByIndustry(industry);
-  return apiCall(url);
+  // Create a mock request and params object for the API handler
+  const mockRequest = new NextRequest('http://localhost:3000/api/products/industries/' + industry);
+  const response = await getProductsByIndustryHandler(
+    mockRequest,
+    { params: Promise.resolve({ industry }) }
+  );
+  return response.json();
 };
 
 // Generate metadata dynamically
