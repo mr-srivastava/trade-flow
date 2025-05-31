@@ -30,7 +30,6 @@ export default function PropertyList({ product }: { product: Product }) {
       icon: 'AlertTriangle',
       data: product.safety_and_hazard,
     },
-    { value: 'storage', label: 'STORAGE', icon: 'Package2', data: product.storage },
   ];
 
   return (

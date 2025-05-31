@@ -4,11 +4,9 @@ import {
   AlertTriangle,
   Beaker,
   ChevronLeft,
-  Crown,
   ExternalLink,
   FileText,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Separator } from "@/components/ui/separator";
@@ -45,30 +43,9 @@ export default function ProductDetails({ product }: { product: Product }) {
       <div className="grid md:grid-cols-3 gap-10 ">
         <div className="md:col-span-1">
           <div className="sticky top-8 space-y-6">
-            <div className="relative aspect-square bg-muted/50 rounded-xl overflow-hidden mb-4 shadow-sm">
-              {product.product_images && product.product_images.length > 0 ? (
-                <Image
-                  src={product.product_images[0] || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <Beaker className="h-16 w-16 text-neutral-300/50" />
-                </div>
-              )}
-
-              <div className="absolute top-3 right-3 flex flex-col gap-2">
-                {product.is_exclusive && (
-                  <Badge
-                    variant={"outline"}
-                    className="bg-purple-50 text-purple-700 border-purple-200"
-                  >
-                    <Crown className="h-3 w-3 mr-1" />
-                    Exclusive
-                  </Badge>
-                )}
+            <div className="relative aspect-square lg:aspect-video bg-muted rounded-lg overflow-hidden">
+              <div className="w-full h-full flex items-center justify-center bg-muted">
+                <Beaker className="h-24 w-24 text-muted-foreground/50" />
               </div>
             </div>
 
@@ -81,15 +58,6 @@ export default function ProductDetails({ product }: { product: Product }) {
                     className="rounded-md py-1 px-2"
                   >
                     {industry}
-                  </Badge>
-                ))}
-                {product.categories.map((category, i) => (
-                  <Badge
-                    key={i}
-                    variant="secondary"
-                    className="rounded-md py-1 px-2"
-                  >
-                    {category}
                   </Badge>
                 ))}
               </div>
@@ -116,7 +84,7 @@ export default function ProductDetails({ product }: { product: Product }) {
               )}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-5 rounded-lg bg-neutral-700">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 p-5 rounded-lg bg-neutral-700">
               <div className="space-y-1.5">
                 <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
                   CAS Number
@@ -128,14 +96,6 @@ export default function ProductDetails({ product }: { product: Product }) {
                   Molecular Formula
                 </p>
                 <p className="font-mono text-sm">{product.molecular_formula}</p>
-              </div>
-              <div className="space-y-1.5">
-                <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
-                  EINECS
-                </p>
-                <p className="font-mono text-sm">
-                  {product.einecs_number || "—"}
-                </p>
               </div>
               <div className="space-y-1.5">
                 <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">

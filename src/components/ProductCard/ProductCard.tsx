@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
-import Image from "next/image";
-import { AlertTriangle, Beaker, Crown } from "lucide-react";
+import { AlertTriangle, Beaker } from "lucide-react";
 import { Product } from "@/lib/types";
 import { Badge } from "../ui/badge";
 import { cn } from "@/lib/utils";
@@ -35,29 +34,11 @@ export default function ProductCard({ product, className }: ProductCardProps) {
         className="relative overflow-hidden"
       >
         <div className="relative aspect-video bg-muted/50">
-          {product.product_images && product.product_images.length > 0 ? (
-            <Image
-              src={product.product_images[0] || "/placeholder.svg"}
-              alt={product.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <Beaker className="h-16 w-16 text-muted-foreground/50" />
-            </div>
-          )}
+          <div className="w-full h-full flex items-center justify-center">
+            <Beaker className="h-16 w-16 text-muted-foreground/50" />
+          </div>
 
           <div className="absolute top-3 right-3 flex flex-col gap-2">
-            {product.is_exclusive && (
-              <Badge
-                variant={"outline"}
-                className="bg-purple-100 text-purple-700 border-purple-200"
-              >
-                <Crown className="h-3 w-3 mr-1" />
-                Exclusive
-              </Badge>
-            )}
           </div>
         </div>
       </Link>
@@ -75,13 +56,13 @@ export default function ProductCard({ product, className }: ProductCardProps) {
             </Link>
 
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {product.categories.map((category, i) => (
+              {product.industries.map((industry, i) => (
                 <Badge
                   key={i}
                   variant="secondary"
                   className="text-xs font-normal border-neutral-300"
                 >
-                  {category}
+                  {industry}
                 </Badge>
               ))}
               {hasHazards && (

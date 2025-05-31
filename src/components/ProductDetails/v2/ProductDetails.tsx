@@ -1,5 +1,10 @@
 import React from 'react';
-import { AlertTriangle, ChevronLeft, ExternalLink, FileText, Crown } from 'lucide-react';
+import {
+  ChevronLeft,
+  AlertTriangle,
+  FileText,
+  ExternalLink,
+} from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,13 +12,13 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import NavBar from '@/components/Navbar/Navbar';
 import Link from 'next/link';
 import Footer from '@/components/Footer/v2/Footer';
-import Image from 'next/image';
 import { Product } from '@/lib/types';
 import ProductCard from '@/components/ProductCard/v2/ProductCard';
 import ReadMore from '@/components/ReadMore/ReadMore';
 import PropertyList from '@/components/PropertyList/v2/PropertyList';
 import { ContactForm } from '@/components/ContactForm/ContactForm';
 import { RequestQuoteForm } from '@/components/RequestQuoteForm/RequestQuoteForm';
+import { BeakerIcon } from 'lucide-react';
 
 interface ProductDetailProps {
   product: Product & { relatedProducts: Array<Product> };
@@ -45,18 +50,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           {/* Left Column - Product Image */}
           <div className='md:col-span-1'>
             <Card className='bg-syntara-darker/70 border border-border/50 overflow-hidden'>
-              <div className='h-80 flex items-center justify-center p-6 bg-syntara-darker/90'>
-                {product.product_images && product.product_images.length > 0 ? (
-                  <Image
-                    src={product.product_images[0] || '/placeholder.svg'}
-                    alt={product.name}
-                    width={150}
-                    height={150}
-                    className='max-h-full max-w-full object-contain'
-                  />
-                ) : (
-                  <div className='text-syntara-light/30 font-medium'>No image available</div>
-                )}
+              <div className='relative h-64 lg:h-96 bg-syntara-darker/70 rounded-lg overflow-hidden flex items-center justify-center'>
+                <div className='w-full h-full flex items-center justify-center'>
+                  <BeakerIcon className='h-24 w-24 text-syntara-light/30' />
+                </div>
               </div>
               <CardContent className='p-4'>
                 <div className='space-y-2'>
@@ -64,10 +61,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                     variant='outline'
                     className='w-full justify-center py-1.5 border-border/50 text-syntara-light/90'
                   >
-                    {product.categories.map((category) => (
-                      <span key={category} className='mr-1'>
-                        {category}
-                        {category !== product.categories[product.categories.length - 1] && ','}
+                    {product.industries.map((industry) => (
+                      <span key={industry} className='mr-1'>
+                        {industry}
+                        {industry !== product.industries[product.industries.length - 1] && ','}
                       </span>
                     ))}
                   </Badge>
@@ -79,14 +76,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                       <AlertTriangle className='h-3.5 w-3.5' /> Hazardous Material
                     </Badge>
                   )}
-                  {product.is_exclusive && (
-                    <Badge
-                      variant='outline'
-                      className='w-full justify-center py-1.5 border-syntara-primary/30 bg-syntara-primary/10 text-syntara-primary flex gap-2'
-                    >
-                      <Crown className='h-3.5 w-3.5' /> Exclusive Product
-                    </Badge>
-                  )}
                 </div>
               </CardContent>
             </Card>
@@ -95,7 +84,17 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           {/* Right Column - Product Details */}
           <div className='md:col-span-2'>
             <div className='mb-6'>
-              <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>{product.name}</h1>
+              <div>
+                <h1 className='text-3xl lg:text-4xl font-bold text-white mb-3'>{product.name}</h1>
+                <div className='flex flex-wrap gap-2'>
+                  {product.industries.map((industry) => (
+                    <span key={industry} className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-syntara-primary/20 text-syntara-primary'>
+                      {industry}
+                      {industry !== product.industries[product.industries.length - 1] && ','}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
                 <div className='flex flex-col'>
@@ -105,10 +104,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>MOLECULAR FORMULA</span>
                   <span className='text-white font-mono'>{product.molecular_formula}</span>
-                </div>
-                <div className='flex flex-col'>
-                  <span className='text-syntara-light/70 text-sm'>EINECS</span>
-                  <span className='text-white font-mono'>{product.einecs_number ?? '-'}</span>
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-syntara-light/70 text-sm'>HSN CODE</span>

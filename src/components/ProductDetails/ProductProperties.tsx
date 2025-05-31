@@ -5,13 +5,13 @@ import { Product } from "@/lib/types";
 import { PropertyList } from "../PropertyList/PropertyList";
 
 export default function ProductProperties({ product }: { product: Product }) {
-  const { properties, applications, safety_and_hazard, storage } = product;
-  const data = { properties, applications, safety_and_hazard, storage };
+  const { properties, applications, safety_and_hazard } = product;
+  const data = { properties, applications, safety_and_hazard };
 
   return (
     <div className="py-2 space-y-2 bg-neutral-700 rounded-xl p-8 md:p-10 mt-16 border border-primary/10">
       <Tabs defaultValue="properties" className="w-full">
-        <TabsList className="grid grid-cols-4 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
+        <TabsList className="grid grid-cols-3 mb-6 bg-muted/30 p-1 rounded-lg h-auto">
           {Object.keys(data).map((key) => (
             <TabsTrigger
               value={key}
