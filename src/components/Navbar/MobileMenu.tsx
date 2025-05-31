@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
@@ -8,11 +8,11 @@ interface MenuItem {
   href: string;
 }
 
-export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems }) => {
+export const MobileMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: string }> = React.memo(({ menuItems, contactHref }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   return (
     <div className='md:hidden'>
@@ -20,6 +20,7 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
         <button
           onClick={toggleMenu}
           className='inline-flex items-center justify-center p-2 rounded-md text-syntara-light hover:text-white focus:outline-none'
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
           {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
         </button>
@@ -44,7 +45,7 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
             About Us
           </Link>
           <Link
-            href='#contact'
+            href={contactHref}
             className='block px-3 py-2 text-base font-medium text-syntara-primary hover:text-white'
             onClick={closeMenu}
           >
@@ -54,4 +55,6 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
       )}
     </div>
   );
-};
+});
+
+MobileMenu.displayName = 'MobileMenu';

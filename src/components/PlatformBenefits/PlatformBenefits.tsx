@@ -2,7 +2,7 @@ import React from 'react';
 import { Benefit } from '@/lib/types';
 import { renderIcon } from '@/lib/icon-util';
 
-const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({
+const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = React.memo(({
   icon,
   title,
   description,
@@ -14,9 +14,11 @@ const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description:
       <p className='text-syntara-light/80'>{description}</p>
     </div>
   );
-};
+});
 
-const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = ({
+BenefitCard.displayName = 'BenefitCard';
+
+const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = React.memo(({
   title,
   subtitle,
 }) => {
@@ -26,7 +28,9 @@ const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = ({
       <p className='text-syntara-light/80 max-w-2xl mx-auto'>{subtitle}</p>
     </div>
   );
-};
+});
+
+PlatformBenefitsHeader.displayName = 'PlatformBenefitsHeader';
 
 const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) => {
   return (
@@ -39,7 +43,7 @@ const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {benefits.map((benefit, index) => (
             <BenefitCard
-              key={index}
+              key={`${benefit.title}-${index}`}
               icon={renderIcon(benefit.icon, 'h-8 w-8 text-syntara-primary')}
               title={benefit.title}
               description={benefit.description}
@@ -51,4 +55,4 @@ const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) 
   );
 };
 
-export default PlatformBenefits;
+export default React.memo(PlatformBenefits);
