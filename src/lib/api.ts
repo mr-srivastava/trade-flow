@@ -11,7 +11,17 @@
  * - Other: General failure to fetch products.
  */
 export const apiCall = async (url: string) => {
-  const response = await fetch(url, { next: { revalidate: 60 * 60 } });
+  // Convert relative URLs to absolute URLs for server-side requests
+  let absoluteUrl = url;
+  if (typeof window === 'undefined' && url.startsWith('/')) {
+    // Server-side: construct absolute URL
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
+    absoluteUrl = `${baseUrl}${url}`;
+  }
+
+  const response = await fetch(absoluteUrl, { next: { revalidate: 60 * 60 } });
 
   if (!response.ok) {
     switch (response.status) {
