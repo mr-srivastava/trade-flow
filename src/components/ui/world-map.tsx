@@ -3,7 +3,6 @@
 import { useMemo, useRef } from 'react';
 import { motion } from 'motion/react';
 import DottedMap from 'dotted-map';
-import Image from 'next/image';
 import React from 'react';
 
 interface MapProps {
@@ -26,12 +25,27 @@ const createCurvedPath = (start: { x: number; y: number }, end: { x: number; y: 
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 };
 
+// Memoized animated dot component to prevent unnecessary re-renders
+const AnimatedDot = React.memo(({ x, y, color }: { x: number; y: number; color: string }) => (
+  <>
+    <circle cx={x} cy={y} r="2" fill={color} />
+    <circle cx={x} cy={y} r="2" fill={color} opacity="0.5">
+      <animate attributeName="r" from="2" to="8" dur="1.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" from="0.5" to="0" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+  </>
+));
+
+AnimatedDot.displayName = 'AnimatedDot';
+
 function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const map = useMemo(() => new DottedMap({ height: 100, grid: 'diagonal' }), []);
+  // Optimize map creation with reduced detail for better performance
+  const map = useMemo(() => new DottedMap({ height: 80, grid: 'diagonal' }), []);
 
-  const svgMap = useMemo(
+  // Cache the SVG string to avoid regeneration
+  const svgString = useMemo(
     () =>
       map.getSVG({
         radius: 0.22,
@@ -42,78 +56,65 @@ function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
     [map],
   );
 
+  // Memoize processed dots to avoid recalculating on every render
+  const processedDots = useMemo(
+    () =>
+      dots.map((dot, i) => {
+        const startPoint = projectPoint(dot.start.lat, dot.start.lng);
+        const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+        const path = createCurvedPath(startPoint, endPoint);
+
+        return {
+          id: `path-group-${i}`,
+          startPoint,
+          endPoint,
+          path,
+          delay: 0.5 * i,
+        };
+      }),
+    [dots],
+  );
+
   return (
-    <div className='w-full aspect-[2/1] bg-syntara-dark rounded-lg relative font-sans'>
-      <Image
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className='h-full w-full pointer-events-none select-none'
-        alt='world map'
-        height='495'
-        width='1056'
-        draggable={false}
+    <div className="w-full aspect-[2/1] bg-syntara-dark rounded-lg relative font-sans">
+      {/* Use dangerouslySetInnerHTML for better performance than Image + data URI */}
+      <div
+        className="h-full w-full pointer-events-none select-none"
+        dangerouslySetInnerHTML={{ __html: svgString }}
       />
       <svg
         ref={svgRef}
-        viewBox='0 0 800 400'
-        className='w-full h-full absolute inset-0 pointer-events-none select-none'
+        viewBox="0 0 800 400"
+        className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
         <defs>
-          <linearGradient id='path-gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
-            <stop offset='0%' stopColor='white' stopOpacity='0' />
-            <stop offset='5%' stopColor={lineColor} stopOpacity='1' />
-            <stop offset='95%' stopColor={lineColor} stopOpacity='1' />
-            <stop offset='100%' stopColor='white' stopOpacity='0' />
+          <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
           </linearGradient>
         </defs>
 
-        {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
-          const path = createCurvedPath(startPoint, endPoint);
-
-          return (
-            <g key={`path-group-${i}`}>
-              <motion.path
-                d={path}
-                fill='none'
-                stroke='url(#path-gradient)'
-                strokeWidth='1'
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
-                  ease: 'easeOut',
-                }}
-              />
-              {/* start point */}
-              <circle cx={startPoint.x} cy={startPoint.y} r='2' fill={lineColor} />
-              <circle cx={startPoint.x} cy={startPoint.y} r='2' fill={lineColor} opacity='0.5'>
-                <animate attributeName='r' from='2' to='8' dur='1.5s' repeatCount='indefinite' />
-                <animate
-                  attributeName='opacity'
-                  from='0.5'
-                  to='0'
-                  dur='1.5s'
-                  repeatCount='indefinite'
-                />
-              </circle>
-
-              {/* end point */}
-              <circle cx={endPoint.x} cy={endPoint.y} r='2' fill={lineColor} />
-              <circle cx={endPoint.x} cy={endPoint.y} r='2' fill={lineColor} opacity='0.5'>
-                <animate attributeName='r' from='2' to='8' dur='1.5s' repeatCount='indefinite' />
-                <animate
-                  attributeName='opacity'
-                  from='0.5'
-                  to='0'
-                  dur='1.5s'
-                  repeatCount='indefinite'
-                />
-              </circle>
-            </g>
-          );
-        })}
+        {processedDots.map((dot) => (
+          <g key={dot.id}>
+            <motion.path
+              d={dot.path}
+              fill="none"
+              stroke="url(#path-gradient)"
+              strokeWidth="1"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{
+                duration: 1,
+                delay: dot.delay,
+                ease: 'easeOut',
+              }}
+            />
+            <AnimatedDot x={dot.startPoint.x} y={dot.startPoint.y} color={lineColor} />
+            <AnimatedDot x={dot.endPoint.x} y={dot.endPoint.y} color={lineColor} />
+          </g>
+        ))}
       </svg>
     </div>
   );
