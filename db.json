@@ -10,8 +10,8 @@
           "href": "#contact"
         },
         "explore": {
-          "text": "Explore Platform",
-          "href": "#platform"
+          "text": "Explore Products",
+          "href": "/products"
         }
       },
       "stats": {
