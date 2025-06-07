@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, AlertTriangle, FileText, ExternalLink } from 'lucide-react';
+import { ChevronLeft, AlertTriangle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,13 +20,36 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
+  // Add error handling for undefined product
+  if (!product) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <NavBar />
+        <div className="section-container pt-8 pb-16">
+          <div className="text-center py-16">
+            <h1 className="text-2xl font-bold text-white mb-4">Product Not Found</h1>
+            <p className="text-syntara-light/80 mb-6">
+              The product you&apos;re looking for doesn&apos;t exist.
+            </p>
+            <Link href="/products" className="text-syntara-primary hover:underline">
+              Back to Products
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   const hasHazards =
     product.safety_and_hazard &&
+    Array.isArray(product.safety_and_hazard) &&
     product.safety_and_hazard.some(
       (item) =>
-        item.value.includes('hazardous') ||
+        item && item.value &&
+        (item.value.includes('hazardous') ||
         item.value.includes('Toxic') ||
-        item.value.includes('Corrosive'),
+        item.value.includes('Corrosive')),
     );
 
   return (
@@ -52,17 +75,19 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
               </div>
               <CardContent className="p-4">
                 <div className="space-y-2">
-                  <Badge
-                    variant="outline"
-                    className="w-full justify-center py-1.5 border-border/50 text-syntara-light/90"
-                  >
-                    {product.industries.map((industry) => (
-                      <span key={industry} className="mr-1">
-                        {industry}
-                        {industry !== product.industries[product.industries.length - 1] && ','}
-                      </span>
-                    ))}
-                  </Badge>
+                  {product.industries && product.industries.length > 0 && (
+                    <Badge
+                      variant="outline"
+                      className="w-full justify-center py-1.5 border-border/50 text-syntara-light/90"
+                    >
+                      {product.industries.map((industry) => (
+                        <span key={industry} className="mr-1">
+                          {industry}
+                          {industry !== product.industries[product.industries.length - 1] && ','}
+                        </span>
+                      ))}
+                    </Badge>
+                  )}
                   {hasHazards && (
                     <Badge
                       variant="outline"
@@ -80,28 +105,30 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           <div className="md:col-span-2">
             <div className="mb-6">
               <div>
-                <h1 className="text-3xl lg:text-4xl font-bold text-white mb-3">{product.name}</h1>
-                <div className="flex flex-wrap gap-2">
-                  {product.industries.map((industry) => (
-                    <span
-                      key={industry}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-syntara-primary/20 text-syntara-primary"
-                    >
-                      {industry}
-                      {industry !== product.industries[product.industries.length - 1] && ','}
-                    </span>
-                  ))}
-                </div>
+                <h1 className="text-3xl lg:text-4xl font-bold text-white mb-3">{product.name ?? 'Untitled Product'}</h1>
+                {product.industries && product.industries.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {product.industries.map((industry) => (
+                      <span
+                        key={industry}
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-syntara-primary/20 text-syntara-primary"
+                      >
+                        {industry}
+                        {industry !== product.industries[product.industries.length - 1] && ','}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="flex flex-col">
                   <span className="text-syntara-light/70 text-sm">CAS NUMBER</span>
-                  <span className="text-white font-mono">{product.cas_number}</span>
+                  <span className="text-white font-mono">{product.cas_number ?? '-'}</span>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-syntara-light/70 text-sm">MOLECULAR FORMULA</span>
-                  <span className="text-white font-mono">{product.molecular_formula}</span>
+                  <span className="text-white font-mono">{product.molecular_formula ?? '-'}</span>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-syntara-light/70 text-sm">HSN CODE</span>
@@ -109,16 +136,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 </div>
               </div>
 
-              <div className="mb-6">
-                <h2 className="text-xl font-semibold text-white mb-3">Description</h2>
-                <ReadMore content={product.description} />
-              </div>
+              {product.description && (
+                <div className="mb-6">
+                  <h2 className="text-xl font-semibold text-white mb-3">Description</h2>
+                  <ReadMore content={product.description} />
+                </div>
+              )}
 
               <div className="mb-6">
                 <h2 className="text-xl font-semibold text-white mb-3">
                   Certificates & Documentation
                 </h2>
-                {product.certificates.length > 0 ? (
+                {product.certificates && product.certificates.length > 0 ? (
                   product.certificates.map((cert, i) => (
                     <span key={i} className="text-syntara-light/80">
                       {cert.name}
@@ -167,37 +196,44 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         </div>
 
         {/* Related Products Section */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Related Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {product.relatedProducts.map((relatedProduct) => (
-              <ProductCard key={relatedProduct.id} product={relatedProduct} />
-            ))}
+        {product.relatedProducts && product.relatedProducts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-white mb-8">Related Products</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {product.relatedProducts.map((relatedProduct) => {
+                const productId =
+                  (relatedProduct as Product & { _id?: string }).id ||
+                  (relatedProduct as Product & { _id?: string })._id;
+                return <ProductCard key={productId} product={relatedProduct} />;
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* FAQ Section */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {product.faq.map((faq, index) => (
-              <Collapsible
-                key={index}
-                className="border border-border/40 rounded-lg overflow-hidden"
-              >
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-syntara-darker/80 text-left">
-                  <span className="font-medium text-white">{faq.key}</span>
-                  <ChevronLeft className="h-5 w-5 transform -rotate-90 text-syntara-light/70 ui-open:rotate-90 transition-transform duration-200" />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="p-4 pt-0 bg-syntara-darker/40">
-                  <div className="pt-4 border-t border-border/20 text-syntara-light/80">
-                    {faq.value}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
-            ))}
+        {product.faq && product.faq.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-white mb-8">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {product.faq.map((faq, index) => (
+                <Collapsible
+                  key={index}
+                  className="border border-border/40 rounded-lg overflow-hidden"
+                >
+                  <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-syntara-darker/80 text-left">
+                    <span className="font-medium text-white">{faq.question}</span>
+                    <ChevronLeft className="h-5 w-5 transform -rotate-90 text-syntara-light/70 ui-open:rotate-90 transition-transform duration-200" />
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="p-4 pt-0 bg-syntara-darker/40">
+                    <div className="pt-4 border-t border-border/20 text-syntara-light/80">
+                      {faq.answer}
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Help Section */}
         <div className="mt-16 bg-syntara-darker/30 border border-border/40 rounded-lg p-8 text-center">

@@ -3,7 +3,7 @@ import {
   getAllProducts, 
   addProduct, 
   isAuthorizedAdmin 
-} from '@/lib/db';
+} from '@/lib/mongodb-db';
 import { z } from 'zod';
 
 // Validation schema for product creation
@@ -34,8 +34,8 @@ const createProductSchema = z.object({
     url: z.string()
   })),
   faq: z.array(z.object({
-    key: z.string(),
-    value: z.string()
+    question: z.string(),
+    answer: z.string()
   }))
 });
 

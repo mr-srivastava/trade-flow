@@ -5,7 +5,7 @@ import {
   deleteProduct, 
   isAuthorizedAdmin,
   getAllProducts
-} from '@/lib/db';
+} from '@/lib/mongodb-db';
 import { z } from 'zod';
 
 // Validation schema for product updates
@@ -36,8 +36,8 @@ const updateProductSchema = z.object({
     url: z.string()
   })).optional(),
   faq: z.array(z.object({
-    key: z.string(),
-    value: z.string()
+    question: z.string(),
+    answer: z.string()
   })).optional()
 });
 

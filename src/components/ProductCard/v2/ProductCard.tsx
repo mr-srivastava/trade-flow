@@ -4,7 +4,10 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import Link from 'next/link';
 import { Product } from '@/lib/types';
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+// Extend Product type to handle MongoDB _id field
+type ProductWithId = Product & { _id?: string };
+
+const ProductCard: React.FC<{ product: ProductWithId }> = ({ product }) => {
   const hasHazards =
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
@@ -13,8 +16,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         item.value.includes('Toxic') ||
         item.value.includes('Corrosive'),
     );
+  
+  // Use _id for MongoDB or id for regular data
+  const productId = product._id || product.id;
+  
   return (
-    <Link href={`/product/${product.id}`} key={product.id}>
+    <Link href={`/product/${productId}`}>
       <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-all duration-300 group'>
         <div className='relative h-40 bg-syntara-darker/70 flex items-center justify-center p-4'>
           <div className='card-image aspect-video bg-gradient-to-br from-syntara-darker to-gray-900 flex items-center justify-center'>

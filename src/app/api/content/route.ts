@@ -3,7 +3,7 @@ import {
   getPageContent, 
   updatePageContent, 
   isAuthorizedAdmin 
-} from '@/lib/db';
+} from '@/lib/mongodb-db';
 
 // GET /api/content - Get all page content
 export async function GET() {
