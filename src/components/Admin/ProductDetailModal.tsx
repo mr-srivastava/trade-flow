@@ -47,6 +47,9 @@ interface ProductDetailModalProps {
   onEditModeChange?: (editMode: boolean) => void;
   isLoading?: boolean;
   mode?: 'view' | 'edit' | 'new';
+  onProductCreated?: (product: Product) => void;
+  onProductUpdated?: (product: Product) => void;
+  adminToken?: string;
 }
 
 export default function ProductDetailModal({
@@ -57,6 +60,9 @@ export default function ProductDetailModal({
   onEditModeChange,
   isLoading = false,
   mode = 'view',
+  onProductCreated,
+  onProductUpdated,
+  adminToken = process.env.NEXT_PUBLIC_ADMIN_TOKEN || 'your-admin-token-here',
 }: ProductDetailModalProps) {
   const [internalEditMode, setInternalEditMode] = React.useState(false);
   const [isSaving, setIsSaving] = React.useState(false);
@@ -129,8 +135,7 @@ export default function ProductDetailModal({
   const onSubmit = async (values: EditProductFormValues) => {
     setIsSaving(true);
 
-    // Simulate API call delay
-    setTimeout(() => {
+    try {
       // Helper function to parse JSON string fields
       const parseStringToArray = (str: string | undefined, fallback: unknown[] = []) => {
         if (!str || str.trim() === '') return fallback;
@@ -142,8 +147,8 @@ export default function ProductDetailModal({
       };
 
       if (isNewMode) {
-        // Creating new product
-        const newProduct: Partial<Product> = {
+        // Creating new product - matches POST /api/products contract
+        const newProductData = {
           name: values.name,
           slug_name: values.slug_name,
           hsn_no: values.hsn_no,
@@ -155,20 +160,42 @@ export default function ProductDetailModal({
           properties: parseStringToArray(values.properties, []),
           safety_and_hazard: parseStringToArray(values.safety_and_hazard, []),
           applications: parseStringToArray(values.applications, []),
+          certificates: [], // Default empty array
           faq: parseStringToArray(values.faq, []),
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         };
 
-        console.log('New Product:', newProduct);
+        console.log('Creating new product:', newProductData);
+
+        const response = await fetch('/api/products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify(newProductData),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to create product');
+        }
+
+        const createdProduct = await response.json();
+        console.log('Product created successfully:', createdProduct);
 
         toast.success('Product Created', {
           description: 'New product has been successfully created.',
         });
+
+        // Notify parent component of the new product
+        onProductCreated?.(createdProduct);
+
+        // Close modal after successful creation
+        setEditMode(false);
+        onClose();
       } else if (product) {
-        // Updating existing product
-        const updatedProduct: Product = {
-          ...product,
+        // Updating existing product - matches PUT /api/products/[id] contract
+        const updateData = {
           name: values.name,
           slug_name: values.slug_name,
           hsn_no: values.hsn_no,
@@ -184,19 +211,44 @@ export default function ProductDetailModal({
           ),
           applications: parseStringToArray(values.applications, product.applications),
           faq: parseStringToArray(values.faq, product.faq),
-          updated_at: new Date().toISOString(),
         };
 
-        console.log('Updated Product:', updatedProduct);
+        console.log('Updating product:', updateData);
+
+        const response = await fetch(`/api/products/${product.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${adminToken}`,
+          },
+          body: JSON.stringify(updateData),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to update product');
+        }
+
+        const updatedProduct = await response.json();
+        console.log('Product updated successfully:', updatedProduct);
 
         toast.success('Product Updated', {
           description: 'Product has been successfully updated.',
         });
-      }
 
+        // Notify parent component of the updated product
+        onProductUpdated?.(updatedProduct);
+
+        setEditMode(false);
+      }
+    } catch (error) {
+      console.error('Error saving product:', error);
+      toast.error('Error', {
+        description: error instanceof Error ? error.message : 'Failed to save product',
+      });
+    } finally {
       setIsSaving(false);
-      setEditMode(false);
-    }, 1000);
+    }
   };
 
   const handleCancel = () => {
