@@ -1,6 +1,6 @@
-# Database Migration Guide
+# Database Setup Guide
 
-This guide explains how to migrate from static `data.ts` and `content.ts` files to a file-based database using `lowdb`.
+This guide explains the MongoDB database setup for the Trade Flow application.
 
 ## Overview
 
@@ -15,9 +15,9 @@ The project has been migrated from static data structures to a dynamic file-base
 
 ## Architecture
 
-### Database Layer (`src/lib/db.ts`)
-- **Database**: JSON file (`db.json`) managed by lowdb
-- **Schema**: TypeScript interfaces for type safety
+### Database Layer (`src/lib/mongodb-db.ts`)
+- **Database**: MongoDB with Mongoose ODM
+- **Schema**: TypeScript interfaces and Mongoose schemas for type safety
 - **Operations**: CRUD functions with proper error handling
 - **Authentication**: Simple bearer token validation for admin operations
 
@@ -59,7 +59,7 @@ export default function LandingV2() {
 
 **After:**
 ```typescript
-import { getPageContent } from '@/lib/db';
+import { getPageContent } from '@/lib/mongodb-db';
 
 async function fetchPageContent(): Promise<PageContent> {
   try {
@@ -96,20 +96,17 @@ export default async function LandingV2() {
 
 ### 1. Initial Setup
 ```bash
-# Install dependencies (lowdb should already be installed)
+# Install dependencies
 npm install
 
-# Reset database (optional)
-npm run db:reset
+# Set up MongoDB connection (see MONGODB_SETUP.md)
+# Configure environment variables
 ```
 
-### 2. Run Migration
+### 2. Run Migration (if needed)
 ```bash
-# Migrate both products and content
-npm run migrate
-
-# Alternative manual migration
-npm run migrate:manual
+# Migrate from JSON to MongoDB
+npm run migrate:mongodb
 ```
 
 ### 3. Verify Migration
@@ -206,7 +203,9 @@ NEXT_PUBLIC_API_URL=https://your-domain.com
 ```
 ├── src/
 │   ├── lib/
-│   │   ├── db.ts              # Database operations
+│   │   ├── mongodb-db.ts      # MongoDB database operations
+│   │   ├── mongodb.ts         # MongoDB connection
+│   │   ├── models.ts          # Mongoose models
 │   │   ├── data.ts            # Original products data
 │   │   ├── content.ts         # Original content data
 │   │   └── types.ts           # TypeScript interfaces
@@ -217,10 +216,10 @@ NEXT_PUBLIC_API_URL=https://your-domain.com
 │       └── Landing/v2/
 │           └── Landing.tsx    # Updated Landing component
 ├── scripts/
-│   ├── migrate-data.ts        # Migration script
+│   ├── migrate-to-mongodb.ts  # Migration script to MongoDB
+│   ├── test-mongodb.ts        # MongoDB connection test
 │   ├── test-content-api.sh    # Content API tests
 │   └── test-landing-integration.sh # Landing integration tests
-├── db.json                    # Database file
 └── DATABASE_SETUP.md          # This file
 ```
 
@@ -249,9 +248,8 @@ NEXT_PUBLIC_API_URL=https://your-domain.com
 ### Reset and Restore
 
 ```bash
-# Complete reset
-npm run db:reset
-npm run migrate
+# Test MongoDB connection
+npm run test:mongodb
 
 # Test everything
 npm run test:content-api

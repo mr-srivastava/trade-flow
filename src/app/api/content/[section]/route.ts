@@ -3,7 +3,7 @@ import {
   getPageContent, 
   updateContentSection, 
   isAuthorizedAdmin 
-} from '@/lib/db';
+} from '@/lib/mongodb-db';
 import { PageContent } from '@/lib/types';
 
 // Valid content sections

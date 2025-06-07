@@ -4,6 +4,11 @@ export interface Property {
   value: string;
 }
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export interface Certificate {
   name: string;
   issued_date: string | null;
@@ -26,7 +31,7 @@ export interface Product {
   safety_and_hazard: Property[];
   applications: Property[];
   certificates: Certificate[];
-  faq: Property[];
+  faq: FAQ[];
 }
 
 export interface ProductsResponse {

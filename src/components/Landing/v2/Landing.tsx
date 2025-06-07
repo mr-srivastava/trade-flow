@@ -8,12 +8,12 @@ import PlatformBenefits from '@/components/PlatformBenefits/PlatformBenefits';
 import ProductCategories from '@/components/ProductCategories/ProductCategories';
 import Hero from '@/components/Hero/Hero';
 import { PageContent } from '@/lib/types';
-import { getPageContent } from '@/lib/db';
+import { getPageContent } from '@/lib/mongodb-db';
 
-// Server action to fetch content
+// Server action to fetch content from MongoDB
 async function fetchPageContent(): Promise<PageContent> {
   try {
-    // Try to fetch from database first
+    // Fetch from MongoDB database
     const content = await getPageContent();
     
     // Validate that the content has the required structure
@@ -23,11 +23,37 @@ async function fetchPageContent(): Promise<PageContent> {
       throw new Error('Invalid content structure from database');
     }
   } catch (error) {
-    console.error('Error fetching from database, falling back to static content:', error);
+    console.error('Error fetching from database:', error);
     
-    // Fallback to static content
-    const { pageContent } = await import('@/lib/content');
-    return pageContent;
+    // Return a minimal default content structure if database fails
+    return {
+      hero: {
+        heading: 'Welcome to Trade Flow',
+        description: 'Your trusted partner in pharmaceutical trading',
+        industries: [],
+        buttons: { 
+          contact: { text: 'Contact Us', href: '/contact' }, 
+          explore: { text: 'Explore Products', href: '/products' } 
+        },
+        stats: { title: 'Our Impact', items: [] }
+      },
+      benefits: [],
+      about: {
+        header: { title: 'About Us', subtitle: 'Leading the Industry' },
+        description: { paragraphs: [], links: [] },
+        values: []
+      },
+      productCategories: { title: 'Product Categories', subtitle: 'Explore our range', buttonText: 'View All' },
+      synFlowFeatures: {
+        features: [],
+        sectionId: 'features',
+        sectionTitle: 'SynFlow Features',
+        sectionDescription: 'Discover our key features',
+        learnMoreText: 'Learn More',
+        learnMoreLink: '/features'
+      },
+      resourcesData: { title: 'Resources', subtitle: 'Helpful information', resources: [] }
+    };
   }
 }
 
