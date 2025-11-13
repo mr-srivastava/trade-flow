@@ -1,69 +1,56 @@
 'use client';
-import React, { useState } from 'react';
-import { Search, Filter } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-
+import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Footer from '@/components/layout/Footer/Footer';
-import ProductPagination from './ProductPagination';
+import NavBar from '@/components/layout/Navbar/Navbar';
 import { Product } from '@/lib/types';
 import ProductFilters from './ProductFilters/ProductFilters';
-import ProductCard from '@/components/Features/product/ProductCard/ProductCard';
-import { useSearchParams } from 'next/navigation';
-import { parseIndustryToSlug } from '@/lib/utils';
-import NavBar from '@/components/layout/Navbar/Navbar';
+import SearchAndFilter from './SearchAndFilter';
+import ProductGrid from './ProductGrid';
+import {
+  filterProducts,
+  paginateProducts,
+  FilterCriteria,
+} from '@/lib/utils/productFilters';
 
+// Main ProductListing Component
 const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
   data,
   title = 'Products Catalog',
 }) => {
-  const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
   const searchParams = useSearchParams();
 
   const productsPerPage = 12;
-  const totalProducts = data.length;
 
   const currentIndustry = searchParams.get('industries') || '';
-  // Remove category and subcategory params since these fields don't exist in Product type
-  // const currentCategory = searchParams.get('categories') || '';
-  // const currentSubcategory = searchParams.get('subcategories') || '';
 
-  const filteredProducts = data
-    .filter((product) => {
-      try {
-        const matchesSearch = [
-          product.name,
-          product.description,
-          product.cas_number,
-          product.molecular_formula,
-        ].some((field) =>
-          field.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+  // Apply filtering logic using the child component's logic
+  const filteredProducts = useMemo(() => {
+    const criteria: FilterCriteria = {
+      searchQuery,
+      industry: currentIndustry,
+    };
+    return filterProducts(data, criteria);
+  }, [data, searchQuery, currentIndustry]);
 
-        const matchesIndustry = currentIndustry
-          ? product.industries
-              .map(parseIndustryToSlug)
-              .includes(currentIndustry)
-          : true;
+  const totalProducts = filteredProducts.length;
 
-        return matchesSearch && matchesIndustry;
-      } catch (error) {
-        console.error('Error filtering product:', product, error);
-        return false;
-      }
-    })
-    .slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
-
-  const toggleFilters = () => setShowFilters((prev) => !prev);
+  // Apply pagination
+  const paginatedProducts = useMemo(() => {
+    return paginateProducts(filteredProducts, currentPage, productsPerPage);
+  }, [filteredProducts, currentPage, productsPerPage]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Searching for:', searchQuery);
+    setCurrentPage(1); // Reset to first page on new search
   };
 
   const handlePageChange = (page: number) => setCurrentPage(page);
+
+  const handleFiltersToggle = (show: boolean) => setShowFilters(show);
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -74,29 +61,12 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
             <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>
               {title}
             </h1>
-            <form
-              onSubmit={handleSearch}
-              className='flex flex-col md:flex-row gap-4 items-stretch md:items-center'
-            >
-              <div className='relative flex-grow'>
-                <Search className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' />
-                <Input
-                  type='text'
-                  placeholder='Search by name, CAS, formula...'
-                  className='w-full pl-10 py-2.5 placeholder:text-syntara-light/50 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus:outline-none focus:ring-2 focus:ring-syntara-primary/50'
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-              <Button
-                onClick={toggleFilters}
-                variant='outline'
-                className='whitespace-nowrap flex items-center gap-2'
-              >
-                <Filter className='h-4 w-4' />
-                {showFilters ? 'Hide Filters' : 'Show Filters'}
-              </Button>
-            </form>
+            <SearchAndFilter
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              onSearchSubmit={handleSearch}
+              onFiltersToggle={handleFiltersToggle}
+            />
           </header>
 
           <div className='flex flex-col md:flex-row gap-6'>
@@ -111,23 +81,14 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
               </aside>
             )}
 
-            <section className='flex-grow'>
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              <div className='mt-12'>
-                <ProductPagination
-                  currentPage={currentPage}
-                  totalPages={Math.ceil(totalProducts / productsPerPage)}
-                  onPageChange={handlePageChange}
-                  totalProducts={totalProducts}
-                  productsPerPage={productsPerPage}
-                />
-              </div>
-            </section>
+            <ProductGrid
+              products={paginatedProducts}
+              currentPage={currentPage}
+              totalPages={Math.ceil(totalProducts / productsPerPage)}
+              totalProducts={totalProducts}
+              productsPerPage={productsPerPage}
+              onPageChange={handlePageChange}
+            />
           </div>
         </div>
       </main>

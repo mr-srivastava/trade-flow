@@ -77,7 +77,8 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
       setOpen(false);
 
       toast.success('Inquiry Submitted', {
-        description: 'We\'ve received your inquiry and will get back to you soon.',
+        description:
+          "We've received your inquiry and will get back to you soon.",
       });
 
       form.reset();
@@ -90,15 +91,19 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
-            Get in Touch
+          <Button
+            variant='outline'
+            className={cn('w-full rounded-md', buttonClassName)}
+          >
+            GET IN TOUCH
           </Button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[500px]'>
           <DialogHeader>
             <DialogTitle>Product Inquiry</DialogTitle>
             <DialogDescription>
-              Submit your inquiry about {product.name}. Our team will get back to you shortly.
+              Submit your inquiry about {product.name}. Our team will get back
+              to you shortly.
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -178,8 +183,14 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                 )}
               />
               <DialogFooter>
-                <Button type='submit' disabled={isSubmitting} className='rounded-md'>
-                  {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+                <Button
+                  type='submit'
+                  disabled={isSubmitting}
+                  className='rounded-md'
+                >
+                  {isSubmitting && (
+                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  )}
                   Submit Inquiry
                 </Button>
               </DialogFooter>

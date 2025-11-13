@@ -18,7 +18,7 @@ export default function Loading() {
               <div className='relative flex-grow'>
                 <Skeleton className='h-10 w-full' />
               </div>
-              <Skeleton className='h-10 w-32' />
+              {/* <Skeleton className='h-10 w-32' /> */}
             </div>
           </header>
 
@@ -53,15 +53,37 @@ export default function Loading() {
                 {Array.from({ length: 12 }).map((_, i) => (
                   <div
                     key={i}
-                    className='bg-syntara-dark rounded-lg p-6 border border-border/20'
+                    className='bg-syntara-darker/80 rounded-lg p-4 border border-border/40'
                   >
-                    <Skeleton className='h-48 w-full mb-4' />
-                    <Skeleton className='h-6 w-3/4 mb-2' />
-                    <Skeleton className='h-4 w-full mb-2' />
-                    <Skeleton className='h-4 w-2/3 mb-4' />
-                    <div className='flex justify-between items-center'>
-                      <Skeleton className='h-4 w-16' />
-                      <Skeleton className='h-8 w-20' />
+                    <Skeleton className='h-6 w-3/4 mb-4' />
+
+                    <div className='space-y-3'>
+                      <div className='flex justify-between'>
+                        <div className='flex gap-2'>
+                          <Skeleton className='h-4 w-12' />
+                          <Skeleton className='h-4 w-24' />
+                        </div>
+                        <Skeleton className='h-4 w-20' />
+                      </div>
+
+                      <Skeleton className='h-px w-full' />
+
+                      <div className='space-y-2'>
+                        <div className='flex gap-2'>
+                          <Skeleton className='h-4 w-12' />
+                          <Skeleton className='h-4 w-24' />
+                        </div>
+                        <div className='flex gap-2'>
+                          <Skeleton className='h-4 w-16' />
+                          <Skeleton className='h-4 w-20' />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='mt-4 space-y-2'>
+                      <Skeleton className='h-4 w-full' />
+                      <Skeleton className='h-4 w-full' />
+                      <Skeleton className='h-4 w-2/3' />
                     </div>
                   </div>
                 ))}
@@ -70,7 +92,7 @@ export default function Loading() {
               <div className='mt-12 flex flex-col items-center space-y-4'>
                 <div className='flex space-x-2'>
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Skeleton key={i} className='h-8 w-8' />
+                    <Skeleton key={i} className='h-10 w-10' />
                   ))}
                 </div>
                 <Skeleton className='h-4 w-48' />
