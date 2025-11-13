@@ -1,7 +1,8 @@
+import React from 'react';
 import ContactSection from '@/components/sections/Contact/Contact';
 import Footer from '@/components/layout/Footer/Footer';
-import NavBar from '@/components/Navbar/Navbar';
-import React from 'react';
+
+import NavBar from '@/components/layout/Navbar/Navbar';
 
 export default function ContactUs() {
   return (

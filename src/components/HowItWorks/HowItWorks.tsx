@@ -1,6 +1,7 @@
 import React from 'react';
-import Steps from '../steps';
+
 import { Button } from '../ui/button';
+import Steps from '../shared/steps';
 
 const steps = [
   {
@@ -30,20 +31,20 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-16  relative" id="how-it-works">
-      <div className="max-w-6xl mx-auto px-8 py-20 flex flex-col items-center justify-center">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-bold text-slate-50 mb-6">
+    <section className='py-16  relative' id='how-it-works'>
+      <div className='max-w-6xl mx-auto px-8 py-20 flex flex-col items-center justify-center'>
+        <div className='text-center mb-20'>
+          <h2 className='text-4xl font-bold text-slate-50 mb-6'>
             How It Works
           </h2>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+          <p className='text-xl text-slate-300 max-w-2xl mx-auto'>
             Simple steps to transform your global trade operations
           </p>
         </div>
         <Steps steps={steps} />
         <Button
           size={'lg'}
-          className="mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
+          className='mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl'
         >
           Book a Demo
         </Button>

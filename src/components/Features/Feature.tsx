@@ -1,5 +1,6 @@
 'use client';
-import FeatureCard from '../feature-card';
+
+import FeatureCard from '../shared/feature-card';
 
 interface FeatureProps {
   title: string;
@@ -14,7 +15,7 @@ export function Feature({
 }: FeatureProps) {
   return (
     <FeatureCard
-      className="relative z-20 h-full w-full"
+      className='relative z-20 h-full w-full'
       title={title}
       description={description}
       icon={icon}

@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { ProductModel } from '../models/product.model';
-import { Product, ProductsResponse, Property, FAQ } from '../../types';
+import { Product, Property, FAQ } from '../../types';
 import { ensureConnection } from '../connection';
 
 // === TYPE DEFINITIONS FOR MONGODB DOCUMENTS ===

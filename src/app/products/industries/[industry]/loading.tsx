@@ -1,5 +1,6 @@
 import Footer from '@/components/layout/Footer/Footer';
-import NavBar from '@/components/Navbar/Navbar';
+import NavBar from '@/components/layout/Navbar/Navbar';
+
 import { Skeleton } from '@/components/ui/skeleton';
 
 const SHOW_FILTERS = false;
