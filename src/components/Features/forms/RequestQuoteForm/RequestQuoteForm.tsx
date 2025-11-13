@@ -95,7 +95,7 @@ export function RequestQuoteForm({
             variant='outline'
             className={cn('w-full rounded-md', buttonClassName)}
           >
-            Request Quote
+            REQUEST A QUOTE
           </Button>
         </SheetTrigger>
         <SheetContent className='sm:max-w-md'>
