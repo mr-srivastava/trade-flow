@@ -1,14 +1,13 @@
 import React from 'react';
-import ProductCatalogue from '@/components/Listing/v2/Listing';
-import { GET as getProductsHandler } from '@/app/api/products/route';
+import ProductCatalogue from '@/components/pages/ProductListing/ProductListing';
+import { productService } from '@/lib/services';
 
 export const dynamic = 'force-dynamic';
 
-// Direct API handler call for server-side rendering
+// Server-side rendering using ProductService directly
 export default async function Products() {
   try {
-    const response = await getProductsHandler();
-    const { products } = await response.json();
+    const { products } = await productService.getAllProducts();
     return <ProductCatalogue data={products} />;
   } catch (error) {
     console.error('Error fetching products:', error);

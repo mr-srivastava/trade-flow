@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getPageContent, 
-  updatePageContent, 
-  isAuthorizedAdmin 
-} from '@/lib/mongodb-db';
+import { contentService } from '@/lib/services';
+import { isAuthorizedAdmin } from '@/lib/utils/auth';
 
 // GET /api/content - Get all page content
 export async function GET() {
   try {
-    const content = await getPageContent();
+    const content = await contentService.getPageContent();
     return NextResponse.json(content);
   } catch (error) {
     console.error('Error fetching content:', error);
@@ -35,7 +32,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
 
     // Update the content
-    const updatedContent = await updatePageContent(body);
+    const updatedContent = await contentService.updatePageContent(body);
 
     return NextResponse.json(updatedContent);
   } catch (error) {
@@ -45,4 +42,4 @@ export async function PUT(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}

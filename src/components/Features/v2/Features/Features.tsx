@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronRight, Zap } from 'lucide-react';
 import { SynFlowData } from '@/lib/types';
-import { renderIcon } from '@/lib/icon-util';
+import { renderIcon } from '@/lib/utils';
 
 const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
   return (
@@ -13,8 +13,12 @@ const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
               <Zap className='h-6 w-6 text-white' />
             </div>
             <div>
-              <h2 className='text-2xl md:text-3xl font-bold text-white'>{data.sectionTitle}</h2>
-              <p className='text-syntara-light/80 mt-2'>{data.sectionDescription}</p>
+              <h2 className='text-2xl md:text-3xl font-bold text-white'>
+                {data.sectionTitle}
+              </h2>
+              <p className='text-syntara-light/80 mt-2'>
+                {data.sectionDescription}
+              </p>
             </div>
           </div>
 
@@ -33,9 +37,13 @@ const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
                       <span className='bg-syntara-primary/20 text-syntara-primary text-xs font-medium px-2 py-1 rounded-full'>
                         {feature.id}
                       </span>
-                      <h3 className='text-lg font-medium text-white'>{feature.title}</h3>
+                      <h3 className='text-lg font-medium text-white'>
+                        {feature.title}
+                      </h3>
                     </div>
-                    <p className='text-syntara-light/80 mt-2 text-sm'>{feature.description}</p>
+                    <p className='text-syntara-light/80 mt-2 text-sm'>
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
               </div>

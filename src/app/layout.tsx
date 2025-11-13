@@ -6,15 +6,15 @@ import './globals.css';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
-  display: 'swap', // Important for performance
-  preload: true,
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
-  display: 'swap', // Important for performance
-  preload: true,
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata: Metadata = {
@@ -29,15 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
-      <head>
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
-        {children}
-      </body>
+    <html
+      lang='en'
+      className={`${inter.variable} ${montserrat.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   );
 }

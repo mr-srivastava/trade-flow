@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import NavBar from '@/components/Navbar/Navbar';
-import Footer from '@/components/Footer/v2/Footer';
+import NavBar from '@/components/layout/Navbar/Navbar';
+
+import Footer from '@/components/layout/Footer/Footer';
 
 const noProductFoundText = {
   backToProducts: 'Back to products',
   title: 'Product Not Found',
-  description: 'The product you\'re looking for doesn\'t exist or has been removed.',
+  description:
+    "The product you're looking for doesn't exist or has been removed.",
   browseAllProducts: 'Browse All Products',
 };
 
@@ -27,10 +29,16 @@ export default function ProductNotFound() {
               {noProductFoundText.backToProducts}
             </Link>
             <div className='glass-card p-12 text-center'>
-              <h1 className='text-2xl font-bold mb-4'>{noProductFoundText.title}</h1>
-              <p className='text-syntara-light/70 mb-8'>{noProductFoundText.description}</p>
+              <h1 className='text-2xl font-bold mb-4'>
+                {noProductFoundText.title}
+              </h1>
+              <p className='text-syntara-light/70 mb-8'>
+                {noProductFoundText.description}
+              </p>
               <Button asChild>
-                <Link href='/products'>{noProductFoundText.browseAllProducts}</Link>
+                <Link href='/products'>
+                  {noProductFoundText.browseAllProducts}
+                </Link>
               </Button>
             </div>
           </div>

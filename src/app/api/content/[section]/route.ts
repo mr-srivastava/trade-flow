@@ -1,19 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { 
-  getPageContent, 
-  updateContentSection, 
-  isAuthorizedAdmin 
-} from '@/lib/mongodb-db';
+import { contentService } from '@/lib/services';
+import { isAuthorizedAdmin } from '@/lib/utils/auth';
 import { PageContent } from '@/lib/types';
 
 // Valid content sections
 const validSections: (keyof PageContent)[] = [
-  'hero', 
-  'benefits', 
-  'about', 
-  'productCategories', 
-  'synFlowFeatures', 
-  'resourcesData'
+  'hero',
+  'benefits',
+  'about',
+  'productCategories',
+  'synFlowFeatures',
+  'resourcesData',
 ];
 
 // GET /api/content/[section] - Get specific content section
@@ -23,15 +20,17 @@ export async function GET(
 ) {
   try {
     const section = params.section as keyof PageContent;
-    
+
     if (!validSections.includes(section)) {
       return NextResponse.json(
-        { error: `Invalid section. Valid sections: ${validSections.join(', ')}` },
+        {
+          error: `Invalid section. Valid sections: ${validSections.join(', ')}`,
+        },
         { status: 400 }
       );
     }
 
-    const content = await getPageContent();
+    const content = await contentService.getPageContent();
     return NextResponse.json(content[section]);
   } catch (error) {
     console.error('Error fetching content section:', error);
@@ -58,10 +57,12 @@ export async function PUT(
     }
 
     const section = params.section as keyof PageContent;
-    
+
     if (!validSections.includes(section)) {
       return NextResponse.json(
-        { error: `Invalid section. Valid sections: ${validSections.join(', ')}` },
+        {
+          error: `Invalid section. Valid sections: ${validSections.join(', ')}`,
+        },
         { status: 400 }
       );
     }
@@ -70,7 +71,10 @@ export async function PUT(
     const body = await request.json();
 
     // Update the specific content section
-    const updatedContent = await updateContentSection(section, body);
+    const updatedContent = await contentService.updateContentSection(
+      section,
+      body
+    );
 
     return NextResponse.json(updatedContent[section]);
   } catch (error) {
@@ -80,4 +84,4 @@ export async function PUT(
       { status: 500 }
     );
   }
-} 
+}

@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
 
-import ProductDetail from '@/components/ProductDetails/v2/ProductDetails';
 import { notFound } from 'next/navigation';
 import { GET as getProductHandler } from '@/app/api/products/[id]/route';
 import { NextRequest } from 'next/server';
+import ProductDetail from '@/components/pages/ProductDetail/ProductDetails';
 
 interface ProductPageProps {
   params: {
@@ -37,10 +37,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 // Direct API handler call for server-side rendering
 const fetchProductById = async (id: string) => {
   // Create a mock request and params object for the API handler
-  const mockRequest = new NextRequest('http://localhost:3000/api/products/' + id);
-  const response = await getProductHandler(
-    mockRequest,
-    { params: { id } }
+  const mockRequest = new NextRequest(
+    'http://localhost:3000/api/products/' + id
   );
+  const response = await getProductHandler(mockRequest, { params: { id } });
   return response.json();
 };
