@@ -30,9 +30,10 @@ const fetchProductsByIndustry = async (
 export async function generateMetadata({
   params,
 }: {
-  params: { industry: string };
+  params: Promise<{ industry: string }>;
 }) {
-  const userFriendlyIndustryName = parseToUserFriendlyName(params.industry);
+  const { industry } = await params;
+  const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 
   return {
     title: `Products in ${userFriendlyIndustryName} Industry`,
@@ -44,9 +45,9 @@ export async function generateMetadata({
 export default async function Products({
   params,
 }: {
-  params: { industry: string };
+  params: Promise<{ industry: string }>;
 }) {
-  const { industry } = params;
+  const { industry } = await params;
   const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 
   try {

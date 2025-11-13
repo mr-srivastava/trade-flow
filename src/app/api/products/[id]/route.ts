@@ -7,12 +7,11 @@ import { z } from 'zod';
 // GET /api/products/[id] - Get a specific product with related products
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const productWithRelated = await productService.getProductWithRelated(
-      params.id
-    );
+    const { id } = await params;
+    const productWithRelated = await productService.getProductWithRelated(id);
 
     if (!productWithRelated) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });
@@ -31,7 +30,7 @@ export async function GET(
 // PUT /api/products/[id] - Update a specific product (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check admin authorization
@@ -48,8 +47,9 @@ export async function PUT(
     const validatedData = updateProductSchema.parse(body);
 
     // Update the product
+    const { id } = await params;
     const updatedProduct = await productService.updateProduct(
-      params.id,
+      id,
       validatedData
     );
 
@@ -81,7 +81,7 @@ export async function PUT(
 // DELETE /api/products/[id] - Delete a specific product (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check admin authorization
@@ -94,7 +94,8 @@ export async function DELETE(
     }
 
     // Delete the product
-    const deleted = await productService.deleteProduct(params.id);
+    const { id } = await params;
+    const deleted = await productService.deleteProduct(id);
 
     if (!deleted) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 });

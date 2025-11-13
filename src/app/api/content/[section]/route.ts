@@ -16,10 +16,11 @@ const validSections: (keyof PageContent)[] = [
 // GET /api/content/[section] - Get specific content section
 export async function GET(
   request: NextRequest,
-  { params }: { params: { section: string } }
+  { params }: { params: Promise<{ section: string }> }
 ) {
   try {
-    const section = params.section as keyof PageContent;
+    const { section: sectionParam } = await params;
+    const section = sectionParam as keyof PageContent;
 
     if (!validSections.includes(section)) {
       return NextResponse.json(
@@ -44,7 +45,7 @@ export async function GET(
 // PUT /api/content/[section] - Update specific content section (admin only)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { section: string } }
+  { params }: { params: Promise<{ section: string }> }
 ) {
   try {
     // Check admin authorization
@@ -56,7 +57,8 @@ export async function PUT(
       );
     }
 
-    const section = params.section as keyof PageContent;
+    const { section: sectionParam } = await params;
+    const section = sectionParam as keyof PageContent;
 
     if (!validSections.includes(section)) {
       return NextResponse.json(

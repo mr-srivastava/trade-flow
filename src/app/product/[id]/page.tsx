@@ -6,13 +6,14 @@ import { NextRequest } from 'next/server';
 import ProductDetail from '@/components/pages/ProductDetail/ProductDetails';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ProductPageProps) {
-  const product = await fetchProductById(params.id);
+  const { id } = await params;
+  const product = await fetchProductById(id);
 
   return {
     title: `${product.name} | Trade Now at Syntara`,
@@ -21,7 +22,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await fetchProductById(params.id);
+  const { id } = await params;
+  const product = await fetchProductById(id);
 
   if (!product) {
     notFound();
@@ -40,6 +42,8 @@ const fetchProductById = async (id: string) => {
   const mockRequest = new NextRequest(
     'http://localhost:3000/api/products/' + id
   );
-  const response = await getProductHandler(mockRequest, { params: { id } });
+  const response = await getProductHandler(mockRequest, {
+    params: Promise.resolve({ id }),
+  });
   return response.json();
 };

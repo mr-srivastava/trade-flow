@@ -74,7 +74,10 @@ function getLucideIcon(name: string): React.ElementType {
  * @param className - Optional CSS classes to apply
  * @returns JSX element of the icon
  */
-export function renderIcon(iconName: string, className?: string): JSX.Element {
+export function renderIcon(
+  iconName: string,
+  className?: string
+): React.ReactElement {
   const Icon = getLucideIcon(iconName);
   return <Icon className={className} />;
 }
