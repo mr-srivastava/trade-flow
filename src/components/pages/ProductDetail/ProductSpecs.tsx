@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { WarningIcon } from '@phosphor-icons/react/ssr';
 
 interface ProductSpecsProps {
   casNumber?: string;
@@ -33,7 +33,7 @@ const ProductSpecs: React.FC<ProductSpecsProps> = ({
           <span className='text-syntara-light/70 text-sm'>SAFETY</span>
           <div className='flex items-center gap-2 mt-1'>
             <span className='inline-flex items-center gap-1.5 text-amber-500/90'>
-              <AlertTriangle className='h-3.5 w-3.5' />
+              <WarningIcon className='h-3.5 w-3.5' />
               <span className='text-sm'>Hazardous</span>
             </span>
           </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { CaretRightIcon } from '@phosphor-icons/react';
 import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
 import { parseIndustryToSlug } from '@/lib/utils/slug';
 import Link from 'next/link';
@@ -44,7 +44,7 @@ const ProductCategories: React.FC<{
                 <span className='text-sm text-syntara-light/70'>
                   Explore products
                 </span>
-                <ChevronRight className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
+                <CaretRightIcon className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
               </div>
             </Link>
           ))}

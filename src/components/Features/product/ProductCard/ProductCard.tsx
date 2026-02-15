@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { WarningIcon } from '@phosphor-icons/react/ssr';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import { ProductWithOptionalId } from '@/lib/types';
@@ -32,7 +32,7 @@ const ProductCard: React.FC<{ product: ProductWithOptionalId }> = ({ product }) 
               </div>
               {hasHazards && (
                 <div className='flex items-center text-amber-500/90'>
-                  <AlertTriangle className='h-3 w-3 mr-1' />
+                  <WarningIcon className='h-3 w-3 mr-1' />
                   <span className='text-xs'>Hazardous</span>
                 </div>
               )}

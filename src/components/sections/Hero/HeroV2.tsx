@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { HeroContent } from '@/lib/types';
 
 const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
@@ -19,7 +19,7 @@ const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
                 href={content.buttons.contact.href}
                 className='btn-primary flex items-center justify-center gap-2'
               >
-                {content.buttons.contact.text} <ArrowRight className='h-4 w-4' />
+                {content.buttons.contact.text} <ArrowRightIcon className='h-4 w-4' />
               </a>
               <a
                 href={content.buttons.explore.href}

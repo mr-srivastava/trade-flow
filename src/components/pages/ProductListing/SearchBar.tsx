@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search } from 'lucide-react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { Input } from '@/components/ui/input';
 
 interface SearchBarProps {
@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <form onSubmit={onSubmit} className='relative flex-grow' role='search'>
-      <Search className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' aria-hidden />
+      <MagnifyingGlassIcon className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' aria-hidden />
       <Input
         id='product-search'
         type='search'

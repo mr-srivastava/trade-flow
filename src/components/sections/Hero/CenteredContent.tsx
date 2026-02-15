@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { HeroContent } from '@/lib/types';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@phosphor-icons/react/ssr';
 import StatCard from './Stat';
 import { ContainerTextFlip } from '@/components/ui/container-text-flip';
 
@@ -56,7 +56,7 @@ function CenteredContent({ content }: CenteredContentProps) {
                 aria-label={`${content.buttons.contact.text} - Contact us`}
               >
                 {content.buttons.contact.text}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
                 href={content.buttons.explore.href}

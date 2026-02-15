@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Send } from 'lucide-react';
+import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -144,7 +144,7 @@ const ContactForm: React.FC = () => {
               type='submit'
               className='btn-primary flex items-center gap-2 w-full justify-center'
             >
-              Send Message <Send className='h-4 w-4' />
+              Send Message <PaperPlaneRightIcon className='h-4 w-4' />
             </Button>
           </form>
         </Form>

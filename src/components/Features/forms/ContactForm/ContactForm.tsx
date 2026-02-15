@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
+import { CircleNotchIcon } from '@phosphor-icons/react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -203,7 +203,7 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                   className='rounded-md'
                 >
                   {isSubmitting && (
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    <CircleNotchIcon className='mr-2 h-4 w-4 animate-spin' />
                   )}
                   Submit Inquiry
                 </Button>

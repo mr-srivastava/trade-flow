@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '../ui/card';
 import Link from 'next/link';
-import { AlertTriangle, Beaker } from 'lucide-react';
+import { WarningIcon, FlaskIcon } from '@phosphor-icons/react';
 import { Product } from '@/lib/types';
 import { Badge } from '../ui/badge';
 import { cn } from '@/lib/utils/cn';
@@ -35,7 +35,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
       >
         <div className="relative aspect-video bg-muted/50">
           <div className="w-full h-full flex items-center justify-center">
-            <Beaker className="h-16 w-16 text-muted-foreground/50" />
+            <FlaskIcon className="h-16 w-16 text-muted-foreground/50" />
           </div>
 
           <div className="absolute top-3 right-3 flex flex-col gap-2">
@@ -70,7 +70,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                   variant="outline"
                   className="bg-warning-muted text-warning-foreground border-warning-border"
                 >
-                  <AlertTriangle className="h-3 w-3" />
+                  <WarningIcon className="h-3 w-3" />
                 </Badge>
               )}
             </div>

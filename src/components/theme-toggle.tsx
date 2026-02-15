@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
+import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/cn';
@@ -22,7 +22,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         className={cn('h-9 w-9', className)}
         aria-label="Toggle theme"
       >
-        <Sun className="h-4 w-4" />
+        <SunIcon className="h-4 w-4" />
       </Button>
     );
   }
@@ -38,9 +38,9 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
       {isDark ? (
-        <Sun className="h-4 w-4" aria-hidden />
+        <SunIcon className="h-4 w-4" aria-hidden />
       ) : (
-        <Moon className="h-4 w-4" aria-hidden />
+        <MoonIcon className="h-4 w-4" aria-hidden />
       )}
     </Button>
   );

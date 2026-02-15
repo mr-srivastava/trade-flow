@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useCallback } from 'react';
-import { Menu, X } from 'lucide-react';
+import { ListIcon, XIcon } from '@phosphor-icons/react';
 import Link from 'next/link';
 
 interface MenuItem {
@@ -22,7 +22,7 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: str
           className='inline-flex items-center justify-center p-2 rounded-md text-syntara-light hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-syntara-darker'
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
+          {isMenuOpen ? <XIcon className='h-6 w-6' /> : <ListIcon className='h-6 w-6' />}
         </button>
       </div>
       {isMenuOpen && (

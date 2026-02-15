@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { CaretLeftIcon } from '@phosphor-icons/react/ssr';
 import {
   Collapsible,
   CollapsibleContent,
@@ -33,7 +33,7 @@ const ProductFAQ: React.FC<ProductFAQProps> = ({ faqs }) => {
           >
             <CollapsibleTrigger className='flex items-center justify-between w-full p-4 bg-card/80 dark:bg-syntara-darker/80 text-left'>
               <span className='font-medium text-foreground'>{faq.question}</span>
-              <ChevronLeft className='h-5 w-5 transform -rotate-90 text-syntara-light/70 ui-open:rotate-90 transition-transform duration-200' />
+              <CaretLeftIcon className='h-5 w-5 transform -rotate-90 text-syntara-light/70 ui-open:rotate-90 transition-transform duration-200' />
             </CollapsibleTrigger>
             <CollapsibleContent className='p-4 pt-0 bg-muted/50 dark:bg-syntara-darker/40'>
               <div className='pt-4 border-t border-border/20 text-syntara-light/80'>

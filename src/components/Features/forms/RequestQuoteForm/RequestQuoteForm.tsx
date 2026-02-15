@@ -24,7 +24,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
-import { Loader2 } from 'lucide-react';
+import { CircleNotchIcon } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils/cn';
 
@@ -190,7 +190,7 @@ export function RequestQuoteForm({
                     className='rounded-md'
                   >
                     {isSubmitting && (
-                      <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                      <CircleNotchIcon className='mr-2 h-4 w-4 animate-spin' />
                     )}
                     Submit Request
                   </Button>

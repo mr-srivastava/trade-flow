@@ -1,4 +1,4 @@
-import { Facebook, Linkedin, Twitter } from 'lucide-react';
+import { FacebookLogoIcon, LinkedinLogoIcon, TwitterLogoIcon } from '@phosphor-icons/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -38,19 +38,19 @@ export default function Footer() {
                 href="#"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
-                <Facebook />
+                <FacebookLogoIcon className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
-                <Twitter />
+                <TwitterLogoIcon className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
-                <Linkedin />
+                <LinkedinLogoIcon className="h-5 w-5" />
               </Link>
             </div>
           </div>
