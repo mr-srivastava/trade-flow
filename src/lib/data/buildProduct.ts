@@ -61,6 +61,11 @@ export interface SlimProduct {
 function oid(id: string): Oid {
   return { $oid: id };
 }
+
+/** Generate a new unique ID when slim data is missing a certificate ID. */
+function generateId(): string {
+  return crypto.randomUUID().replace(/-/g, '').slice(0, 24);
+}
 function dateWrap(s: string): DateWrap {
   return { $date: s };
 }
@@ -98,11 +103,15 @@ export function buildProduct(slim: SlimProduct): FullProduct {
         _id: oid(slim.applicationId),
       },
     ],
-    certificates: CERTIFICATE_NAMES.map((name, i) => ({
-      name,
-      ...CERTIFICATE_DEFAULTS,
-      _id: oid(slim.certificateIds[i]),
-    })),
+    certificates: CERTIFICATE_NAMES.map((name, i) => {
+      const cid = slim.certificateIds?.[i];
+      const id = cid !== undefined ? cid : generateId();
+      return {
+        name,
+        ...CERTIFICATE_DEFAULTS,
+        _id: oid(id),
+      };
+    }),
     faq: FAQ_QUESTIONS.map((question, i) => ({
       question,
       answer: slim.faqAnswers[i],
@@ -120,6 +129,18 @@ export function buildProducts(slimList: SlimProduct[]): FullProduct[] {
 
 /** Extract slim representation from a full product (for one-time migration). */
 export function fullProductToSlim(full: FullProduct): SlimProduct {
+  const safetySlice = full.safety_and_hazard.slice(0, 2);
+  const safetyValues: [string, string] = [
+    safetySlice[0]?.value ?? '',
+    safetySlice[1]?.value ?? '',
+  ];
+  const safetyIds: [string, string] = [
+    safetySlice[0]?._id.$oid ?? '',
+    safetySlice[1]?._id.$oid ?? '',
+  ];
+  const applicationValue = full.applications[0]?.value ?? '';
+  const applicationId = full.applications[0]?._id.$oid ?? '';
+
   return {
     _id: full._id.$oid,
     name: full.name,
@@ -132,10 +153,10 @@ export function fullProductToSlim(full: FullProduct): SlimProduct {
     industries: full.industries,
     propertyValues: full.properties.map((p) => p.value),
     propertyIds: full.properties.map((p) => p._id.$oid),
-    safetyValues: [full.safety_and_hazard[0].value, full.safety_and_hazard[1].value],
-    safetyIds: [full.safety_and_hazard[0]._id.$oid, full.safety_and_hazard[1]._id.$oid],
-    applicationValue: full.applications[0].value,
-    applicationId: full.applications[0]._id.$oid,
+    safetyValues,
+    safetyIds,
+    applicationValue,
+    applicationId,
     certificateIds: full.certificates.map((c) => c._id.$oid),
     faqAnswers: full.faq.map((f) => f.answer),
     faqIds: full.faq.map((f) => f._id.$oid),

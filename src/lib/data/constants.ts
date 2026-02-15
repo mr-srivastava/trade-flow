@@ -29,7 +29,7 @@ export const CERTIFICATE_NAMES = [
   'KOSHER',
   'HALAL',
   'REACH',
-  'and CEP (Certificate of Suitability) depending on the specific product and market requirements.',
+  'CEP',
 ] as const;
 
 export const FAQ_QUESTIONS = [
