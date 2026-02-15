@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { cn } from '@/lib/utils/cn';
 
 const formSchema = z.object({
@@ -87,8 +87,6 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
 
   return (
     <>
-      <Toaster position='bottom-left' richColors />
-
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button

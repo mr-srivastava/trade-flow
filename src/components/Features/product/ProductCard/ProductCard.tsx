@@ -14,9 +14,9 @@ const ProductCard: React.FC<{ product: ProductWithOptionalId }> = ({ product }) 
 
   return (
     <Link href={`/product/${productId}`}>
-      <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-colors transition-shadow duration-300 group'>
+      <Card className='h-full overflow-hidden bg-card dark:bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-colors transition-shadow duration-300 group'>
         <CardContent className='p-4'>
-          <h3 className='text-xl font-semibold text-white group-hover:text-syntara-primary transition-colors'>
+          <h3 className='text-xl font-semibold text-foreground group-hover:text-syntara-primary transition-colors'>
             {product.name}
           </h3>
 

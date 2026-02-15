@@ -4,7 +4,7 @@ import { renderIcon } from '@/lib/utils/icons';
 
 const Header: React.FC<{ header: AboutContent['header'] }> = React.memo(
   ({ header }) => (
-    <h2 className='text-2xl md:text-3xl font-bold mb-8 text-white'>
+    <h2 className='text-2xl md:text-3xl font-bold mb-8 text-foreground'>
       {header.title}{' '}
       <span className='text-syntara-light/70 text-xl'>{header.subtitle}</span>
     </h2>
@@ -35,8 +35,8 @@ Description.displayName = 'Description';
 
 const CoreValues: React.FC<{ values: AboutContent['values'] }> = React.memo(
   ({ values }) => (
-    <div className='lg:col-span-2 bg-syntara-darker rounded-lg p-6 border border-border/30'>
-      <h3 className='text-xl font-semibold mb-6 text-white'>Our Core Values</h3>
+    <div className='lg:col-span-2 bg-card dark:bg-syntara-darker rounded-lg p-6 border border-border/30'>
+      <h3 className='text-xl font-semibold mb-6 text-foreground'>Our Core Values</h3>
       <ul className='space-y-6'>
         {values.map((value, index) => (
           <li
@@ -47,7 +47,7 @@ const CoreValues: React.FC<{ values: AboutContent['values'] }> = React.memo(
               {renderIcon(value.icon, 'h-6 w-6 text-syntara-primary')}
             </div>
             <div>
-              <h4 className='font-semibold text-white'>{value.title}</h4>
+              <h4 className='font-semibold text-foreground'>{value.title}</h4>
               <p className='text-sm text-syntara-light/80 leading-relaxed'>
                 {value.description}
               </p>
@@ -69,7 +69,7 @@ const AboutSection: React.FC<AboutContent> = ({
   return (
     <section
       id='about'
-      className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'
+      className='py-4 bg-gradient-to-b from-card to-background dark:from-syntara-darker dark:to-syntara-dark'
     >
       <div className='section-container'>
         <div className='glass-card p-8 md:p-12'>

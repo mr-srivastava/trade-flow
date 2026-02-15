@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Montserrat } from 'next/font/google';
+import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 // Optimize font loading with proper settings
@@ -34,7 +36,12 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable}`}
       suppressHydrationWarning
     >
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        <Providers>
+          {children}
+          <Toaster position="bottom-left" richColors />
+        </Providers>
+      </body>
     </html>
   );
 }

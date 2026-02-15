@@ -8,7 +8,7 @@ interface ProductHeaderProps {
 const ProductHeader: React.FC<ProductHeaderProps> = ({ name }) => {
   return (
     <div>
-      <h1 className='text-3xl lg:text-4xl font-bold text-white mb-3'>
+      <h1 className='text-3xl lg:text-4xl font-bold text-foreground mb-3'>
         {name ?? 'Untitled Product'}
       </h1>
       {/* {industries && industries.length > 0 && (

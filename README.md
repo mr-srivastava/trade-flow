@@ -209,12 +209,14 @@ npm run test:landing-integration  # Test landing page integration
 The application uses a custom design system with:
 
 - **Typography**: Montserrat for headings, Inter for body text
-- **Color Palette**: Custom Syntara brand colors with dark theme support
+- **Color Palette**: Custom Syntara brand colors with dark and light theme support
 - **Components**: Built on Radix UI primitives for accessibility
 - **Animations**: Smooth transitions and micro-interactions with Framer Motion
-- **Theme System**: Next Themes for seamless dark/light mode switching
+- **Theme System**: Next Themes for dark/light mode with a theme toggle in the navbar; preference is persisted.
 
-### Custom Theme Colors
+For the full list of semantic and Syntara tokens, usage guidelines, and accessibility notes, see [docs/design-tokens.md](docs/design-tokens.md).
+
+### Custom Theme Colors (summary)
 ```css
 syntara: {
   dark: '#121620',      /* Very dark blue/black */

@@ -53,7 +53,7 @@ export default function Loading() {
                 {Array.from({ length: 12 }).map((_, i) => (
                   <div
                     key={i}
-                    className='bg-syntara-dark rounded-lg p-6 border border-border/20'
+                    className='bg-card dark:bg-syntara-dark rounded-lg p-6 border border-border/20'
                   >
                     <Skeleton className='h-48 w-full mb-4' />
                     <Skeleton className='h-6 w-3/4 mb-2' />

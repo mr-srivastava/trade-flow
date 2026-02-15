@@ -26,7 +26,7 @@ function CenteredContent({ content }: CenteredContentProps) {
         {content.heading}
         {' for '}
         <ContainerTextFlip
-          className="text-left max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold text-white bg-transparent dark:bg-transparent"
+          className="text-left max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold text-foreground bg-transparent dark:bg-transparent"
           words={content.industries!}
           interval={1500}
         />
@@ -40,7 +40,7 @@ function CenteredContent({ content }: CenteredContentProps) {
         {/* Main Hero Section */}
         <section className="p-8 md:p-12 animate-fade-in bg-gradient-to-b from-syntara-darker/10 to-syntara-dark/10 backdrop-blur-sm shadow-md rounded-lg">
           <div className="max-w-4xl text-left">
-            <h1 className="max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
+            <h1 className="max-w-2xl text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground">
               {headingContent}
             </h1>
 
@@ -71,8 +71,8 @@ function CenteredContent({ content }: CenteredContentProps) {
 
         {/* Stats Section */}
         <section className="mt-8 p-6 md:p-8">
-          <h2 className="text-xl md:text-2xl font-medium mb-4 text-white">{content.stats.title}</h2>
-          <div className="bg-syntara-darker rounded-lg p-4 border border-border/25">
+          <h2 className="text-xl md:text-2xl font-medium mb-4 text-foreground">{content.stats.title}</h2>
+          <div className="bg-card dark:bg-syntara-darker rounded-lg p-4 border border-border/25">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {content.stats.items.map((stat) => (
                 <StatCard key={stat.description} stat={stat} />

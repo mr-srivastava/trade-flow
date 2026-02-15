@@ -43,7 +43,7 @@ const footerData: FooterData = {
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-syntara-darker pt-16 pb-8 border-t border-border/50'>
+    <footer className='bg-card dark:bg-syntara-darker pt-16 pb-8 border-t border-border/50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
+                  className='bg-muted dark:bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
                 >
                   {renderIcon(
                     social.icon,

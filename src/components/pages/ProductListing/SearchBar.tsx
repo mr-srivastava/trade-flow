@@ -23,7 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         autoComplete='off'
         aria-label='Search products by name, CAS number, or formula'
         placeholder='Search by name, CAS, formula…'
-        className='w-full pl-10 py-2.5 placeholder:text-syntara-light/50 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary/50'
+        className='w-full pl-10 py-2.5 placeholder:text-muted-foreground bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary/50'
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
       />
