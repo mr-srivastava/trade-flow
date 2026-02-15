@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResourcesData } from '@/lib/types';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 const ResourcesSection: React.FC<{ data: ResourcesData }> = ({ data }) => {
   return (

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import Link from 'next/link';
 import React from 'react';
 
@@ -47,7 +47,7 @@ export default function Header({ isFixed = true }: { isFixed?: boolean }) {
               </a>
             </div>
           </div>
-          <button className='hidden md:block px-6 py-2 bg-brand text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl transform rounded-lg '>
+          <button className='hidden md:block px-6 py-2 bg-brand text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-colors transition-transform duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-opacity-50 shadow-lg hover:shadow-xl transform rounded-lg'>
             Schedule a Demo
           </button>
           <button className='md:hidden text-white'>

@@ -29,7 +29,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
 import { toast, Toaster } from 'sonner';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -115,7 +115,11 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                   <FormItem>
                     <FormLabel>Name*</FormLabel>
                     <FormControl>
-                      <Input placeholder='Your name' {...field} />
+                      <Input
+                        placeholder='Your name…'
+                        autoComplete='name'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -128,7 +132,11 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                   <FormItem>
                     <FormLabel>Email*</FormLabel>
                     <FormControl>
-                      <Input placeholder='your.email@company.com' {...field} />
+                      <Input
+                        placeholder='your.email@company.com'
+                        autoComplete='email'
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,7 +150,11 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                     <FormItem>
                       <FormLabel>Company</FormLabel>
                       <FormControl>
-                        <Input placeholder='Your company' {...field} />
+                        <Input
+                          placeholder='Your company…'
+                          autoComplete='organization'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,7 +167,11 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                     <FormItem>
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <Input placeholder='Your phone number' {...field} />
+                        <Input
+                          placeholder='Your phone number…'
+                          autoComplete='tel'
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -170,7 +186,7 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                     <FormLabel>Message*</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder='Please provide details about your inquiry'
+                        placeholder='Please provide details about your inquiry…'
                         className='min-h-[120px]'
                         {...field}
                       />

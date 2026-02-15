@@ -67,9 +67,10 @@ const ContactForm: React.FC = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='Your name'
+                        placeholder='Your name…'
+                        autoComplete='name'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -87,8 +88,9 @@ const ContactForm: React.FC = () => {
                     <FormControl>
                       <Input
                         placeholder='your.email@company.com'
+                        autoComplete='email'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -106,9 +108,9 @@ const ContactForm: React.FC = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='How can we help you?'
+                      placeholder='How can we help you?…'
                       {...field}
-                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                     />
                   </FormControl>
                   <FormMessage />
@@ -125,8 +127,8 @@ const ContactForm: React.FC = () => {
                   </FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder='Please provide details about your inquiry'
-                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary resize-none'
+                      placeholder='Please provide details about your inquiry…'
+                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary resize-none'
                       rows={3}
                       {...field}
                     />

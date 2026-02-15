@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { AlertTriangle, Beaker } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { Badge } from '../ui/badge';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface ProductCardProps {
   product: Product;

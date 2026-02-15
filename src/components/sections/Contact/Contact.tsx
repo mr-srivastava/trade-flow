@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 import ContactForm from '@/components/Features/forms/ContactForm/ContactFormV2';
 
 const contactDetails = [

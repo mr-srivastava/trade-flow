@@ -44,7 +44,7 @@ export default function HowItWorks() {
         <Steps steps={steps} />
         <Button
           size={'lg'}
-          className='mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl'
+          className='mt-10 px-6 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-colors transition-transform duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-opacity-50 shadow-lg hover:shadow-xl'
         >
           Book a Demo
         </Button>

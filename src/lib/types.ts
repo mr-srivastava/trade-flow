@@ -139,3 +139,11 @@ export interface IndustryProductCountMap {
   name: string;
   count: number;
 }
+
+/** Product with optional MongoDB _id for backward compatibility */
+export type ProductWithOptionalId = Product & { _id?: string };
+
+/** Product with related products (e.g. from getProductWithRelated) */
+export interface ProductWithRelated extends Product {
+  relatedProducts: Product[];
+}

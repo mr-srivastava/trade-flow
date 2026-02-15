@@ -26,7 +26,7 @@ import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
 import { Loader2 } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 const formSchema = z.object({
   name: z.string().min(2, {

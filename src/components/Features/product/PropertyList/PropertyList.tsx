@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 
 import { Product } from '@/lib/types';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 const TabContent = ({ data }: { data: { key: string; value: string }[] }) => (
   <Card className='border border-border/40 bg-syntara-darker/40'>

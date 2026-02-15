@@ -1,4 +1,4 @@
-import { Product } from '@/lib/types';
+import { Product, ProductWithOptionalId } from '@/lib/types';
 
 /**
  * Checks if a product has hazardous materials based on safety_and_hazard data
@@ -29,6 +29,6 @@ export const hasHazardousMaterials = (product?: Product | null): boolean => {
  * @param product - The product object
  * @returns The product ID as a string
  */
-export const getProductId = (product: Product & { _id?: string }): string => {
-  return product._id || product.id;
+export const getProductId = (product: ProductWithOptionalId): string => {
+  return product._id ?? product.id;
 };

@@ -19,7 +19,7 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: str
       <div className='flex items-center'>
         <button
           onClick={toggleMenu}
-          className='inline-flex items-center justify-center p-2 rounded-md text-syntara-light hover:text-white focus:outline-none'
+          className='inline-flex items-center justify-center p-2 rounded-md text-syntara-light hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary focus-visible:ring-offset-2 focus-visible:ring-offset-syntara-darker'
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
           {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}

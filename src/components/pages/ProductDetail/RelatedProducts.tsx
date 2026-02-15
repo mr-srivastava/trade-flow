@@ -1,5 +1,6 @@
 import React from 'react';
-import { Product } from '@/lib/types';
+import { Product, ProductWithOptionalId } from '@/lib/types';
+import { getProductId } from '@/lib/utils/productHelpers';
 import ProductCard from '@/components/Features/product/ProductCard/ProductCard';
 
 interface RelatedProductsProps {
@@ -16,10 +17,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ products }) => {
       <h2 className='text-2xl font-bold text-white mb-8'>Related Products</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {products.map((relatedProduct) => {
-          const productId =
-            (relatedProduct as Product & { _id?: string }).id ||
-            (relatedProduct as Product & { _id?: string })._id;
-          return <ProductCard key={productId} product={relatedProduct} />;
+          const productId = getProductId(relatedProduct as ProductWithOptionalId);
+          return <ProductCard key={productId} product={relatedProduct as ProductWithOptionalId} />;
         })}
       </div>
     </div>

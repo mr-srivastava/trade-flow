@@ -7,7 +7,7 @@
  * Makes an API call to the specified URL and handles common HTTP errors.
  *
  * @param url - The URL to fetch data from (can be relative or absolute)
- * @returns A promise that resolves to the JSON response from the API
+ * @returns A promise that resolves to the JSON response from the API as type T
  * @throws Will throw an error if the response status indicates a failure:
  * - 401: Unauthorized access. Prompts the user to log in.
  * - 403: Forbidden access. Indicates lack of permission.
@@ -15,7 +15,7 @@
  * - 5xx: Server error. Suggests trying again later.
  * - Other: General failure to fetch data.
  */
-export async function apiCall(url: string) {
+export async function apiCall<T = unknown>(url: string): Promise<T> {
   // Convert relative URLs to absolute URLs for server-side requests
   let absoluteUrl = url;
   if (typeof window === 'undefined' && url.startsWith('/')) {
@@ -53,5 +53,5 @@ export async function apiCall(url: string) {
     }
   }
 
-  return response.json();
+  return response.json() as Promise<T>;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Benefit } from '@/lib/types';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 const BenefitCard: React.FC<{
   icon: React.ReactNode;

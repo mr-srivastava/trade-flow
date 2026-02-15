@@ -1,9 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
-import { GET as getProductHandler } from '@/app/api/products/[id]/route';
-import { NextRequest } from 'next/server';
+import { productService } from '@/lib/services';
 import ProductDetail from '@/components/pages/ProductDetail/ProductDetails';
+import type { ProductWithRelated } from '@/lib/types';
 
 interface ProductPageProps {
   params: Promise<{
@@ -13,7 +13,14 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params;
-  const product = await fetchProductById(id);
+  const product = await productService.getProductWithRelated(id);
+
+  if (!product) {
+    return {
+      title: 'Product Not Found | Syntara',
+      description: 'The requested product could not be found.',
+    };
+  }
 
   return {
     title: `${product.name} | Trade Now at Syntara`,
@@ -23,7 +30,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-  const product = await fetchProductById(id);
+  const product: ProductWithRelated | null =
+    await productService.getProductWithRelated(id);
 
   if (!product) {
     notFound();
@@ -35,15 +43,3 @@ export default async function ProductPage({ params }: ProductPageProps) {
     </>
   );
 }
-
-// Direct API handler call for server-side rendering
-const fetchProductById = async (id: string) => {
-  // Create a mock request and params object for the API handler
-  const mockRequest = new NextRequest(
-    'http://localhost:3000/api/products/' + id
-  );
-  const response = await getProductHandler(mockRequest, {
-    params: Promise.resolve({ id }),
-  });
-  return response.json();
-};

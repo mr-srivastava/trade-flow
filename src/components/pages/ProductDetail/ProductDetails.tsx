@@ -3,7 +3,7 @@ import { ChevronLeft } from 'lucide-react';
 import NavBar from '@/components/layout/Navbar/Navbar';
 import Link from 'next/link';
 import Footer from '@/components/layout/Footer/Footer';
-import { Product } from '@/lib/types';
+import { ProductWithRelated } from '@/lib/types';
 import ReadMore from '@/components/shared/ReadMore';
 import PropertyList from '@/components/Features/product/PropertyList/PropertyList';
 import { hasHazardousMaterials } from '@/lib/utils/productHelpers';
@@ -16,7 +16,7 @@ import ProductFAQ from './ProductFAQ';
 import HelpSection from './HelpSection';
 
 interface ProductDetailProps {
-  product: Product & { relatedProducts: Array<Product> };
+  product: ProductWithRelated;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
