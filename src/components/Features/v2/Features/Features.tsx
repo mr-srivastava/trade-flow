@@ -10,7 +10,7 @@ const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
         <div className='glass-card p-8 md:p-12'>
           <div className='flex flex-col md:flex-row gap-6 items-start md:items-center mb-12'>
             <div className='bg-gradient-to-r from-syntara-primary to-syntara-accent p-3 rounded-full'>
-              <Zap className='h-6 w-6 text-foreground' />
+              <Zap className='h-6 w-6 text-white dark:text-foreground' />
             </div>
             <div>
               <h2 className='text-2xl md:text-3xl font-bold text-foreground'>
