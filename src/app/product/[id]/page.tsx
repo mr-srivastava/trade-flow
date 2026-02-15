@@ -1,9 +1,10 @@
 export const dynamic = 'force-dynamic';
 
 import { notFound } from 'next/navigation';
-import { productService } from '@/lib/services';
 import ProductDetail from '@/components/pages/ProductDetail/ProductDetails';
 import type { ProductWithRelated } from '@/lib/types';
+import { PRODUCTS_DATA } from '@/lib/data/data';
+import { getProductWithRelatedFromLocal } from '@/lib/data/adapters';
 
 interface ProductPageProps {
   params: Promise<{
@@ -13,7 +14,7 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { id } = await params;
-  const product = await productService.getProductWithRelated(id);
+  const product = getProductWithRelatedFromLocal(PRODUCTS_DATA, id);
 
   if (!product) {
     return {
@@ -30,8 +31,10 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-  const product: ProductWithRelated | null =
-    await productService.getProductWithRelated(id);
+  const product: ProductWithRelated | null = getProductWithRelatedFromLocal(
+    PRODUCTS_DATA,
+    id
+  );
 
   if (!product) {
     notFound();

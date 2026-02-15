@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCatalogue from '@/components/pages/ProductListing/ProductListing';
-import { productService } from '@/lib/services';
-import type { Product } from '@/lib/types';
+import { PRODUCTS_DATA } from '@/lib/data/data';
+import { getProductsByIndustryFromLocal } from '@/lib/data/adapters';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,21 +30,15 @@ export default async function Products({
   params: Promise<{ industry: string }>;
 }) {
   const { industry } = await params;
+  const industrySlug = decodeURIComponent(industry);
   const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 
-  try {
-    const products: Product[] = await productService.getProductsByIndustry(
-      decodeURIComponent(industry)
-    );
+  const products = getProductsByIndustryFromLocal(PRODUCTS_DATA, industrySlug);
 
-    return (
-      <ProductCatalogue
-        data={products}
-        title={`Product Catalog | ${userFriendlyIndustryName}`}
-      />
-    );
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return <div>Failed to load products. Please try again later.</div>;
-  }
+  return (
+    <ProductCatalogue
+      data={products}
+      title={`Product Catalog | ${userFriendlyIndustryName}`}
+    />
+  );
 }
