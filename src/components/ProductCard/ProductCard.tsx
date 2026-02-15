@@ -35,7 +35,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
       >
         <div className="relative aspect-video bg-muted/50">
           <div className="w-full h-full flex items-center justify-center">
-            <FlaskIcon className="h-16 w-16 text-muted-foreground/50" />
+            <FlaskIcon className="h-16 w-16 text-muted-foreground/50" aria-hidden />
           </div>
 
           <div className="absolute top-3 right-3 flex flex-col gap-2">
@@ -69,8 +69,9 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                 <Badge
                   variant="outline"
                   className="bg-warning-muted text-warning-foreground border-warning-border"
+                  aria-label="Hazard: contains chemicals"
                 >
-                  <WarningIcon className="h-3 w-3" />
+                  <WarningIcon className="h-3 w-3" aria-hidden />
                 </Badge>
               )}
             </div>
