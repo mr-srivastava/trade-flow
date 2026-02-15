@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronRight, Zap } from 'lucide-react';
 import { SynFlowData } from '@/lib/types';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 const SynFlowFeatures: React.FC<{ data: SynFlowData }> = ({ data }) => {
   return (

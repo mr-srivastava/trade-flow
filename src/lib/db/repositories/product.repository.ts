@@ -1,34 +1,17 @@
 import { Types } from 'mongoose';
 import { ProductModel } from '../models/product.model';
-import { Product, Property, FAQ } from '../../types';
+import { Product, Certificate } from '../../types';
 import { ensureConnection } from '../connection';
 
 // === TYPE DEFINITIONS FOR MONGODB DOCUMENTS ===
 
-/**
- * MongoDB document interface for Product collection
- */
-interface MongoProductDocument {
+/** MongoDB document shape derived from Product with _id and mongoose timestamps */
+interface MongoProductDocument
+  extends Omit<Product, 'id' | 'created_at' | 'updated_at' | 'certificates'> {
   _id: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
-  name: string;
-  slug_name: string;
-  hsn_no: string;
-  cas_number: string;
-  iupac_name: string;
-  molecular_formula: string;
-  description: string;
-  industries: string[];
-  properties: Property[];
-  safety_and_hazard: Property[];
-  applications: Property[];
-  certificates?: Array<{
-    name: string;
-    issued_date?: Date;
-    url: string;
-  }>;
-  faq: FAQ[];
+  certificates?: Array<Omit<Certificate, 'issued_date'> & { issued_date?: Date }>;
 }
 
 // === HELPER FUNCTIONS ===

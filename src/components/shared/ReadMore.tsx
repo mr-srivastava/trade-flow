@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../ui/button';
 

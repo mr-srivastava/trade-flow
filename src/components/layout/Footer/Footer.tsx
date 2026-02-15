@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 interface FooterData {
   logo: string;

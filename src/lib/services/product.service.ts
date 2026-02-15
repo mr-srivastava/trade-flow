@@ -1,13 +1,13 @@
 import { productRepository } from '../db/repositories/product.repository';
 import { parseIndustryToSlug } from '../utils/slug';
-import { Product, ProductsResponse, IndustryProductCountMap } from '../types';
-
-/**
- * ProductWithRelated - Product with related products
- */
-export interface ProductWithRelated extends Product {
-  relatedProducts: Product[];
-}
+import {
+  Product,
+  ProductWithRelated,
+  ProductsResponse,
+  IndustryProductCountMap,
+} from '../types';
+import type { CreateProductInput, UpdateProductInput } from '../schemas/product.schema';
+export type { ProductWithRelated } from '../types';
 
 /**
  * ProductService - Business logic layer for Product operations
@@ -89,9 +89,7 @@ export class ProductService {
   /**
    * Create a new product
    */
-  async createProduct(
-    productData: Omit<Product, 'id' | 'created_at' | 'updated_at'>
-  ): Promise<Product> {
+  async createProduct(productData: CreateProductInput): Promise<Product> {
     try {
       return await productRepository.create(productData);
     } catch (error) {
@@ -106,7 +104,7 @@ export class ProductService {
    */
   async updateProduct(
     id: string,
-    updates: Partial<Omit<Product, 'id' | 'created_at'>>
+    updates: UpdateProductInput
   ): Promise<Product | null> {
     try {
       return await productRepository.update(id, updates);

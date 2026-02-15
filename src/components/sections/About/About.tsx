@@ -1,6 +1,6 @@
 import React from 'react';
 import { AboutContent } from '@/lib/types';
-import { renderIcon } from '@/lib/utils';
+import { renderIcon } from '@/lib/utils/icons';
 
 const Header: React.FC<{ header: AboutContent['header'] }> = React.memo(
   ({ header }) => (

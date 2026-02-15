@@ -61,21 +61,3 @@ export async function ensureConnection(): Promise<typeof mongoose> {
     throw error;
   }
 }
-
-/**
- * Get the current Mongoose connection
- * Returns null if no connection has been established
- */
-export function getConnection(): typeof mongoose | null {
-  const cached = getCache();
-  return cached.conn;
-}
-
-/**
- * Check if connected to MongoDB
- * Returns true if connection is active and ready
- */
-export function isConnected(): boolean {
-  const cached = getCache();
-  return cached.conn?.connection.readyState === 1;
-}

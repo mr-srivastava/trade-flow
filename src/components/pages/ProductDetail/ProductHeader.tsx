@@ -5,7 +5,7 @@ interface ProductHeaderProps {
   industries: string[];
 }
 
-const ProductHeader: React.FC<ProductHeaderProps> = ({ name, industries }) => {
+const ProductHeader: React.FC<ProductHeaderProps> = ({ name }) => {
   return (
     <div>
       <h1 className='text-3xl lg:text-4xl font-bold text-white mb-3'>

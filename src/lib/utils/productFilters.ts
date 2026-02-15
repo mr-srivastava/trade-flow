@@ -1,5 +1,5 @@
 import { Product } from '@/lib/types';
-import { parseIndustryToSlug } from '@/lib/utils';
+import { parseIndustryToSlug } from './slug';
 
 export interface FilterCriteria {
   searchQuery: string;

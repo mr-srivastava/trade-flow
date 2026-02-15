@@ -8,7 +8,7 @@ import PlatformBenefits from '@/components/sections/PlatformBenefits/PlatformBen
 import ProductCategories from '@/components/sections/ProductCategories/ProductCategories';
 import Hero from '@/components/sections/Hero/Hero';
 import { PageContent } from '@/lib/types';
-import { contentService } from '@/lib/services';
+import { contentService, productService } from '@/lib/services';
 
 // Server action to fetch content from MongoDB
 async function fetchPageContent(): Promise<PageContent> {
@@ -66,7 +66,10 @@ async function fetchPageContent(): Promise<PageContent> {
 }
 
 export default async function Landing() {
-  const content = await fetchPageContent();
+  const [content, industries] = await Promise.all([
+    fetchPageContent(),
+    productService.getIndustryCounts().catch(() => []),
+  ]);
 
   return (
     <div className='flex flex-col min-h-screen'>
@@ -75,7 +78,10 @@ export default async function Landing() {
         <Hero content={content.hero} />
         {/* <HeroSection content={content.hero} /> */}
         <PlatformBenefits benefits={content.benefits} />
-        <ProductCategories productCategories={content.productCategories} />
+        <ProductCategories
+          productCategories={content.productCategories}
+          industries={industries}
+        />
         <AboutSection {...content.about} />
         {/* <SynFlowFeatures data={content.synFlowFeatures} /> */}
         {/* <ResourcesSection data={content.resourcesData} /> */}
