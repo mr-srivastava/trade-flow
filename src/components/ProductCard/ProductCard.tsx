@@ -60,7 +60,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
                 <Badge
                   key={i}
                   variant="secondary"
-                  className="text-xs font-normal border-neutral-300"
+                  className="text-xs font-normal border-border"
                 >
                   {industry}
                 </Badge>
@@ -68,7 +68,7 @@ export default function ProductCard({ product, className }: ProductCardProps) {
               {hasHazards && (
                 <Badge
                   variant="outline"
-                  className="bg-amber-50 text-amber-700 border-amber-200"
+                  className="bg-warning-muted text-warning-foreground border-warning-border"
                 >
                   <AlertTriangle className="h-3 w-3" />
                 </Badge>

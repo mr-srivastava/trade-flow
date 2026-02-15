@@ -1,9 +1,14 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import DottedMap from 'dotted-map';
 import React from 'react';
+
+function getCssVar(name: string): string {
+  if (typeof document === 'undefined') return '';
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '';
+}
 
 interface MapProps {
   dots?: Array<{
@@ -38,22 +43,36 @@ const AnimatedDot = React.memo(({ x, y, color }: { x: number; y: number; color: 
 
 AnimatedDot.displayName = 'AnimatedDot';
 
-function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
+function WorldMap({ dots = [], lineColor: lineColorProp }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [themeColors, setThemeColors] = useState({
+    primaryHex: '#2563eb',
+    backgroundHex: '#121620',
+    mapDotFill: 'rgba(255, 255, 255, 0.25)',
+  });
+
+  useEffect(() => {
+    const primaryHex = getCssVar('--primary-hex') || '#2563eb';
+    const backgroundHex = getCssVar('--syntara-dark-hex') || '#121620';
+    const mapDotFill = getCssVar('--map-dot-fill') || 'rgba(255, 255, 255, 0.25)';
+    setThemeColors({ primaryHex, backgroundHex, mapDotFill });
+  }, []);
+
+  const lineColor = lineColorProp || themeColors.primaryHex;
 
   // Optimize map creation with reduced detail for better performance
   const map = useMemo(() => new DottedMap({ height: 80, grid: 'diagonal' }), []);
 
-  // Cache the SVG string to avoid regeneration
+  // Cache the SVG string to avoid regeneration (uses theme colors from globals.css)
   const svgString = useMemo(
     () =>
       map.getSVG({
         radius: 0.22,
-        color: '#FFFFFF40',
+        color: themeColors.mapDotFill,
         shape: 'circle',
-        backgroundColor: '#121620',
+        backgroundColor: themeColors.backgroundHex,
       }),
-    [map],
+    [map, themeColors.mapDotFill, themeColors.backgroundHex],
   );
 
   // Memoize processed dots to avoid recalculating on every render

@@ -18,37 +18,37 @@ const COMPANY_LINKS = [
 
 export default function Footer() {
   return (
-    <footer id="footer" className="relative bg-neutral-900/95 pt-24 pb-12">
+    <footer id="footer" className="relative bg-secondary/95 pt-24 pb-12">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <a
               href="#"
-              className="text-2xl font-bold group text-white transition-colors duration-300"
+              className="text-2xl font-bold group text-foreground transition-colors duration-300"
             >
-              <span className="group-hover:text-brand">Trade</span>
-              <span className="text-brand group-hover:text-white">Flow</span>
+              <span className="group-hover:text-primary">Trade</span>
+              <span className="text-primary group-hover:text-foreground">Flow</span>
             </a>
-            <p className="text-slate-400">
+            <p className="text-muted-foreground">
               Transforming global trade operations with innovative software
               solutions.
             </p>
             <div className="flex space-x-4">
               <Link
                 href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Facebook />
               </Link>
               <Link
                 href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Twitter />
               </Link>
               <Link
                 href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
               >
                 <Linkedin />
               </Link>
@@ -56,13 +56,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-slate-50 mb-6">Product</h3>
+            <h3 className="text-lg font-bold text-card-foreground mb-6">Product</h3>
             <ul className="space-y-4">
               {PRODUCT_LINKS.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300"
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -72,13 +72,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-slate-50 mb-6">Company</h3>
+            <h3 className="text-lg font-bold text-card-foreground mb-6">Company</h3>
             <ul className="space-y-4">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300"
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -88,18 +88,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Stay Updated</h3>
+            <h3 className="text-lg font-bold text-foreground mb-6">Stay Updated</h3>
             <form className="space-y-4">
               <input
                 type="email"
                 name="email"
                 autoComplete="email"
                 placeholder="Enter your email…"
-                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white placeholder-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:border-brand transition-colors duration-300"
+                className="w-full px-4 py-2 bg-muted border border-border rounded-lg text-foreground placeholder-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary transition-colors duration-300"
               />
               <button
                 type="submit"
-                className="w-full px-4 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-opacity-50 shadow-lg hover:shadow-xl"
+                className="w-full px-4 py-2 rounded-lg text-primary-foreground bg-gradient-to-r from-primary to-brand font-semibold transition-all duration-300 hover:from-primary/90 hover:to-brand-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-opacity-50 shadow-lg hover:shadow-xl"
               >
                 Subscribe
               </button>
@@ -107,27 +107,27 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
+        <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-neutral-500 text-sm">
+            <div className="text-muted-foreground text-sm">
               © 2024 TradeFlow. All rights reserved.
             </div>
             <div className="flex gap-6 text-sm">
               <a
                 href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Privacy Policy
               </a>
               <a
                 href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Terms of Service
               </a>
               <a
                 href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 Cookie Policy
               </a>
