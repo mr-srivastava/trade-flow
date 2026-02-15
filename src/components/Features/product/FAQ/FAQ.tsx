@@ -25,7 +25,7 @@ function FAQItem({ faq, index }: { faq: Product['faq'][number]; index: number })
       <AccordionTrigger className="text-base font-medium transition-colors py-2">
         {faq.question}
       </AccordionTrigger>
-      <AccordionContent className="text-neutral-300 pt-2 pb-4 leading-relaxed">
+      <AccordionContent className="text-muted-foreground pt-2 pb-4 leading-relaxed">
         <p className="whitespace-pre-line">{faq.answer}</p>
       </AccordionContent>
     </AccordionItem>

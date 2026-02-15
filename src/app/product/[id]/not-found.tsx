@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
+import { CaretLeftIcon } from '@phosphor-icons/react/ssr';
 
 import { Button } from '@/components/ui/button';
 import NavBar from '@/components/layout/Navbar/Navbar';
@@ -25,7 +25,7 @@ export default function ProductNotFound() {
               href='/products'
               className='flex items-center text-syntara-light hover:text-syntara-primary transition mb-6'
             >
-              <ChevronLeft className='h-4 w-4 mr-1' />
+              <CaretLeftIcon className='h-4 w-4 mr-1' />
               {noProductFoundText.backToProducts}
             </Link>
             <div className='glass-card p-12 text-center'>

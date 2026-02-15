@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Send } from 'lucide-react';
+import { PaperPlaneRightIcon } from '@phosphor-icons/react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -52,7 +52,7 @@ const ContactForm: React.FC = () => {
   return (
     <div className='lg:col-span-3'>
       <div className='glass-card p-6'>
-        <h3 className='text-xl font-medium mb-6 text-white'>Send us a Message</h3>
+        <h3 className='text-xl font-medium mb-6 text-foreground'>Send us a Message</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -70,7 +70,7 @@ const ContactForm: React.FC = () => {
                         placeholder='Your name…'
                         autoComplete='name'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
+                        className='w-full bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -90,7 +90,7 @@ const ContactForm: React.FC = () => {
                         placeholder='your.email@company.com'
                         autoComplete='email'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
+                        className='w-full bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -110,7 +110,7 @@ const ContactForm: React.FC = () => {
                     <Input
                       placeholder='How can we help you?…'
                       {...field}
-                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
+                      className='w-full bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary'
                     />
                   </FormControl>
                   <FormMessage />
@@ -128,7 +128,7 @@ const ContactForm: React.FC = () => {
                   <FormControl>
                     <Textarea
                       placeholder='Please provide details about your inquiry…'
-                      className='w-full bg-syntara-darker border border-border rounded-md text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary resize-none'
+                      className='w-full bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-syntara-primary focus-visible:border-syntara-primary resize-none'
                       rows={3}
                       {...field}
                     />
@@ -144,7 +144,7 @@ const ContactForm: React.FC = () => {
               type='submit'
               className='btn-primary flex items-center gap-2 w-full justify-center'
             >
-              Send Message <Send className='h-4 w-4' />
+              Send Message <PaperPlaneRightIcon className='h-4 w-4' />
             </Button>
           </form>
         </Form>

@@ -4,7 +4,7 @@
 
 @layer utilities {
   .bg-syntara-dark {
-    background-color: #121620;
+    background-color: hsl(var(--syntara-dark));
   }
   .text-foreground {
     color: hsl(var(--foreground));
@@ -16,7 +16,7 @@
     background-color: hsl(var(--primary));
   }
   .to-syntara-darker {
-    --tw-gradient-to: #0b0e14;
+    --tw-gradient-to: hsl(var(--syntara-darker));
   }
 }
 
@@ -40,7 +40,8 @@
     --muted: 217 20% 15%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 226 83% 53%;
+    /* Accent: distinct from primary (links, secondary actions). Cyan. */
+    --accent: 187 85% 53%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
@@ -51,6 +52,85 @@
     --ring: 221 83% 53%;
 
     --radius: 0.5rem;
+
+    /* Syntara / layout (HSL for Tailwind, hex for JS/SVG where needed) */
+    --syntara-dark: 220 20% 9%;
+    --syntara-darker: 220 25% 5%;
+    --syntara-dark-hex: #121620;
+    --syntara-darker-hex: #0b0e14;
+
+    /* Brand (alias for primary, with hover) */
+    --brand: 221 83% 53%;
+    --brand-hover: 200 85% 43%;
+    --primary-hex: #2563eb;
+
+    /* Semantic: warning (e.g. hazard badge) — foreground darkened for WCAG AA on warning bg */
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 18%;
+    --warning-muted: 38 60% 92%;
+    --warning-border: 38 92% 60%;
+
+    /* Semantic: success (e.g. form success, toasts) */
+    --success: 142 71% 45%;
+    --success-foreground: 142 71% 98%;
+
+    /* Semantic: info (neutral/informational states) */
+    --info: 199 89% 48%;
+    --info-foreground: 199 89% 98%;
+
+    /* One-off UI (defined here so components don’t inline) */
+    --logo-glow: 221 90% 67%;
+    --logo-react-glow: 193 95% 68%;
+    --read-the-docs: 215 10% 53%;
+    --map-dot-fill: rgba(255, 255, 255, 0.25);
+  }
+
+  /* Light theme: apply when class="light" on html */
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 220 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 12%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 12%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 187 85% 53%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
+
+    --syntara-dark: 220 14% 96%;
+    --syntara-darker: 220 10% 93%;
+    --syntara-dark-hex: #f1f3f5;
+    --syntara-darker-hex: #e6e9ec;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 18%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 142 71% 98%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 199 89% 98%;
+
+    --read-the-docs: 220 10% 40%;
+    --map-dot-fill: rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -60,10 +140,19 @@
   }
 
   body {
-    @apply bg-syntara-dark text-foreground font-sans;
-    background-image: linear-gradient(to bottom, rgba(18, 22, 32, 0.99), rgba(11, 14, 20, 0.99)),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    @apply bg-background text-foreground font-sans;
     scroll-behavior: smooth;
+  }
+
+  .dark body,
+  :root:not(.light) body {
+    background-image: linear-gradient(to bottom, hsl(var(--syntara-dark) / 0.99), hsl(var(--syntara-darker) / 0.99)),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .light body {
+    background-color: hsl(var(--background));
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 
   h1,
@@ -89,7 +178,7 @@
   }
 
   .btn-primary {
-    @apply bg-syntara-primary hover:bg-syntara-primary/90 text-white rounded-md px-6 py-2.5 font-medium transition duration-200;
+    @apply bg-syntara-primary hover:bg-syntara-primary/90 text-primary-foreground rounded-md px-6 py-2.5 font-medium transition duration-200;
   }
 
   .btn-outline {
@@ -116,10 +205,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em hsl(var(--logo-glow) / 0.67));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em hsl(var(--logo-react-glow) / 0.67));
 }
 
 @keyframes logo-spin {
@@ -142,7 +231,7 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: hsl(var(--read-the-docs));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -40,7 +40,7 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: string }>
           <Link
             key={item.name}
             href={item.href}
-            className='text-syntara-light hover:text-white font-medium transition-colors link-hover py-1'
+            className='text-syntara-light hover:text-foreground font-medium transition-colors link-hover py-1'
           >
             {item.name}
           </Link>
@@ -50,7 +50,7 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: string }>
     <div className='hidden md:flex items-center space-x-4'>
       <Link
         href='/#about'
-        className='px-4 py-2 text-syntara-light hover:text-white text-sm font-medium transition duration-150'
+        className='px-4 py-2 text-syntara-light hover:text-foreground text-sm font-medium transition duration-150'
       >
         About Us
       </Link>
@@ -65,14 +65,20 @@ const DesktopMenu: React.FC<{ menuItems: Array<MenuItem>; contactHref: string }>
 );
 
 // Server Component - most of the navbar
-export const NavBarContent: React.FC<{ contactHref: string }> = ({ contactHref }) => {
+export const NavBarContent: React.FC<{
+  contactHref: string;
+  rightSlot?: React.ReactNode;
+}> = ({ contactHref, rightSlot }) => {
   return (
-    <nav className='sticky top-0 z-50 bg-syntara-darker/90 backdrop-blur-md border-b border-border/50'>
+    <nav className='sticky top-0 z-50 bg-card/95 dark:bg-syntara-darker/90 backdrop-blur-md border-b border-border/50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <Logo text='Syntara' />
-          <DesktopMenu menuItems={menuItems} contactHref={contactHref} />
-          <MobileMenu menuItems={menuItems} contactHref={contactHref} />
+          <div className='flex items-center gap-2'>
+            <DesktopMenu menuItems={menuItems} contactHref={contactHref} />
+            {rightSlot}
+            <MobileMenu menuItems={menuItems} contactHref={contactHref} />
+          </div>
         </div>
       </div>
     </nav>

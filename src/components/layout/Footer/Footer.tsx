@@ -43,11 +43,11 @@ const footerData: FooterData = {
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-syntara-darker pt-16 pb-8 border-t border-border/50'>
+    <footer className='bg-card dark:bg-syntara-darker pt-16 pb-8 border-t border-border/50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
-            <h3 className='text-xl font-bold text-white mb-6'>
+            <h3 className='text-xl font-bold text-foreground mb-6'>
               {footerData.logo}
             </h3>
             <p className='text-syntara-light/70 mb-6 text-sm'>
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
+                  className='bg-muted dark:bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
                 >
                   {renderIcon(
                     social.icon,
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-white mb-4'>Quick Links</h4>
+            <h4 className='text-lg font-medium text-foreground mb-4'>Quick Links</h4>
             <ul className='space-y-3'>
               {footerData.quickLinks.map((link) => (
                 <li key={link.name}>
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-white mb-4'>Products</h4>
+            <h4 className='text-lg font-medium text-foreground mb-4'>Products</h4>
             <ul className='space-y-3'>
               {footerData.products.map((product) => (
                 <li key={product.name}>
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-white mb-4'>Contact</h4>
+            <h4 className='text-lg font-medium text-foreground mb-4'>Contact</h4>
             <ul className='space-y-3'>
               {footerData.contact.map(({ key, icon, content, href }) => (
                 <li key={key} className='flex items-center gap-3'>

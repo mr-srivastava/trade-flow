@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { CaretLeftIcon } from '@phosphor-icons/react/ssr';
 import NavBar from '@/components/layout/Navbar/Navbar';
 import Link from 'next/link';
 import Footer from '@/components/layout/Footer/Footer';
@@ -24,7 +24,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
     if (!product) {
       return (
         <div className='text-center py-16'>
-          <h1 className='text-2xl font-bold text-white mb-4'>
+          <h1 className='text-2xl font-bold text-foreground mb-4'>
             Product Not Found
           </h1>
           <p className='text-syntara-light/80 mb-6'>
@@ -46,7 +46,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
           href='/products'
           className='flex items-center text-syntara-light hover:text-syntara-primary transition mb-6'
         >
-          <ChevronLeft className='h-4 w-4 mr-1' />
+          <CaretLeftIcon className='h-4 w-4 mr-1' />
           Back to products
         </Link>
 
@@ -65,7 +65,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
           {product.description && product.description !== '#N/A' && (
             <div className='mb-6'>
-              <h2 className='text-xl font-semibold text-white mb-3'>
+              <h2 className='text-xl font-semibold text-foreground mb-3'>
                 Description
               </h2>
               <ReadMore content={product.description} />

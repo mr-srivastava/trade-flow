@@ -14,7 +14,7 @@ const nextConfig = {
   },
   experimental: {
     // optimizePackageImports is still experimental in Next.js 15
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: ['@phosphor-icons/react'],
   },
 };
 

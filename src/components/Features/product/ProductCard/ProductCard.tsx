@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { WarningIcon } from '@phosphor-icons/react/ssr';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import { ProductWithOptionalId } from '@/lib/types';
@@ -14,9 +14,9 @@ const ProductCard: React.FC<{ product: ProductWithOptionalId }> = ({ product }) 
 
   return (
     <Link href={`/product/${productId}`}>
-      <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-colors transition-shadow duration-300 group'>
+      <Card className='h-full overflow-hidden bg-card dark:bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-colors transition-shadow duration-300 group'>
         <CardContent className='p-4'>
-          <h3 className='text-xl font-semibold text-white group-hover:text-syntara-primary transition-colors'>
+          <h3 className='text-xl font-semibold text-foreground group-hover:text-syntara-primary transition-colors'>
             {product.name}
           </h3>
 
@@ -32,7 +32,7 @@ const ProductCard: React.FC<{ product: ProductWithOptionalId }> = ({ product }) 
               </div>
               {hasHazards && (
                 <div className='flex items-center text-amber-500/90'>
-                  <AlertTriangle className='h-3 w-3 mr-1' />
+                  <WarningIcon className='h-3 w-3 mr-1' />
                   <span className='text-xs'>Hazardous</span>
                 </div>
               )}

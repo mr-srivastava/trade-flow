@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { HeroContent } from '@/lib/types';
 
 const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
@@ -8,7 +8,7 @@ const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
       <div className='section-container'>
         <div className='glass-card p-8 md:p-12 animate-fade-in'>
           <div className='max-w-4xl'>
-            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight'>
+            <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight'>
               {content.heading}
             </h1>
             <p className='text-lg md:text-xl text-syntara-light/90 mb-8 max-w-3xl'>
@@ -19,7 +19,7 @@ const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
                 href={content.buttons.contact.href}
                 className='btn-primary flex items-center justify-center gap-2'
               >
-                {content.buttons.contact.text} <ArrowRight className='h-4 w-4' />
+                {content.buttons.contact.text} <ArrowRightIcon className='h-4 w-4' />
               </a>
               <a
                 href={content.buttons.explore.href}
@@ -32,8 +32,8 @@ const HeroSection: React.FC<{ content: HeroContent }> = ({ content }) => {
         </div>
 
         <div className='mt-12 glass-card p-6 md:p-8'>
-          <h2 className='text-xl md:text-2xl font-medium mb-4 text-white'>{content.stats.title}</h2>
-          <div className='bg-syntara-darker/50 rounded-lg p-4 border border-border/25'>
+          <h2 className='text-xl md:text-2xl font-medium mb-4 text-foreground'>{content.stats.title}</h2>
+          <div className='bg-card/80 dark:bg-syntara-darker/50 rounded-lg p-4 border border-border/25'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
               {content.stats.items.map((stat, index) => (
                 <div key={index} className='flex flex-col items-center p-4'>

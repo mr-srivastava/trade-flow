@@ -57,12 +57,30 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        brand: {
+          DEFAULT: 'hsl(var(--brand))',
+          hover: 'hsl(var(--brand-hover))',
+        },
         syntara: {
-          dark: '#121620', // Very dark blue/black
-          darker: '#0b0e14', // Almost black
-          primary: '#2563eb', // Blue
-          accent: '#6366f1', // Indigo
-          light: '#e2e8f0', // Light gray with a hint of blue
+          dark: 'hsl(var(--syntara-dark))',
+          darker: 'hsl(var(--syntara-darker))',
+          primary: 'hsl(var(--primary))',
+          accent: 'hsl(var(--accent))',
+          light: 'hsl(var(--muted-foreground))',
+        },
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))',
+          muted: 'hsl(var(--warning-muted))',
+          border: 'hsl(var(--warning-border))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          foreground: 'hsl(var(--info-foreground))',
         },
       },
       borderRadius: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search } from 'lucide-react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { Input } from '@/components/ui/input';
 
 interface SearchBarProps {
@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <form onSubmit={onSubmit} className='relative flex-grow' role='search'>
-      <Search className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' aria-hidden />
+      <MagnifyingGlassIcon className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' aria-hidden />
       <Input
         id='product-search'
         type='search'
@@ -23,7 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         autoComplete='off'
         aria-label='Search products by name, CAS number, or formula'
         placeholder='Search by name, CAS, formula…'
-        className='w-full pl-10 py-2.5 placeholder:text-syntara-light/50 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary/50'
+        className='w-full pl-10 py-2.5 placeholder:text-muted-foreground bg-card dark:bg-syntara-darker border border-border rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-syntara-primary/50'
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
       />

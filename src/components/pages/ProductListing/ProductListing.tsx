@@ -54,7 +54,7 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
       <main className='flex-grow'>
         <div className='section-container pt-8 pb-16'>
           <header className='mb-8'>
-            <h1 className='text-3xl md:text-4xl font-bold text-white mb-6'>
+            <h1 className='text-3xl md:text-4xl font-bold text-foreground mb-6'>
               {title}
             </h1>
             <SearchAndFilter

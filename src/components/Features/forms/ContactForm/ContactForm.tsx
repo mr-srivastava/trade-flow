@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
+import { CircleNotchIcon } from '@phosphor-icons/react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import { cn } from '@/lib/utils/cn';
 
 const formSchema = z.object({
@@ -87,8 +87,6 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
 
   return (
     <>
-      <Toaster position='bottom-left' richColors />
-
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button
@@ -205,7 +203,7 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                   className='rounded-md'
                 >
                   {isSubmitting && (
-                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    <CircleNotchIcon className='mr-2 h-4 w-4 animate-spin' />
                   )}
                   Submit Inquiry
                 </Button>

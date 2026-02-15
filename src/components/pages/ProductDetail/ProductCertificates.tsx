@@ -14,7 +14,7 @@ const ProductCertificates: React.FC<ProductCertificatesProps> = ({
 }) => {
   return (
     <div className='mb-6'>
-      <h2 className='text-xl font-semibold text-white mb-3'>
+      <h2 className='text-xl font-semibold text-foreground mb-3'>
         Certificates & Documentation
       </h2>
       {certificates && certificates.length > 0 ? (

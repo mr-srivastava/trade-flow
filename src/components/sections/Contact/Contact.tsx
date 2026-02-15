@@ -25,11 +25,11 @@ const ContactSection: React.FC = () => {
   return (
     <section
       id='contact'
-      className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'
+      className='py-4 bg-gradient-to-b from-card to-background dark:from-syntara-darker dark:to-syntara-dark'
     >
       <div className='section-container'>
         <div className='text-center mb-12'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-white'>
+          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-foreground'>
             Contact Us
           </h2>
           <p className='text-syntara-light/80 max-w-2xl mx-auto'>
@@ -41,7 +41,7 @@ const ContactSection: React.FC = () => {
         <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
           <div className='lg:col-span-2 space-y-6'>
             <div className='glass-card p-6'>
-              <h3 className='text-xl font-medium mb-6 text-white'>
+              <h3 className='text-xl font-medium mb-6 text-foreground'>
                 Get in Touch
               </h3>
 
@@ -58,7 +58,7 @@ const ContactSection: React.FC = () => {
                       <h4 className='text-sm font-medium text-syntara-light'>
                         {detail.title}
                       </h4>
-                      <p className='text-white'>{detail.content}</p>
+                      <p className='text-foreground'>{detail.content}</p>
                       {detail.subContent && (
                         <p className='text-syntara-light/80 text-sm'>
                           {detail.subContent}
