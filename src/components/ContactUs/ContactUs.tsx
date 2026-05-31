@@ -11,7 +11,7 @@ const contactDetails = [
   {
     icon: 'Phone',
     title: 'Phone',
-    content: '9804835919',
+    content: '+919804835919',
   },
   {
     icon: 'MapPin',
