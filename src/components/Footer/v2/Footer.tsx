@@ -36,7 +36,7 @@ const footerData: FooterData = {
   contact: [
     { key: 'location', icon: 'Globe', content: 'Kolkata, India' },
     { key: 'mail', icon: 'Mail', content: 'mmg.exim30@gmail.com', href: 'mailto:mmg.exim30@gmail.com' },
-    { key: 'phone', icon: 'Phone', content: '+919804835919', href: 'tel:+919804835919' },
+    { key: 'phone', icon: 'Phone', content: '+91+91 980483591935919', href: 'tel:+91+91 980483591935919' },
   ],
 };
 

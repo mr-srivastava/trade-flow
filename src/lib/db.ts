@@ -20,7 +20,12 @@ function createPool(): Pool {
   return new Pool({
     connectionString,
     ssl: { rejectUnauthorized: false },
-    max: 10,
+    // Keep the client-side pool small: we connect through Supabase's
+    // transaction-mode pooler (port 6543), which multiplexes queries over a
+    // limited number of server connections. A large `max` here can exhaust the
+    // pooler ("max clients reached"). Also recycle idle connections promptly.
+    max: 5,
+    idleTimeoutMillis: 10_000,
   });
 }
 
