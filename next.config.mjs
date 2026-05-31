@@ -8,14 +8,6 @@ const nextConfig = {
       },
     ],
   },
-  compiler: {
-    // Remove console.log in production
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  experimental: {
-    // optimizePackageImports is still experimental in Next.js 15
-    optimizePackageImports: ['@phosphor-icons/react'],
-  },
 };
 
 export default nextConfig;

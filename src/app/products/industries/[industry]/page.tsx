@@ -1,22 +1,27 @@
 import React from 'react';
-import ProductCatalogue from '@/components/pages/ProductListing/ProductListing';
-import { productService } from '@/lib/services';
-import type { Product } from '@/lib/types';
+import ProductCatalogue from '@/components/Listing/v2/Listing';
+import urlMap from '@/lib/endpoint';
+import { apiCall } from '@/lib/api';
+import { Product } from '@/lib/types';
 
-export const dynamic = 'force-dynamic';
+// Cached/revalidated hourly, consistent with the product API and apiCall.
+export const revalidate = 60;
 
+// Utility function to convert industry name to a user-friendly format
 const parseToUserFriendlyName = (name: string): string =>
   decodeURIComponent(name)
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ industry: string }>;
-}) {
-  const { industry } = await params;
-  const userFriendlyIndustryName = parseToUserFriendlyName(industry);
+// Fetch products by industry
+const fetchProductsByIndustry = async (industry: string): Promise<Product[]> => {
+  const url = urlMap.getProductsByIndustry(industry);
+  return apiCall(url);
+};
+
+// Generate metadata dynamically
+export async function generateMetadata({ params }: { params: { industry: string } }) {
+  const userFriendlyIndustryName = parseToUserFriendlyName(params.industry);
 
   return {
     title: `Products in ${userFriendlyIndustryName} Industry`,
@@ -24,24 +29,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function Products({
-  params,
-}: {
-  params: Promise<{ industry: string }>;
-}) {
-  const { industry } = await params;
+// Main component
+export default async function Products({ params }: { params: { industry: string } }) {
+  const { industry } = params;
   const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 
   try {
-    const products: Product[] = await productService.getProductsByIndustry(
-      decodeURIComponent(industry)
-    );
+    const products = await fetchProductsByIndustry(decodeURIComponent(industry));
 
     return (
-      <ProductCatalogue
-        data={products}
-        title={`Product Catalog | ${userFriendlyIndustryName}`}
-      />
+      <ProductCatalogue data={products} title={`Product Catalog | ${userFriendlyIndustryName}`} />
     );
   } catch (error) {
     console.error('Error fetching products:', error);

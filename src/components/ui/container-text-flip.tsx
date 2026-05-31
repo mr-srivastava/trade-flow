@@ -2,7 +2,7 @@
 
 import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils/cn';
+import { cn } from '@/lib/utils';
 
 export interface ContainerTextFlipProps {
   words?: string[];
@@ -55,7 +55,7 @@ export function ContainerTextFlip({
         transition: { duration: animationDuration / 2000 },
       })}
       className={cn(
-        'relative inline-block rounded-lg pt-2 pb-3 text-center text-4xl font-bold text-foreground md:text-7xl',
+        'relative inline-block rounded-lg pt-2 pb-3 text-center text-4xl font-bold text-black md:text-7xl dark:text-white',
         className,
       )}
       key={currentWord}

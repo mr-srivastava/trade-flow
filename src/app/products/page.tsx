@@ -1,13 +1,21 @@
 import React from 'react';
-import ProductCatalogue from '@/components/pages/ProductListing/ProductListing';
-import { productService } from '@/lib/services';
+import ProductCatalogue from '@/components/Listing/v2/Listing';
+import urlMap from '@/lib/endpoint';
+import { apiCall } from '@/lib/api';
 
-export const dynamic = 'force-dynamic';
+// Cached/revalidated hourly, consistent with the product API and apiCall.
+export const revalidate = 60;
 
-// Server-side rendering using ProductService directly
+// Extract API call logic into a separate utility function
+const fetchProducts = async () => {
+  const url = urlMap.getProducts();
+  return apiCall(url);
+};
+
+// Separate the data-fetching logic from the component
 export default async function Products() {
   try {
-    const { products } = await productService.getAllProducts();
+    const { products } = await fetchProducts();
     return <ProductCatalogue data={products} />;
   } catch (error) {
     console.error('Error fetching products:', error);
