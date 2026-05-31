@@ -1,59 +1,39 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { productService } from '@/lib/services';
-import { createProductSchema } from '@/lib/schemas';
-import { isAuthorizedAdmin } from '@/lib/utils/auth';
-import { z } from 'zod';
+import { query } from '@/lib/db';
+import { rowToProduct, type ProductRow } from '@/lib/mappers';
 
-// GET /api/products - Get all products
+// Cached/revalidated hourly — product data changes rarely (see caching strategy).
+export const revalidate = 60;
+
 export async function GET() {
   try {
-    const productsResponse = await productService.getAllProducts();
-    return NextResponse.json(productsResponse);
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch products' },
-      { status: 500 }
+    // Listing needs the light columns + description & safety_and_hazard (for the
+    // card preview and hazard badge), so we LEFT JOIN only those two detail fields.
+    const rows = await query<ProductRow>(
+      `select
+         p.id, p.name, p.cas_number, p.molecular_formula, p.categories,
+         p.industries, p.sub_categories, p.product_images, p.is_exclusive,
+         d.description, d.safety_and_hazard
+       from products p
+       left join product_details d on d.product_id = p.id
+       order by p.name`,
     );
-  }
-}
 
-// POST /api/products - Create a new product (admin only)
-export async function POST(request: NextRequest) {
-  try {
-    // Check admin authorization
-    const authHeader = request.headers.get('authorization');
-    if (!isAuthorizedAdmin(authHeader)) {
-      return NextResponse.json(
-        { error: 'Unauthorized - Admin access required' },
-        { status: 401 }
-      );
-    }
-
-    // Parse and validate request body
-    const body = await request.json();
-    const validatedData = createProductSchema.parse(body);
-
-    // Create the product
-    const newProduct = await productService.createProduct(validatedData);
-
-    return NextResponse.json(newProduct, { status: 201 });
-  } catch (error) {
-    console.error('Error creating product:', error);
-
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          error: 'Validation failed',
-          details: error.errors,
-        },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      { error: 'Failed to create product' },
-      { status: 500 }
+    const countRows = await query<{ count: string }>(
+      `select count(*)::text as count from products`,
     );
+    const totalProducts = Number(countRows[0]?.count ?? rows.length);
+
+    const products = rows.map((row) => rowToProduct(row));
+
+    return new Response(JSON.stringify({ total_products: totalProducts, products }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    console.error('GET /api/products failed:', error);
+    return new Response(JSON.stringify({ error: 'Failed to fetch products' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }

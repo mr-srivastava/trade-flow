@@ -20,8 +20,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        heading: ['var(--font-montserrat)', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+        heading: ['Montserrat', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -57,30 +57,12 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        brand: {
-          DEFAULT: 'hsl(var(--brand))',
-          hover: 'hsl(var(--brand-hover))',
-        },
         syntara: {
-          dark: 'hsl(var(--syntara-dark))',
-          darker: 'hsl(var(--syntara-darker))',
-          primary: 'hsl(var(--primary))',
-          accent: 'hsl(var(--accent))',
-          light: 'hsl(var(--muted-foreground))',
-        },
-        warning: {
-          DEFAULT: 'hsl(var(--warning))',
-          foreground: 'hsl(var(--warning-foreground))',
-          muted: 'hsl(var(--warning-muted))',
-          border: 'hsl(var(--warning-border))',
-        },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
-        },
-        info: {
-          DEFAULT: 'hsl(var(--info))',
-          foreground: 'hsl(var(--info-foreground))',
+          dark: '#ffffff', // Page surface (light theme)
+          darker: '#f1f5f9', // Slightly tinted surface for cards/inputs/nav
+          primary: '#2563eb', // Blue
+          accent: '#6366f1', // Indigo
+          light: '#334155', // Primary text color on light surfaces (slate-700)
         },
       },
       borderRadius: {
