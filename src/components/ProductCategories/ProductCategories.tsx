@@ -1,14 +1,9 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
-import urlMap from '@/lib/endpoint';
-import { apiCall, parseIndustryToSlug } from '@/lib/api';
+import { getIndustryCounts } from '@/lib/products';
+import { parseIndustryToSlug } from '@/lib/api';
 import Link from 'next/link';
-
-const fetchIndustries = async () => {
-  const url = urlMap.getIndustriesProductCount();
-  return apiCall(url);
-};
 
 // Categories hidden from the UI (kept in code/data, just not displayed).
 const HIDDEN_CATEGORIES = ['Beauty & Personal Care', 'Flavors & Fragrances', 'Food & Nutrition'];
@@ -16,7 +11,7 @@ const HIDDEN_CATEGORIES = ['Beauty & Personal Care', 'Flavors & Fragrances', 'Fo
 const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> = async ({
   productCategories,
 }) => {
-  const allIndustries = await fetchIndustries();
+  const allIndustries = await getIndustryCounts();
   const industries = allIndustries.filter(
     (industry: IndustryProductCountMap) => !HIDDEN_CATEGORIES.includes(industry.name),
   );

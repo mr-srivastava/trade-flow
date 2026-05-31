@@ -3,11 +3,12 @@ import { Product } from '@/lib/types';
 import { FilterCategory } from './FilterCategory';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { parseIndustryToSlug } from '@/lib/api';
 
 function getFilterData(products: Array<Product>) {
   const mapToFilterItems = (items: string[]) =>
     Array.from(new Set(items)).map((item) => ({
-      id: item.toLowerCase().replace(/\s+/g, '-'),
+      id: parseIndustryToSlug(item),
       label: item,
     }));
 

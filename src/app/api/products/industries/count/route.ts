@@ -1,22 +1,10 @@
-import { query } from '@/lib/db';
-import { IndustryProductCountMap } from '@/lib/types';
+import { getIndustryCounts } from '@/lib/products';
 
 export const revalidate = 60;
 
 export async function GET() {
   try {
-    const rows = await query<{ name: string; count: string }>(
-      `select industry as name, count(*)::text as count
-       from products, unnest(industries) as industry
-       where industry is not null and industry <> ''
-       group by industry
-       order by count(*) desc`,
-    );
-
-    const industries: Array<IndustryProductCountMap> = rows.map((r) => ({
-      name: r.name,
-      count: Number(r.count),
-    }));
+    const industries = await getIndustryCounts();
 
     return new Response(JSON.stringify(industries), {
       status: 200,

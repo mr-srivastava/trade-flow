@@ -91,9 +91,9 @@ export const pageContent: PageContent = {
     ],
   },
   productCategories: {
-    title: 'Product Categories',
+    title: 'Browse by Industry',
     subtitle: 'Entry Point to Products',
-    buttonText: 'View All Product Categories',
+    buttonText: 'View All Products',
   },
   synFlowFeatures: {
     features: [
