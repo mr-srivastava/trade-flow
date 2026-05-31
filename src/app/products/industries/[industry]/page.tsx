@@ -1,23 +1,16 @@
 import React from 'react';
 import ProductCatalogue from '@/components/Listing/v2/Listing';
-import urlMap from '@/lib/endpoint';
-import { apiCall } from '@/lib/api';
-import { Product } from '@/lib/types';
+import { getProductsByIndustrySlug } from '@/lib/products';
 
-// Cached/revalidated hourly, consistent with the product API and apiCall.
+// Read page: cached/revalidated hourly. Now valid since we query the DB
+// directly (no `headers()` / self-fetch to conflict with ISR).
 export const revalidate = 60;
 
-// Utility function to convert industry name to a user-friendly format
+// Utility function to convert industry slug to a user-friendly format
 const parseToUserFriendlyName = (name: string): string =>
   decodeURIComponent(name)
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (char) => char.toUpperCase());
-
-// Fetch products by industry
-const fetchProductsByIndustry = async (industry: string): Promise<Product[]> => {
-  const url = urlMap.getProductsByIndustry(industry);
-  return apiCall(url);
-};
 
 // Generate metadata dynamically
 export async function generateMetadata({ params }: { params: { industry: string } }) {
@@ -34,14 +27,9 @@ export default async function Products({ params }: { params: { industry: string 
   const { industry } = params;
   const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 
-  try {
-    const products = await fetchProductsByIndustry(decodeURIComponent(industry));
+  const products = await getProductsByIndustrySlug(decodeURIComponent(industry));
 
-    return (
-      <ProductCatalogue data={products} title={`Product Catalog | ${userFriendlyIndustryName}`} />
-    );
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    return <div>Failed to load products. Please try again later.</div>;
-  }
+  return (
+    <ProductCatalogue data={products} title={`Product Catalog | ${userFriendlyIndustryName}`} />
+  );
 }
