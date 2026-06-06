@@ -11,7 +11,7 @@ export default function StatCard({ stat }: { stat: HeroContent['stats']['items']
 
   return (
     <div key={stat.description} className='flex flex-col items-center p-4'>
-      <div className='text-syntara-primary font-bold text-4xl mb-2'>
+      <div className='font-mono text-syntara-primary font-bold text-4xl mb-2'>
         {count}
         {symbolPart}
       </div>

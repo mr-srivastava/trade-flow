@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { Montserrat, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
 });
 export const metadata: Metadata = {
   title: 'Syntara | Transform Your Global Trade Operations',
@@ -18,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${montserrat.className} antialiased`}>{children}</body>
+      <body className={`${montserrat.className} ${jetbrainsMono.variable} antialiased`}>{children}</body>
     </html>
   );
 }

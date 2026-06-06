@@ -58,7 +58,6 @@ export function ContainerTextFlip({
         'relative inline-block rounded-lg pt-2 pb-3 text-center text-4xl font-bold text-black md:text-7xl dark:text-white',
         className,
       )}
-      key={currentWord}
     >
       <Wrapper
         {...(hasMounted && {
@@ -66,13 +65,14 @@ export function ContainerTextFlip({
         })}
         className={cn('inline-block', textClassName)}
         ref={textRef}
+        key={currentWord}
       >
         <div className='inline-block'>
           {currentWord.split('').map((letter, index) => {
             const Span = hasMounted ? motion.span : 'span';
             return (
               <Span
-                key={index}
+                key={`${currentWord}-${index}`}
                 {...(hasMounted && {
                   initial: { opacity: 0, filter: 'blur(10px)' },
                   animate: { opacity: 1, filter: 'blur(0px)' },

@@ -13,7 +13,7 @@ export const pageContent: PageContent = {
       },
       explore: {
         text: 'Explore Platform',
-        href: '#platform',
+        href: '/products',
       },
     },
     stats: {
