@@ -1,18 +1,21 @@
 import React from 'react';
 import { AboutContent } from '@/lib/types';
 import { renderIcon } from '@/lib/icon-util';
+import { Reveal } from '@/components/ui/Reveal';
 
 const AboutSection: React.FC<AboutContent> = ({ header, description, values }) => {
   return (
     <section id='about' className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
       <div className='section-container'>
-        <div className='glass-card p-8 md:p-12'>
-          <Header header={header} />
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
-            <Description description={description} />
-            <CoreValues values={values} />
+        <Reveal>
+          <div className='glass-card p-8 md:p-12'>
+            <Header header={header} />
+            <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
+              <Description description={description} />
+              <CoreValues values={values} />
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

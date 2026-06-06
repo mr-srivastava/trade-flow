@@ -7,34 +7,32 @@ export default function MapBackground() {
       <WorldMap
         dots={[
           {
-            start: {
-              lat: 64.2008,
-              lng: -149.4937,
-            }, // Alaska (Fairbanks)
-            end: {
-              lat: 34.0522,
-              lng: -118.2437,
-            }, // Los Angeles
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 23.8103, lng: 90.4125 }, // Dhaka, Bangladesh
           },
           {
-            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 25.2048, lng: 55.2708 }, // Dubai, UAE
           },
           {
-            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-            end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 51.9244, lng: 4.4777 }, // Rotterdam, Europe
           },
           {
-            start: { lat: 51.5074, lng: -0.1278 }, // London
-            end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 51.5074, lng: -0.1278 }, // London, UK
           },
           {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 40.7128, lng: -74.006 }, // New York, USA
           },
           {
-            start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: 35.6762, lng: 139.6503 }, // Tokyo, Japan
+          },
+          {
+            start: { lat: 19.076, lng: 72.8777 }, // Mumbai, India
+            end: { lat: -33.8688, lng: 151.2093 }, // Sydney, Australia
           },
         ]}
       />

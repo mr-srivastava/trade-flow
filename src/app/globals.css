@@ -91,7 +91,7 @@
   }
 
   .btn-primary {
-    @apply bg-syntara-primary hover:bg-syntara-primary/90 text-white rounded-md px-6 py-2.5 font-medium transition duration-200;
+    @apply bg-syntara-primary hover:bg-syntara-primary/90 text-white rounded-md px-6 py-2.5 font-medium transition duration-200 shadow-[0_4px_14px_0_rgba(37,99,235,0.39)];
   }
 
   .btn-outline {

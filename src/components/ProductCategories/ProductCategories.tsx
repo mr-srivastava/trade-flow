@@ -4,6 +4,7 @@ import { IndustryProductCountMap, ProductCategoriesData } from '@/lib/types';
 import { getIndustryCounts } from '@/lib/products';
 import { parseIndustryToSlug } from '@/lib/api';
 import Link from 'next/link';
+import { Reveal } from '@/components/ui/Reveal';
 
 // Categories hidden from the UI (kept in code/data, just not displayed).
 const HIDDEN_CATEGORIES = ['Beauty & Personal Care', 'Flavors & Fragrances', 'Food & Nutrition'];
@@ -27,23 +28,24 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {industries.map((industry: IndustryProductCountMap) => (
-            <Link
-              href={`/products/industries/${parseIndustryToSlug(industry.name)}`}
-              key={industry.name}
-              className='glass-card p-6 hover:border-syntara-primary/50 transition-all duration-300 group'
-            >
-              <div className='flex justify-between items-center'>
-                <h3 className='text-lg font-medium text-slate-900'>{industry.name}</h3>
-                <span className='text-sm text-syntara-light/70 bg-syntara-darker py-1 px-2 rounded-full'>
-                  {industry.count}
-                </span>
-              </div>
-              <div className='mt-6 flex justify-between items-center'>
-                <span className='text-sm text-syntara-light/70'>Explore products</span>
-                <ChevronRight className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
-              </div>
-            </Link>
+          {industries.map((industry: IndustryProductCountMap, idx: number) => (
+            <Reveal key={industry.name} delay={idx * 0.05}>
+              <Link
+                href={`/products/industries/${parseIndustryToSlug(industry.name)}`}
+                className='glass-card p-6 hover:border-syntara-primary/50 transition-all duration-300 group block'
+              >
+                <div className='flex justify-between items-center'>
+                  <h3 className='text-lg font-medium text-slate-900'>{industry.name}</h3>
+                  <span className='text-sm text-syntara-light/70 bg-syntara-darker py-1 px-2 rounded-full'>
+                    {industry.count}
+                  </span>
+                </div>
+                <div className='mt-6 flex justify-between items-center'>
+                  <span className='text-sm text-syntara-light/70'>Explore products</span>
+                  <ChevronRight className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
 

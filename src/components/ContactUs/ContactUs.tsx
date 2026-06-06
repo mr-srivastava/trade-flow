@@ -1,6 +1,7 @@
 import React from 'react';
 import { renderIcon } from '@/lib/icon-util';
 import ContactForm from '../ContactForm/v2/ContactForm';
+import { Reveal } from '@/components/ui/Reveal';
 
 const contactDetails = [
   {
@@ -33,7 +34,7 @@ const ContactSection: React.FC = () => {
         </div>
 
         <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
-          <div className='lg:col-span-2 space-y-6'>
+          <Reveal className='lg:col-span-2 space-y-6'>
             <div className='glass-card p-6'>
               <h3 className='text-xl font-medium mb-6 text-slate-900'>Get in Touch</h3>
 
@@ -54,9 +55,11 @@ const ContactSection: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <ContactForm />
+          <Reveal delay={0.1} className='lg:col-span-3'>
+            <ContactForm />
+          </Reveal>
         </div>
       </div>
     </section>

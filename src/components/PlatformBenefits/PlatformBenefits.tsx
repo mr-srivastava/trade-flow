@@ -1,17 +1,23 @@
 import React from 'react';
 import { Benefit } from '@/lib/types';
 import { renderIcon } from '@/lib/icon-util';
+import { Reveal } from '@/components/ui/Reveal';
 
-const BenefitCard: React.FC<{ icon: React.ReactNode; title: string; description: string }> = ({
-  icon,
-  title,
-  description,
-}) => {
+const BenefitCard: React.FC<{
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  index: number;
+}> = ({ icon, title, description, index }) => {
+  const topAccent =
+    index % 2 === 0 ? 'border-t-4 border-t-syntara-primary' : 'border-t-4 border-t-syntara-tealAccent';
   return (
-    <div className='glass-card p-6 flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1'>
+    <div
+      className={`bg-white border border-slate-200 ${topAccent} rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 p-6 flex flex-col items-center text-center hover:-translate-y-1`}
+    >
       <div className='mb-4 p-3 rounded-full bg-syntara-darker/70'>{icon}</div>
       <h3 className='text-xl font-semibold mb-2 text-slate-900'>{title}</h3>
-      <p className='text-syntara-light/80'>{description}</p>
+      <p className='text-slate-600'>{description}</p>
     </div>
   );
 };
@@ -38,12 +44,14 @@ const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) 
         />
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {benefits.map((benefit, index) => (
-            <BenefitCard
-              key={index}
-              icon={renderIcon(benefit.icon, 'h-8 w-8 text-syntara-primary')}
-              title={benefit.title}
-              description={benefit.description}
-            />
+            <Reveal key={index} delay={index * 0.05}>
+              <BenefitCard
+                index={index}
+                icon={renderIcon(benefit.icon, 'h-8 w-8 text-syntara-primary')}
+                title={benefit.title}
+                description={benefit.description}
+              />
+            </Reveal>
           ))}
         </div>
       </div>

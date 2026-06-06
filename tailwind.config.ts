@@ -22,6 +22,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         heading: ['Montserrat', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -63,6 +64,7 @@ export default {
           primary: '#2563eb', // Blue
           accent: '#6366f1', // Indigo
           light: '#334155', // Primary text color on light surfaces (slate-700)
+          tealAccent: '#0D9488', // Teal accent for alternating UI elements
         },
       },
       borderRadius: {

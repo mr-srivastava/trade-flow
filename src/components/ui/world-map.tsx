@@ -60,8 +60,8 @@ function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
         <defs>
           <linearGradient id='path-gradient' x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' stopColor='white' stopOpacity='0' />
-            <stop offset='5%' stopColor={lineColor} stopOpacity='1' />
-            <stop offset='95%' stopColor={lineColor} stopOpacity='1' />
+            <stop offset='5%' stopColor={lineColor} stopOpacity='0.6' />
+            <stop offset='95%' stopColor={lineColor} stopOpacity='0.6' />
             <stop offset='100%' stopColor='white' stopOpacity='0' />
           </linearGradient>
         </defs>
@@ -73,17 +73,28 @@ function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
 
           return (
             <g key={`path-group-${i}`}>
+              <path
+                d={path}
+                fill='none'
+                stroke={lineColor}
+                strokeWidth='0.6'
+                strokeOpacity='0.08'
+              />
               <motion.path
                 d={path}
                 fill='none'
                 stroke='url(#path-gradient)'
-                strokeWidth='1'
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
+                strokeWidth='0.8'
+                strokeLinecap='round'
+                style={{ pathLength: 0.25 }}
+                initial={{ pathOffset: 0 }}
+                animate={{ pathOffset: 1 }}
                 transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
-                  ease: 'easeOut',
+                  duration: 2.5,
+                  delay: 0.4 * i,
+                  ease: 'linear',
+                  repeat: Infinity,
+                  repeatType: 'loop',
                 }}
               />
               {/* start point */}
