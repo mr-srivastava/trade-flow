@@ -129,6 +129,23 @@ export async function getProductById(
   return { ...product, relatedProducts };
 }
 
+/**
+ * Featured "Top Items" for the home page, ordered by `top_rank` then name.
+ * Mirrors the `is_exclusive` flag pattern; `is_top`/`top_rank` live only in the
+ * WHERE/ORDER BY (straight off `products`) so they never need to surface on the
+ * rich `Product` type. `LISTING_SELECT` ends at the JOIN, so the clause slots in.
+ */
+export async function getTopProducts(limit = 18): Promise<Product[]> {
+  const rows = await query<ProductRow>(
+    `select ${LISTING_SELECT}
+     where p.is_top
+     order by p.top_rank nulls last, p.name
+     limit $1`,
+    [limit],
+  );
+  return rows.map((row) => rowToProduct(row));
+}
+
 /** Count of products per industry, most populous first. */
 export async function getIndustryCounts(): Promise<IndustryProductCountMap[]> {
   const rows = await query<{ name: string; count: string }>(

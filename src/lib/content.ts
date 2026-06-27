@@ -95,6 +95,11 @@ export const pageContent: PageContent = {
     subtitle: 'Entry Point to Products',
     buttonText: 'View All Products',
   },
+  topProducts: {
+    title: 'Top Products',
+    subtitle: 'Our most-requested APIs & intermediates',
+    buttonText: 'View All Products',
+  },
   synFlowFeatures: {
     features: [
       {
