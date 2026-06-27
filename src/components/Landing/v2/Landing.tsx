@@ -6,6 +6,7 @@ import Footer from '@/components/Footer/v2/Footer';
 import NavBar from '@/components/Navbar/Navbar';
 import PlatformBenefits from '@/components/PlatformBenefits/PlatformBenefits';
 import ProductCategories from '@/components/ProductCategories/ProductCategories';
+import TopProducts from '@/components/TopProducts/TopProducts';
 
 import { pageContent } from '@/lib/content';
 import Hero from '@/components/Hero/Hero';
@@ -19,6 +20,7 @@ export default function LandingV2() {
         {/* <HeroSection content={pageContent.hero} /> */}
         <PlatformBenefits benefits={pageContent.benefits} />
         <ProductCategories productCategories={pageContent.productCategories} />
+        <TopProducts topProducts={pageContent.topProducts} />
         <AboutSection {...pageContent.about} />
         {/* <SynFlowFeatures data={pageContent.synFlowFeatures} /> */}
         {/* <ResourcesSection data={pageContent.resourcesData} /> */}

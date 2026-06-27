@@ -134,6 +134,12 @@ export interface ProductCategoriesData {
   buttonText: string;
 }
 
+export interface TopProductsContent {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+}
+
 interface Feature {
   id: number;
   icon: string;
@@ -168,6 +174,7 @@ export interface PageContent {
   benefits: Array<Benefit>;
   about: AboutContent;
   productCategories: ProductCategoriesData;
+  topProducts: TopProductsContent;
   synFlowFeatures: SynFlowData;
   resourcesData: ResourcesData;
 }

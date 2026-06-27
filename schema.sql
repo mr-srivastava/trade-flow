@@ -16,12 +16,16 @@ create table if not exists products (
   sub_categories text[] default '{}',
   product_images text[] default '{}',
   is_exclusive boolean default false,
+  -- "Top Items" feature on the home page (mirrors is_exclusive flag pattern)
+  is_top boolean default false,
+  top_rank integer,                 -- lower = shown first; null = unranked
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
 create index if not exists products_name_idx on products (name);
 create index if not exists products_industries_idx on products using gin (industries);
 create index if not exists products_categories_idx on products using gin (categories);
+create index if not exists products_is_top_idx on products (is_top) where is_top;
 
 -- 2. Everything shown on the product DETAILS page, 1:1 with products
 create table if not exists product_details (
