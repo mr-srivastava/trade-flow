@@ -19,18 +19,18 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
       <div className='flex items-center'>
         <button
           onClick={toggleMenu}
-          className='inline-flex items-center justify-center p-2 rounded-md text-syntara-light hover:text-slate-900 focus:outline-none'
+          className='inline-flex items-center justify-center p-2 rounded-md text-Syntaraa-light hover:text-slate-900 focus:outline-none'
         >
           {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
         </button>
       </div>
       {isMenuOpen && (
-        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-syntara-darker border-t border-border/50'>
+        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-Syntaraa-darker border-t border-border/50'>
           {menuItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className='block px-3 py-2 text-base font-medium text-syntara-light hover:text-slate-900'
+              className='block px-3 py-2 text-base font-medium text-Syntaraa-light hover:text-slate-900'
               onClick={closeMenu}
             >
               {item.name}
@@ -38,14 +38,14 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
           ))}
           <Link
             href='#about'
-            className='block px-3 py-2 text-base font-medium text-syntara-light hover:text-slate-900'
+            className='block px-3 py-2 text-base font-medium text-Syntaraa-light hover:text-slate-900'
             onClick={closeMenu}
           >
             About Us
           </Link>
           <Link
             href='#contact'
-            className='block px-3 py-2 text-base font-medium text-syntara-primary hover:text-slate-900'
+            className='block px-3 py-2 text-base font-medium text-Syntaraa-primary hover:text-slate-900'
             onClick={closeMenu}
           >
             Contact

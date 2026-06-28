@@ -12,7 +12,7 @@ interface FooterData {
 }
 
 const footerData: FooterData = {
-  logo: 'Syntara',
+  logo: 'Syntaraa',
   description:
     'Bridging markets and building partnerships in the global chemical and pharmaceutical trade industry.',
   quickLinks: [
@@ -42,12 +42,12 @@ const footerData: FooterData = {
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-syntara-darker pt-16 pb-8 border-t border-border/50'>
+    <footer className='bg-Syntaraa-darker pt-16 pb-8 border-t border-border/50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
             <h3 className='text-xl font-bold text-slate-900 mb-6'>{footerData.logo}</h3>
-            <p className='text-syntara-light/70 mb-6 text-sm'>{footerData.description}</p>
+            <p className='text-Syntaraa-light/70 mb-6 text-sm'>{footerData.description}</p>
             <div className='flex space-x-4'>
               {footerData.socials.map((social) => (
                 <Link
@@ -55,9 +55,9 @@ const Footer: React.FC = () => {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-syntara-darker hover:bg-syntara-primary/20 p-2 rounded-full transition-colors duration-200'
+                  className='bg-Syntaraa-darker hover:bg-Syntaraa-primary/20 p-2 rounded-full transition-colors duration-200'
                 >
-                  {renderIcon(social.icon, 'h-5 w-5 text-syntara-light hover:text-syntara-primary')}
+                  {renderIcon(social.icon, 'h-5 w-5 text-Syntaraa-light hover:text-Syntaraa-primary')}
                 </Link>
               ))}
             </div>
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                    className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
                   >
                     {link.name}
                   </Link>
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                 <li key={product.name}>
                   <Link
                     href={product.href}
-                    className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                    className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
                   >
                     {product.name}
                   </Link>
@@ -100,16 +100,16 @@ const Footer: React.FC = () => {
             <ul className='space-y-3'>
               {footerData.contact.map(({ key, icon, content, href }) => (
                 <li key={key} className='flex items-center gap-3'>
-                  {renderIcon(icon, 'h-5 w-5 text-syntara-primary')}
+                  {renderIcon(icon, 'h-5 w-5 text-Syntaraa-primary')}
                   {href ? (
                     <Link
                       href={href}
-                      className='text-syntara-light/70 hover:text-syntara-primary transition-colors duration-200'
+                      className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
                     >
                       {content}
                     </Link>
                   ) : (
-                    <span className='text-syntara-light/70'>{content}</span>
+                    <span className='text-Syntaraa-light/70'>{content}</span>
                   )}
                 </li>
               ))}
@@ -119,25 +119,25 @@ const Footer: React.FC = () => {
 
         <div className='border-t border-border/30 pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center'>
-            <p className='text-syntara-light/60 text-sm'>
-              © {new Date().getFullYear()} Syntara. All rights reserved.
+            <p className='text-Syntaraa-light/60 text-sm'>
+              © {new Date().getFullYear()} Syntaraa. All rights reserved.
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link
                 href='#'
-                className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
+                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
               >
                 Privacy Policy
               </Link>
               <Link
                 href='#'
-                className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
+                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
               >
                 Terms of Service
               </Link>
               <Link
                 href='#'
-                className='text-sm text-syntara-light/60 hover:text-syntara-primary transition-colors duration-200'
+                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
               >
                 Cookie Policy
               </Link>

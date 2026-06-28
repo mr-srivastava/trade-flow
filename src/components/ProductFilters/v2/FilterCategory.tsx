@@ -34,7 +34,7 @@ export const FilterCategory: React.FC<FilterCategoryProps> = ({
                 onCheckedChange={() => onFilterChange(item.id)}
                 checked={selected === item.id}
               />
-              <Label htmlFor={item.id} className='text-syntara-light/80 cursor-pointer'>
+              <Label htmlFor={item.id} className='text-Syntaraa-light/80 cursor-pointer'>
                 {item.label}
               </Label>
             </div>

@@ -22,14 +22,14 @@ export default function ProductNotFound() {
           <div className='section-container pt-8 pb-16'>
             <Link
               href='/products'
-              className='flex items-center text-syntara-light hover:text-syntara-primary transition mb-6'
+              className='flex items-center text-Syntaraa-light hover:text-Syntaraa-primary transition mb-6'
             >
               <ChevronLeft className='h-4 w-4 mr-1' />
               {noProductFoundText.backToProducts}
             </Link>
             <div className='glass-card p-12 text-center'>
               <h1 className='text-2xl font-bold mb-4'>{noProductFoundText.title}</h1>
-              <p className='text-syntara-light/70 mb-8'>{noProductFoundText.description}</p>
+              <p className='text-Syntaraa-light/70 mb-8'>{noProductFoundText.description}</p>
               <Button asChild>
                 <Link href='/products'>{noProductFoundText.browseAllProducts}</Link>
               </Button>

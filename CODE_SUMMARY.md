@@ -1,6 +1,6 @@
 # TradeFlow — Code Summary
 
-A Next.js 14 (App Router) marketing and product-catalogue website for a B2B chemical and pharmaceutical trading platform (branded "Syntara"). Built with TypeScript, Tailwind CSS, and shadcn/ui (Radix) components. The product data is bundled statically and served through internal API routes.
+A Next.js 14 (App Router) marketing and product-catalogue website for a B2B chemical and pharmaceutical trading platform (branded "Syntaraa"). Built with TypeScript, Tailwind CSS, and shadcn/ui (Radix) components. The product data is bundled statically and served through internal API routes.
 
 ## Tech stack
 
@@ -64,7 +64,7 @@ Organized by feature (Hero, About, Features, Footer, ProductCard, ProductDetails
 
 ## Observations
 
-- **Branding mismatch:** the package is `trade-flow` / repo "TradeFlow", but user-facing metadata and copy brand it **"Syntara."**
+- **Branding mismatch:** the package is `trade-flow` / repo "TradeFlow", but user-facing metadata and copy brand it **"Syntaraa."**
 - **Static data as source of truth:** the API routes are a thin layer over an in-repo dataset rather than a real backend — simple to deploy, but updates require code changes and the 7.5k-line `data.ts` is large to ship.
 - **v1/v2 duplication:** legacy component versions still live alongside the active v2 ones, worth pruning to reduce maintenance surface.
 - **README is essentially empty** (just the title) — no setup or run instructions documented.

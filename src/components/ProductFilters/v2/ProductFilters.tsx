@@ -60,7 +60,7 @@ const ProductFilters: React.FC<{
           appliedFilters.subcategories) && (
           <Button
             variant='link'
-            className='text-syntara-primary text-sm hover:text-syntara-primary/80 transition'
+            className='text-Syntaraa-primary text-sm hover:text-Syntaraa-primary/80 transition'
             onClick={clearFilters}
           >
             Clear all

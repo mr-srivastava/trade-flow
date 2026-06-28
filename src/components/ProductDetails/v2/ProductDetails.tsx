@@ -38,7 +38,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
       <div className='section-container pt-8 pb-16'>
         <Link
           href='/products'
-          className='flex items-center text-syntara-light hover:text-syntara-primary transition mb-6'
+          className='flex items-center text-Syntaraa-light hover:text-Syntaraa-primary transition mb-6'
         >
           <ChevronLeft className='h-4 w-4 mr-1' />
           Back to products
@@ -47,8 +47,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Left Column - Product Image */}
           <div className='md:col-span-1'>
-            <Card className='bg-syntara-darker/70 border border-border/50 overflow-hidden'>
-              <div className='h-80 flex items-center justify-center p-6 bg-syntara-darker/90'>
+            <Card className='bg-Syntaraa-darker/70 border border-border/50 overflow-hidden'>
+              <div className='h-80 flex items-center justify-center p-6 bg-Syntaraa-darker/90'>
                 {product.product_images && product.product_images.length > 0 ? (
                   <Image
                     src={product.product_images[0] || '/placeholder.svg'}
@@ -58,14 +58,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                     className='max-h-full max-w-full object-contain'
                   />
                 ) : (
-                  <div className='text-syntara-light/30 font-medium'>No image available</div>
+                  <div className='text-Syntaraa-light/30 font-medium'>No image available</div>
                 )}
               </div>
               <CardContent className='p-4'>
                 <div className='space-y-2'>
                   <Badge
                     variant='outline'
-                    className='w-full justify-center py-1.5 border-border/50 text-syntara-light/90'
+                    className='w-full justify-center py-1.5 border-border/50 text-Syntaraa-light/90'
                   >
                     {product.categories.map((category) => (
                       <span key={category} className='mr-1'>
@@ -85,7 +85,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                   {product.is_exclusive && (
                     <Badge
                       variant='outline'
-                      className='w-full justify-center py-1.5 border-syntara-primary/30 bg-syntara-primary/10 text-syntara-primary flex gap-2'
+                      className='w-full justify-center py-1.5 border-Syntaraa-primary/30 bg-Syntaraa-primary/10 text-Syntaraa-primary flex gap-2'
                     >
                       <Crown className='h-3.5 w-3.5' /> Exclusive Product
                     </Badge>
@@ -102,19 +102,19 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
 
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
                 <div className='flex flex-col'>
-                  <span className='text-syntara-light/70 text-sm'>CAS NUMBER</span>
+                  <span className='text-Syntaraa-light/70 text-sm'>CAS NUMBER</span>
                   <span className='text-slate-900 font-mono'>{product.cas_number}</span>
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-syntara-light/70 text-sm'>MOLECULAR FORMULA</span>
+                  <span className='text-Syntaraa-light/70 text-sm'>MOLECULAR FORMULA</span>
                   <span className='text-slate-900 font-mono'>{product.molecular_formula}</span>
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-syntara-light/70 text-sm'>EINECS</span>
+                  <span className='text-Syntaraa-light/70 text-sm'>EINECS</span>
                   <span className='text-slate-900 font-mono'>{product.einecs_number ?? '-'}</span>
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-syntara-light/70 text-sm'>HSN CODE</span>
+                  <span className='text-Syntaraa-light/70 text-sm'>HSN CODE</span>
                   <span className='text-slate-900 font-mono'>{product.hsn_no ?? '-'}</span>
                 </div>
               </div>
@@ -146,7 +146,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                       </Button>
                     ))
                   ) : (
-                    <p className='text-syntara-light/80'>
+                    <p className='text-Syntaraa-light/80'>
                       No certificates available for this product.
                     </p>
                   )}
@@ -195,12 +195,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
                 key={index}
                 className='border border-border/40 rounded-lg overflow-hidden'
               >
-                <CollapsibleTrigger className='flex items-center justify-between w-full p-4 bg-syntara-darker/80 text-left'>
+                <CollapsibleTrigger className='flex items-center justify-between w-full p-4 bg-Syntaraa-darker/80 text-left'>
                   <span className='font-medium text-slate-900'>{faq.key}</span>
-                  <ChevronLeft className='h-5 w-5 transform -rotate-90 text-syntara-light/70 ui-open:rotate-90 transition-transform duration-200' />
+                  <ChevronLeft className='h-5 w-5 transform -rotate-90 text-Syntaraa-light/70 ui-open:rotate-90 transition-transform duration-200' />
                 </CollapsibleTrigger>
-                <CollapsibleContent className='p-4 pt-0 bg-syntara-darker/40'>
-                  <div className='pt-4 border-t border-border/20 text-syntara-light/80'>
+                <CollapsibleContent className='p-4 pt-0 bg-Syntaraa-darker/40'>
+                  <div className='pt-4 border-t border-border/20 text-Syntaraa-light/80'>
                     {faq.value}
                   </div>
                 </CollapsibleContent>
@@ -210,15 +210,15 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
         </div>
 
         {/* Help Section */}
-        <div className='mt-16 bg-syntara-darker/30 border border-border/40 rounded-lg p-8 text-center'>
+        <div className='mt-16 bg-Syntaraa-darker/30 border border-border/40 rounded-lg p-8 text-center'>
           <h2 className='text-2xl font-bold text-slate-900 mb-3'>
             Need Help Finding the Right Chemical?
           </h2>
-          <p className='text-syntara-light/80 max-w-3xl mx-auto mb-6'>
+          <p className='text-Syntaraa-light/80 max-w-3xl mx-auto mb-6'>
             Our team of experts can help you source the exact chemical products you need for your
             application. Get personalized assistance and technical support.
           </p>
-          <Button size='lg' className='bg-syntara-primary hover:bg-syntara-primary/90'>
+          <Button size='lg' className='bg-Syntaraa-primary hover:bg-Syntaraa-primary/90'>
             Contact Our Experts
           </Button>
         </div>

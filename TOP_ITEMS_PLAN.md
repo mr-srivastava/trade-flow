@@ -126,7 +126,7 @@ Two files (server fetch + client marquee):
 
 **`src/components/TopProducts/TopProducts.tsx`** — async **server** component (same pattern as `ProductCategories`), props `{ topProducts: TopProductsContent }`:
 - Call `getTopProducts()`; `if (!products.length) return null;`.
-- Render the section shell on a tinted band (e.g. `bg-syntara-darker` / a light blue like distil), `id="top-products"`, centered heading/subtitle reusing the `ProductCategories` classes (`topProducts.title` / `topProducts.subtitle`), then render the client marquee passing `products`.
+- Render the section shell on a tinted band (e.g. `bg-Syntaraa-darker` / a light blue like distil), `id="top-products"`, centered heading/subtitle reusing the `ProductCategories` classes (`topProducts.title` / `topProducts.subtitle`), then render the client marquee passing `products`.
 
 **`src/components/TopProducts/TopProductsMarquee.tsx`** — `'use client'`:
 - A full-width `overflow-hidden` viewport. Inside, a flex track that holds the product list **rendered twice back-to-back** (the duplicate makes the loop seamless).

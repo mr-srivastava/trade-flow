@@ -58,7 +58,7 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        syntara: {
+        Syntaraa: {
           dark: '#ffffff', // Page surface (light theme)
           darker: '#f1f5f9', // Slightly tinted surface for cards/inputs/nav
           primary: '#2563eb', // Blue

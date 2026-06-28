@@ -88,11 +88,11 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
               className='flex flex-col md:flex-row gap-4 items-stretch md:items-center'
             >
               <div className='relative flex-grow'>
-                <Search className='absolute top-2 left-3 h-5 w-5 text-syntara-light/50 pointer-events-none' />
+                <Search className='absolute top-2 left-3 h-5 w-5 text-Syntaraa-light/50 pointer-events-none' />
                 <Input
                   type='text'
                   placeholder='Search by name, CAS, formula...'
-                  className='w-full pl-10 py-2.5 placeholder:text-syntara-light/50 bg-syntara-darker border border-border rounded-md text-syntara-light/90 focus:outline-none focus:ring-2 focus:ring-syntara-primary/50'
+                  className='w-full pl-10 py-2.5 placeholder:text-Syntaraa-light/50 bg-Syntaraa-darker border border-border rounded-md text-Syntaraa-light/90 focus:outline-none focus:ring-2 focus:ring-Syntaraa-primary/50'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -130,7 +130,7 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
                   ))}
                 </div>
               ) : (
-                <div className='text-center text-syntara-light/70 py-16'>
+                <div className='text-center text-Syntaraa-light/70 py-16'>
                   No products match your search or filters.
                 </div>
               )}

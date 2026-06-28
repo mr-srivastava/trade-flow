@@ -32,13 +32,13 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
   );
 
   return (
-    <section id='products' className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
+    <section id='products' className='py-4 bg-gradient-to-b from-Syntaraa-darker to-Syntaraa-dark'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>
             {productCategories.title}
           </h2>
-          <p className='text-syntara-light/80 max-w-2xl mx-auto'>{productCategories.subtitle}</p>
+          <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>{productCategories.subtitle}</p>
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
@@ -74,17 +74,17 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
                   // Fallback: current flat glass-card (used until an image is dropped in).
                   <Link
                     href={href}
-                    className='glass-card p-6 hover:border-syntara-primary/50 transition-all duration-300 group block'
+                    className='glass-card p-6 hover:border-Syntaraa-primary/50 transition-all duration-300 group block'
                   >
                     <div className='flex justify-between items-center'>
                       <h3 className='text-lg font-medium text-slate-900'>{industry.name}</h3>
-                      <span className='text-sm text-syntara-light/70 bg-syntara-darker py-1 px-2 rounded-full'>
+                      <span className='text-sm text-Syntaraa-light/70 bg-Syntaraa-darker py-1 px-2 rounded-full'>
                         {industry.count}
                       </span>
                     </div>
                     <div className='mt-6 flex justify-between items-center'>
-                      <span className='text-sm text-syntara-light/70'>Explore products</span>
-                      <ChevronRight className='h-5 w-5 text-syntara-primary transform group-hover:translate-x-1 transition-transform duration-300' />
+                      <span className='text-sm text-Syntaraa-light/70'>Explore products</span>
+                      <ChevronRight className='h-5 w-5 text-Syntaraa-primary transform group-hover:translate-x-1 transition-transform duration-300' />
                     </div>
                   </Link>
                 )}
