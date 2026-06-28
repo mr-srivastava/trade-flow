@@ -43,7 +43,7 @@ function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
   );
 
   return (
-    <div className='w-full aspect-[2/1] bg-syntara-dark rounded-lg relative font-sans'>
+    <div className='w-full aspect-[2/1] bg-Syntaraa-dark rounded-lg relative font-sans'>
       <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className='h-full w-full pointer-events-none select-none'

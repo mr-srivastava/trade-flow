@@ -58,7 +58,7 @@ export const pageContent: PageContent = {
     },
     description: {
       paragraphs: [
-        'Syntara is a leading global platform for chemical and pharmaceutical trading, connecting manufacturers, suppliers, and buyers across the world. We leverage cutting-edge technology to streamline operations and reduce costs while ensuring compliance with international standards.',
+        'Syntaraa is a leading global platform for chemical and pharmaceutical trading, connecting manufacturers, suppliers, and buyers across the world. We leverage cutting-edge technology to streamline operations and reduce costs while ensuring compliance with international standards.',
         'Our platform integrates AI-driven analytics, secure blockchain transactions, and real-time market data to provide unparalleled insights and efficiency in the chemical trading industry.',
         'With a global network spanning over 65 countries, we facilitate seamless trade operations while ensuring regulatory compliance and quality assurance at every step.',
       ],

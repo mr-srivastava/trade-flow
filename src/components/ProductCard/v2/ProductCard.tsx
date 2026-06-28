@@ -17,12 +17,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     );
   return (
     <Link href={`/product/${product.id}`} key={product.id}>
-      <Card className='h-full overflow-hidden bg-syntara-darker/80 border border-border/40 hover:border-syntara-primary/50 transition-all duration-300 group'>
-        <div className='relative h-40 bg-syntara-darker/70 flex items-center justify-center p-4'>
+      <Card className='h-full overflow-hidden bg-Syntaraa-darker/80 border border-border/40 hover:border-Syntaraa-primary/50 transition-all duration-300 group'>
+        <div className='relative h-40 bg-Syntaraa-darker/70 flex items-center justify-center p-4'>
           {product.is_exclusive && (
             <Badge
               variant='secondary'
-              className='absolute top-2 right-2 flex items-center gap-1 bg-syntara-primary/20 text-syntara-primary'
+              className='absolute top-2 right-2 flex items-center gap-1 bg-Syntaraa-primary/20 text-Syntaraa-primary'
             >
               <Crown className='h-3 w-3' /> Exclusive
             </Badge>
@@ -36,16 +36,16 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               className='max-h-full max-w-full object-contain'
             />
           ) : (
-            <div className='text-syntara-light/30 font-medium'>No image available</div>
+            <div className='text-Syntaraa-light/30 font-medium'>No image available</div>
           )}
         </div>
 
         <CardContent className='p-4'>
-          <h3 className='text-xl font-semibold text-slate-900 mb-2 group-hover:text-syntara-primary transition-colors'>
+          <h3 className='text-xl font-semibold text-slate-900 mb-2 group-hover:text-Syntaraa-primary transition-colors'>
             {product.name}
           </h3>
 
-          <div className='inline-flex items-center px-2.5 py-1 mb-3 rounded-full text-xs font-medium bg-secondary/80 text-syntara-light/90'>
+          <div className='inline-flex items-center px-2.5 py-1 mb-3 rounded-full text-xs font-medium bg-secondary/80 text-Syntaraa-light/90'>
             {product.categories.map((category) => (
               <span key={category} className='mr-1'>
                 {category}
@@ -63,13 +63,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
           <div className='space-y-2 mt-3'>
             <div className='flex'>
-              <span className='text-syntara-light/70 w-24 text-sm'>CAS:</span>
-              <span className='text-syntara-light font-mono text-sm'>{product.cas_number}</span>
+              <span className='text-Syntaraa-light/70 w-24 text-sm'>CAS:</span>
+              <span className='text-Syntaraa-light font-mono text-sm'>{product.cas_number}</span>
             </div>
 
             <div className='flex'>
-              <span className='text-syntara-light/70 w-24 text-sm'>Formula:</span>
-              <span className='text-syntara-light font-mono text-sm'>
+              <span className='text-Syntaraa-light/70 w-24 text-sm'>Formula:</span>
+              <span className='text-Syntaraa-light font-mono text-sm'>
                 {product.molecular_formula}
               </span>
             </div>
@@ -77,8 +77,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         </CardContent>
 
         <CardFooter className='p-4 pt-0 flex justify-between items-center'>
-          <p className='text-xs text-syntara-light/70 line-clamp-1'>{product.description}</p>
-          <ChevronRight className='h-4 w-4 text-syntara-primary shrink-0 ml-2 group-hover:translate-x-1 transition-transform' />
+          <p className='text-xs text-Syntaraa-light/70 line-clamp-1'>{product.description}</p>
+          <ChevronRight className='h-4 w-4 text-Syntaraa-primary shrink-0 ml-2 group-hover:translate-x-1 transition-transform' />
         </CardFooter>
       </Card>
     </Link>

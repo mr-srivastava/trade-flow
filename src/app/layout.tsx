@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 export const metadata: Metadata = {
-  title: 'Syntara | Transform Your Global Trade Operations',
+  title: 'Syntaraa | Transform Your Global Trade Operations',
   description:
     'Connect to our global network and leverage cutting-edge technology for operational efficiency in chemical and pharmaceutical trading.',
 };

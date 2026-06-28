@@ -24,11 +24,11 @@ const contactDetails = [
 
 const ContactSection: React.FC = () => {
   return (
-    <section id='contact' className='py-4 bg-gradient-to-b from-syntara-darker to-syntara-dark'>
+    <section id='contact' className='py-4 bg-gradient-to-b from-Syntaraa-darker to-Syntaraa-dark'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>Contact Us</h2>
-          <p className='text-syntara-light/80 max-w-2xl mx-auto'>
+          <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>
             Our team is ready to assist you with any inquiries about our products and services
           </p>
         </div>
@@ -41,14 +41,14 @@ const ContactSection: React.FC = () => {
               <div className='space-y-4'>
                 {contactDetails.map((detail, index) => (
                   <div key={index} className='flex items-start gap-4'>
-                    <div className='bg-syntara-primary/10 p-2 rounded-full'>
-                      {renderIcon(detail.icon, 'h-5 w-5 text-syntara-primary')}
+                    <div className='bg-Syntaraa-primary/10 p-2 rounded-full'>
+                      {renderIcon(detail.icon, 'h-5 w-5 text-Syntaraa-primary')}
                     </div>
                     <div>
-                      <h4 className='text-sm font-medium text-syntara-light'>{detail.title}</h4>
+                      <h4 className='text-sm font-medium text-Syntaraa-light'>{detail.title}</h4>
                       <p className='text-slate-900'>{detail.content}</p>
                       {detail.subContent && (
-                        <p className='text-syntara-light/80 text-sm'>{detail.subContent}</p>
+                        <p className='text-Syntaraa-light/80 text-sm'>{detail.subContent}</p>
                       )}
                     </div>
                   </div>

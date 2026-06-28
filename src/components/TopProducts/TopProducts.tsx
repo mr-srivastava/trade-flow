@@ -15,11 +15,11 @@ const TopProducts: React.FC<{ topProducts: TopProductsContent }> = async ({ topP
   if (!products.length) return null;
 
   return (
-    <section id='top-products' className='py-4 bg-gradient-to-b from-syntara-dark to-syntara-darker'>
+    <section id='top-products' className='py-4 bg-gradient-to-b from-Syntaraa-dark to-Syntaraa-darker'>
       <div className='section-container'>
         <div className='text-center mb-12'>
           <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>{topProducts.title}</h2>
-          <p className='text-syntara-light/80 max-w-2xl mx-auto'>{topProducts.subtitle}</p>
+          <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>{topProducts.subtitle}</p>
         </div>
       </div>
 

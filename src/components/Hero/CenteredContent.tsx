@@ -22,7 +22,7 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
                 </>
               )}
             </h1>
-            <p className='text-lg md:text-xl text-syntara-light/90 mb-8 max-w-3xl'>
+            <p className='text-lg md:text-xl text-Syntaraa-light/90 mb-8 max-w-3xl'>
               {content.description}
             </p>
             <div className='flex flex-col sm:flex-row gap-4'>
@@ -47,20 +47,20 @@ export default function CenteredContent({ content }: { content: HeroContent }) {
             {content.stats.title.split(/(\bIndia\b|\bGlobal Markets\b)/).map((part, i) => {
               if (part === 'India')
                 return (
-                  <span key={i} className='text-syntara-primary'>
+                  <span key={i} className='text-Syntaraa-primary'>
                     {part}
                   </span>
                 );
               if (part === 'Global Markets')
                 return (
-                  <span key={i} className='text-syntara-tealAccent'>
+                  <span key={i} className='text-Syntaraa-tealAccent'>
                     {part}
                   </span>
                 );
               return part;
             })}
           </h2>
-          <div className='bg-syntara-darker rounded-lg p-4 border border-border/25'>
+          <div className='bg-Syntaraa-darker rounded-lg p-4 border border-border/25'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
               {content.stats.items.map((stat) => (
                 <StatCard key={stat.description} stat={stat} />

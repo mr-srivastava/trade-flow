@@ -61,7 +61,7 @@ Route handlers type `params` as `Promise<{…}>` and `await` it (Next 15 style),
 11. **Pagination uses `href="#"`** with `preventDefault` — pages aren't shareable/bookmarkable URLs and it's a minor a11y/SEO smell.
 12. **Search submit does nothing** — `handleSearch` only logs; filtering is live via `onChange`, so pressing Enter has no effect (harmless but dead code).
 13. **README is empty** (just `# TradeFlow`) — no setup/run instructions.
-14. **Branding mismatch** — package/repo is "TradeFlow" but all user-facing copy/metadata says "Syntara."
+14. **Branding mismatch** — package/repo is "TradeFlow" but all user-facing copy/metadata says "Syntaraa."
 15. **Dead v1 code** — many components ship both an original and a `v2` version; only v2 is wired up. The unused versions add maintenance surface and confusion (note: product detail still imports the *v1* ContactForm/RequestQuoteForm).
 
 ---

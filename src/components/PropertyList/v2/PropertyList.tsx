@@ -6,12 +6,12 @@ import { Product } from '@/lib/types';
 import { renderIcon } from '@/lib/icon-util';
 
 const TabContent = ({ data }: { data: { key: string; value: string }[] }) => (
-  <Card className='border border-border/40 bg-syntara-darker/40'>
+  <Card className='border border-border/40 bg-Syntaraa-darker/40'>
     <CardContent className='p-6'>
       <div className='divide-y divide-border/30'>
         {data.map((item, index) => (
           <div key={index} className='flex py-4 px-6'>
-            <div className='w-1/2 text-syntara-light/80'>{item.key}</div>
+            <div className='w-1/2 text-Syntaraa-light/80'>{item.key}</div>
             <div className='w-1/2 text-slate-900'>{item.value}</div>
           </div>
         ))}
@@ -35,7 +35,7 @@ export default function PropertyList({ product }: { product: Product }) {
 
   return (
     <Tabs defaultValue='properties' className='w-full'>
-      <TabsList className='w-full bg-syntara-darker border border-border/50 rounded-lg p-1 mb-6'>
+      <TabsList className='w-full bg-Syntaraa-darker border border-border/50 rounded-lg p-1 mb-6'>
         {tabs.map(({ value, label, icon }) => (
           <TabsTrigger key={value} value={value} className='flex items-center gap-2 flex-1'>
             {renderIcon(icon, 'h-4 w-4')} {label}

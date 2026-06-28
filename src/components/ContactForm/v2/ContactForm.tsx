@@ -85,14 +85,14 @@ const ContactForm: React.FC = () => {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-syntara-light mb-2'>
+                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
                       Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='Your name'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -104,14 +104,14 @@ const ContactForm: React.FC = () => {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-syntara-light mb-2'>
+                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
                       Email
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='your.email@company.com'
                         {...field}
-                        className='w-full bg-syntara-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -124,14 +124,14 @@ const ContactForm: React.FC = () => {
               name='subject'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-syntara-light mb-2'>
+                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
                     Subject
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder='How can we help you?'
                       {...field}
-                      className='w-full bg-syntara-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary'
+                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                     />
                   </FormControl>
                   <FormMessage />
@@ -143,13 +143,13 @@ const ContactForm: React.FC = () => {
               name='message'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-syntara-light mb-2'>
+                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
                     Message
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder='Please provide details about your inquiry'
-                      className='w-full bg-syntara-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-syntara-primary focus:border-syntara-primary resize-none'
+                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary resize-none'
                       rows={3}
                       {...field}
                     />

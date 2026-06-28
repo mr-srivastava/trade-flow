@@ -2,7 +2,7 @@
 
 TradeFlow is a Next.js marketing and product-catalogue site for a B2B
 chemical and pharmaceutical trading platform. The user-facing brand is
-**Syntara**; the repository and package name remain `trade-flow`.
+**Syntaraa**; the repository and package name remain `trade-flow`.
 
 ## Features
 

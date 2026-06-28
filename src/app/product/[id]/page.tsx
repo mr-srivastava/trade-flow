@@ -15,11 +15,11 @@ export async function generateMetadata({ params }: ProductPageProps) {
   const product = await getProductById(params.id);
 
   if (!product) {
-    return { title: 'Product Not Found | Syntara' };
+    return { title: 'Product Not Found | Syntaraa' };
   }
 
   return {
-    title: `${product.name} | Trade Now at Syntara`,
+    title: `${product.name} | Trade Now at Syntaraa`,
     description: product.description,
   };
 }

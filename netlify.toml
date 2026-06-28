@@ -1,0 +1,9 @@
+[build]
+  command = "next build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify auto-installs the Next.js runtime, but pinning it is explicit & reproducible.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
