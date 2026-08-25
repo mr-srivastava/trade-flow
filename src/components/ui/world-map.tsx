@@ -26,7 +26,7 @@ const createCurvedPath = (start: { x: number; y: number }, end: { x: number; y: 
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 };
 
-function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
+function WorldMap({ dots = [], lineColor = '#5B2BD9' }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   const map = useMemo(() => new DottedMap({ height: 100, grid: 'diagonal' }), []);
@@ -35,15 +35,15 @@ function WorldMap({ dots = [], lineColor = '#0ea5e9' }: MapProps) {
     () =>
       map.getSVG({
         radius: 0.22,
-        color: '#33415540',
+        color: '#140C2940',
         shape: 'circle',
-        backgroundColor: '#f1f5f9',
+        backgroundColor: '#F3F1F9',
       }),
     [map],
   );
 
   return (
-    <div className='w-full aspect-[2/1] bg-Syntaraa-dark rounded-lg relative font-sans'>
+    <div className='w-full aspect-[2/1] bg-white rounded-lg relative font-sans'>
       <Image
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className='h-full w-full pointer-events-none select-none'
