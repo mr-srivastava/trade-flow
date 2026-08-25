@@ -11,11 +11,11 @@ export default function StatCard({ stat }: { stat: HeroContent['stats']['items']
 
   return (
     <div key={stat.description} className='flex flex-col items-center p-4'>
-      <div className='font-mono text-Syntaraa-primary font-bold text-4xl mb-2'>
+      <div className='font-mono text-brand font-bold text-4xl mb-2'>
         {count}
         {symbolPart}
       </div>
-      <p className='text-center text-sm text-Syntaraa-light/80'>{stat.description}</p>
+      <p className='text-center text-sm text-slate'>{stat.description}</p>
     </div>
   );
 }

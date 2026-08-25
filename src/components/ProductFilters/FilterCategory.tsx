@@ -20,10 +20,14 @@ export const FilterCategory: React.FC<FilterCategoryProps> = ({
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} className='border-b border-border/30 pb-4'>
-      <CollapsibleTrigger className='flex w-full items-center justify-between py-3 text-left font-medium text-slate-900'>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className='border-b border-line pb-4'>
+      <CollapsibleTrigger className='eyebrow flex w-full items-center justify-between py-3 text-left'>
         {title}
-        {isOpen ? <ChevronUp className='h-4 w-4' /> : <ChevronDown className='h-4 w-4' />}
+        {isOpen ? (
+          <ChevronUp className='h-4 w-4 text-slate' />
+        ) : (
+          <ChevronDown className='h-4 w-4 text-slate' />
+        )}
       </CollapsibleTrigger>
       <CollapsibleContent>
         <div className='mt-2 space-y-2'>
@@ -34,7 +38,7 @@ export const FilterCategory: React.FC<FilterCategoryProps> = ({
                 onCheckedChange={() => onFilterChange(item.id)}
                 checked={selected === item.id}
               />
-              <Label htmlFor={item.id} className='text-Syntaraa-light/80 cursor-pointer'>
+              <Label htmlFor={item.id} className='text-slate cursor-pointer transition-colors hover:text-ink'>
                 {item.label}
               </Label>
             </div>

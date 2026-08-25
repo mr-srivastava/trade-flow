@@ -24,31 +24,34 @@ const contactDetails = [
 
 const ContactSection: React.FC = () => {
   return (
-    <section id='contact' className='py-4 bg-gradient-to-b from-Syntaraa-darker to-Syntaraa-dark'>
+    <section id='contact' className='py-4 bg-white'>
       <div className='section-container'>
         <div className='text-center mb-12'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>Contact Us</h2>
-          <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>
+          <span className='eyebrow'>Get in touch</span>
+          <h2 className='mt-3 mb-4 text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink'>
+            Contact Us
+          </h2>
+          <p className='text-slate max-w-2xl mx-auto leading-relaxed'>
             Our team is ready to assist you with any inquiries about our products and services
           </p>
         </div>
 
         <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
           <Reveal className='lg:col-span-2 space-y-6'>
-            <div className='glass-card p-6'>
-              <h3 className='text-xl font-medium mb-6 text-slate-900'>Get in Touch</h3>
+            <div className='surface-card p-6'>
+              <h3 className='text-lg md:text-xl font-semibold mb-6 text-ink'>Get in Touch</h3>
 
               <div className='space-y-4'>
                 {contactDetails.map((detail, index) => (
                   <div key={index} className='flex items-start gap-4'>
-                    <div className='bg-Syntaraa-primary/10 p-2 rounded-full'>
-                      {renderIcon(detail.icon, 'h-5 w-5 text-Syntaraa-primary')}
+                    <div className='bg-brand-50 text-brand p-2 rounded-lg'>
+                      {renderIcon(detail.icon, 'h-5 w-5')}
                     </div>
                     <div>
-                      <h4 className='text-sm font-medium text-Syntaraa-light'>{detail.title}</h4>
-                      <p className='text-slate-900'>{detail.content}</p>
+                      <span className='eyebrow'>{detail.title}</span>
+                      <p className='mt-1 text-ink'>{detail.content}</p>
                       {detail.subContent && (
-                        <p className='text-Syntaraa-light/80 text-sm'>{detail.subContent}</p>
+                        <p className='text-sm text-slate'>{detail.subContent}</p>
                       )}
                     </div>
                   </div>

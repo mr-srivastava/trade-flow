@@ -81,17 +81,6 @@ export default {
         success: { DEFAULT: '#0F7A55', bg: '#E6F4EE' },
         warning: { DEFAULT: '#A85C00', bg: '#FDF1E1' },
         error: { DEFAULT: '#B32741', bg: '#FCEAEE' },
-
-        // TEMPORARY alias. Repoints the old vocabulary at the new palette so
-        // nothing looks broken between Phase 2 and Phase 6. Deleted in Phase 6e.
-        Syntaraa: {
-          dark: '#FFFFFF',
-          darker: '#F3F1F9',
-          primary: '#5B2BD9',
-          accent: '#835FE2',
-          light: '#6B6480',
-          tealAccent: '#5B2BD9',
-        },
       },
       borderRadius: {
         lg: 'var(--radius)', // 12px

@@ -47,7 +47,6 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
               onPageChange(i);
             }}
             isActive={i === currentPage}
-            className={i === currentPage ? 'bg-Syntaraa-primary/80 border-Syntaraa-primary' : ''}
           >
             {i}
           </PaginationLink>
@@ -88,7 +87,7 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
         </PaginationContent>
       </Pagination>
 
-      <div className='text-sm text-Syntaraa-light/70'>
+      <div className='eyebrow'>
         Showing {startProduct} to {endProduct} of {totalProducts} products
       </div>
     </div>

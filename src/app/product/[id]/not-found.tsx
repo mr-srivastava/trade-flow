@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import NavBar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import Logo from '@/components/Logo/Logo';
@@ -23,20 +22,22 @@ export default function ProductNotFound() {
           <div className='section-container pt-8 pb-16'>
             <Link
               href='/products'
-              className='flex items-center text-Syntaraa-light hover:text-Syntaraa-primary transition mb-6'
+              className='flex items-center text-sm text-slate hover:text-brand transition-colors duration-150 mb-6'
             >
               <ChevronLeft className='h-4 w-4 mr-1' />
               {noProductFoundText.backToProducts}
             </Link>
-            <div className='glass-card p-12 text-center'>
+            <div className='surface-card p-12 text-center'>
               <div className='flex justify-center mb-4'>
                 <Logo size={40} showWordmark={false} />
               </div>
-              <h1 className='text-2xl font-bold mb-4'>{noProductFoundText.title}</h1>
-              <p className='text-Syntaraa-light/70 mb-8'>{noProductFoundText.description}</p>
-              <Button asChild>
-                <Link href='/products'>{noProductFoundText.browseAllProducts}</Link>
-              </Button>
+              <h1 className='text-2xl font-semibold tracking-[-0.02em] text-ink mb-4'>
+                {noProductFoundText.title}
+              </h1>
+              <p className='text-slate leading-relaxed mb-8'>{noProductFoundText.description}</p>
+              <Link href='/products' className='btn-primary'>
+                {noProductFoundText.browseAllProducts}
+              </Link>
             </div>
           </div>
         </div>

@@ -7,17 +7,13 @@ const BenefitCard: React.FC<{
   icon: React.ReactNode;
   title: string;
   description: string;
-  index: number;
-}> = ({ icon, title, description, index }) => {
-  const topAccent =
-    index % 2 === 0 ? 'border-t-4 border-t-Syntaraa-primary' : 'border-t-4 border-t-Syntaraa-tealAccent';
+}> = ({ icon, title, description }) => {
   return (
-    <div
-      className={`bg-white border border-slate-200 ${topAccent} rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300 p-6 flex flex-col items-center text-center hover:-translate-y-1`}
-    >
-      <div className='mb-4 p-3 rounded-full bg-Syntaraa-darker/70'>{icon}</div>
-      <h3 className='text-xl font-semibold mb-2 text-slate-900'>{title}</h3>
-      <p className='text-slate-600'>{description}</p>
+    <div className='h-full bg-white border border-line rounded-lg p-6 flex flex-col items-center text-center transition-colors duration-150 hover:border-brand-200'>
+      {/* The accent lives in the icon tile now, not an alternating top stripe. */}
+      <div className='mb-4 p-3 rounded-lg bg-brand-50 text-brand'>{icon}</div>
+      <h3 className='text-lg md:text-xl font-semibold mb-2 text-ink'>{title}</h3>
+      <p className='text-slate leading-relaxed'>{description}</p>
     </div>
   );
 };
@@ -28,15 +24,18 @@ const PlatformBenefitsHeader: React.FC<{ title: string; subtitle: string }> = ({
 }) => {
   return (
     <div className='text-center mb-12'>
-      <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>{title}</h2>
-      <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>{subtitle}</p>
+      <span className='eyebrow'>Platform</span>
+      <h2 className='mt-3 mb-4 text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink'>
+        {title}
+      </h2>
+      <p className='text-slate max-w-2xl mx-auto leading-relaxed'>{subtitle}</p>
     </div>
   );
 };
 
 const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) => {
   return (
-    <section id='solutions' className='py-4 bg-gradient-to-b from-Syntaraa-darker to-Syntaraa-dark'>
+    <section id='solutions' className='py-4 bg-mist'>
       <div className='section-container'>
         <PlatformBenefitsHeader
           title='Platform Benefits'
@@ -46,8 +45,7 @@ const PlatformBenefits: React.FC<{ benefits: Array<Benefit> }> = ({ benefits }) 
           {benefits.map((benefit, index) => (
             <Reveal key={index} delay={index * 0.05}>
               <BenefitCard
-                index={index}
-                icon={renderIcon(benefit.icon, 'h-8 w-8 text-Syntaraa-primary')}
+                icon={renderIcon(benefit.icon, 'h-8 w-8')}
                 title={benefit.title}
                 description={benefit.description}
               />

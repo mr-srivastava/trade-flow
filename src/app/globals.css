@@ -74,15 +74,6 @@
     @apply bg-mist border border-line rounded-lg;
   }
 
-  /* TEMPORARY aliases for the old vocabulary. Deleted in Phase 6e. */
-  .glass-card {
-    @apply bg-white border border-line rounded-lg;
-  }
-
-  .card-gradient {
-    @apply bg-mist border border-line rounded-lg;
-  }
-
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-md
            bg-brand px-6 py-2.5 text-sm font-medium text-white

@@ -82,17 +82,17 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
       <main className='flex-grow'>
         <div className='section-container pt-8 pb-16'>
           <header className='mb-8'>
-            <h1 className='text-3xl md:text-4xl font-bold text-slate-900 mb-6'>{title}</h1>
+            <h1 className='text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-ink mb-6'>{title}</h1>
             <form
               onSubmit={handleSearch}
               className='flex flex-col md:flex-row gap-4 items-stretch md:items-center'
             >
               <div className='relative flex-grow'>
-                <Search className='absolute top-2 left-3 h-5 w-5 text-Syntaraa-light/50 pointer-events-none' />
+                <Search className='absolute top-2.5 left-3 h-5 w-5 text-slate pointer-events-none' />
                 <Input
                   type='text'
                   placeholder='Search by name, CAS, formula...'
-                  className='w-full pl-10 py-2.5 placeholder:text-Syntaraa-light/50 bg-Syntaraa-darker border border-border rounded-md text-Syntaraa-light/90 focus:outline-none focus:ring-2 focus:ring-Syntaraa-primary/50'
+                  className='w-full pl-10'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -124,13 +124,13 @@ const Products: React.FC<{ data: Array<Product>; title?: string }> = ({
 
             <section className='flex-grow'>
               {pageItems.length > 0 ? (
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                   {pageItems.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
               ) : (
-                <div className='text-center text-Syntaraa-light/70 py-16'>
+                <div className='text-center text-slate py-16'>
                   No products match your search or filters.
                 </div>
               )}

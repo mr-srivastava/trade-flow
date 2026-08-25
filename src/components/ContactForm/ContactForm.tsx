@@ -74,8 +74,8 @@ const ContactForm: React.FC = () => {
   return (
     <div className='lg:col-span-3'>
       <Toaster position='bottom-left' richColors />
-      <div className='glass-card p-6'>
-        <h3 className='text-xl font-medium mb-6 text-slate-900'>Send us a Message</h3>
+      <div className='surface-card p-6'>
+        <h3 className='text-lg md:text-xl font-semibold mb-6 text-ink'>Send us a Message</h3>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -85,14 +85,13 @@ const ContactForm: React.FC = () => {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                    <FormLabel className='block text-sm font-medium text-ink mb-2'>
                       Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='Your name'
                         {...field}
-                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -104,14 +103,13 @@ const ContactForm: React.FC = () => {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                    <FormLabel className='block text-sm font-medium text-ink mb-2'>
                       Email
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='your.email@company.com'
                         {...field}
-                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                       />
                     </FormControl>
                     <FormMessage />
@@ -124,14 +122,13 @@ const ContactForm: React.FC = () => {
               name='subject'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                  <FormLabel className='block text-sm font-medium text-ink mb-2'>
                     Subject
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder='How can we help you?'
                       {...field}
-                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                     />
                   </FormControl>
                   <FormMessage />
@@ -143,13 +140,13 @@ const ContactForm: React.FC = () => {
               name='message'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                  <FormLabel className='block text-sm font-medium text-ink mb-2'>
                     Message
                   </FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder='Please provide details about your inquiry'
-                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary resize-none'
+                      className='resize-none'
                       rows={3}
                       {...field}
                     />
@@ -164,7 +161,7 @@ const ContactForm: React.FC = () => {
             <Button
               type='submit'
               disabled={isSubmitting}
-              className='btn-primary flex items-center gap-2 w-full justify-center'
+              className='btn-primary w-full'
             >
               {isSubmitting ? (
                 <>

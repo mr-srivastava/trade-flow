@@ -41,14 +41,14 @@ const footerData: FooterData = {
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-Syntaraa-darker pt-16 pb-8 border-t border-border/50'>
+    <footer className='bg-mist border-t border-line pt-16 pb-8'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
             <div className='mb-6 -ml-2'>
               <Logo size={28} />
             </div>
-            <p className='text-Syntaraa-light/70 mb-6 text-sm'>{footerData.description}</p>
+            <p className='text-slate mb-6 text-sm'>{footerData.description}</p>
             <div className='flex space-x-4'>
               {footerData.socials.map((social) => (
                 <Link
@@ -56,22 +56,22 @@ const Footer: React.FC = () => {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='bg-Syntaraa-darker hover:bg-Syntaraa-primary/20 p-2 rounded-full transition-colors duration-200'
+                  className='bg-white border border-line rounded-full p-2 text-slate transition-colors duration-150 hover:border-brand hover:text-brand'
                 >
-                  {renderIcon(social.icon, 'h-5 w-5 text-Syntaraa-light hover:text-Syntaraa-primary')}
+                  {renderIcon(social.icon, 'h-5 w-5')}
                 </Link>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-slate-900 mb-4'>Quick Links</h4>
+            <h4 className='eyebrow mb-4 block'>Quick Links</h4>
             <ul className='space-y-3'>
               {footerData.quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
+                    className='text-slate transition-colors duration-150 hover:text-brand'
                   >
                     {link.name}
                   </Link>
@@ -81,13 +81,13 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-slate-900 mb-4'>Products</h4>
+            <h4 className='eyebrow mb-4 block'>Products</h4>
             <ul className='space-y-3'>
               {footerData.products.map((product) => (
                 <li key={product.name}>
                   <Link
                     href={product.href}
-                    className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
+                    className='text-slate transition-colors duration-150 hover:text-brand'
                   >
                     {product.name}
                   </Link>
@@ -97,20 +97,20 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='text-lg font-medium text-slate-900 mb-4'>Contact</h4>
+            <h4 className='eyebrow mb-4 block'>Contact</h4>
             <ul className='space-y-3'>
               {footerData.contact.map(({ key, icon, content, href }) => (
                 <li key={key} className='flex items-center gap-3'>
-                  {renderIcon(icon, 'h-5 w-5 text-Syntaraa-primary')}
+                  {renderIcon(icon, 'h-5 w-5 shrink-0 text-brand')}
                   {href ? (
                     <Link
                       href={href}
-                      className='text-Syntaraa-light/70 hover:text-Syntaraa-primary transition-colors duration-200'
+                      className='text-ink transition-colors duration-150 hover:text-brand'
                     >
                       {content}
                     </Link>
                   ) : (
-                    <span className='text-Syntaraa-light/70'>{content}</span>
+                    <span className='text-ink'>{content}</span>
                   )}
                 </li>
               ))}
@@ -118,27 +118,27 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className='border-t border-border/30 pt-8'>
+        <div className='border-t border-line pt-8'>
           <div className='flex flex-col md:flex-row justify-between items-center'>
-            <p className='text-Syntaraa-light/60 text-sm'>
+            <p className='text-sm text-slate'>
               © {new Date().getFullYear()} Syntaraa. All rights reserved.
             </p>
             <div className='flex space-x-6 mt-4 md:mt-0'>
               <Link
                 href='#'
-                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Privacy Policy
               </Link>
               <Link
                 href='#'
-                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Terms of Service
               </Link>
               <Link
                 href='#'
-                className='text-sm text-Syntaraa-light/60 hover:text-Syntaraa-primary transition-colors duration-200'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Cookie Policy
               </Link>

@@ -52,15 +52,15 @@ const ProductFilters: React.FC<{
   };
 
   return (
-    <div className='glass-card p-5'>
+    <div className='surface-card p-5'>
       <div className='flex items-center justify-between mb-4'>
-        <h2 className='text-xl font-bold text-slate-900'>Filters</h2>
+        <h2 className='text-lg font-semibold text-ink'>Filters</h2>
         {(appliedFilters.industries ||
           appliedFilters.categories ||
           appliedFilters.subcategories) && (
           <Button
             variant='link'
-            className='text-Syntaraa-primary text-sm hover:text-Syntaraa-primary/80 transition'
+            className='text-brand text-sm hover:text-brand-600 transition-colors duration-150'
             onClick={clearFilters}
           >
             Clear all

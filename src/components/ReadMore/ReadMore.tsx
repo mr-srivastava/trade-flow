@@ -10,11 +10,11 @@ export default function ReadMore({ content }: { content: string }) {
 
   return (
     <div>
-      <p className={cn('text-Syntaraa-light/80', expanded ? '' : 'line-clamp-3')}>{content}</p>
+      <p className={cn('text-slate leading-relaxed', expanded ? '' : 'line-clamp-3')}>{content}</p>
 
       <Button
         onClick={toggleExpanded}
-        className='text-Syntaraa-primary hover:text-Syntaraa-primary/80 p-0'
+        className='text-brand text-sm font-medium hover:underline p-0 h-auto'
         variant='link'
       >
         {expanded ? 'Read less' : 'Read more'}
