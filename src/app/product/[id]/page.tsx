@@ -1,7 +1,7 @@
 // Read page: cached/revalidated hourly (consistent with the other read pages).
 export const revalidate = 60;
 
-import ProductDetail from '@/components/ProductDetails/v2/ProductDetails';
+import ProductDetail from '@/components/ProductDetails/ProductDetails';
 import { notFound } from 'next/navigation';
 import { getProductById } from '@/lib/products';
 

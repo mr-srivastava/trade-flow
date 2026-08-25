@@ -1,146 +1,88 @@
-import React from "react";
-import { Card, CardContent } from "../ui/card";
-import Link from "next/link";
-import Image from "next/image";
-import { AlertTriangle, Beaker, Crown } from "lucide-react";
-import { Product } from "@/lib/types";
-import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { AlertTriangle, Crown, ChevronRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Product } from '@/lib/types';
 
-interface ProductCardProps {
-  product: Product;
-  className?: string;
-}
-
-export default function ProductCard({ product, className }: ProductCardProps) {
-  // Check if product has hazard warnings
+const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const hasHazards =
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
       (item) =>
-        item.value.includes("hazardous") ||
-        item.value.includes("Toxic") ||
-        item.value.includes("Corrosive")
+        item.value.includes('hazardous') ||
+        item.value.includes('Toxic') ||
+        item.value.includes('Corrosive'),
     );
-
   return (
-    <Card
-      className={cn(
-        "overflow-hidden flex flex-col h-full group transition-all duration-300 hover:shadow-md",
-        className
-      )}
-    >
-      <Link
-        href={`/products/${product.id}`}
-        className="relative overflow-hidden"
-      >
-        <div className="relative aspect-video bg-muted/50">
+    <Link href={`/product/${product.id}`} key={product.id}>
+      <Card className='h-full overflow-hidden bg-Syntaraa-darker/80 border border-border/40 hover:border-Syntaraa-primary/50 transition-all duration-300 group'>
+        <div className='relative h-40 bg-Syntaraa-darker/70 flex items-center justify-center p-4'>
+          {product.is_exclusive && (
+            <Badge
+              variant='secondary'
+              className='absolute top-2 right-2 flex items-center gap-1 bg-Syntaraa-primary/20 text-Syntaraa-primary'
+            >
+              <Crown className='h-3 w-3' /> Exclusive
+            </Badge>
+          )}
           {product.product_images && product.product_images.length > 0 ? (
             <Image
-              src={product.product_images[0] || "/placeholder.svg"}
+              src={product.product_images[0] || '/placeholder.svg'}
               alt={product.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              width={150}
+              height={150}
+              className='max-h-full max-w-full object-contain'
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <Beaker className="h-16 w-16 text-muted-foreground/50" />
+            <div className='text-Syntaraa-light/30 font-medium'>No image available</div>
+          )}
+        </div>
+
+        <CardContent className='p-4'>
+          <h3 className='text-xl font-semibold text-slate-900 mb-2 group-hover:text-Syntaraa-primary transition-colors'>
+            {product.name}
+          </h3>
+
+          <div className='inline-flex items-center px-2.5 py-1 mb-3 rounded-full text-xs font-medium bg-secondary/80 text-Syntaraa-light/90'>
+            {product.categories.map((category) => (
+              <span key={category} className='mr-1'>
+                {category}
+                {category !== product.categories[product.categories.length - 1] && ','}
+              </span>
+            ))}
+          </div>
+
+          {hasHazards && (
+            <div className='flex items-center text-amber-500/90 mb-3'>
+              <AlertTriangle className='h-4 w-4 mr-1' />
+              <span className='text-xs'>Hazardous Material</span>
             </div>
           )}
 
-          <div className="absolute top-3 right-3 flex flex-col gap-2">
-            {product.is_exclusive && (
-              <Badge
-                variant={"outline"}
-                className="bg-purple-100 text-purple-700 border-purple-200"
-              >
-                <Crown className="h-3 w-3 mr-1" />
-                Exclusive
-              </Badge>
-            )}
-          </div>
-        </div>
-      </Link>
-
-      <CardContent className="p-5 flex-grow flex flex-col">
-        <div className="space-y-3 flex-grow">
-          <div>
-            <Link
-              href={`/products/${product.id}`}
-              className="hover:underline decoration-primary decoration-1 underline-offset-4"
-            >
-              <h3 className="font-semibold text-xl line-clamp-2 leading-tight">
-                {product.name}
-              </h3>
-            </Link>
-
-            <div className="flex flex-wrap gap-1.5 mt-2">
-              {product.categories.map((category, i) => (
-                <Badge
-                  key={i}
-                  variant="secondary"
-                  className="text-xs font-normal border-neutral-300"
-                >
-                  {category}
-                </Badge>
-              ))}
-              {hasHazards && (
-                <Badge
-                  variant="outline"
-                  className="bg-amber-50 text-amber-700 border-amber-200"
-                >
-                  <AlertTriangle className="h-3 w-3" />
-                </Badge>
-              )}
+          <div className='space-y-2 mt-3'>
+            <div className='flex'>
+              <span className='text-Syntaraa-light/70 w-24 text-sm'>CAS:</span>
+              <span className='text-Syntaraa-light font-mono text-sm'>{product.cas_number}</span>
             </div>
-          </div>
 
-          <div className="text-sm text-muted-foreground space-y-1.5 pt-1">
-            <div className="flex items-center gap-1.5">
-              <span className="font-medium text-foreground/80">CAS:</span>
-              <span className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">
-                {product.cas_number}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-medium text-foreground/80">Formula:</span>
-              <span className="font-mono text-xs">
+            <div className='flex'>
+              <span className='text-Syntaraa-light/70 w-24 text-sm'>Formula:</span>
+              <span className='text-Syntaraa-light font-mono text-sm'>
                 {product.molecular_formula}
               </span>
             </div>
           </div>
+        </CardContent>
 
-          <p className="text-sm line-clamp-2 text-muted-foreground">
-            {product.description}
-          </p>
-        </div>
-      </CardContent>
-
-      {/* <CardFooter className="px-5 py-4 border-t bg-muted/20">
-        <div className="w-full flex items-center justify-between">
-          {product.certificates && product.certificates.length > 0 && (
-            <div className="flex gap-2">
-              {product.certificates.map((cert, i) => (
-                <Link
-                  key={i}
-                  href={cert.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-xs text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <FileText className="h-3 w-3 mr-1" />
-                  {cert.name}
-                </Link>
-              ))}
-            </div>
-          )}
-          <Button className="ml-auto" size="sm" variant="default" asChild>
-            <Link href={`/products/${product.id}`} className="font-medium">
-              View Details
-            </Link>
-          </Button>
-        </div>
-      </CardFooter> */}
-    </Card>
+        <CardFooter className='p-4 pt-0 flex justify-between items-center'>
+          <p className='text-xs text-Syntaraa-light/70 line-clamp-1'>{product.description}</p>
+          <ChevronRight className='h-4 w-4 text-Syntaraa-primary shrink-0 ml-2 group-hover:translate-x-1 transition-transform' />
+        </CardFooter>
+      </Card>
+    </Link>
   );
-}
+};
+
+export default ProductCard;

@@ -1,5 +1,5 @@
 import ContactSection from '@/components/ContactUs/ContactUs';
-import Footer from '@/components/Footer/v2/Footer';
+import Footer from '@/components/Footer/Footer';
 import NavBar from '@/components/Navbar/Navbar';
 import React from 'react';
 

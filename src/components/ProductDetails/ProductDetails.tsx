@@ -1,222 +1,231 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  AlertTriangle,
-  Beaker,
-  ChevronLeft,
-  Crown,
-  ExternalLink,
-  FileText,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { Separator } from "@/components/ui/separator";
-import { ProductRecommendations } from "@/components/ProductRecommendation/ProductRecommendation";
-import { CTABanner } from "@/components/CTABanner/CTABanner";
-import { RequestQuoteForm } from "@/components/RequestQuoteForm/RequestQuoteForm";
-import { ContactForm } from "@/components/ContactForm/ContactForm";
-import { Product } from "@/lib/types";
-import FAQ from "../FAQ/FAQ";
-import ProductProperties from "./ProductProperties";
-import ReadMore from "../ReadMore/ReadMore";
+import React from 'react';
+import { AlertTriangle, ChevronLeft, ExternalLink, FileText, Crown } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import NavBar from '@/components/Navbar/Navbar';
+import Link from 'next/link';
+import Footer from '@/components/Footer/Footer';
+import Image from 'next/image';
+import { Product } from '@/lib/types';
+import ProductCard from '@/components/ProductCard/ProductCard';
+import ReadMore from '@/components/ReadMore/ReadMore';
+import PropertyList from '@/components/PropertyList/PropertyList';
+import { ProductInquiryForm } from '@/components/ContactForm/ProductInquiryForm';
+import { RequestQuoteForm } from '@/components/RequestQuoteForm/RequestQuoteForm';
 
-export default function ProductDetails({ product }: { product: Product }) {
-  // Check if product has hazard warnings
+interface ProductDetailProps {
+  product: Product & { relatedProducts: Array<Product> };
+}
+
+// Toggle to show/hide the Certificates & Documentation section. Currently disabled.
+const SHOW_CERTIFICATES = false;
+
+const ProductDetail: React.FC<ProductDetailProps> = ({ product }) => {
   const hasHazards =
     product.safety_and_hazard &&
     product.safety_and_hazard.some(
       (item) =>
-        item.value.includes("hazardous") ||
-        item.value.includes("Toxic") ||
-        item.value.includes("Corrosive")
+        item.value.includes('hazardous') ||
+        item.value.includes('Toxic') ||
+        item.value.includes('Corrosive'),
     );
 
   return (
-    <main className="container px-8 py-8 mx-auto bg-neutral-900 text-neutral-50">
-      <Link
-        href="/products"
-        className="inline-flex items-center text-sm font-medium mb-8 hover:text-primary transition-colors"
-      >
-        <ChevronLeft className="mr-1 h-4 w-4" />
-        Back to products
-      </Link>
+    <div className='flex flex-col min-h-screen'>
+      <NavBar />
+      <div className='section-container pt-8 pb-16'>
+        <Link
+          href='/products'
+          className='flex items-center text-Syntaraa-light hover:text-Syntaraa-primary transition mb-6'
+        >
+          <ChevronLeft className='h-4 w-4 mr-1' />
+          Back to products
+        </Link>
 
-      <div className="grid md:grid-cols-3 gap-10 ">
-        <div className="md:col-span-1">
-          <div className="sticky top-8 space-y-6">
-            <div className="relative aspect-square bg-muted/50 rounded-xl overflow-hidden mb-4 shadow-sm">
-              {product.product_images && product.product_images.length > 0 ? (
-                <Image
-                  src={product.product_images[0] || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center">
-                  <Beaker className="h-16 w-16 text-neutral-300/50" />
-                </div>
-              )}
-
-              <div className="absolute top-3 right-3 flex flex-col gap-2">
-                {product.is_exclusive && (
-                  <Badge
-                    variant={"outline"}
-                    className="bg-purple-50 text-purple-700 border-purple-200"
-                  >
-                    <Crown className="h-3 w-3 mr-1" />
-                    Exclusive
-                  </Badge>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+          {/* Left Column - Product Image */}
+          <div className='md:col-span-1'>
+            <Card className='bg-Syntaraa-darker/70 border border-border/50 overflow-hidden'>
+              <div className='h-80 flex items-center justify-center p-6 bg-Syntaraa-darker/90'>
+                {product.product_images && product.product_images.length > 0 ? (
+                  <Image
+                    src={product.product_images[0] || '/placeholder.svg'}
+                    alt={product.name}
+                    width={150}
+                    height={150}
+                    className='max-h-full max-w-full object-contain'
+                  />
+                ) : (
+                  <div className='text-Syntaraa-light/30 font-medium'>No image available</div>
                 )}
               </div>
-            </div>
-
-            <div className="space-y-5">
-              <div className="flex flex-wrap gap-2">
-                {product.industries.map((industry, i) => (
+              <CardContent className='p-4'>
+                <div className='space-y-2'>
                   <Badge
-                    key={i}
-                    variant="secondary"
-                    className="rounded-md py-1 px-2"
+                    variant='outline'
+                    className='w-full justify-center py-1.5 border-border/50 text-Syntaraa-light/90'
                   >
-                    {industry}
+                    {product.categories.map((category) => (
+                      <span key={category} className='mr-1'>
+                        {category}
+                        {category !== product.categories[product.categories.length - 1] && ','}
+                      </span>
+                    ))}
                   </Badge>
-                ))}
-                {product.categories.map((category, i) => (
-                  <Badge
-                    key={i}
-                    variant="secondary"
-                    className="rounded-md py-1 px-2"
-                  >
-                    {category}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+                  {hasHazards && (
+                    <Badge
+                      variant='outline'
+                      className='w-full justify-center py-1.5 border-amber-500/30 bg-amber-500/10 text-amber-500 flex gap-2'
+                    >
+                      <AlertTriangle className='h-3.5 w-3.5' /> Hazardous Material
+                    </Badge>
+                  )}
+                  {product.is_exclusive && (
+                    <Badge
+                      variant='outline'
+                      className='w-full justify-center py-1.5 border-Syntaraa-primary/30 bg-Syntaraa-primary/10 text-Syntaraa-primary flex gap-2'
+                    >
+                      <Crown className='h-3.5 w-3.5' /> Exclusive Product
+                    </Badge>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        </div>
 
-        <div className="md:col-span-2 space-y-8">
-          <div className="space-y-6">
-            <div className="flex items-start gap-3">
-              <h1 className="text-3xl font-bold leading-tight">
-                {product.name}
-              </h1>
-              {hasHazards && (
-                <div className="mt-1.5 flex-shrink-0">
-                  <Badge
-                    variant="outline"
-                    className="bg-amber-50 text-amber-700 border-amber-200 rounded-md py-1 px-2"
-                  >
-                    <AlertTriangle className="h-4 w-4 mr-1.5" />
-                    Hazardous Material
-                  </Badge>
+          {/* Right Column - Product Details */}
+          <div className='md:col-span-2'>
+            <div className='mb-6'>
+              <h1 className='text-3xl md:text-4xl font-bold text-slate-900 mb-6'>{product.name}</h1>
+
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
+                <div className='flex flex-col'>
+                  <span className='text-Syntaraa-light/70 text-sm'>CAS NUMBER</span>
+                  <span className='text-slate-900 font-mono'>{product.cas_number}</span>
+                </div>
+                <div className='flex flex-col'>
+                  <span className='text-Syntaraa-light/70 text-sm'>MOLECULAR FORMULA</span>
+                  <span className='text-slate-900 font-mono'>{product.molecular_formula}</span>
+                </div>
+                <div className='flex flex-col'>
+                  <span className='text-Syntaraa-light/70 text-sm'>EINECS</span>
+                  <span className='text-slate-900 font-mono'>{product.einecs_number ?? '-'}</span>
+                </div>
+                <div className='flex flex-col'>
+                  <span className='text-Syntaraa-light/70 text-sm'>HSN CODE</span>
+                  <span className='text-slate-900 font-mono'>{product.hsn_no ?? '-'}</span>
+                </div>
+              </div>
+
+              <div className='mb-6'>
+                <h2 className='text-xl font-semibold text-slate-900 mb-3'>Description</h2>
+                <ReadMore content={product.description} />
+              </div>
+
+              {/* Certificates & Documentation section is disabled (hidden from UI,
+                  kept in code). Set SHOW_CERTIFICATES to true to re-enable. */}
+              {SHOW_CERTIFICATES && (
+                <div className='mb-6'>
+                  <h2 className='text-xl font-semibold text-slate-900 mb-3'>
+                    Certificates & Documentation
+                  </h2>
+                  {product.certificates.length > 0 ? (
+                    product.certificates.map((cert, i) => (
+                      <Button key={i} variant='outline' className='gap-2 mr-3'>
+                        <Link
+                          href={cert.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='flex items-center gap-2'
+                        >
+                          <FileText className='h-4 w-4' /> {cert.name}{' '}
+                          <ExternalLink className='h-3 w-3 ml-1' />
+                        </Link>
+                      </Button>
+                    ))
+                  ) : (
+                    <p className='text-Syntaraa-light/80'>
+                      No certificates available for this product.
+                    </p>
+                  )}
                 </div>
               )}
+
+              {/* <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+                <Button className='flex-1 bg-white text-slate-900 hover:bg-white/90'>
+                  Get in Touch
+                </Button>
+                <Button variant='outline' className='flex-1'>
+                  Request Quote
+                </Button>
+              </div> */}
+              <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+                <ProductInquiryForm
+                  product={product}
+                  buttonClassName='bg-white text-slate-900 hover:text-slate-900 hover:bg-white/90'
+                />
+                <RequestQuoteForm product={product} buttonClassName='' />
+              </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-5 rounded-lg bg-neutral-700">
-              <div className="space-y-1.5">
-                <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
-                  CAS Number
-                </p>
-                <p className="font-mono text-sm">{product.cas_number}</p>
-              </div>
-              <div className="space-y-1.5">
-                <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
-                  Molecular Formula
-                </p>
-                <p className="font-mono text-sm">{product.molecular_formula}</p>
-              </div>
-              <div className="space-y-1.5">
-                <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
-                  EINECS
-                </p>
-                <p className="font-mono text-sm">
-                  {product.einecs_number || "—"}
-                </p>
-              </div>
-              <div className="space-y-1.5">
-                <p className="text-xs uppercase tracking-wider text-neutral-300 font-medium">
-                  HSN Code
-                </p>
-                <p className="font-mono text-sm">{product.hsn_no || "—"}</p>
-              </div>
-            </div>
-            {/* 
-        <div>
-          {product.iupac_name && (
-            <p className="text-neutral-300 mt-1">
-              IUPAC Name: {product.iupac_name}
-            </p>
-          )}
-        </div> */}
-
-            <div className="space-y-2">
-              <h2 className="text-xl font-semibold">Description</h2>
-              <ReadMore content={product.description} />
-            </div>
-            {product.certificates && product.certificates.length > 0 && (
-              <div className="space-y-3 bg-neutral-700 p-4 rounded-lg">
-                <h3 className="text-sm font-medium">
-                  Certificates & Documentation
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {product.certificates.map((cert, i) => (
-                    <Button
-                      key={i}
-                      variant="outline"
-                      size="sm"
-                      className="h-8 rounded-md bg-transparent text-neutral-50 border-neutral-50"
-                      asChild
-                    >
-                      <Link
-                        href={cert.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FileText className="h-3.5 w-3.5 mr-1.5" />
-                        {cert.name}
-                        <ExternalLink className="h-3 w-3 ml-1.5 opacity-70" />
-                      </Link>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            )}
-            <div className="flex pt-2 space-x-2">
-              <ContactForm
-                product={product}
-                buttonClassName="bg-white text-neutral-900"
-              />
-              <RequestQuoteForm
-                product={product}
-                buttonClassName="border border-neutral-50 text-neutral-50 bg-transparent"
-              />
+            <div className='mt-10'>
+              <PropertyList product={product} />
             </div>
           </div>
+        </div>
+
+        {/* Related Products Section */}
+        <div className='mt-16'>
+          <h2 className='text-2xl font-bold text-slate-900 mb-8'>Related Products</h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            {product.relatedProducts.map((relatedProduct) => (
+              <ProductCard key={relatedProduct.id} product={relatedProduct} />
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className='mt-16'>
+          <h2 className='text-2xl font-bold text-slate-900 mb-8'>Frequently Asked Questions</h2>
+          <div className='space-y-4'>
+            {product.faq.map((faq, index) => (
+              <Collapsible
+                key={index}
+                className='border border-border/40 rounded-lg overflow-hidden'
+              >
+                <CollapsibleTrigger className='flex items-center justify-between w-full p-4 bg-Syntaraa-darker/80 text-left'>
+                  <span className='font-medium text-slate-900'>{faq.key}</span>
+                  <ChevronLeft className='h-5 w-5 transform -rotate-90 text-Syntaraa-light/70 ui-open:rotate-90 transition-transform duration-200' />
+                </CollapsibleTrigger>
+                <CollapsibleContent className='p-4 pt-0 bg-Syntaraa-darker/40'>
+                  <div className='pt-4 border-t border-border/20 text-Syntaraa-light/80'>
+                    {faq.value}
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            ))}
+          </div>
+        </div>
+
+        {/* Help Section */}
+        <div className='mt-16 bg-Syntaraa-darker/30 border border-border/40 rounded-lg p-8 text-center'>
+          <h2 className='text-2xl font-bold text-slate-900 mb-3'>
+            Need Help Finding the Right Chemical?
+          </h2>
+          <p className='text-Syntaraa-light/80 max-w-3xl mx-auto mb-6'>
+            Our team of experts can help you source the exact chemical products you need for your
+            application. Get personalized assistance and technical support.
+          </p>
+          <Button size='lg' className='bg-Syntaraa-primary hover:bg-Syntaraa-primary/90'>
+            Contact Our Experts
+          </Button>
         </div>
       </div>
-      <ProductProperties product={product} />
-      <Separator className="my-12" />
-
-      <ProductRecommendations currentProductId={product.id} />
-
-      <Separator className="my-12" />
-
-      {product.faq && product.faq.length > 0 && (
-        <div className="space-y-4 pt-4 flex justify-between">
-          <div className="w-full flex items-center justify-center">
-            <h2 className="max-w-2xl text-4xl font-black">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <FAQ faqs={product.faq} />
-        </div>
-      )}
-
-      <CTABanner />
-    </main>
+      <Footer />
+    </div>
   );
-}
+};
+
+export default ProductDetail;

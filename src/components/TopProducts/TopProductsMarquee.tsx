@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import ProductCard from '@/components/ProductCard/v2/ProductCard';
+import ProductCard from '@/components/ProductCard/ProductCard';
 import { Product } from '@/lib/types';
 
 /**

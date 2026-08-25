@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCatalogue from '@/components/Listing/v2/Listing';
+import ProductCatalogue from '@/components/Listing/Listing';
 import { getAllProducts } from '@/lib/products';
 
 // Read page: cached/revalidated hourly. Now valid since we query the DB

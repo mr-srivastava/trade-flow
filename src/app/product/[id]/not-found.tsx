@@ -3,7 +3,7 @@ import { ChevronLeft } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import NavBar from '@/components/Navbar/Navbar';
-import Footer from '@/components/Footer/v2/Footer';
+import Footer from '@/components/Footer/Footer';
 
 
 const noProductFoundText = {

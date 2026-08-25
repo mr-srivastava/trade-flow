@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderIcon } from '@/lib/icon-util';
-import ContactForm from '../ContactForm/v2/ContactForm';
+import ContactForm from '../ContactForm/ContactForm';
 import { Reveal } from '@/components/ui/Reveal';
 
 const contactDetails = [

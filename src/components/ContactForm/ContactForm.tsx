@@ -1,21 +1,10 @@
 'use client';
-
-import { useState } from 'react';
+import React from 'react';
+import { Send, Loader2 } from 'lucide-react';
+import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Loader2 } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { toast, Toaster } from 'sonner';
 import {
   Form,
   FormControl,
@@ -27,9 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import type { Product } from '@/lib/types';
-import { toast, Toaster } from 'sonner';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -38,8 +25,9 @@ const formSchema = z.object({
   email: z.string().email({
     message: 'Please enter a valid email address.',
   }),
-  company: z.string().optional(),
-  phone: z.string().optional(),
+  subject: z.string().min(5, {
+    message: 'Subject must be at least 5 characters.',
+  }),
   message: z.string().min(10, {
     message: 'Message must be at least 10 characters.',
   }),
@@ -47,83 +35,65 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface ContactFormProps {
-  product: Product;
-  buttonClassName?: string;
-}
-
-export function ContactForm({ product, buttonClassName }: ContactFormProps) {
-  const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
+const ContactForm: React.FC = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
       email: '',
-      company: '',
-      phone: '',
-      message: `I'm interested in ${product.name} (CAS: ${product.cas_number}) and would like more information.`,
+      subject: '',
+      message: '',
     },
   });
 
-  async function onSubmit(values: FormValues) {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'contact',
-          ...values,
-          product_id: product.id,
-          product_name: product.name,
-        }),
+        body: JSON.stringify({ type: 'contact', ...data }),
       });
       if (!res.ok) throw new Error('Request failed');
 
-      setOpen(false);
-      toast.success('Inquiry Submitted', {
-        description: "We've received your inquiry and will get back to you soon.",
+      toast.success('Message Sent', {
+        description: "We've received your message and will get back to you soon.",
       });
       form.reset();
     } catch {
-      // Keep the dialog open so the user can retry.
-      toast.error('Submission failed', {
-        description: 'We could not submit your inquiry. Please try again.',
+      toast.error('Something went wrong', {
+        description: 'Your message could not be sent. Please try again.',
       });
     } finally {
       setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <>
+    <div className='lg:col-span-3'>
       <Toaster position='bottom-left' richColors />
+      <div className='glass-card p-6'>
+        <h3 className='text-xl font-medium mb-6 text-slate-900'>Send us a Message</h3>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
-            Get in Touch
-          </Button>
-        </DialogTrigger>
-        <DialogContent className='sm:max-w-[500px]'>
-          <DialogHeader>
-            <DialogTitle>Product Inquiry</DialogTitle>
-            <DialogDescription>
-              Submit your inquiry about {product.name}. Our team will get back to you shortly.
-            </DialogDescription>
-          </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <FormField
                 control={form.control}
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name*</FormLabel>
+                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                      Name
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder='Your name' {...field} />
+                      <Input
+                        placeholder='Your name'
+                        {...field}
+                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -134,72 +104,83 @@ export function ContactForm({ product, buttonClassName }: ContactFormProps) {
                 name='email'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email*</FormLabel>
+                    <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                      Email
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder='your.email@company.com' {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className='grid grid-cols-2 gap-4'>
-                <FormField
-                  control={form.control}
-                  name='company'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Company</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your company' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='phone'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your phone number' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={form.control}
-                name='message'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message*</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder='Please provide details about your inquiry'
-                        className='min-h-[120px]'
+                      <Input
+                        placeholder='your.email@company.com'
                         {...field}
+                        className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
                       />
                     </FormControl>
-                    <FormDescription>
-                      Include any specific requirements or questions you have.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <DialogFooter>
-                <Button type='submit' disabled={isSubmitting} className='rounded-md'>
-                  {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-                  Submit Inquiry
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
-    </>
+            </div>
+            <FormField
+              control={form.control}
+              name='subject'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                    Subject
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder='How can we help you?'
+                      {...field}
+                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary'
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='message'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='block text-sm font-medium text-Syntaraa-light mb-2'>
+                    Message
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder='Please provide details about your inquiry'
+                      className='w-full bg-Syntaraa-darker border border-border rounded-md text-slate-900 focus:outline-none focus:ring-1 focus:ring-Syntaraa-primary focus:border-Syntaraa-primary resize-none'
+                      rows={3}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Include any specific requirements or questions you have.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              type='submit'
+              disabled={isSubmitting}
+              className='btn-primary flex items-center gap-2 w-full justify-center'
+            >
+              {isSubmitting ? (
+                <>
+                  Sending <Loader2 className='h-4 w-4 animate-spin' />
+                </>
+              ) : (
+                <>
+                  Send Message <Send className='h-4 w-4' />
+                </>
+              )}
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </div>
   );
-}
+};
+
+export default ContactForm;
