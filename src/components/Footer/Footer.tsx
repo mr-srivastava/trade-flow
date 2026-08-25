@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { renderIcon } from '@/lib/icon-util';
+import Logo from '@/components/Logo/Logo';
 
 interface FooterData {
-  logo: string;
   description: string;
   quickLinks: Record<'name' | 'href', string>[];
   products: Record<'name' | 'href', string>[];
@@ -12,7 +12,6 @@ interface FooterData {
 }
 
 const footerData: FooterData = {
-  logo: 'Syntaraa',
   description:
     'Bridging markets and building partnerships in the global chemical and pharmaceutical trade industry.',
   quickLinks: [
@@ -46,7 +45,9 @@ const Footer: React.FC = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
           <div>
-            <h3 className='text-xl font-bold text-slate-900 mb-6'>{footerData.logo}</h3>
+            <div className='mb-6 -ml-2'>
+              <Logo size={28} />
+            </div>
             <p className='text-Syntaraa-light/70 mb-6 text-sm'>{footerData.description}</p>
             <div className='flex space-x-4'>
               {footerData.socials.map((social) => (
