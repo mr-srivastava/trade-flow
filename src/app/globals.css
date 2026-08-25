@@ -1,58 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .bg-Syntaraa-dark {
-    background-color: #ffffff;
-  }
-  .text-foreground {
-    color: hsl(var(--foreground));
-  }
-  .font-heading {
-    font-family: 'Montserrat', sans-serif;
-  }
-  .bg-Syntaraa-primary {
-    background-color: hsl(var(--primary));
-  }
-  .to-Syntaraa-darker {
-    --tw-gradient-to: #f1f5f9;
-  }
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --foreground: 257 55% 10%; /* ink   #140C29 */
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 257 55% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 257 55% 10%;
 
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 257 70% 51%; /* brand #5B2BD9 */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 255 40% 96%; /* mist  #F3F1F9 */
+    --secondary-foreground: 257 55% 10%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 255 40% 96%;
+    --muted-foreground: 255 12% 45%; /* slate #6B6480 */
 
-    --accent: 226 83% 53%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 257 70% 96%; /* brand-50 */
+    --accent-foreground: 257 70% 43%; /* brand-600 */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 349 64% 43%; /* error #B32741 */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 88%;
-    --input: 214 32% 88%;
-    --ring: 221 83% 53%;
+    --border: 257 32% 91%; /* line  #E6E2F0 */
+    --input: 257 32% 91%;
+    --ring: 257 70% 51%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* 12px */
   }
 }
 
@@ -62,9 +42,7 @@
   }
 
   body {
-    @apply bg-Syntaraa-dark text-foreground font-sans;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.97), rgba(241, 245, 249, 0.97)),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    @apply bg-background text-ink font-sans antialiased;
     scroll-behavior: smooth;
   }
 
@@ -74,75 +52,60 @@
   h4,
   h5,
   h6 {
-    @apply font-heading font-semibold;
+    @apply font-heading font-semibold text-ink;
+    letter-spacing: -0.02em;
   }
 
-  /* Custom components */
+  h1 {
+    letter-spacing: -0.03em;
+  }
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20;
   }
 
-  .card-gradient {
-    @apply bg-gradient-to-br from-secondary to-Syntaraa-darker border border-border/50;
+  /* Was a blurred glass panel with a heavy shadow. Now a flat hairline card. */
+  .surface-card {
+    @apply bg-white border border-line rounded-lg;
   }
 
+  /* Was a gradient. Now a tinted flat panel. */
+  .surface-muted {
+    @apply bg-mist border border-line rounded-lg;
+  }
+
+  /* TEMPORARY aliases for the old vocabulary. Deleted in Phase 6e. */
   .glass-card {
-    @apply bg-secondary/70 backdrop-blur-sm border border-border/50 rounded-lg shadow-lg;
+    @apply bg-white border border-line rounded-lg;
+  }
+
+  .card-gradient {
+    @apply bg-mist border border-line rounded-lg;
   }
 
   .btn-primary {
-    @apply bg-Syntaraa-primary hover:bg-Syntaraa-primary/90 text-white rounded-md px-6 py-2.5 font-medium transition duration-200 shadow-[0_4px_14px_0_rgba(37,99,235,0.39)];
+    @apply inline-flex items-center justify-center gap-2 rounded-md
+           bg-brand px-6 py-2.5 text-sm font-medium text-white
+           transition-colors duration-150
+           hover:bg-brand-600 active:bg-brand-700
+           focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-brand/30;
   }
 
   .btn-outline {
-    @apply bg-transparent border border-Syntaraa-primary/50 hover:border-Syntaraa-primary text-Syntaraa-primary rounded-md px-6 py-2.5 font-medium transition duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-md
+           border border-line bg-white px-6 py-2.5 text-sm font-medium text-ink
+           transition-colors duration-150
+           hover:bg-mist hover:border-brand-200
+           focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-brand/30;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-slate;
   }
 
   .link-hover {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:text-Syntaraa-primary 
-           after:transition-all after:duration-300 hover:after:w-full after:z-50;
+    @apply relative transition-colors duration-150 hover:text-brand
+           after:absolute after:bottom-0 after:left-0 after:h-px after:w-0
+           after:bg-brand after:transition-all after:duration-200 hover:after:w-full;
   }
-}
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

@@ -20,11 +20,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Montserrat', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'monospace'],
+        sans: ['var(--font-archivo)', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        heading: ['var(--font-archivo)', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        mono: ['var(--font-plex-mono)', 'ui-monospace', 'Menlo', 'monospace'],
       },
       colors: {
+        // shadcn semantic keys — these read the CSS vars repointed in globals.css.
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -58,19 +59,48 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+
+        // Syntaraa brand palette. One hue — indigo. No second accent.
+        brand: {
+          DEFAULT: '#5B2BD9',
+          50: '#F2EEFC',
+          100: '#E4DCF9',
+          200: '#CDBEF3',
+          300: '#AB93EC',
+          400: '#835FE2',
+          500: '#5B2BD9',
+          600: '#4C21BA',
+          700: '#3E1B97',
+          800: '#311679',
+          900: '#25105B',
+        },
+        ink: '#140C29',
+        slate: '#6B6480',
+        mist: '#F3F1F9',
+        line: '#E6E2F0',
+        success: { DEFAULT: '#0F7A55', bg: '#E6F4EE' },
+        warning: { DEFAULT: '#A85C00', bg: '#FDF1E1' },
+        error: { DEFAULT: '#B32741', bg: '#FCEAEE' },
+
+        // TEMPORARY alias. Repoints the old vocabulary at the new palette so
+        // nothing looks broken between Phase 2 and Phase 6. Deleted in Phase 6e.
         Syntaraa: {
-          dark: '#ffffff', // Page surface (light theme)
-          darker: '#f1f5f9', // Slightly tinted surface for cards/inputs/nav
-          primary: '#2563eb', // Blue
-          accent: '#6366f1', // Indigo
-          light: '#334155', // Primary text color on light surfaces (slate-700)
-          tealAccent: '#0D9488', // Teal accent for alternating UI elements
+          dark: '#FFFFFF',
+          darker: '#F3F1F9',
+          primary: '#5B2BD9',
+          accent: '#835FE2',
+          light: '#6B6480',
+          tealAccent: '#5B2BD9',
         },
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: 'var(--radius)', // 12px
+        md: 'calc(var(--radius) - 4px)', // 8px
+        sm: 'calc(var(--radius) - 6px)', // 6px
+        xl: 'calc(var(--radius) + 4px)', // 16px, matches the logo tile
+      },
+      transitionDuration: {
+        DEFAULT: '160ms',
       },
       keyframes: {
         'accordion-down': {
@@ -103,10 +133,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in': 'fade-in 0.5s ease-out forwards',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'fade-in': 'fade-in 0.3s ease-out forwards',
       },
     },
   },
