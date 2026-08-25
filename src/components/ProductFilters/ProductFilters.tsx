@@ -1,199 +1,95 @@
-"use client";
+import React from 'react';
+import { Product } from '@/lib/types';
+import { FilterCategory } from './FilterCategory';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { parseIndustryToSlug } from '@/lib/api';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+function getFilterData(products: Array<Product>) {
+  const mapToFilterItems = (items: string[]) =>
+    Array.from(new Set(items)).map((item) => ({
+      id: parseIndustryToSlug(item),
+      label: item,
+    }));
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import {
-  getAllIndustries,
-  getAllCategories,
-  getAllSubCategories,
-} from "@/lib/data";
+  return {
+    industries: mapToFilterItems(products.flatMap((product) => product.industries)),
+    categories: mapToFilterItems(products.flatMap((product) => product.categories)),
+    subcategories: mapToFilterItems(products.flatMap((product) => product.sub_categories || [])),
+  };
+}
 
-export function ProductFilters() {
+const ProductFilters: React.FC<{
+  products: Array<Product>;
+  appliedFilters: { industries: string; categories: string; subcategories: string };
+}> = ({ products, appliedFilters }) => {
+  const { industries, categories, subcategories } = getFilterData(products);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const currentIndustry = searchParams.get("industry") || "";
-  const currentCategory = searchParams.get("category") || "";
-
-  const industries = getAllIndustries();
-  const categories = getAllCategories();
-  const subCategories = getAllSubCategories();
-
-  const handleIndustryChange = (industryName: string) => {
+  const updateFilters = (key: string, value: string, resetKeys: string[] = []) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    if (industryName === currentIndustry) {
-      params.delete("industry");
+    if (value === appliedFilters[key as keyof typeof appliedFilters]) {
+      params.delete(key);
     } else {
-      params.set("industry", industryName);
+      params.set(key, value);
     }
 
-    // Reset to page 1 when changing filters
-    params.set("page", "1");
+    resetKeys.forEach((resetKey) => params.delete(resetKey));
+    params.set('page', '1');
 
-    // router.push(`/?${params.toString()}`);
-    router.push(`${pathname}?${params.toString()}`);
-  };
-
-  const handleCategoryChange = (categoryName: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (categoryName === currentCategory) {
-      params.delete("category");
-    } else {
-      params.set("category", categoryName);
-    }
-
-    // Reset to page 1 when changing filters
-    params.set("page", "1");
-
-    // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
   };
 
   const clearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
-    params.delete("industry");
-    params.delete("category");
-    params.set("page", "1");
+    ['industries', 'categories', 'subcategories'].forEach((key) => params.delete(key));
+    params.set('page', '1');
 
-    // router.push(`/?${params.toString()}`);
     router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="font-medium">Filters</h3>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={clearFilters}
-          className="h-auto p-0 text-sm text-muted-foreground"
-        >
-          Clear all
-        </Button>
+    <div className='surface-card p-5'>
+      <div className='flex items-center justify-between mb-4'>
+        <h2 className='text-lg font-semibold text-ink'>Filters</h2>
+        {(appliedFilters.industries ||
+          appliedFilters.categories ||
+          appliedFilters.subcategories) && (
+          <Button
+            variant='link'
+            className='text-brand text-sm hover:text-brand-600 transition-colors duration-150'
+            onClick={clearFilters}
+          >
+            Clear all
+          </Button>
+        )}
       </div>
 
-      <Separator />
-
-      <Accordion type="multiple" defaultValue={["industries", "categories"]}>
-        <AccordionItem value="industries">
-          <AccordionTrigger>Industries</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3">
-              {industries.map((industry) => (
-                <div key={industry} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`industry-${industry}`}
-                    checked={currentIndustry === industry}
-                    onCheckedChange={() => handleIndustryChange(industry)}
-                  />
-                  <Label
-                    htmlFor={`industry-${industry}`}
-                    className="text-sm font-normal cursor-pointer"
-                  >
-                    {industry}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        <AccordionItem value="categories">
-          <AccordionTrigger>Categories</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3">
-              {categories.map((category) => (
-                <div key={category} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`category-${category}`}
-                    checked={currentCategory === category}
-                    onCheckedChange={() => handleCategoryChange(category)}
-                  />
-                  <Label
-                    htmlFor={`category-${category}`}
-                    className="text-sm font-normal cursor-pointer"
-                  >
-                    {category}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        {subCategories.length > 0 && (
-          <AccordionItem value="subcategories">
-            <AccordionTrigger>Sub-Categories</AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-3">
-                {subCategories.map((subCategory) => (
-                  <div
-                    key={subCategory}
-                    className="flex items-center space-x-2"
-                  >
-                    <Checkbox id={`subcategory-${subCategory}`} />
-                    <Label
-                      htmlFor={`subcategory-${subCategory}`}
-                      className="text-sm font-normal cursor-pointer"
-                    >
-                      {subCategory}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        )}
-
-        <AccordionItem value="properties">
-          <AccordionTrigger>Properties</AccordionTrigger>
-          <AccordionContent>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="property-hazardous" />
-                <Label
-                  htmlFor="property-hazardous"
-                  className="text-sm font-normal cursor-pointer"
-                >
-                  Hazardous Materials
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="property-exclusive" />
-                <Label
-                  htmlFor="property-exclusive"
-                  className="text-sm font-normal cursor-pointer"
-                >
-                  Exclusive Products
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="property-certificates" />
-                <Label
-                  htmlFor="property-certificates"
-                  className="text-sm font-normal cursor-pointer"
-                >
-                  With Certificates
-                </Label>
-              </div>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <div className='space-y-1'>
+        <FilterCategory
+          title='Industries'
+          items={industries}
+          onFilterChange={(value) => updateFilters('industries', value)}
+          selected={appliedFilters.industries}
+        />
+        <FilterCategory
+          title='Categories'
+          items={categories}
+          onFilterChange={(value) => updateFilters('categories', value)}
+          selected={appliedFilters.categories}
+        />
+        <FilterCategory
+          title='Sub-Categories'
+          items={subcategories}
+          onFilterChange={(value) => updateFilters('subcategories', value)}
+          selected={appliedFilters.subcategories}
+        />
+      </div>
     </div>
   );
-}
+};
+
+export default ProductFilters;

@@ -1,68 +1,77 @@
-import { Facebook, Linkedin, Twitter } from "lucide-react";
-import Link from "next/link";
-import React from "react";
+import React from 'react';
+import Link from 'next/link';
+import { renderIcon } from '@/lib/icon-util';
+import Logo from '@/components/Logo/Logo';
 
-const PRODUCT_LINKS = [
-  { name: "Features", href: "#" },
-  { name: "Pricing", href: "#" },
-  { name: "Testimonials", href: "#" },
-  { name: "FAQ", href: "#" },
-];
+interface FooterData {
+  description: string;
+  quickLinks: Record<'name' | 'href', string>[];
+  products: Record<'name' | 'href', string>[];
+  socials: Record<'name' | 'href' | 'icon', string>[];
+  contact: (Record<'key' | 'icon' | 'content', string> & Partial<Record<'href', string>>)[];
+}
 
-const COMPANY_LINKS = [
-  { name: "About", href: "#" },
-  { name: "Blog", href: "#" },
-  { name: "Careers", href: "#" },
-  { name: "Contact", href: "#" },
-];
+const footerData: FooterData = {
+  description:
+    'Bridging markets and building partnerships in the global chemical and pharmaceutical trade industry.',
+  quickLinks: [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '#about' },
+    { name: 'Products', href: '#products' },
+    { name: 'Capabilities', href: '#capabilities' },
+    { name: 'Contact', href: '/contact' },
+  ],
+  products: [
+    { name: 'Pharmaceutical Intermediates', href: '#' },
+    { name: 'API & Bulk Drugs', href: '#' },
+    { name: 'Fine Chemicals', href: '#' },
+    { name: 'Specialty Chemicals', href: '#' },
+  ],
+  socials: [
+    { name: 'Linkedin', href: '#linkedin', icon: 'Linkedin' },
+    { name: 'Twitter', href: '#twitter', icon: 'Twitter' },
+    { name: 'Facebook', href: '#facebook', icon: 'Facebook' },
+  ],
+  contact: [
+    { key: 'location', icon: 'Globe', content: 'Kolkata, India' },
+    { key: 'mail', icon: 'Mail', content: 'mmg.exim30@gmail.com', href: 'mailto:mmg.exim30@gmail.com' },
+    { key: 'phone', icon: 'Phone', content: '+91 9804835919', href: 'tel:+91 9804835919' },
+  ],
+};
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
-    <footer id="footer" className="relative bg-neutral-900/95 pt-24 pb-12">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-6">
-            <a
-              href="#"
-              className="text-2xl font-bold group text-white transition-colors duration-300"
-            >
-              <span className="group-hover:text-brand">Trade</span>
-              <span className="text-brand group-hover:text-white">Flow</span>
-            </a>
-            <p className="text-slate-400">
-              Transforming global trade operations with innovative software
-              solutions.
-            </p>
-            <div className="flex space-x-4">
-              <Link
-                href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
-              >
-                <Facebook />
-              </Link>
-              <Link
-                href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
-              >
-                <Twitter />
-              </Link>
-              <Link
-                href="#"
-                className="text-slate-400 hover:text-brand transition-colors duration-300"
-              >
-                <Linkedin />
-              </Link>
+    <footer className='bg-mist border-t border-line pt-16 pb-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
+          <div>
+            <div className='mb-6 -ml-2'>
+              <Logo size={28} />
+            </div>
+            <p className='text-slate mb-6 text-sm'>{footerData.description}</p>
+            <div className='flex space-x-4'>
+              {footerData.socials.map((social) => (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='bg-white border border-line rounded-full p-2 text-slate transition-colors duration-150 hover:border-brand hover:text-brand'
+                >
+                  {renderIcon(social.icon, 'h-5 w-5')}
+                </Link>
+              ))}
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-slate-50 mb-6">Product</h3>
-            <ul className="space-y-4">
-              {PRODUCT_LINKS.map((link) => (
+            <h4 className='eyebrow mb-4 block'>Quick Links</h4>
+            <ul className='space-y-3'>
+              {footerData.quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300"
+                    className='text-slate transition-colors duration-150 hover:text-brand'
                   >
                     {link.name}
                   </Link>
@@ -72,15 +81,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-slate-50 mb-6">Company</h3>
-            <ul className="space-y-4">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.name}>
+            <h4 className='eyebrow mb-4 block'>Products</h4>
+            <ul className='space-y-3'>
+              {footerData.products.map((product) => (
+                <li key={product.name}>
                   <Link
-                    href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300"
+                    href={product.href}
+                    className='text-slate transition-colors duration-150 hover:text-brand'
                   >
-                    {link.name}
+                    {product.name}
                   </Link>
                 </li>
               ))}
@@ -88,51 +97,57 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Stay Updated</h3>
-            <form className="space-y-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 bg-neutral-700 border border-neutral-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-brand transition-colors duration-300"
-              />
-              <button
-                type="submit"
-                className="w-full px-4 py-2 rounded-lg text-white bg-gradient-to-r from-blue-400 to-brand font-semibold transition-all duration-300 hover:from-blue-500 hover:to-[#0B8ED0] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg hover:shadow-xl"
-              >
-                Subscribe
-              </button>
-            </form>
+            <h4 className='eyebrow mb-4 block'>Contact</h4>
+            <ul className='space-y-3'>
+              {footerData.contact.map(({ key, icon, content, href }) => (
+                <li key={key} className='flex items-center gap-3'>
+                  {renderIcon(icon, 'h-5 w-5 shrink-0 text-brand')}
+                  {href ? (
+                    <Link
+                      href={href}
+                      className='text-ink transition-colors duration-150 hover:text-brand'
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <span className='text-ink'>{content}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-neutral-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-neutral-500 text-sm">
-              © 2024 TradeFlow. All rights reserved.
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a
-                href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+        <div className='border-t border-line pt-8'>
+          <div className='flex flex-col md:flex-row justify-between items-center'>
+            <p className='text-sm text-slate'>
+              © {new Date().getFullYear()} Syntaraa. All rights reserved.
+            </p>
+            <div className='flex space-x-6 mt-4 md:mt-0'>
+              <Link
+                href='#'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+              </Link>
+              <Link
+                href='#'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-neutral-500 hover:text-white transition-colors duration-300"
+              </Link>
+              <Link
+                href='#'
+                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
               >
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

@@ -1,29 +1,53 @@
-import type { Property } from "@/lib/types";
+import React from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent } from '@/components/ui/card';
 
-interface PropertyListProps {
-  properties: Property[];
-}
+import { Product } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
 
-export function PropertyList({ properties }: PropertyListProps) {
-  if (!properties || properties.length === 0) {
-    return <p className="text-muted-foreground">No information available</p>;
-  }
+const TabContent = ({ data }: { data: { key: string; value: string }[] }) => (
+  <Card className='border border-line bg-white'>
+    <CardContent className='p-6'>
+      <div className='divide-y divide-line'>
+        {data.map((item, index) => (
+          <div key={index} className='flex py-4 px-6'>
+            <div className='w-1/2 text-sm text-slate'>{item.key}</div>
+            <div className='w-1/2 font-mono text-sm text-ink'>{item.value}</div>
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
+export default function PropertyList({ product }: { product: Product }) {
+  const tabs = [
+    { value: 'properties', label: 'PROPERTIES', icon: 'Info', data: product.properties },
+    { value: 'applications', label: 'APPLICATIONS', icon: 'Beaker', data: product.applications },
+    {
+      value: 'safety',
+      label: 'SAFETY AND HAZARD',
+      icon: 'AlertTriangle',
+      data: product.safety_and_hazard,
+    },
+    { value: 'storage', label: 'STORAGE', icon: 'Package2', data: product.storage },
+  ];
 
   return (
-    <div className="space-y-5 divide-y divide-border/40">
-      {properties.map((property, index) => (
-        <div
-          key={index}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-3 ${
-            index > 0 ? "pt-5" : ""
-          }`}
-        >
-          <div className="font-medium text-white">{property.key}</div>
-          <div className="md:col-span-2 text-neutral-300 whitespace-pre-line">
-            {property.value}
-          </div>
-        </div>
+    <Tabs defaultValue='properties' className='w-full'>
+      <TabsList className='w-full bg-mist rounded-md p-1 mb-6'>
+        {tabs.map(({ value, label, icon }) => (
+          <TabsTrigger key={value} value={value} className='flex items-center gap-2 flex-1 font-mono text-[11px] uppercase tracking-[0.08em]'>
+            {renderIcon(icon, 'h-4 w-4')} {label}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+
+      {tabs.map(({ value, data }) => (
+        <TabsContent key={value} value={value}>
+          <TabContent data={data} />
+        </TabsContent>
       ))}
-    </div>
+    </Tabs>
   );
 }

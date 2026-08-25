@@ -1,139 +1,66 @@
-import React from "react";
+import React from 'react';
+import { AboutContent } from '@/lib/types';
+import { renderIcon } from '@/lib/icon-util';
+import { Reveal } from '@/components/ui/Reveal';
 
-export default function About() {
+const AboutSection: React.FC<AboutContent> = ({ header, description, values }) => {
   return (
-    <section id="about" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            About Trade<span className="text-brand">Flow</span>
-          </h2>
-          <div className="w-24 h-1 bg-brand mx-auto"></div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h3 className="text-3xl font-semibold text-slate-50">
-              Your Trusted Partner in Global Trade
-            </h3>
-            <p className="text-lg text-slate-300">
-              Since 2005, ExportBridge has been at the forefront of
-              international trade, facilitating seamless connections between
-              buyers and sellers across the globe. Our expertise in export
-              brokering has helped countless businesses expand their reach and
-              achieve sustainable growth.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="w-6 h-6 text-brand"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-slate-50">
-                    Expert Market Knowledge
-                  </h4>
-                  <p className="text-slate-300">
-                    Deep understanding of international markets and trade
-                    regulations
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="w-6 h-6 text-brand"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-slate-50">
-                    Global Network
-                  </h4>
-                  <p className="text-slate-300">
-                    Strong partnerships with verified suppliers and buyers
-                    worldwide
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="w-6 h-6 text-brand"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M5 13l4 4L19 7"
-                    ></path>
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-slate-50">
-                    Quality Assurance
-                  </h4>
-                  <p className="text-slate-300">
-                    Rigorous quality control and verification processes
-                  </p>
-                </div>
-              </div>
+    <section id='about' className='py-4 bg-white'>
+      <div className='section-container'>
+        <Reveal>
+          <div className='surface-card p-8 md:p-12'>
+            <Header header={header} />
+            <div className='grid grid-cols-1 lg:grid-cols-5 gap-8'>
+              <Description description={description} />
+              <CoreValues values={values} />
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <div className="text-4xl font-bold text-brand mb-2">15+</div>
-              <div className="text-gray-600">Years of Experience</div>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <div className="text-4xl font-bold text-brand mb-2">1000+</div>
-              <div className="text-gray-600">Successful Deals</div>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <div className="text-4xl font-bold text-brand mb-2">50+</div>
-              <div className="text-gray-600">Countries Served</div>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
-              <div className="text-4xl font-bold text-brand mb-2">500+</div>
-              <div className="text-gray-600">Active Clients</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16 bg-gradient-to-r from-blue-400 to-brand text-white rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-semibold mb-4">Our Certifications</h3>
-          <div className="flex flex-wrap justify-center gap-8">
-            <div className="certification-badge">ISO 9001:2015</div>
-            <div className="certification-badge">ISO 14001:2015</div>
-            <div className="certification-badge">FIEO Member</div>
-            <div className="certification-badge">DGFT Certified</div>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
-}
+};
+
+const Header: React.FC<{ header: AboutContent['header'] }> = ({ header }) => (
+  <h2 className='text-2xl md:text-3xl font-semibold tracking-[-0.02em] mb-8 text-ink'>
+    {header.title} <span className='text-slate text-lg'>{header.subtitle}</span>
+  </h2>
+);
+
+const Description: React.FC<{ description: AboutContent['description'] }> = ({ description }) => (
+  <div className='lg:col-span-3'>
+    {description.paragraphs.map((paragraph, index) => (
+      <p key={index} className='text-slate mb-6 leading-relaxed'>
+        {paragraph}
+      </p>
+    ))}
+    <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+      {description.links.map((link, index) => (
+        <a key={index} href={link.href} className={link.className}>
+          {link.text}
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
+const CoreValues: React.FC<{ values: AboutContent['values'] }> = ({ values }) => (
+  <div className='lg:col-span-2 bg-mist border border-line rounded-lg p-6'>
+    <h3 className='text-lg md:text-xl font-semibold mb-6 text-ink'>Our Core Values</h3>
+    <ul className='space-y-6'>
+      {values.map((value, index) => (
+        <li key={index} className='flex items-start gap-4'>
+          <div className='flex-shrink-0 bg-brand-50 text-brand p-3 rounded-lg'>
+            {renderIcon(value.icon, 'h-6 w-6')}
+          </div>
+          <div>
+            <h4 className='font-semibold text-ink'>{value.title}</h4>
+            <p className='text-sm text-slate leading-relaxed'>{value.description}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+export default AboutSection;

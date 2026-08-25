@@ -15,7 +15,7 @@ const HIDDEN_CATEGORIES = ['Beauty & Personal Care', 'Flavors & Fragrances', 'Fo
  * Background photo for an industry card, distil.market style. Looks for
  * `public/industries/<slug>.jpg` (slug from `parseIndustryToSlug`). Returns the
  * public URL when the file exists, otherwise null so the card falls back to the
- * flat glass-card style — tolerant of industries that have no image yet.
+ * flat surface-card style — tolerant of industries that have no image yet.
  */
 function industryImage(name: string): string | null {
   const slug = parseIndustryToSlug(name);
@@ -32,13 +32,16 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
   );
 
   return (
-    <section id='products' className='py-4 bg-gradient-to-b from-Syntaraa-darker to-Syntaraa-dark'>
+    <section id='products' className='py-4 bg-white'>
       <div className='section-container'>
         <div className='text-center mb-12'>
-          <h2 className='text-2xl md:text-3xl font-bold mb-4 text-slate-900'>
+          <span className='eyebrow'>Products</span>
+          <h2 className='mt-3 mb-4 text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-ink'>
             {productCategories.title}
           </h2>
-          <p className='text-Syntaraa-light/80 max-w-2xl mx-auto'>{productCategories.subtitle}</p>
+          <p className='text-slate max-w-2xl mx-auto leading-relaxed'>
+            {productCategories.subtitle}
+          </p>
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
@@ -55,36 +58,36 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
                     className='group relative block h-56 rounded-xl overflow-hidden'
                   >
                     <div
-                      className='absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105'
+                      className='absolute inset-0 bg-cover bg-center transition-transform duration-200 group-hover:scale-105'
                       style={{ backgroundImage: `url(${image})` }}
                     />
-                    <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
-                    <span className='absolute top-3 right-3 text-sm text-white/90 bg-black/40 backdrop-blur py-1 px-2 rounded-full'>
+                    <div className='absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent' />
+                    <span className='absolute top-3 right-3 font-mono text-xs text-ink bg-white/90 py-1 px-2 rounded-full'>
                       {industry.count}
                     </span>
                     <div className='absolute bottom-0 left-0 right-0 p-5'>
                       <h3 className='text-lg font-semibold text-white'>{industry.name}</h3>
                       <div className='mt-2 flex items-center text-white/90'>
                         <span className='text-sm'>Explore products</span>
-                        <ChevronRight className='h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-300' />
+                        <ChevronRight className='h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform duration-200' />
                       </div>
                     </div>
                   </Link>
                 ) : (
-                  // Fallback: current flat glass-card (used until an image is dropped in).
+                  // Fallback: current flat surface-card (used until an image is dropped in).
                   <Link
                     href={href}
-                    className='glass-card p-6 hover:border-Syntaraa-primary/50 transition-all duration-300 group block'
+                    className='surface-card p-6 transition-colors duration-150 hover:border-brand group block'
                   >
                     <div className='flex justify-between items-center'>
-                      <h3 className='text-lg font-medium text-slate-900'>{industry.name}</h3>
-                      <span className='text-sm text-Syntaraa-light/70 bg-Syntaraa-darker py-1 px-2 rounded-full'>
+                      <h3 className='text-lg font-semibold text-ink'>{industry.name}</h3>
+                      <span className='font-mono text-xs text-slate bg-mist py-1 px-2 rounded-full'>
                         {industry.count}
                       </span>
                     </div>
                     <div className='mt-6 flex justify-between items-center'>
-                      <span className='text-sm text-Syntaraa-light/70'>Explore products</span>
-                      <ChevronRight className='h-5 w-5 text-Syntaraa-primary transform group-hover:translate-x-1 transition-transform duration-300' />
+                      <span className='text-sm text-slate'>Explore products</span>
+                      <ChevronRight className='h-5 w-5 text-brand transform group-hover:translate-x-1 transition-transform duration-200' />
                     </div>
                   </Link>
                 )}
