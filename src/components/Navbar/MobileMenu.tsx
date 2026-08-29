@@ -21,7 +21,7 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
           onClick={toggleMenu}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
-          className="inline-flex items-center justify-center p-2 rounded-md text-ink transition-colors hover:text-brand focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-brand/30"
+          className="inline-flex items-center justify-center p-2 rounded-md text-ink transition-colors hover:text-brand focus-visible:outline-hidden focus-visible:ring-[3px] focus-visible:ring-brand/30"
         >
           {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>

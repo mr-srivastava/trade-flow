@@ -61,7 +61,7 @@ const ProductCategories: React.FC<{ productCategories: ProductCategoriesData }> 
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-200 group-hover:scale-105"
                       style={{ backgroundImage: `url(${image})` }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/20 to-transparent" />
                     <span className="absolute top-3 right-3 font-mono text-xs text-ink bg-white/90 py-1 px-2 rounded-full">
                       {industry.count}
                     </span>

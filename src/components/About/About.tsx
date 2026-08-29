@@ -50,7 +50,7 @@ const CoreValues: React.FC<{ values: AboutContent['values'] }> = ({ values }) =>
     <ul className="space-y-6">
       {values.map((value, index) => (
         <li key={index} className="flex items-start gap-4">
-          <div className="flex-shrink-0 bg-brand-50 text-brand p-3 rounded-lg">
+          <div className="shrink-0 bg-brand-50 text-brand p-3 rounded-lg">
             {renderIcon(value.icon, 'h-6 w-6')}
           </div>
           <div>

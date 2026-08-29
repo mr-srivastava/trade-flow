@@ -16,7 +16,7 @@ export default function ProductNotFound() {
   return (
     <div>
       <NavBar />
-      <main className="flex-grow">
+      <main className="grow">
         <div>
           <div className="section-container pt-8 pb-16">
             <Link
