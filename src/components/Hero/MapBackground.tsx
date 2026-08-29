@@ -3,7 +3,7 @@ import WorldMap from '../ui/world-map';
 
 export default function MapBackground() {
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <WorldMap
         dots={[
           {

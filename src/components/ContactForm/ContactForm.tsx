@@ -4,7 +4,7 @@ import { Send, Loader2 } from 'lucide-react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast, Toaster } from 'sonner';
+import { useLeadSubmit } from '@/hooks/useLeadSubmit';
 import {
   Form,
   FormControl,
@@ -46,53 +46,31 @@ const ContactForm: React.FC = () => {
     },
   });
 
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { isSubmitting, submitLead } = useLeadSubmit({
+    successTitle: 'Message Sent',
+    successDescription: "We've received your message and will get back to you soon.",
+    errorDescription: 'Your message could not be sent. Please try again.',
+    onSuccess: () => form.reset(),
+  });
 
-  const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'contact', ...data }),
-      });
-      if (!res.ok) throw new Error('Request failed');
-
-      toast.success('Message Sent', {
-        description: "We've received your message and will get back to you soon.",
-      });
-      form.reset();
-    } catch {
-      toast.error('Something went wrong', {
-        description: 'Your message could not be sent. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const onSubmit = (data: FormValues) => submitLead({ type: 'contact', ...data });
 
   return (
-    <div className='lg:col-span-3'>
-      <Toaster position='bottom-left' richColors />
-      <div className='surface-card p-6'>
-        <h3 className='text-lg md:text-xl font-semibold mb-6 text-ink'>Send us a Message</h3>
+    <div className="lg:col-span-3">
+      <div className="surface-card p-6">
+        <h3 className="text-lg md:text-xl font-semibold mb-6 text-ink">Send us a Message</h3>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name='name'
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-ink mb-2'>
-                      Name
-                    </FormLabel>
+                    <FormLabel className="block text-sm font-medium text-ink mb-2">Name</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder='Your name'
-                        {...field}
-                      />
+                      <Input placeholder="Your name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,17 +78,12 @@ const ContactForm: React.FC = () => {
               />
               <FormField
                 control={form.control}
-                name='email'
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className='block text-sm font-medium text-ink mb-2'>
-                      Email
-                    </FormLabel>
+                    <FormLabel className="block text-sm font-medium text-ink mb-2">Email</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder='your.email@company.com'
-                        {...field}
-                      />
+                      <Input placeholder="your.email@company.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -119,17 +92,12 @@ const ContactForm: React.FC = () => {
             </div>
             <FormField
               control={form.control}
-              name='subject'
+              name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-ink mb-2'>
-                    Subject
-                  </FormLabel>
+                  <FormLabel className="block text-sm font-medium text-ink mb-2">Subject</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder='How can we help you?'
-                      {...field}
-                    />
+                    <Input placeholder="How can we help you?" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -137,16 +105,14 @@ const ContactForm: React.FC = () => {
             />
             <FormField
               control={form.control}
-              name='message'
+              name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='block text-sm font-medium text-ink mb-2'>
-                    Message
-                  </FormLabel>
+                  <FormLabel className="block text-sm font-medium text-ink mb-2">Message</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder='Please provide details about your inquiry'
-                      className='resize-none'
+                      placeholder="Please provide details about your inquiry"
+                      className="resize-none"
                       rows={3}
                       {...field}
                     />
@@ -158,18 +124,14 @@ const ContactForm: React.FC = () => {
                 </FormItem>
               )}
             />
-            <Button
-              type='submit'
-              disabled={isSubmitting}
-              className='btn-primary w-full'
-            >
+            <Button type="submit" disabled={isSubmitting} className="btn-primary w-full">
               {isSubmitting ? (
                 <>
-                  Sending <Loader2 className='h-4 w-4 animate-spin' />
+                  Sending <Loader2 className="h-4 w-4 animate-spin" />
                 </>
               ) : (
                 <>
-                  Send Message <Send className='h-4 w-4' />
+                  Send Message <Send className="h-4 w-4" />
                 </>
               )}
             </Button>

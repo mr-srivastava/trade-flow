@@ -52,15 +52,15 @@ const ProductFilters: React.FC<{
   };
 
   return (
-    <div className='surface-card p-5'>
-      <div className='flex items-center justify-between mb-4'>
-        <h2 className='text-lg font-semibold text-ink'>Filters</h2>
+    <div className="surface-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-ink">Filters</h2>
         {(appliedFilters.industries ||
           appliedFilters.categories ||
           appliedFilters.subcategories) && (
           <Button
-            variant='link'
-            className='text-brand text-sm hover:text-brand-600 transition-colors duration-150'
+            variant="link"
+            className="text-brand text-sm hover:text-brand-600 transition-colors duration-150"
             onClick={clearFilters}
           >
             Clear all
@@ -68,21 +68,21 @@ const ProductFilters: React.FC<{
         )}
       </div>
 
-      <div className='space-y-1'>
+      <div className="space-y-1">
         <FilterCategory
-          title='Industries'
+          title="Industries"
           items={industries}
           onFilterChange={(value) => updateFilters('industries', value)}
           selected={appliedFilters.industries}
         />
         <FilterCategory
-          title='Categories'
+          title="Categories"
           items={categories}
           onFilterChange={(value) => updateFilters('categories', value)}
           selected={appliedFilters.categories}
         />
         <FilterCategory
-          title='Sub-Categories'
+          title="Sub-Categories"
           items={subcategories}
           onFilterChange={(value) => updateFilters('subcategories', value)}
           selected={appliedFilters.subcategories}

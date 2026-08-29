@@ -1,13 +1,14 @@
-import { Pool, type QueryResultRow } from 'pg';
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import * as schema from './schema';
 
 /**
- * Shared Postgres connection pool for Supabase.
+ * Shared Postgres connection pool + Drizzle instance for Supabase.
  *
  * The pool is cached on globalThis so Next.js dev hot-reloads don't open a new
  * pool on every change (which would exhaust connections). Supabase requires SSL.
  */
 declare global {
-  // eslint-disable-next-line no-var
   var _pgPool: Pool | undefined;
 }
 
@@ -34,13 +35,5 @@ if (process.env.NODE_ENV !== 'production') {
   global._pgPool = pool;
 }
 
-/** Run a parameterized query and return the rows. */
-export async function query<T extends QueryResultRow = QueryResultRow>(
-  text: string,
-  params?: unknown[],
-): Promise<T[]> {
-  const result = await pool.query<T>(text, params as never);
-  return result.rows;
-}
-
-export { pool };
+export const db = drizzle(pool, { schema });
+export { schema };

@@ -6,15 +6,6 @@ import type { Product } from '../src/lib/types';
 const OUT = '/sessions/inspiring-quirky-franklin/mnt/outputs/sqlgen2';
 mkdirSync(OUT, { recursive: true });
 
-const DETAIL_KEYS = new Set([
-  'description', 'einecs_number', 'hsn_no', 'iupac_name', 'synonyms', 'shelf_life',
-  'properties', 'safety_and_hazard', 'applications', 'storage', 'certificates', 'faq',
-]);
-const PRODUCT_KEYS = new Set([
-  'id', 'name', 'cas_number', 'molecular_formula', 'categories', 'industries',
-  'sub_categories', 'product_images', 'is_exclusive',
-]);
-
 const products = productsData.products;
 
 const productRows = products.map((p) => ({

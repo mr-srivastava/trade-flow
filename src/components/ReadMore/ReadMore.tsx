@@ -14,8 +14,8 @@ export default function ReadMore({ content }: { content: string }) {
 
       <Button
         onClick={toggleExpanded}
-        className='text-brand text-sm font-medium hover:underline p-0 h-auto'
-        variant='link'
+        className="text-brand text-sm font-medium hover:underline p-0 h-auto"
+        variant="link"
       >
         {expanded ? 'Read less' : 'Read more'}
       </Button>
