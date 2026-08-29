@@ -4,7 +4,7 @@ import { Send, Loader2 } from 'lucide-react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast, Toaster } from 'sonner';
+import { useLeadSubmit } from '@/hooks/useLeadSubmit';
 import {
   Form,
   FormControl,
@@ -46,34 +46,17 @@ const ContactForm: React.FC = () => {
     },
   });
 
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { isSubmitting, submitLead } = useLeadSubmit({
+    successTitle: 'Message Sent',
+    successDescription: "We've received your message and will get back to you soon.",
+    errorDescription: 'Your message could not be sent. Please try again.',
+    onSuccess: () => form.reset(),
+  });
 
-  const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'contact', ...data }),
-      });
-      if (!res.ok) throw new Error('Request failed');
-
-      toast.success('Message Sent', {
-        description: "We've received your message and will get back to you soon.",
-      });
-      form.reset();
-    } catch {
-      toast.error('Something went wrong', {
-        description: 'Your message could not be sent. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const onSubmit = (data: FormValues) => submitLead({ type: 'contact', ...data });
 
   return (
     <div className='lg:col-span-3'>
-      <Toaster position='bottom-left' richColors />
       <div className='surface-card p-6'>
         <h3 className='text-lg md:text-xl font-semibold mb-6 text-ink'>Send us a Message</h3>
 

@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
 import { Loader2 } from 'lucide-react';
-import { toast, Toaster } from 'sonner';
+import { useLeadSubmit } from '@/hooks/useLeadSubmit';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -53,7 +53,6 @@ interface RequestQuoteFormProps {
 
 export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormProps) {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -66,39 +65,22 @@ export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormP
     },
   });
 
-  async function onSubmit(values: FormValues) {
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'quote',
-          ...values,
-          product_id: product.id,
-          product_name: product.name,
-        }),
-      });
-      if (!res.ok) throw new Error('Request failed');
-
+  const { isSubmitting, submitLead } = useLeadSubmit({
+    successTitle: 'Quote Request Submitted',
+    successDescription: "We'll prepare a custom quote and contact you soon.",
+    errorTitle: 'Submission failed',
+    // Keep the sheet open on failure so the user can retry.
+    errorDescription: 'We could not submit your request. Please try again.',
+    onSuccess: () => {
       setOpen(false);
-      toast.success('Quote Request Submitted', {
-        description: "We'll prepare a custom quote and contact you soon.",
-      });
       form.reset();
-    } catch {
-      // Keep the sheet open so the user can retry.
-      toast.error('Submission failed', {
-        description: 'We could not submit your request. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+    },
+  });
+
+  const onSubmit = (values: FormValues) =>
+    submitLead({ type: 'quote', ...values, product_id: product.id, product_name: product.name });
 
   return (
-    <>
-      <Toaster position='bottom-left' richColors />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
@@ -195,6 +177,5 @@ export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormP
           </div>
         </SheetContent>
       </Sheet>
-    </>
   );
 }

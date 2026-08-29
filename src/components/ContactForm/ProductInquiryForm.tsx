@@ -28,7 +28,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import type { Product } from '@/lib/types';
-import { toast, Toaster } from 'sonner';
+import { useLeadSubmit } from '@/hooks/useLeadSubmit';
 import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -54,7 +54,6 @@ interface ProductInquiryFormProps {
 
 export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryFormProps) {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -67,40 +66,22 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
     },
   });
 
-  async function onSubmit(values: FormValues) {
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'contact',
-          ...values,
-          product_id: product.id,
-          product_name: product.name,
-        }),
-      });
-      if (!res.ok) throw new Error('Request failed');
-
+  const { isSubmitting, submitLead } = useLeadSubmit({
+    successTitle: 'Inquiry Submitted',
+    successDescription: "We've received your inquiry and will get back to you soon.",
+    errorTitle: 'Submission failed',
+    // Keep the dialog open on failure so the user can retry.
+    errorDescription: 'We could not submit your inquiry. Please try again.',
+    onSuccess: () => {
       setOpen(false);
-      toast.success('Inquiry Submitted', {
-        description: "We've received your inquiry and will get back to you soon.",
-      });
       form.reset();
-    } catch {
-      // Keep the dialog open so the user can retry.
-      toast.error('Submission failed', {
-        description: 'We could not submit your inquiry. Please try again.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+    },
+  });
+
+  const onSubmit = (values: FormValues) =>
+    submitLead({ type: 'contact', ...values, product_id: product.id, product_name: product.name });
 
   return (
-    <>
-      <Toaster position='bottom-left' richColors />
-
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
@@ -200,6 +181,5 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
           </Form>
         </DialogContent>
       </Dialog>
-    </>
   );
 }
