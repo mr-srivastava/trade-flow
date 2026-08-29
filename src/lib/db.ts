@@ -7,7 +7,6 @@ import { Pool, type QueryResultRow } from 'pg';
  * pool on every change (which would exhaust connections). Supabase requires SSL.
  */
 declare global {
-  // eslint-disable-next-line no-var
   var _pgPool: Pool | undefined;
 }
 
