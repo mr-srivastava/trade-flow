@@ -83,10 +83,10 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className={cn('w-full rounded-md', buttonClassName)}>
-          Get in Touch
-        </Button>
+      <DialogTrigger
+        render={<Button variant="outline" className={cn('w-full rounded-md', buttonClassName)} />}
+      >
+        Get in Touch
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>

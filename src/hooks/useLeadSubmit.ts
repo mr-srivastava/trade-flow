@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { toast } from 'sonner';
+import { toast } from '@/components/ui/toast';
 
 interface UseLeadSubmitOptions {
   successTitle: string;
@@ -32,10 +32,10 @@ export function useLeadSubmit({
       });
       if (!res.ok) throw new Error('Request failed');
 
-      toast.success(successTitle, { description: successDescription });
+      toast.add({ title: successTitle, description: successDescription, type: 'success' });
       onSuccess?.();
     } catch {
-      toast.error(errorTitle, { description: errorDescription });
+      toast.add({ title: errorTitle, description: errorDescription, type: 'error' });
     } finally {
       setIsSubmitting(false);
     }

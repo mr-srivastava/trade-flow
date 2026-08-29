@@ -82,10 +82,10 @@ export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormP
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" className={cn('w-full rounded-md', buttonClassName)}>
-          Request Quote
-        </Button>
+      <SheetTrigger
+        render={<Button variant="outline" className={cn('w-full rounded-md', buttonClassName)} />}
+      >
+        Request Quote
       </SheetTrigger>
       <SheetContent className="sm:max-w-md">
         <SheetHeader>
