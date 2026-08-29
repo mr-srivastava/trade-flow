@@ -84,7 +84,12 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
-        render={<Button variant="outline" className={cn('w-full rounded-md', buttonClassName)} />}
+        render={
+          <Button
+            variant="outline"
+            className={cn('w-full rounded-md sm:w-auto', buttonClassName)}
+          />
+        }
       >
         Get in Touch
       </DialogTrigger>

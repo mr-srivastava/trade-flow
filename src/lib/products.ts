@@ -1,30 +1,47 @@
-import { query } from './db';
-import { rowToProduct, type ProductRow, type ProductDetailRow } from './mappers';
+import { and, arrayOverlaps, asc, eq, ne, or, sql } from 'drizzle-orm';
+import { db } from './db';
+import { productDetails, products } from './db/schema';
+import { rowToProduct, type ProductDetailRow } from './mappers';
 import type { Product, IndustryProductCountMap } from './types';
 
 /**
- * Direct database access layer for products.
+ * Data access layer for products, built on the Drizzle schema in `./db/schema`.
  *
- * Server components and route handlers both call these functions, so the SQL
- * lives in exactly one place. This replaces the previous pattern where server
- * components fetched the app's own HTTP API over an absolute URL (which used
- * `headers()` and broke under static generation / ISR).
+ * Server components and route handlers both call these functions, so the
+ * query logic lives in exactly one place. A few queries (industry slug
+ * matching, array-overlap "related products", the industry unnest/count) rely
+ * on Postgres features the query builder doesn't model directly, so those stay
+ * as raw `sql` fragments; everything else goes through the typed builder.
  *
  * The SQL slug transform here must stay byte-for-byte equivalent to
  * `parseIndustryToSlug` in `./api` so industry slugs round-trip correctly.
  */
 
 // Light columns + the two detail fields the listing card needs.
-const LISTING_SELECT = `
-  p.id, p.name, p.cas_number, p.molecular_formula, p.categories,
-  p.industries, p.sub_categories, p.product_images, p.is_exclusive,
-  d.description, d.safety_and_hazard
-  from products p
-  left join product_details d on d.product_id = p.id`;
+const listingColumns = {
+  id: products.id,
+  name: products.name,
+  cas_number: products.casNumber,
+  molecular_formula: products.molecularFormula,
+  categories: products.categories,
+  industries: products.industries,
+  sub_categories: products.subCategories,
+  product_images: products.productImages,
+  is_exclusive: products.isExclusive,
+  description: productDetails.description,
+  safety_and_hazard: productDetails.safetyAndHazard,
+};
+
+function listingQuery() {
+  return db
+    .select(listingColumns)
+    .from(products)
+    .leftJoin(productDetails, eq(productDetails.productId, products.id));
+}
 
 /** All products, ordered by name (for the full catalogue). */
 export async function getAllProducts(): Promise<Product[]> {
-  const rows = await query<ProductRow>(`select ${LISTING_SELECT} order by p.name`);
+  const rows = await listingQuery().orderBy(asc(products.name));
   return rows.map((row) => rowToProduct(row));
 }
 
@@ -34,34 +51,34 @@ export async function getAllProducts(): Promise<Product[]> {
  * any run of non-alphanumerics -> `-`, trimmed of leading/trailing `-`.
  */
 export async function getProductsByIndustrySlug(slug: string): Promise<Product[]> {
-  const rows = await query<ProductRow>(
-    `select ${LISTING_SELECT}
-     where exists (
-       select 1 from unnest(p.industries) as ind
-       where trim(both '-' from regexp_replace(replace(lower(ind), '&', 'and'), '[^a-z0-9]+', '-', 'g')) = $1
-     )
-     order by p.name`,
-    [slug.toLowerCase()],
-  );
+  const normalizedSlug = slug.toLowerCase();
+  const rows = await listingQuery()
+    .where(
+      sql`exists (
+        select 1 from unnest(${products.industries}) as ind
+        where trim(both '-' from regexp_replace(replace(lower(ind), '&', 'and'), '[^a-z0-9]+', '-', 'g')) = ${normalizedSlug}
+      )`,
+    )
+    .orderBy(asc(products.name));
   return rows.map((row) => rowToProduct(row));
 }
 
-type JoinedRow = ProductRow & {
-  d_product_id: string | null;
-  description: string | null;
-  einecs_number: string | null;
-  hsn_no: string | null;
-  iupac_name: string | null;
-  synonyms: string | null;
-  shelf_life: string | null;
-  storage_conditions: string | null;
-  properties: unknown;
-  safety_and_hazard: unknown;
-  applications: unknown;
-  storage: unknown;
-  certificates: unknown;
-  faq: unknown;
-  extra: Record<string, unknown> | null;
+// Full detail columns, plus a marker column to detect a missing `product_details` row.
+const detailColumns = {
+  ...listingColumns,
+  detail_product_id: productDetails.productId,
+  einecs_number: productDetails.einecsNumber,
+  hsn_no: productDetails.hsnNo,
+  iupac_name: productDetails.iupacName,
+  synonyms: productDetails.synonyms,
+  storage_conditions: productDetails.storageConditions,
+  shelf_life: productDetails.shelfLife,
+  properties: productDetails.properties,
+  applications: productDetails.applications,
+  storage: productDetails.storage,
+  certificates: productDetails.certificates,
+  faq: productDetails.faq,
+  extra: productDetails.extra,
 };
 
 /**
@@ -71,27 +88,19 @@ type JoinedRow = ProductRow & {
 export async function getProductById(
   id: string,
 ): Promise<(Product & { relatedProducts: Product[] }) | null> {
-  const rows = await query<JoinedRow>(
-    `select
-       p.id, p.name, p.cas_number, p.molecular_formula, p.categories,
-       p.industries, p.sub_categories, p.product_images, p.is_exclusive,
-       d.product_id as d_product_id, d.description, d.einecs_number, d.hsn_no,
-       d.iupac_name, d.synonyms, d.shelf_life, d.storage_conditions,
-       d.properties, d.safety_and_hazard, d.applications, d.storage,
-       d.certificates, d.faq, d.extra
-     from products p
-     left join product_details d on d.product_id = p.id
-     where p.id = $1
-     limit 1`,
-    [id],
-  );
+  const rows = await db
+    .select(detailColumns)
+    .from(products)
+    .leftJoin(productDetails, eq(productDetails.productId, products.id))
+    .where(eq(products.id, id))
+    .limit(1);
 
   if (rows.length === 0) return null;
 
   const row = rows[0];
-  const detail: ProductDetailRow | null = row.d_product_id
+  const detail: ProductDetailRow | null = row.detail_product_id
     ? {
-        product_id: row.d_product_id,
+        product_id: row.detail_product_id,
         description: row.description,
         einecs_number: row.einecs_number,
         hsn_no: row.hsn_no,
@@ -105,19 +114,23 @@ export async function getProductById(
         storage: row.storage,
         certificates: row.certificates,
         faq: row.faq,
-        extra: row.extra,
+        extra: row.extra as Record<string, unknown> | null,
       }
     : null;
 
   const product = rowToProduct(row, detail);
 
-  const relatedRows = await query<ProductRow>(
-    `select ${LISTING_SELECT}
-     where p.id <> $1
-       and (p.categories && $2::text[] or p.industries && $3::text[])
-     limit 3`,
-    [id, product.categories ?? [], product.industries ?? []],
-  );
+  const relatedRows = await listingQuery()
+    .where(
+      and(
+        ne(products.id, id),
+        or(
+          arrayOverlaps(products.categories, product.categories ?? []),
+          arrayOverlaps(products.industries, product.industries ?? []),
+        ),
+      ),
+    )
+    .limit(3);
   const relatedProducts = relatedRows.map((r) => rowToProduct(r));
 
   return { ...product, relatedProducts };
@@ -127,27 +140,24 @@ export async function getProductById(
  * Featured "Top Items" for the home page, ordered by `top_rank` then name.
  * Mirrors the `is_exclusive` flag pattern; `is_top`/`top_rank` live only in the
  * WHERE/ORDER BY (straight off `products`) so they never need to surface on the
- * rich `Product` type. `LISTING_SELECT` ends at the JOIN, so the clause slots in.
+ * rich `Product` type.
  */
 export async function getTopProducts(limit = 18): Promise<Product[]> {
-  const rows = await query<ProductRow>(
-    `select ${LISTING_SELECT}
-     where p.is_top
-     order by p.top_rank nulls last, p.name
-     limit $1`,
-    [limit],
-  );
+  const rows = await listingQuery()
+    .where(eq(products.isTop, true))
+    .orderBy(sql`${products.topRank} nulls last`, asc(products.name))
+    .limit(limit);
   return rows.map((row) => rowToProduct(row));
 }
 
 /** Count of products per industry, most populous first. */
 export async function getIndustryCounts(): Promise<IndustryProductCountMap[]> {
-  const rows = await query<{ name: string; count: string }>(
-    `select industry as name, count(*)::text as count
-     from products, unnest(industries) as industry
-     where industry is not null and industry <> ''
-     group by industry
-     order by count(*) desc`,
-  );
-  return rows.map((r) => ({ name: r.name, count: Number(r.count) }));
+  const result = await db.execute<{ name: string; count: string }>(sql`
+    select industry as name, count(*)::text as count
+    from products, unnest(industries) as industry
+    where industry is not null and industry <> ''
+    group by industry
+    order by count(*) desc
+  `);
+  return result.rows.map((r) => ({ name: r.name, count: Number(r.count) }));
 }
