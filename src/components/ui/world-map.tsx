@@ -26,7 +26,7 @@ const createCurvedPath = (start: { x: number; y: number }, end: { x: number; y: 
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 };
 
-function WorldMap({ dots = [], lineColor = '#5B2BD9' }: MapProps) {
+function WorldMap({ dots = [], lineColor = 'var(--color-brand)' }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
 
   const map = useMemo(() => new DottedMap({ height: 100, grid: 'diagonal' }), []);

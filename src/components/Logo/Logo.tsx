@@ -28,10 +28,10 @@ type LogoProps = {
 
 /** tile fill (null = no tile), stroke colour, wordmark colour */
 const VARIANTS: Record<LogoVariant, { tile: string | null; stroke: string; word: string }> = {
-  default: { tile: '#5B2BD9', stroke: '#FFFFFF', word: 'text-ink' },
-  reversed: { tile: '#FFFFFF', stroke: '#5B2BD9', word: 'text-white' },
-  ink: { tile: '#140C29', stroke: '#FFFFFF', word: 'text-white' },
-  open: { tile: null, stroke: '#5B2BD9', word: 'text-ink' },
+  default: { tile: 'var(--color-brand)', stroke: '#FFFFFF', word: 'text-ink' },
+  reversed: { tile: '#FFFFFF', stroke: 'var(--color-brand)', word: 'text-white' },
+  ink: { tile: 'var(--color-ink)', stroke: '#FFFFFF', word: 'text-white' },
+  open: { tile: null, stroke: 'var(--color-brand)', word: 'text-ink' },
 };
 
 export default function Logo({

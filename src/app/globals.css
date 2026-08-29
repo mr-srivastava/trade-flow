@@ -69,7 +69,7 @@
   --color-warning: #a85c00;
   --color-warning-bg: #fdf1e1;
 
-  --color-error: #b32741;
+  --color-error: hsl(var(--destructive));
   --color-error-bg: #fceaee;
 
   --radius-lg: var(--radius);
@@ -161,6 +161,36 @@
 
     --radius: 0.75rem; /* 12px */
   }
+
+  .dark {
+    --background: 257 45% 8%;
+    --foreground: 255 40% 96%;
+
+    --card: 257 40% 11%;
+    --card-foreground: 255 40% 96%;
+
+    --popover: 257 40% 11%;
+    --popover-foreground: 255 40% 96%;
+
+    --primary: 257 70% 65%;
+    --primary-foreground: 257 45% 8%;
+
+    --secondary: 257 30% 16%;
+    --secondary-foreground: 255 40% 96%;
+
+    --muted: 257 30% 16%;
+    --muted-foreground: 255 12% 65%;
+
+    --accent: 257 30% 18%;
+    --accent-foreground: 257 70% 80%;
+
+    --destructive: 349 64% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 257 25% 20%;
+    --input: 257 25% 20%;
+    --ring: 257 70% 65%;
+  }
 }
 
 @layer base {
@@ -194,11 +224,6 @@
   /* Was a blurred glass panel with a heavy shadow. Now a flat hairline card. */
   .surface-card {
     @apply bg-white border border-line rounded-lg;
-  }
-
-  /* Was a gradient. Now a tinted flat panel. */
-  .surface-muted {
-    @apply bg-mist border border-line rounded-lg;
   }
 
   .btn-primary {
