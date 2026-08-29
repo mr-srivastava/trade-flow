@@ -25,6 +25,8 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
+import type { JSX } from 'react';
+
 // Explicit registry of every icon name referenced from `content.ts` and component
 // data. Add new icons here as they're introduced — this keeps icon resolution
 // statically checkable instead of indexing into the full lucide-react namespace.
