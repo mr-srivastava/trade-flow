@@ -1,9 +1,5 @@
 import { query } from './db';
-import {
-  rowToProduct,
-  type ProductRow,
-  type ProductDetailRow,
-} from './mappers';
+import { rowToProduct, type ProductRow, type ProductDetailRow } from './mappers';
 import type { Product, IndustryProductCountMap } from './types';
 
 /**
@@ -28,9 +24,7 @@ const LISTING_SELECT = `
 
 /** All products, ordered by name (for the full catalogue). */
 export async function getAllProducts(): Promise<Product[]> {
-  const rows = await query<ProductRow>(
-    `select ${LISTING_SELECT} order by p.name`,
-  );
+  const rows = await query<ProductRow>(`select ${LISTING_SELECT} order by p.name`);
   return rows.map((row) => rowToProduct(row));
 }
 

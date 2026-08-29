@@ -48,10 +48,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${archivo.variable} ${plexMono.variable} font-sans antialiased`}>
         {children}
-        <Toaster position='bottom-left' richColors />
+        <Toaster position="bottom-left" richColors />
       </body>
     </html>
   );

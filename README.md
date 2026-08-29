@@ -77,34 +77,34 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the development server |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Run ESLint with auto-fix |
+| Command              | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| `npm run dev`        | Start the development server                    |
+| `npm run build`      | Production build                                |
+| `npm run start`      | Serve the production build                      |
+| `npm run lint`       | Run ESLint                                      |
+| `npm run lint:fix`   | Run ESLint with auto-fix                        |
 | `npm run db:migrate` | Seed or refresh products from `src/lib/data.ts` |
 
 ## Routes
 
-| Path | Description |
-| --- | --- |
-| `/` | Landing page |
-| `/products` | Full product catalogue |
+| Path                              | Description                    |
+| --------------------------------- | ------------------------------ |
+| `/`                               | Landing page                   |
+| `/products`                       | Full product catalogue         |
 | `/products/industries/[industry]` | Catalogue filtered by industry |
-| `/product/[id]` | Product detail page |
-| `/contact` | Contact page |
+| `/product/[id]`                   | Product detail page            |
+| `/contact`                        | Contact page                   |
 
 ## API
 
-| Method | Route | Description |
-| --- | --- | --- |
-| `GET` | `/api/products` | List all products (cached, revalidates hourly) |
-| `GET` | `/api/products/[id]` | Single product with related items |
-| `GET` | `/api/products/industries/[industry]` | Products for one industry |
-| `GET` | `/api/products/industries/count` | Product counts per industry |
-| `POST` | `/api/leads` | Submit a contact or quote inquiry |
+| Method | Route                                 | Description                                    |
+| ------ | ------------------------------------- | ---------------------------------------------- |
+| `GET`  | `/api/products`                       | List all products (cached, revalidates hourly) |
+| `GET`  | `/api/products/[id]`                  | Single product with related items              |
+| `GET`  | `/api/products/industries/[industry]` | Products for one industry                      |
+| `GET`  | `/api/products/industries/count`      | Product counts per industry                    |
+| `POST` | `/api/leads`                          | Submit a contact or quote inquiry              |
 
 ## Project structure
 

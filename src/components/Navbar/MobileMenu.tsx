@@ -15,39 +15,39 @@ export const MobileMenu: React.FC<{ menuItems: Array<MenuItem> }> = ({ menuItems
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <div className='md:hidden'>
-      <div className='flex items-center'>
+    <div className="md:hidden">
+      <div className="flex items-center">
         <button
           onClick={toggleMenu}
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMenuOpen}
-          className='inline-flex items-center justify-center p-2 rounded-md text-ink transition-colors hover:text-brand focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-brand/30'
+          className="inline-flex items-center justify-center p-2 rounded-md text-ink transition-colors hover:text-brand focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-brand/30"
         >
-          {isMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
       {isMenuOpen && (
-        <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-line'>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-line">
           {menuItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className='block px-3 py-2 text-base font-medium text-ink transition-colors hover:text-brand'
+              className="block px-3 py-2 text-base font-medium text-ink transition-colors hover:text-brand"
               onClick={closeMenu}
             >
               {item.name}
             </Link>
           ))}
           <Link
-            href='#about'
-            className='block px-3 py-2 text-base font-medium text-ink transition-colors hover:text-brand'
+            href="#about"
+            className="block px-3 py-2 text-base font-medium text-ink transition-colors hover:text-brand"
             onClick={closeMenu}
           >
             About Us
           </Link>
           <Link
-            href='#contact'
-            className='block px-3 py-2 text-base font-medium text-brand hover:text-brand-600'
+            href="#contact"
+            className="block px-3 py-2 text-base font-medium text-brand hover:text-brand-600"
             onClick={closeMenu}
           >
             Contact

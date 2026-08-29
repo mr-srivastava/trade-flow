@@ -82,29 +82,56 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
     submitLead({ type: 'contact', ...values, product_id: product.id, product_name: product.name });
 
   return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
-            Get in Touch
-          </Button>
-        </DialogTrigger>
-        <DialogContent className='sm:max-w-[500px]'>
-          <DialogHeader>
-            <DialogTitle>Product Inquiry</DialogTitle>
-            <DialogDescription>
-              Submit your inquiry about {product.name}. Our team will get back to you shortly.
-            </DialogDescription>
-          </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className={cn('w-full rounded-md', buttonClassName)}>
+          Get in Touch
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[500px]">
+        <DialogHeader>
+          <DialogTitle>Product Inquiry</DialogTitle>
+          <DialogDescription>
+            Submit your inquiry about {product.name}. Our team will get back to you shortly.
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email*</FormLabel>
+                  <FormControl>
+                    <Input placeholder="your.email@company.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name='name'
+                name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name*</FormLabel>
+                    <FormLabel>Company</FormLabel>
                     <FormControl>
-                      <Input placeholder='Your name' {...field} />
+                      <Input placeholder="Your company" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -112,74 +139,47 @@ export function ProductInquiryForm({ product, buttonClassName }: ProductInquiryF
               />
               <FormField
                 control={form.control}
-                name='email'
+                name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email*</FormLabel>
+                    <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder='your.email@company.com' {...field} />
+                      <Input placeholder="Your phone number" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <div className='grid grid-cols-2 gap-4'>
-                <FormField
-                  control={form.control}
-                  name='company'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Company</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your company' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='phone'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your phone number' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={form.control}
-                name='message'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message*</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder='Please provide details about your inquiry'
-                        className='min-h-[120px]'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      Include any specific requirements or questions you have.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <DialogFooter>
-                <Button type='submit' disabled={isSubmitting} className='rounded-md'>
-                  {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-                  Submit Inquiry
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+            </div>
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Message*</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Please provide details about your inquiry"
+                      className="min-h-[120px]"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Include any specific requirements or questions you have.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button type="submit" disabled={isSubmitting} className="rounded-md">
+                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Submit Inquiry
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

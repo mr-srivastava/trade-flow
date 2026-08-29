@@ -81,101 +81,101 @@ export function RequestQuoteForm({ product, buttonClassName }: RequestQuoteFormP
     submitLead({ type: 'quote', ...values, product_id: product.id, product_name: product.name });
 
   return (
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button variant='outline' className={cn('w-full rounded-md', buttonClassName)}>
-            Request Quote
-          </Button>
-        </SheetTrigger>
-        <SheetContent className='sm:max-w-md'>
-          <SheetHeader>
-            <SheetTitle>Request a Quote</SheetTitle>
-            <SheetDescription>
-              Get a custom quote for {product.name} based on your specific requirements.
-            </SheetDescription>
-          </SheetHeader>
-          <div className='py-4'>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-                <FormField
-                  control={form.control}
-                  name='name'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name*</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your name' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='email'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email*</FormLabel>
-                      <FormControl>
-                        <Input placeholder='your.email@company.com' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='company'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Company*</FormLabel>
-                      <FormControl>
-                        <Input placeholder='Your company' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='quantity'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Quantity Required*</FormLabel>
-                      <FormControl>
-                        <Input placeholder='e.g., 100 kg, 5 drums' {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name='requirements'
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Special Requirements</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder='Any specific purity, packaging, or delivery requirements'
-                          className='min-h-[100px]'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <SheetFooter>
-                  <Button type='submit' disabled={isSubmitting} className='rounded-md'>
-                    {isSubmitting && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-                    Submit Request
-                  </Button>
-                </SheetFooter>
-              </form>
-            </Form>
-          </div>
-        </SheetContent>
-      </Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button variant="outline" className={cn('w-full rounded-md', buttonClassName)}>
+          Request Quote
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="sm:max-w-md">
+        <SheetHeader>
+          <SheetTitle>Request a Quote</SheetTitle>
+          <SheetDescription>
+            Get a custom quote for {product.name} based on your specific requirements.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="py-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="your.email@company.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Company*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your company" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="quantity"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Quantity Required*</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., 100 kg, 5 drums" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="requirements"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Special Requirements</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Any specific purity, packaging, or delivery requirements"
+                        className="min-h-[100px]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <SheetFooter>
+                <Button type="submit" disabled={isSubmitting} className="rounded-md">
+                  {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Submit Request
+                </Button>
+              </SheetFooter>
+            </form>
+          </Form>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 }
