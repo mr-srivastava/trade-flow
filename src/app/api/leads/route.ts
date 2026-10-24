@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { query } from '@/lib/db';
+import { db, schema } from '@/lib/db';
 
 // Lead writes must never be cached.
 export const dynamic = 'force-dynamic';
@@ -37,28 +37,24 @@ export async function POST(request: Request) {
   const d = parsed.data;
 
   try {
-    const rows = await query<{ id: string }>(
-      `insert into leads
-         (type, name, email, company, phone, subject, message,
-          quantity, requirements, product_id, product_name)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
-       returning id`,
-      [
-        d.type,
-        d.name,
-        d.email,
-        d.company ?? null,
-        d.phone ?? null,
-        d.subject ?? null,
-        d.message ?? null,
-        d.quantity ?? null,
-        d.requirements ?? null,
-        d.product_id ?? null,
-        d.product_name ?? null,
-      ],
-    );
+    const [row] = await db
+      .insert(schema.leads)
+      .values({
+        type: d.type,
+        name: d.name,
+        email: d.email,
+        company: d.company ?? null,
+        phone: d.phone ?? null,
+        subject: d.subject ?? null,
+        message: d.message ?? null,
+        quantity: d.quantity ?? null,
+        requirements: d.requirements ?? null,
+        productId: d.product_id ?? null,
+        productName: d.product_name ?? null,
+      })
+      .returning({ id: schema.leads.id });
 
-    return Response.json({ ok: true, id: rows[0]?.id }, { status: 201 });
+    return Response.json({ ok: true, id: row?.id }, { status: 201 });
   } catch (error: unknown) {
     // Foreign key violation: product_id references a product that doesn't exist.
     if (typeof error === 'object' && error !== null && 'code' in error && error.code === '23503') {

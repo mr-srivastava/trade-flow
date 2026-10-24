@@ -34,29 +34,34 @@ const footerData: FooterData = {
   ],
   contact: [
     { key: 'location', icon: 'Globe', content: 'Kolkata, India' },
-    { key: 'mail', icon: 'Mail', content: 'mmg.exim30@gmail.com', href: 'mailto:mmg.exim30@gmail.com' },
+    {
+      key: 'mail',
+      icon: 'Mail',
+      content: 'mmg.exim30@gmail.com',
+      href: 'mailto:mmg.exim30@gmail.com',
+    },
     { key: 'phone', icon: 'Phone', content: '+91 9804835919', href: 'tel:+91 9804835919' },
   ],
 };
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-mist border-t border-line pt-16 pb-8'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12'>
+    <footer className="bg-mist border-t border-line pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
-            <div className='mb-6 -ml-2'>
+            <div className="mb-6 -ml-2">
               <Logo size={28} />
             </div>
-            <p className='text-slate mb-6 text-sm'>{footerData.description}</p>
-            <div className='flex space-x-4'>
+            <p className="text-slate mb-6 text-sm">{footerData.description}</p>
+            <div className="flex space-x-4">
               {footerData.socials.map((social) => (
                 <Link
                   key={social.name}
                   href={social.href}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='bg-white border border-line rounded-full p-2 text-slate transition-colors duration-150 hover:border-brand hover:text-brand'
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white border border-line rounded-full p-2 text-slate transition-colors duration-150 hover:border-brand hover:text-brand"
                 >
                   {renderIcon(social.icon, 'h-5 w-5')}
                 </Link>
@@ -65,13 +70,13 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='eyebrow mb-4 block'>Quick Links</h4>
-            <ul className='space-y-3'>
+            <h4 className="eyebrow mb-4 block">Quick Links</h4>
+            <ul className="space-y-3">
               {footerData.quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className='text-slate transition-colors duration-150 hover:text-brand'
+                    className="text-slate transition-colors duration-150 hover:text-brand"
                   >
                     {link.name}
                   </Link>
@@ -81,13 +86,13 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='eyebrow mb-4 block'>Products</h4>
-            <ul className='space-y-3'>
+            <h4 className="eyebrow mb-4 block">Products</h4>
+            <ul className="space-y-3">
               {footerData.products.map((product) => (
                 <li key={product.name}>
                   <Link
                     href={product.href}
-                    className='text-slate transition-colors duration-150 hover:text-brand'
+                    className="text-slate transition-colors duration-150 hover:text-brand"
                   >
                     {product.name}
                   </Link>
@@ -97,20 +102,20 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className='eyebrow mb-4 block'>Contact</h4>
-            <ul className='space-y-3'>
+            <h4 className="eyebrow mb-4 block">Contact</h4>
+            <ul className="space-y-3">
               {footerData.contact.map(({ key, icon, content, href }) => (
-                <li key={key} className='flex items-center gap-3'>
+                <li key={key} className="flex items-center gap-3">
                   {renderIcon(icon, 'h-5 w-5 shrink-0 text-brand')}
                   {href ? (
                     <Link
                       href={href}
-                      className='text-ink transition-colors duration-150 hover:text-brand'
+                      className="text-ink transition-colors duration-150 hover:text-brand"
                     >
                       {content}
                     </Link>
                   ) : (
-                    <span className='text-ink'>{content}</span>
+                    <span className="text-ink">{content}</span>
                   )}
                 </li>
               ))}
@@ -118,27 +123,27 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className='border-t border-line pt-8'>
-          <div className='flex flex-col md:flex-row justify-between items-center'>
-            <p className='text-sm text-slate'>
+        <div className="border-t border-line pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-slate">
               © {new Date().getFullYear()} Syntaraa. All rights reserved.
             </p>
-            <div className='flex space-x-6 mt-4 md:mt-0'>
+            <div className="flex space-x-6 mt-4 md:mt-0">
               <Link
-                href='#'
-                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
+                href="#"
+                className="text-sm text-slate transition-colors duration-150 hover:text-brand"
               >
                 Privacy Policy
               </Link>
               <Link
-                href='#'
-                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
+                href="#"
+                className="text-sm text-slate transition-colors duration-150 hover:text-brand"
               >
                 Terms of Service
               </Link>
               <Link
-                href='#'
-                className='text-sm text-slate transition-colors duration-150 hover:text-brand'
+                href="#"
+                className="text-sm text-slate transition-colors duration-150 hover:text-brand"
               >
                 Cookie Policy
               </Link>

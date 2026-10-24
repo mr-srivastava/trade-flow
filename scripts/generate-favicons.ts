@@ -98,10 +98,7 @@ async function main() {
   await writePng(path.join(PUBLIC, 'icon-512.png'), await render(MARK, 512));
 
   // Open Graph / share image — flattened on white so social cards render clean.
-  await writePng(
-    path.join(BRAND, 'syntaraa-icon-1024.png'),
-    await render(MARK, 1024, '#FFFFFF'),
-  );
+  await writePng(path.join(BRAND, 'syntaraa-icon-1024.png'), await render(MARK, 1024, '#FFFFFF'));
 
   // Replaces the stock Next.js favicon.
   const ico = buildIco([

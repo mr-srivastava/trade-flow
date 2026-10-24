@@ -1,10 +1,59 @@
-import * as LucideIcons from 'lucide-react';
-import React from 'react'; // Ensure React is imported for JSX
+import {
+  Activity,
+  AlertTriangle,
+  Award,
+  Beaker,
+  BookOpen,
+  Download,
+  Facebook,
+  FileText,
+  Globe,
+  Handshake,
+  HelpCircle,
+  Info,
+  Linkedin,
+  Mail,
+  MapPin,
+  Package2,
+  Phone,
+  Shield,
+  ShieldCheck,
+  TrendingUp,
+  Twitter,
+  Users,
+  Video,
+  type LucideIcon,
+} from 'lucide-react';
 
-function getLucideIcon(name: string): React.ElementType {
-  const Icon = LucideIcons[name as keyof typeof LucideIcons];
-  return (Icon as React.ElementType) || (LucideIcons.HelpCircle as React.ElementType); // fallback icon
-}
+import type { JSX } from 'react';
+
+// Explicit registry of every icon name referenced from `content.ts` and component
+// data. Add new icons here as they're introduced — this keeps icon resolution
+// statically checkable instead of indexing into the full lucide-react namespace.
+const ICONS: Record<string, LucideIcon> = {
+  Activity,
+  AlertTriangle,
+  Award,
+  Beaker,
+  BookOpen,
+  Download,
+  Facebook,
+  FileText,
+  Globe,
+  Handshake,
+  Info,
+  Linkedin,
+  Mail,
+  MapPin,
+  Package2,
+  Phone,
+  Shield,
+  ShieldCheck,
+  TrendingUp,
+  Twitter,
+  Users,
+  Video,
+};
 
 /**
  * Renders a Lucide icon by name. `strokeWidth` defaults to 1.75 rather than
@@ -16,6 +65,6 @@ export function renderIcon(
   className?: string,
   strokeWidth: number = 1.75,
 ): JSX.Element {
-  const Icon = getLucideIcon(iconName) ?? LucideIcons.HelpCircle;
+  const Icon = ICONS[iconName] ?? HelpCircle;
   return <Icon className={className} strokeWidth={strokeWidth} />;
 }

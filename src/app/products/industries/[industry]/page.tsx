@@ -13,7 +13,8 @@ const parseToUserFriendlyName = (name: string): string =>
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
 // Generate metadata dynamically
-export async function generateMetadata({ params }: { params: { industry: string } }) {
+export async function generateMetadata(props: { params: Promise<{ industry: string }> }) {
+  const params = await props.params;
   const userFriendlyIndustryName = parseToUserFriendlyName(params.industry);
 
   return {
@@ -23,7 +24,8 @@ export async function generateMetadata({ params }: { params: { industry: string 
 }
 
 // Main component
-export default async function Products({ params }: { params: { industry: string } }) {
+export default async function Products(props: { params: Promise<{ industry: string }> }) {
+  const params = await props.params;
   const { industry } = params;
   const userFriendlyIndustryName = parseToUserFriendlyName(industry);
 

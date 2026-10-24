@@ -28,10 +28,10 @@ type LogoProps = {
 
 /** tile fill (null = no tile), stroke colour, wordmark colour */
 const VARIANTS: Record<LogoVariant, { tile: string | null; stroke: string; word: string }> = {
-  default: { tile: '#5B2BD9', stroke: '#FFFFFF', word: 'text-ink' },
-  reversed: { tile: '#FFFFFF', stroke: '#5B2BD9', word: 'text-white' },
-  ink: { tile: '#140C29', stroke: '#FFFFFF', word: 'text-white' },
-  open: { tile: null, stroke: '#5B2BD9', word: 'text-ink' },
+  default: { tile: 'var(--color-brand)', stroke: '#FFFFFF', word: 'text-ink' },
+  reversed: { tile: '#FFFFFF', stroke: 'var(--color-brand)', word: 'text-white' },
+  ink: { tile: 'var(--color-ink)', stroke: '#FFFFFF', word: 'text-white' },
+  open: { tile: null, stroke: 'var(--color-brand)', word: 'text-ink' },
 };
 
 export default function Logo({
@@ -55,18 +55,20 @@ export default function Logo({
       <svg
         width={tileSize}
         height={tileSize}
-        viewBox='0 0 120 120'
-        role='img'
-        aria-label='Syntaraa'
+        viewBox="0 0 120 120"
+        // role="img" is the correct ARIA pattern for a decorative inline SVG mark, not a raster <img>.
+        // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
+        role="img"
+        aria-label="Syntaraa"
         style={{ display: 'block', flexShrink: 0 }}
       >
-        {tile && <rect x='2' y='2' width='116' height='116' rx='16' fill={tile} />}
+        {tile && <rect x="2" y="2" width="116" height="116" rx="16" fill={tile} />}
         <path
           d={MARK_PATH}
-          fill='none'
+          fill="none"
           stroke={stroke}
           strokeWidth={strokeWidth}
-          strokeLinejoin='bevel'
+          strokeLinejoin="bevel"
         />
       </svg>
 
@@ -74,7 +76,7 @@ export default function Logo({
         // The SVG already carries the accessible name, so the visible wordmark
         // is hidden from assistive tech to avoid announcing "Syntaraa" twice.
         <span
-          aria-hidden='true'
+          aria-hidden="true"
           className={`font-heading font-bold tracking-[-0.02em] leading-none ${word}`}
           style={{ fontSize: tileSize * 0.72 }}
         >

@@ -41,7 +41,7 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
       pages.push(
         <PaginationItem key={i}>
           <PaginationLink
-            href='#'
+            href="#"
             onClick={(e) => {
               e.preventDefault();
               onPageChange(i);
@@ -58,12 +58,12 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
   };
 
   return (
-    <div className='flex flex-col items-center space-y-4'>
+    <div className="flex flex-col items-center space-y-4">
       <Pagination>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious
-              href='#'
+              href="#"
               onClick={(e) => {
                 e.preventDefault();
                 if (currentPage > 1) onPageChange(currentPage - 1);
@@ -76,7 +76,7 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
 
           <PaginationItem>
             <PaginationNext
-              href='#'
+              href="#"
               onClick={(e) => {
                 e.preventDefault();
                 if (currentPage < totalPages) onPageChange(currentPage + 1);
@@ -87,7 +87,7 @@ const ProductPagination: React.FC<ProductPaginationProps> = ({
         </PaginationContent>
       </Pagination>
 
-      <div className='eyebrow'>
+      <div className="eyebrow">
         Showing {startProduct} to {endProduct} of {totalProducts} products
       </div>
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Archivo, IBM_Plex_Mono } from 'next/font/google';
+import { Toaster } from '@/components/ui/toast';
 import './globals.css';
 
 const archivo = Archivo({
@@ -47,9 +48,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${archivo.variable} ${plexMono.variable} font-sans antialiased`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

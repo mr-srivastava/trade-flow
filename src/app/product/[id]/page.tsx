@@ -6,12 +6,13 @@ import { notFound } from 'next/navigation';
 import { getProductById } from '@/lib/products';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: ProductPageProps) {
+export async function generateMetadata(props: ProductPageProps) {
+  const params = await props.params;
   const product = await getProductById(params.id);
 
   if (!product) {
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }: ProductPageProps) {
   };
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage(props: ProductPageProps) {
+  const params = await props.params;
   const product = await getProductById(params.id);
 
   if (!product) {

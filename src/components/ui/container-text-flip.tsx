@@ -1,8 +1,24 @@
 'use client';
 
-import React, { useState, useLayoutEffect, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useLayoutEffect, useEffect, useRef, useSyncExternalStore } from 'react';
+import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
+
+const emptySubscribe = () => () => {};
+
+/**
+ * True once mounted on the client, false during SSR. `useSyncExternalStore`'s
+ * server snapshot lets this be read directly during render instead of via a
+ * `useEffect` + `setState` hydration-guard, which would trigger an extra
+ * render.
+ */
+function useHasMounted(): boolean {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
 
 export interface ContainerTextFlipProps {
   words?: string[];
@@ -21,7 +37,7 @@ export function ContainerTextFlip({
 }: ContainerTextFlipProps) {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [width, setWidth] = useState<number | null>(null);
-  const [hasMounted, setHasMounted] = useState(false);
+  const hasMounted = useHasMounted();
   const textRef = useRef<HTMLDivElement>(null);
 
   const updateWidthForWord = () => {
@@ -36,7 +52,6 @@ export function ContainerTextFlip({
   }, [currentWordIndex]);
 
   useEffect(() => {
-    setHasMounted(true);
     const intervalId = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
     }, interval);
@@ -67,7 +82,7 @@ export function ContainerTextFlip({
         ref={textRef}
         key={currentWord}
       >
-        <div className='inline-block'>
+        <div className="inline-block">
           {currentWord.split('').map((letter, index) => {
             const Span = hasMounted ? motion.span : 'span';
             return (
@@ -78,7 +93,7 @@ export function ContainerTextFlip({
                   animate: { opacity: 1, filter: 'blur(0px)' },
                   transition: { delay: index * 0.02 },
                 })}
-                className='inline-block'
+                className="inline-block"
               >
                 {letter}
               </Span>

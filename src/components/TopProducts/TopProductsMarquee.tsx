@@ -22,9 +22,9 @@ const TopProductsMarquee: React.FC<{ products: Product[] }> = ({ products }) => 
   const durationSeconds = Math.max(30, products.length * 4);
 
   return (
-    <div role='region' aria-label='Top products' className='tp-marquee group relative w-full overflow-hidden'>
+    <section aria-label="Top products" className="tp-marquee group relative w-full overflow-hidden">
       <div
-        className='tp-track flex w-max'
+        className="tp-track flex w-max"
         style={{ ['--tp-duration' as string]: `${durationSeconds}s` } as React.CSSProperties}
       >
         {products.map((product) => (
@@ -34,7 +34,11 @@ const TopProductsMarquee: React.FC<{ products: Product[] }> = ({ products }) => 
         ))}
         {/* Duplicate set — hidden from assistive tech / tab order to avoid double stops. */}
         {products.map((product) => (
-          <div key={`b-${product.id}`} aria-hidden='true' className={`${SLIDE} [&_a]:pointer-events-none`}>
+          <div
+            key={`b-${product.id}`}
+            aria-hidden="true"
+            className={`${SLIDE} [&_a]:pointer-events-none`}
+          >
             <ProductCard product={product} />
           </div>
         ))}
@@ -59,7 +63,7 @@ const TopProductsMarquee: React.FC<{ products: Product[] }> = ({ products }) => 
           .tp-track { animation: none; }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 

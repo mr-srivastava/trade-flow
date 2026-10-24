@@ -17,14 +17,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     );
   return (
     <Link href={`/product/${product.id}`} key={product.id}>
-      <Card className='h-full overflow-hidden bg-white border border-line hover:border-brand transition-colors duration-150 group'>
-        <div className='relative h-40 bg-mist flex items-center justify-center p-4'>
+      <Card className="h-full overflow-hidden bg-white border border-line hover:border-brand transition-colors duration-150 group">
+        <div className="relative h-40 bg-mist flex items-center justify-center p-4">
           {product.is_exclusive && (
             <Badge
-              variant='secondary'
-              className='absolute top-2 right-2 flex items-center gap-1 bg-brand-50 text-brand-700'
+              variant="secondary"
+              className="absolute top-2 right-2 flex items-center gap-1 bg-brand-50 text-brand-700"
             >
-              <Crown className='h-3 w-3' /> Exclusive
+              <Crown className="h-3 w-3" /> Exclusive
             </Badge>
           )}
           {product.product_images && product.product_images.length > 0 ? (
@@ -33,21 +33,21 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               alt={product.name}
               width={150}
               height={150}
-              className='max-h-full max-w-full object-contain'
+              className="max-h-full max-w-full object-contain"
             />
           ) : (
-            <div className='text-sm text-slate/60'>No image available</div>
+            <div className="text-sm text-slate/60">No image available</div>
           )}
         </div>
 
-        <CardContent className='p-4'>
-          <h3 className='text-lg font-semibold text-ink mb-2 group-hover:text-brand transition-colors'>
+        <CardContent className="p-4">
+          <h3 className="text-lg font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
             {product.name}
           </h3>
 
-          <div className='inline-flex items-center px-2.5 py-0.5 mb-3 rounded-full font-mono text-[11px] uppercase tracking-[0.08em] bg-mist text-slate'>
+          <div className="inline-flex items-center px-2.5 py-0.5 mb-3 rounded-full font-mono text-[11px] uppercase tracking-[0.08em] bg-mist text-slate">
             {product.categories.map((category) => (
-              <span key={category} className='mr-1'>
+              <span key={category} className="mr-1">
                 {category}
                 {category !== product.categories[product.categories.length - 1] && ','}
               </span>
@@ -55,33 +55,28 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </div>
 
           {hasHazards && (
-            <div
-              className='flex items-center text-warning mb-3'
-              aria-label='Hazardous material'
-            >
-              <AlertTriangle className='h-4 w-4 mr-1' aria-hidden='true' />
-              <span className='text-xs'>Hazardous Material</span>
+            <div className="flex items-center text-warning mb-3" aria-label="Hazardous material">
+              <AlertTriangle className="h-4 w-4 mr-1" aria-hidden="true" />
+              <span className="text-xs">Hazardous Material</span>
             </div>
           )}
 
-          <div className='space-y-2 mt-3'>
-            <div className='flex'>
-              <span className='text-slate w-24 text-sm'>CAS:</span>
-              <span className='font-mono text-sm text-ink'>{product.cas_number}</span>
+          <div className="space-y-2 mt-3">
+            <div className="flex">
+              <span className="text-slate w-24 text-sm">CAS:</span>
+              <span className="font-mono text-sm text-ink">{product.cas_number}</span>
             </div>
 
-            <div className='flex'>
-              <span className='text-slate w-24 text-sm'>Formula:</span>
-              <span className='font-mono text-sm text-ink'>
-                {product.molecular_formula}
-              </span>
+            <div className="flex">
+              <span className="text-slate w-24 text-sm">Formula:</span>
+              <span className="font-mono text-sm text-ink">{product.molecular_formula}</span>
             </div>
           </div>
         </CardContent>
 
-        <CardFooter className='p-4 pt-0 flex justify-between items-center'>
-          <p className='text-sm text-slate line-clamp-1'>{product.description}</p>
-          <ChevronRight className='h-4 w-4 text-brand shrink-0 ml-2 group-hover:translate-x-1 transition-transform' />
+        <CardFooter className="p-4 pt-0 flex justify-between items-center">
+          <p className="text-sm text-slate line-clamp-1">{product.description}</p>
+          <ChevronRight className="h-4 w-4 text-brand shrink-0 ml-2 group-hover:translate-x-1 transition-transform" />
         </CardFooter>
       </Card>
     </Link>
